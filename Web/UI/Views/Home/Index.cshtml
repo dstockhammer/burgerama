@@ -1,0 +1,16 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en" ng-app="Burgerama" data-framework="angularjs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/css")
+</head>
+    <body>
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/burgerama")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
