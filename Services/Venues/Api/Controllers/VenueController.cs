@@ -1,35 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
+using Burgerama.Services.Venues.Api.Models;
+using Burgerama.Services.Venues.Core;
 
 namespace Burgerama.Services.Venues.Api.Controllers
 {
     public class VenueController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<VenueModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[]
+            {
+                new VenueModel
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Test venue 1",
+                    Votes = 2
+                },
+                new VenueModel
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Test venue 2",
+                    Votes = 3,
+                    Rating = 4.5
+                }
+            };
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public VenueModel Get(string id)
         {
-            return "value";
+            return new VenueModel
+            {
+                Id = Guid.Parse(id),
+                Title = "Test venue"
+            };
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post(VenueModel model)
         {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            var venue = new Venue(model.Title);
         }
     }
 }
