@@ -97,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Default.css" />
+    <Content Include="Default.html" />
+    <Content Include="Default.js" />
+    <Content Include="Default.min.css">
+      <DependentUpon>Default.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\app.ts" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.js" />
@@ -439,6 +445,7 @@
     <Content Include="Scripts\vendor\angularjs\angular.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\errors.json" />
     <Content Include="Scripts\vendor\angularjs\version.json" />
+    <Content Include="Default.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -452,7 +459,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
@@ -467,11 +473,11 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-scenario.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\googlemaps.infobubble\google.maps.infobubble-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\googlemaps.infobubble\google.maps.infobubble.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\googlemaps\google.maps.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
