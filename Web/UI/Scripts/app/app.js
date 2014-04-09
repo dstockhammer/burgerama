@@ -1,24 +1,16 @@
 ﻿/// <reference path='../typings/angularjs/angular.d.ts' />
 /// <reference path='../typings/angularjs/angular-resource.d.ts' />
 /// <reference path='../typings/googlemaps/google.maps.d.ts' />
-
 'use strict';
-
-module Burgerama {
-    export interface IModule {
-        id: string;
-    }
-
+var Burgerama;
+(function (Burgerama) {
     // Create the module and define its dependencies.
-    export var app: ng.IModule = angular.module('burgerama', [
-        // Angular modules
+    Burgerama.app = angular.module('burgerama', [
         'ngResource',
-
-        // Angular UI modules
         'ui.bootstrap'
     ]);
 
-    export function initialize() {
+    function initialize() {
         var mapOptions = {
             center: new google.maps.LatLng(-34.397, 150.644),
             overviewMapControl: false,
@@ -34,27 +26,25 @@ module Burgerama {
             zoom: 15
         };
 
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
+            navigator.geolocation.getCurrentPosition(function (position) {
                 var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 map.setCenter(initialLocation);
                 map.setZoom(mapOptions.zoom);
             });
         }
 
-        var input = <HTMLInputElement>document.getElementById('central-search-box');
+        var input = document.getElementById('central-search-box');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var searchBox = new google.maps.places.SearchBox(input);
         var markers = [];
 
         // Listen for the event fired when the user selects an item from the
         // pick list. Retrieve the matching places for that item.
-        google.maps.event.addListener(searchBox, 'places_changed', () => {
+        google.maps.event.addListener(searchBox, 'places_changed', function () {
             var places = searchBox.getPlaces();
-
 
             for (var i = 0, marker; marker = markers[i]; i++) {
                 marker.setMap(null);
@@ -89,13 +79,15 @@ module Burgerama {
 
         // Bias the SearchBox results towards places that are within the bounds of the
         // current map's viewport.
-        google.maps.event.addListener(map, 'bounds_changed', () => {
+        google.maps.event.addListener(map, 'bounds_changed', function () {
             var bounds = map.getBounds();
             searchBox.setBounds(bounds);
         });
     }
-}
+    Burgerama.initialize = initialize;
+})(Burgerama || (Burgerama = {}));
 
-Burgerama.app.run(() => {
+Burgerama.app.run(function () {
     Burgerama.initialize();
 });
+//# sourceMappingURL=app.js.map

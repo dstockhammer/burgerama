@@ -96,15 +96,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Default.css" />
-    <Content Include="Default.html" />
-    <Content Include="Default.js" />
-    <Content Include="Default.min.css">
-      <DependentUpon>Default.css</DependentUpon>
-    </Content>
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\app.ts" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap.js" />
@@ -389,52 +386,9 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\vendor\bootstrap\less\.csscomb.json" />
-    <Content Include="Scripts\vendor\bootstrap\less\.csslintrc" />
-    <Content Include="Scripts\vendor\bootstrap\less\alerts.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\badges.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\bootstrap.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\breadcrumbs.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\button-groups.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\buttons.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\carousel.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\close.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\code.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\component-animations.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\dropdowns.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\forms.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\glyphicons.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\grid.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\input-groups.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\jumbotron.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\labels.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\list-group.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\media.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\mixins.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\modals.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\navbar.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\navs.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\normalize.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\pager.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\pagination.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\panels.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\popovers.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\print.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\progress-bars.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\responsive-utilities.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\scaffolding.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\tables.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\theme.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\thumbnails.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\tooltip.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\type.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\utilities.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\variables.less" />
-    <Content Include="Scripts\vendor\bootstrap\less\wells.less" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Scripts\less\main.less" />
     <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-loader.min.js.map" />
@@ -445,10 +399,12 @@
     <Content Include="Scripts\vendor\angularjs\angular.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\errors.json" />
     <Content Include="Scripts\vendor\angularjs\version.json" />
-    <Content Include="Default.less" />
+    <Content Include="Content\css\default.less" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -458,10 +414,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\css\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
