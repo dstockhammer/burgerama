@@ -15,7 +15,7 @@
     <RootNamespace>Burgerama.Web.UI</RootNamespace>
     <AssemblyName>Burgerama.Web.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -446,6 +446,9 @@
     <Content Include="Scripts\vendor\angularjs\errors.json" />
     <Content Include="Scripts\vendor\angularjs\version.json" />
     <Content Include="Default.less" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -495,7 +498,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8055</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8055/</IISUrl>
+          <IISUrl>http://localhost/burgerama</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
