@@ -19,7 +19,7 @@ var Burgerama;
             zoomControl: true,
             zoomControlOptions: {
                 style: google.maps.ZoomControlStyle.LARGE,
-                position: google.maps.ControlPosition.RIGHT_CENTER
+                position: google.maps.ControlPosition.LEFT_CENTER
             },
             mapTypeControl: false,
             panControl: false,
