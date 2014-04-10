@@ -7,12 +7,13 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/bundles/css")
 </head>
-    <body>
-        @RenderBody()
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places"></script>
-        @Scripts.Render("~/bundles/angular")
-        @Scripts.Render("~/bundles/burgerama")
-        @RenderSection("scripts", required: false)
-    </body>
+<body>
+    @RenderBody()
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places"></script>
+    <script type="text/javascript" src="~/Scripts/app/map.options.js"></script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/burgerama")
+    @RenderSection("scripts", required: false)
+</body>
 </html>
