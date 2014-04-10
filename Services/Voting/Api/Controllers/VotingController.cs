@@ -7,7 +7,6 @@ using Burgerama.Services.Voting.Core.Data;
 
 namespace Burgerama.Services.Voting.Api.Controllers
 {
-    [RoutePrefix("api/v1")]
     //[Authorize]
     public class VotingController : ApiController
     {
@@ -84,9 +83,10 @@ namespace Burgerama.Services.Voting.Api.Controllers
         /// <example>
         /// POST api/venue/878f000c-e61f-4d34-a9f7-236a153c062c
         /// </example> 
-        /// <param name="venueId"></param>
+        /// <param name="venueId">The guid of the venue.</param>
         [HttpPost]
         [Route("venue/{venueId}")]
+        [ResponseType(typeof(bool))]
         public IHttpActionResult AddVote(Guid venueId)
         {
             var venue = _venueRepository.Get(venueId);
@@ -94,7 +94,9 @@ namespace Burgerama.Services.Voting.Api.Controllers
             // todo: get the userid from identity.
             var userId = Guid.NewGuid();
 
-            venue.AddVote(userId);
+            var voteAdded = venue.AddVote(userId);
+            if (voteAdded == false) 
+                return Conflict();
 
             _venueRepository.SaveOrUpdate(venue);
 

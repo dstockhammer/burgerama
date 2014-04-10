@@ -7,6 +7,7 @@ namespace Burgerama.Services.Venues.Api
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(AutofacConfig.Register);
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
