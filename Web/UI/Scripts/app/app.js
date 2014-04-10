@@ -1,7 +1,6 @@
 ﻿/// <reference path='../typings/angularjs/angular.d.ts' />
 /// <reference path='../typings/angularjs/angular-resource.d.ts' />
 /// <reference path='../typings/googlemaps/google.maps.d.ts' />
-/// <reference path="map.options.ts"/>
 'use strict';
 var Burgerama;
 (function (Burgerama) {
@@ -12,13 +11,13 @@ var Burgerama;
     ]);
 
     function initialize() {
-        var map = new google.maps.Map(document.getElementById("map-canvas"), burgerama.map.options);
+        var map = new google.maps.Map(document.getElementById("map-canvas"), Burgerama.options);
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 map.setCenter(initialLocation);
-                map.setZoom(burgerama.map.options.zoom);
+                map.setZoom(Burgerama.options.zoom);
             });
         }
 
@@ -60,7 +59,7 @@ var Burgerama;
             }
 
             map.fitBounds(bounds);
-            map.setZoom(burgerama.map.options.zoom);
+            map.setZoom(Burgerama.options.zoom);
         });
 
         // Bias the SearchBox results towards places that are within the bounds of the
