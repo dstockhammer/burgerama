@@ -21,7 +21,7 @@ var Burgerama;
             });
         }
 
-        var input = document.getElementById('central-search-box');
+        var input = document.getElementById('map-search-box');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var searchBox = new google.maps.places.SearchBox(input);
         var markers = [];

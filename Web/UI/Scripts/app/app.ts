@@ -25,7 +25,7 @@ module Burgerama {
             });
         }
 
-        var input = <HTMLInputElement>document.getElementById('central-search-box');
+        var input = <HTMLInputElement>document.getElementById('map-search-box');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var searchBox = new google.maps.places.SearchBox(input);
         var markers = [];

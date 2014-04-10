@@ -101,7 +101,14 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\calendar_icon.png" />
     <Content Include="Content\img\hamburger_logo.png" />
+    <Content Include="Content\img\profile.jpg" />
+    <Content Include="Content\img\profile.png" />
+    <Content Include="Content\img\red-splash-1.png" />
+    <Content Include="Content\img\red-splash-2.png" />
+    <Content Include="Content\img\red-splash-3.png" />
+    <Content Include="Content\img\venue_icon.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.min.js" />
