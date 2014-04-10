@@ -406,6 +406,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
+    <TypeScriptCompile Include="Scripts\app\map.options.ts" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

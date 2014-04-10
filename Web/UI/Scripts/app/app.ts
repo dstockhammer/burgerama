@@ -1,6 +1,7 @@
 ﻿/// <reference path='../typings/angularjs/angular.d.ts' />
 /// <reference path='../typings/angularjs/angular-resource.d.ts' />
 /// <reference path='../typings/googlemaps/google.maps.d.ts' />
+/// <reference path="map.options.ts"/>
 
 'use strict';
 
@@ -19,45 +20,13 @@ module Burgerama {
     ]);
 
     export function initialize() {
-        var mapOptions = {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            overviewMapControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.LARGE,
-                position: google.maps.ControlPosition.LEFT_CENTER
-            },
-            mapTypeControl: false,
-            panControl: false,
-            zoom: 15,
-            styles: [{
-                stylers: [
-                    { hue: "#ffa200" },
-                    { saturation: 20 },
-                    { lightness: 10 },
-                    { gamma: 0.75 }
-                ]
-                },
-                {
-                    featureType: "water",
-                    stylers: [
-                        { hue: "#0044ff" },
-                        { lightness: 40 }
-                    ]
-                }
-            ]
-        };
-
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
+        var map = new google.maps.Map(document.getElementById("map-canvas"), burgerama.map.options );
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 map.setCenter(initialLocation);
-                map.setZoom(mapOptions.zoom);
+                map.setZoom(burgerama.map.options.zoom);
             });
         }
 
@@ -100,7 +69,7 @@ module Burgerama {
             }
 
             map.fitBounds(bounds);
-            map.setZoom(mapOptions.zoom);
+            map.setZoom(burgerama.map.options.zoom);
         });
 
         // Bias the SearchBox results towards places that are within the bounds of the
