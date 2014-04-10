@@ -20,7 +20,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             // Assert
             Assert.AreEqual(id, venue.Id);
             Assert.AreEqual(0, venue.Votes.Count());
-            Assert.IsFalse(venue.Outing.HasValue);
+            Assert.IsFalse(venue.LatestOuting.HasValue);
         }
 
         [TestMethod]
@@ -37,8 +37,8 @@ namespace Burgerama.Services.Voting.Tests.Domain
             // Assert
             Assert.AreEqual(id, venue.Id);
             Assert.AreEqual(4, venue.Votes.Count());
-            Assert.IsTrue(venue.Outing.HasValue);
-            Assert.AreEqual(outing, venue.Outing);
+            Assert.IsTrue(venue.LatestOuting.HasValue);
+            Assert.AreEqual(outing, venue.LatestOuting);
         }
 
         [TestMethod]
@@ -104,10 +104,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
         {
             // Arrange
             var user = Guid.NewGuid();
-            var venue = new Venue(Guid.NewGuid())
-            {
-                Outing = Guid.NewGuid()
-            };
+            var venue = new Venue(Guid.NewGuid(), Guid.NewGuid());
             
             // Act
             var result = venue.AddVote(user);

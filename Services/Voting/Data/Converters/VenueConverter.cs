@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Burgerama.Services.Voting.Data.Models;
 using Burgerama.Services.Voting.Domain;
+using Burgerama.Services.Voting.Data.Models;
 
 namespace Burgerama.Services.Voting.Data.Converters
 {
@@ -12,7 +12,7 @@ namespace Burgerama.Services.Voting.Data.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
-                Outing = venue.Outing.HasValue ? venue.Outing.ToString() : null,
+                Outing = venue.LatestOuting.HasValue ? venue.LatestOuting.ToString() : null,
                 Votes = venue.Votes.Select(userId => userId.ToString()).ToList()
             };
         }

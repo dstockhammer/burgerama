@@ -20,7 +20,7 @@ namespace Burgerama.Services.Voting.Data.Repositories
             // todo: move connection details into config
             const string connectionString = "localhost";
             _venues = new Lazy<MongoCollection<VenueModel>>(() => new MongoClient(connectionString).GetServer()
-                .GetDatabase("burgerama_dev")
+                .GetDatabase("burgerama_voting")
                 .GetCollection<VenueModel>("venues"));
         }
 
