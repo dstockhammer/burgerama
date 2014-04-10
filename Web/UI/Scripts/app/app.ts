@@ -38,7 +38,16 @@ module Burgerama {
                     { saturation: 20 },
                     { lightness: 10 },
                     { gamma: 0.75 }
-                ]}]
+                ]
+                },
+                {
+                    featureType: "water",
+                    stylers: [
+                        { hue: "#0044ff" },
+                        { lightness: 40 }
+                    ]
+                }
+            ]
         };
 
         var map = new google.maps.Map(document.getElementById("map-canvas"),
