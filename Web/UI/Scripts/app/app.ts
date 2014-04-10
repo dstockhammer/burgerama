@@ -31,7 +31,14 @@ module Burgerama {
             },
             mapTypeControl: false,
             panControl: false,
-            zoom: 15
+            zoom: 15,
+            styles: [{
+                stylers: [
+                    { hue: "#ffa200" },
+                    { saturation: 20 },
+                    { lightness: 10 },
+                    { gamma: 0.75 }
+                ]}]
         };
 
         var map = new google.maps.Map(document.getElementById("map-canvas"),
