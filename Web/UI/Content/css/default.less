@@ -135,11 +135,16 @@ body {
     font-weight: bold;
 
     background: -webkit-gradient(linear, left top, left bottom, 
-                                 color-stop(0%,rgba(255,255,255,0.1)),
-                                 color-stop(40%,rgba(0,0,0,0.1)),
-                                 color-stop(60%,rgba(0,0,0,0.1)),
-                                 color-stop(100%,rgba(255,255,255,0.1))
+                                 color-stop(0%,rgba(255,255,255,0.03)),
+                                 color-stop(40%,rgba(0,0,0,0.03)),
+                                 color-stop(60%,rgba(0,0,0,0.03)),
+                                 color-stop(100%,rgba(255,255,255,0.03))
                                  );
+    
+    -moz-transition: background-color 0.3s ease-out;
+    -o-transition: background-color 0.3s ease-out;
+    -webkit-transition: background-color 0.3s ease-out;
+    transition: background-color 0.3s ease-out;
 }
 
 #venue-list li:first-child{
@@ -149,9 +154,21 @@ body {
 
 #venue-list li:hover {
     background-color: rgba(255, 0, 0, 0.7);
+    -moz-transition: background-color 0.3s ease-in;
+    -o-transition: background-color 0.3s ease-in;
+    -webkit-transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease-in;
 }
 
-#calendar-icon, #venue-icon  {
+.switcher-icon  {
     width: 2em;
     margin: 2em;
+}
+
+.switcher-icon-active {
+
+}
+
+#organizer-switcher {
+    text-align: center;
 }
