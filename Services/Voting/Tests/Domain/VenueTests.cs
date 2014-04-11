@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Burgerama.Messaging.Events.Voting;
 using Burgerama.Services.Voting.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -52,7 +53,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             var result = venue.AddVote(user);
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.IsTrue(result.Any(e => e is VoteAdded));
             Assert.AreEqual(1, venue.Votes.Count());
             Assert.IsTrue(venue.Votes.Contains(user));
         }
@@ -70,8 +71,8 @@ namespace Burgerama.Services.Voting.Tests.Domain
             var result2 = venue.AddVote(user2);
 
             // Assert
-            Assert.IsTrue(result1);
-            Assert.IsTrue(result2);
+            Assert.IsTrue(result1.Any(e => e is VoteAdded));
+            Assert.IsTrue(result2.Any(e => e is VoteAdded));
             Assert.AreEqual(2, venue.Votes.Count());
             Assert.IsTrue(venue.Votes.Contains(user1));
             Assert.IsTrue(venue.Votes.Contains(user2));
@@ -110,7 +111,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             var result = venue.AddVote(user);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.IsFalse(result.Any(e => e is VoteAdded));
             Assert.AreEqual(0, venue.Votes.Count());
             Assert.IsFalse(venue.Votes.Contains(user));
         }

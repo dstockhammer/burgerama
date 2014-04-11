@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Burgerama.Services.Voting.Core.DI
 {
@@ -8,6 +9,8 @@ namespace Burgerama.Services.Voting.Core.DI
 
         public static void SetServiceLocator(Func<IServiceLocator> create)
         {
+            Contract.Requires<ArgumentNullException>(create != null);
+
             Current = create();
         }
     }

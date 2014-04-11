@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Burgerama.Messaging.Events;
 using Burgerama.Services.Voting.Core.Data;
+using Burgerama.Services.Voting.Core.Messaging;
 
 namespace Burgerama.Services.Voting.Api.Controllers
 {
@@ -11,10 +13,12 @@ namespace Burgerama.Services.Voting.Api.Controllers
     public class VotingController : ApiController
     {
         private readonly IVenueRepository _venueRepository;
+        private readonly IEventDispatcher _eventDispatcher;
 
-        public VotingController(IVenueRepository venueRepository)
+        public VotingController(IVenueRepository venueRepository, IEventDispatcher eventDispatcher)
         {
             _venueRepository = venueRepository;
+            _eventDispatcher = eventDispatcher;
         }
 
         /// <summary>
@@ -26,9 +30,9 @@ namespace Burgerama.Services.Voting.Api.Controllers
         /// <param name="venueId">The guid of the venue.</param>
         /// <returns>Returns the total number of votes for the venue.</returns>
         [HttpGet]
-        [Route("venue/{venueId}")]
+        [Route("venue/{venueId}/count")]
         [ResponseType(typeof(int))]
-        public IHttpActionResult GetVotesForVenue(Guid venueId)
+        public IHttpActionResult GetVoteCountForVenue(Guid venueId)
         {
             var venue = _venueRepository.Get(venueId);
 
@@ -47,9 +51,9 @@ namespace Burgerama.Services.Voting.Api.Controllers
         /// <param name="venueId">The guid of the venue.</param>
         /// <returns>Returns the ids of all users who have voted for the venue.</returns>
         [HttpGet]
-        [Route("venue/{venueId}/details")]
+        [Route("venue/{venueId}")]
         [ResponseType(typeof(IEnumerable<Guid>))]
-        public IHttpActionResult GetVoteDetailsForVenue(Guid venueId)
+        public IHttpActionResult GetVotesForVenue(Guid venueId)
         {
             var venue = _venueRepository.Get(venueId);
 
@@ -57,6 +61,34 @@ namespace Burgerama.Services.Voting.Api.Controllers
                 return NotFound();
 
             return Ok(venue.Votes);
+        }
+
+        /// <summary>
+        /// Add a vote to a venue.
+        /// </summary>
+        /// <example>
+        /// POST api/venue/878f000c-e61f-4d34-a9f7-236a153c062c
+        /// </example> 
+        /// <param name="venueId">The guid of the venue.</param>
+        [HttpPost]
+        [Route("venue/{venueId}")]
+        public IHttpActionResult AddVote(Guid venueId)
+        {
+            var venue = _venueRepository.Get(venueId);
+            if (venue == null)
+                return NotFound();
+
+            // todo: get the userid from identity.
+            var userId = Guid.NewGuid();
+
+            var messages = venue.AddVote(userId);
+            if (messages.Any() == false)
+                return Conflict();
+
+            _venueRepository.SaveOrUpdate(venue);
+            _eventDispatcher.Publish(messages);
+
+            return Ok();
         }
 
         /// <summary>
@@ -75,32 +107,6 @@ namespace Burgerama.Services.Voting.Api.Controllers
             var venues = _venueRepository.GetVotesForUser(userId);
 
             return Ok(venues.Select(v => v.Id));
-        }
-
-        /// <summary>
-        /// Add a vote to a venue.
-        /// </summary>
-        /// <example>
-        /// POST api/venue/878f000c-e61f-4d34-a9f7-236a153c062c
-        /// </example> 
-        /// <param name="venueId">The guid of the venue.</param>
-        [HttpPost]
-        [Route("venue/{venueId}")]
-        [ResponseType(typeof(bool))]
-        public IHttpActionResult AddVote(Guid venueId)
-        {
-            var venue = _venueRepository.Get(venueId);
-
-            // todo: get the userid from identity.
-            var userId = Guid.NewGuid();
-
-            var voteAdded = venue.AddVote(userId);
-            if (voteAdded == false) 
-                return Conflict();
-
-            _venueRepository.SaveOrUpdate(venue);
-
-            return Ok();
         }
     }
 }

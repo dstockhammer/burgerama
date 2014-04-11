@@ -100,6 +100,9 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Burgerama.Messaging.Events">
+      <HintPath>..\..\..\Messaging\Events\bin\Debug\Burgerama.Messaging.Events.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

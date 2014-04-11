@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Burgerama.Messaging.Events;
+using Burgerama.Messaging.Events.Voting;
 
 namespace Burgerama.Services.Voting.Domain
 {
@@ -11,7 +14,7 @@ namespace Burgerama.Services.Voting.Domain
 
         public Guid? LatestOuting { get; private set; }
 
-        public IEnumerable<Guid> Votes 
+        public IEnumerable<Guid> Votes
         {
             get { return _votes; }
         }
@@ -39,13 +42,19 @@ namespace Burgerama.Services.Voting.Domain
         /// Voting is only allowed as long as the venue has no outing.
         /// </remarks>
         /// <param name="userId">The id of the voting user.</param>
-        /// <returns>Returns true if the vote was added, false otherwise.</returns>
-        public bool AddVote(Guid userId)
+        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
+        public IEnumerable<IEvent> AddVote(Guid userId)
         {
             if (LatestOuting.HasValue)
-                return false;
+                return Enumerable.Empty<IEvent>();
 
-            return _votes.Add(userId);
+            if (_votes.Add(userId) == false)
+                return Enumerable.Empty<IEvent>();
+            
+            return new[]
+            {
+                new VoteAdded { VenueId = Id, UserId = userId }
+            };
         }
 
         /// <summary>
