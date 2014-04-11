@@ -1,4 +1,13 @@
-﻿html {
+﻿@import 'helper-mixins.less';
+
+@default-background-color: rgba(0,0,0,0.7);
+@default-shadow-color: @default-background-color;
+@default-shadow: 0 0 1.5em @default-shadow-color;
+@default-text-color: #fff;
+
+@badge-size: 9em;
+
+html {
     height: 100%;
 }
 
@@ -13,112 +22,91 @@ body {
     height: 100%;
 }
 
+// Google Maps Search Box Styling
 #map-canvas {
     height: 100%;
+    
+    #map-search-box {
+        .top-left();
+        font-family: sans-serif;
+        font-size: 1.5em;
+        color: @default-text-color;
+        background-color: @default-background-color;
+        padding: 0.3em 0.5em 0.3em 0.5em;
+        border: 0;
+        z-index: 100;
+        width: 20em;
+        box-shadow: @default-shadow;
+    }
+
+    #map-search-box:focus {
+        outline: none;
+    }
 }
 
+// Google Maps Search Result Custom Styling
+.pac-container {
+    background-color: @default-background-color;
+
+    .pac-item .pac-item-query {
+        color: @default-text-color;
+    }
+
+    .pac-item:hover .pac-item-query,
+    .pac-item-selected .pac-item-query {
+        color: #000;
+    }
+}
+
+// Custom Controls over Maps
 #map-space {
     right: 20em;
     left: 0;
+  
+    // ---------------- Burgerama Logo ----------------
+    #logo-container {
+        .bottom-right(@right: 0);
+        color: @default-text-color;
+        background-color: @default-background-color;
+        z-index: 200;
+        padding: 0.2em 0.4em 0.2em 0.4em;
+        font-family: sans-serif;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 2px #000;
+        box-shadow: @default-shadow;
+
+        img {
+            width: 1.5em;
+        }
+
+        span {
+            vertical-align: middle;
+        }
+    }
+    // ---------------- Badge ----------------
+    #badge-container {
+        .top-right();
+        z-index: 200;
+        overflow: hidden;
+        width: @badge-size;
+        border-radius: @badge-size;
+        border: 0.75em solid @default-background-color;
+        box-shadow: @default-shadow;
+
+        img {
+            width: 100%;
+            border-radius: @badge-size;
+            background-color: #fff;
+        }
+    }  
 }
 
-#organizer-space {  
+#organizer-space {
     width: 20em;
     right: 0;
     top: 0;
-
-    background-color: rgba(0,0,0,0.9);
-    box-shadow: 0 0 1.5em   rgba(0,0,0,0.7);
-}
-
-#map-search-box {
-    font-family: sans-serif;
-    font-size: 1.5em;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 0.3em 0.5em 0.3em 0.5em;
-    border: 0;
-    position: absolute;
-    z-index: 100;
-    width: 20em;
-    top: 1.5em !important;
-    left: 1.5em !important;
-    box-shadow: 0 0 1.5em   rgba(0,0,0,0.7);
-}
-
-#map-search-box:focus {
-    outline: none;
-}
-
-#information-box {
-    display: none;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    
-    font-family: sans-serif;
-    font-size: 1.5em;
-    padding: 0.3em;
-    background-color: rgba(255,255,255,0.6);
-    text-align: right;
-}
-
-#logo-container {
-    position: absolute;
-    color: #fff;
-    right: 0;
-    bottom: 2em;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 200;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    font-family: sans-serif;
-    font-size: 2.5em;   
-    text-shadow: 2px 2px 2px #000;
-    box-shadow: 
-      inset 0 0 0.2em   rgba(255,255,255,0.3),
-            0 0 1.5em   rgba(0,0,0,0.7);
-}
-
-#logo-container img {
-    width: 1.5em;
-}
-
-#logo-container span {
-    vertical-align: middle;
-}
-
-#badge-container {
-    position: absolute;
-    right: 1em;
-    top: 2em;
-    z-index: 200;
-    overflow: hidden;
-    width: 9em;
-    border-radius: 9em;
-    border-width: 0.75em;
-    border-style: solid;
-    border-color:  rgba(0, 0, 0, 0.7);
-    
-    box-shadow:  0 0 1.5em   rgba(0,0,0,0.7);
-}
-
-#badge-container img {
-    width: 100%;
-    border-radius: 9em;
-    background-color: #fff;    
-}
-
-.pac-container {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.pac-item .pac-item-query {
-    color: #fff;
-}
-
-.pac-item:hover .pac-item-query,
-.pac-item-selected .pac-item-query {
-    color: #000;
+    background-color: fadein(@default-background-color, 20%);
+    box-shadow: @default-shadow;
 }
 
 #venue-list {
@@ -126,32 +114,41 @@ body {
     padding: 0;
 }
 
+
+@item-background-gradient-color-1: rgba(255,255,255,0.03);
+@item-background-gradient-color-2: rgba(0,0,0,0.03);
+@item-background: 
+    @item-background-gradient-color-1 0%, 
+    @item-background-gradient-color-2 40%,
+    @item-background-gradient-color-2 60%,
+    @item-background-gradient-color-1 100%;
+
 #venue-list li {
     display: block;
     text-decoration: none;
     padding: 0.5em 2em 0.5em 2em;
     border-bottom: 1px solid #000;
-    color: #fff;
+    color: @default-text-color;
     font-weight: bold;
-
-    background: -webkit-gradient(linear, left top, left bottom, 
-                                 color-stop(0%,rgba(255,255,255,0.1)),
-                                 color-stop(40%,rgba(0,0,0,0.1)),
-                                 color-stop(60%,rgba(0,0,0,0.1)),
-                                 color-stop(100%,rgba(255,255,255,0.1))
-                                 );
+    .vertical-gradient-background(@color-stops: @item-background);
+    .transition(@propertyName: background-color; @transitionLength: 0.3s; @transitionType: ease-out);
 }
 
-#venue-list li:first-child{
+#venue-list li:first-child {
     border-top: 1px solid #000;
 }
 
 
 #venue-list li:hover {
     background-color: rgba(255, 0, 0, 0.7);
+    .transition(@propertyName: background-color; @transitionLength: 0.3s; @transitionType: ease-in);
 }
 
-#calendar-icon, #venue-icon  {
+.switcher-icon {
     width: 2em;
     margin: 2em;
+}
+
+#organizer-switcher {
+    text-align: center;
 }

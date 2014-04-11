@@ -100,6 +100,12 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\helper-mixins.css">
+      <DependentUpon>helper-mixins.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\helper-mixins.min.css">
+      <DependentUpon>helper-mixins.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\calendar_icon.png" />
     <Content Include="Content\img\hamburger_logo.png" />
@@ -414,6 +420,7 @@
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <TypeScriptCompile Include="Scripts\app\map.options.ts" />
+    <Content Include="Content\css\helper-mixins.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
