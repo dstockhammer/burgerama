@@ -1,6 +1,6 @@
 ﻿var Burgerama;
 (function (Burgerama) {
-    Burgerama.options = {
+    Burgerama.mapOptions = {
         center: new google.maps.LatLng(51.51, -0.11),
         overviewMapControl: false,
         scaleControl: false,

@@ -1,5 +1,5 @@
 ﻿module Burgerama {
-    export var options = {
+    export var mapOptions = {
         center: new google.maps.LatLng(51.51, -0.11),
         overviewMapControl: false,
         scaleControl: false,
