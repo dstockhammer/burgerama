@@ -419,6 +419,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
+    <TypeScriptCompile Include="Scripts\app\map.functions.ts" />
     <TypeScriptCompile Include="Scripts\app\map.options.ts" />
     <Content Include="Content\css\helper-mixins.less" />
     <None Include="Web.Debug.config">

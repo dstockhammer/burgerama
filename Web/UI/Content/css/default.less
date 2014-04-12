@@ -111,12 +111,12 @@ body {
 
 #venue-list {
     margin: 0;
-    padding: 0;
+    padding: 0; 
 }
 
 
-@item-background-gradient-color-1: rgba(255,255,255,0.03);
-@item-background-gradient-color-2: rgba(0,0,0,0.03);
+@item-background-gradient-color-1: rgba(255,255,255,0.05);
+@item-background-gradient-color-2: rgba(0,0,0,0.05);
 @item-background: 
     @item-background-gradient-color-1 0%, 
     @item-background-gradient-color-2 40%,
@@ -129,9 +129,10 @@ body {
     padding: 0.5em 2em 0.5em 2em;
     border-bottom: 1px solid #000;
     color: @default-text-color;
-    font-weight: bold;
+    font-weight: bold;  
+    box-shadow: none;
     .vertical-gradient-background(@color-stops: @item-background);
-    .transition(@propertyName: background-color; @transitionLength: 0.3s; @transitionType: ease-out);
+    .transition(@propertyName: all; @transitionLength: 0.3s; @transitionType: ease-out);
 }
 
 #venue-list li:first-child {
@@ -141,7 +142,8 @@ body {
 
 #venue-list li:hover {
     background-color: rgba(255, 0, 0, 0.7);
-    .transition(@propertyName: background-color; @transitionLength: 0.3s; @transitionType: ease-in);
+    box-shadow: inset @default-shadow;
+    .transition(@propertyName: all; @transitionLength: 0.3s; @transitionType: ease-in);
 }
 
 .switcher-icon {

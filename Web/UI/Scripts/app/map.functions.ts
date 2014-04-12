@@ -19,12 +19,12 @@
         places = searchBox.getPlaces();
         clearMarkersFromTheMap(markers);
         var bounds = new google.maps.LatLngBounds();
-        for (var i = 0, place; place = places[i]; i++) {
+        places.forEach((place) => {
             var marker = placeMarkerOnTheMap(map, place);
-            google.maps.event.addDomListener(marker, 'click', showMarkerInfo);
+            google.maps.event.addDomListener(marker, 'click', () => { showMarkerInfo(marker, place); });
             markers.push(marker);
             bounds.extend(place.geometry.location);
-        }
+        });
 
         map.fitBounds(bounds);
         map.setZoom(options.zoom);
@@ -52,17 +52,18 @@
     }
 
     export function showMarkerInfo(
-        marker: google.maps.Marker)
+        marker: google.maps.Marker,
+        place: google.maps.places.PlaceResult)
     {
-        alert(marker);
+        alert(place.name);
     }
 
     export function clearMarkersFromTheMap(
         markers: Array<google.maps.Marker>)
     {
-        for (var i = 0, marker; marker = markers[i]; i++) {
+        markers.forEach((marker) => {
             marker.setMap(null);
-        }
+        });
 
         markers = new Array<google.maps.Marker>();
     }

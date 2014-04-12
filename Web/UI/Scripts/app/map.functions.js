@@ -11,12 +11,14 @@
         places = searchBox.getPlaces();
         clearMarkersFromTheMap(markers);
         var bounds = new google.maps.LatLngBounds();
-        for (var i = 0, place; place = places[i]; i++) {
+        places.forEach(function (place) {
             var marker = placeMarkerOnTheMap(map, place);
-            google.maps.event.addDomListener(marker, 'click', showMarkerInfo);
+            google.maps.event.addDomListener(marker, 'click', function () {
+                showMarkerInfo(marker, place);
+            });
             markers.push(marker);
             bounds.extend(place.geometry.location);
-        }
+        });
 
         map.fitBounds(bounds);
         map.setZoom(options.zoom);
@@ -40,15 +42,15 @@
     }
     Burgerama.setCurrentLocation = setCurrentLocation;
 
-    function showMarkerInfo(marker) {
-        alert(marker);
+    function showMarkerInfo(marker, place) {
+        alert(place.name);
     }
     Burgerama.showMarkerInfo = showMarkerInfo;
 
     function clearMarkersFromTheMap(markers) {
-        for (var i = 0, marker; marker = markers[i]; i++) {
+        markers.forEach(function (marker) {
             marker.setMap(null);
-        }
+        });
 
         markers = new Array();
     }
