@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web.Mvc;
 
 namespace Burgerama.Services.Users.Api
 {
@@ -6,6 +8,8 @@ namespace Burgerama.Services.Users.Api
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            Contract.Requires<ArgumentException>(filters != null);
+
             filters.Add(new HandleErrorAttribute());
         }
     }

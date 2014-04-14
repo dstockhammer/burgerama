@@ -20,17 +20,17 @@ using Microsoft.Owin.Security.OAuth;
 namespace Burgerama.Services.Users.Api.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
+    [RoutePrefix("account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
+        private BurgeramaUserManager _userManager;
 
-        public ApplicationUserManager UserManager
+        public BurgeramaUserManager UserManager
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? Request.GetOwinContext().GetUserManager<BurgeramaUserManager>();
             }
             private set
             {
@@ -44,7 +44,7 @@ namespace Burgerama.Services.Users.Api.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        public AccountController(BurgeramaUserManager userManager, ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
@@ -281,7 +281,7 @@ namespace Burgerama.Services.Users.Api.Controllers
                 {
                     provider = description.AuthenticationType,
                     response_type = "token",
-                    client_id = Startup.PublicClientId,
+                    client_id = AuthConfig.PublicClientId,
                     redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
                     state = state
                 })
@@ -294,7 +294,7 @@ namespace Burgerama.Services.Users.Api.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            if (ModelState.IsValid == false)
+            if (model == null || ModelState.IsValid == false)
             {
                 return BadRequest(ModelState);
             }
@@ -322,7 +322,7 @@ namespace Burgerama.Services.Users.Api.Controllers
         [Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
-            if (ModelState.IsValid == false)
+            if (model == null || ModelState.IsValid == false)
             {
                 return BadRequest(ModelState);
             }

@@ -1,21 +1,20 @@
-﻿using Burgerama.Services.Users.Core;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace Burgerama.Services.Users.Api
+namespace Burgerama.Services.Users.Core
 {
-    public class ApplicationUserManager : UserManager<BurgeramaUser>
+    public class BurgeramaUserManager : UserManager<BurgeramaUser>
     {
-        public ApplicationUserManager(IUserStore<BurgeramaUser> store)
+        public BurgeramaUserManager(IUserStore<BurgeramaUser> store)
             : base(store)
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public static BurgeramaUserManager Create(IdentityFactoryOptions<BurgeramaUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<BurgeramaUser>(context.Get<BurgeramaDbContext>()));
+            var manager = new BurgeramaUserManager(new UserStore<BurgeramaUser>(context.Get<BurgeramaDbContext>()));
 
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<BurgeramaUser>(manager)
@@ -31,7 +30,7 @@ namespace Burgerama.Services.Users.Api
                 RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = true
             };
 
             var dataProtectionProvider = options.DataProtectionProvider;

@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
@@ -8,6 +10,8 @@ namespace Burgerama.Services.Users.Api
     {
         public static void Register(HttpConfiguration config)
         {
+            Contract.Requires<ArgumentException>(config != null);
+
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
@@ -18,12 +22,6 @@ namespace Burgerama.Services.Users.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
         }
     }
 }

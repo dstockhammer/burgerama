@@ -1,4 +1,6 @@
-﻿using Burgerama.Services.Users.Api;
+﻿using System;
+using System.Diagnostics.Contracts;
+using Burgerama.Services.Users.Api;
 using Microsoft.Owin;
 using Owin;
 
@@ -6,11 +8,13 @@ using Owin;
 
 namespace Burgerama.Services.Users.Api
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            Contract.Requires<ArgumentNullException>(app != null);
+
+            AuthConfig.Configure(app);
         }
     }
 }

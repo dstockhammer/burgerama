@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using Burgerama.Services.Users.Api.Providers;
+using Burgerama.Services.Users.Core;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -8,17 +10,17 @@ using Owin;
 
 namespace Burgerama.Services.Users.Api
 {
-    public partial class Startup
+    public static class AuthConfig
     {
-        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+        public const string PublicClientId = "burgerama";
 
-        public static string PublicClientId { get; private set; }
-
-        public void ConfigureAuth(IAppBuilder app)
+        public static void Configure(IAppBuilder app)
         {
+            Contract.Requires<ArgumentNullException>(app != null);
+
             // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext(BurgeramaDbContext.Create);
+            app.CreatePerOwinContext<BurgeramaUserManager>(BurgeramaUserManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -26,31 +28,30 @@ namespace Burgerama.Services.Users.Api
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Configure the application for OAuth based flow
-            PublicClientId = "burgerama";
-            OAuthOptions = new OAuthAuthorizationServerOptions
+            var oAuthOptions = new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString("/Token"),
+                TokenEndpointPath = new PathString("/Token"), // todo correct url
                 Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"), // todo correct url
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };
 
             // Enable the application to use bearer tokens to authenticate users
-            app.UseOAuthBearerTokens(OAuthOptions);
+            app.UseOAuthBearerTokens(oAuthOptions);
 
             // External identity providers
-            app.UseMicrosoftAccountAuthentication(
-                clientId: "",
-                clientSecret: "");
+            //app.UseMicrosoftAccountAuthentication(
+            //    clientId: "",
+            //    clientSecret: "");
 
-            app.UseTwitterAuthentication(
-                consumerKey: "",
-                consumerSecret: "");
+            //app.UseTwitterAuthentication(
+            //    consumerKey: "",
+            //    consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-                appId: "",
-                appSecret: "");
+            //app.UseFacebookAuthentication(
+            //    appId: "",
+            //    appSecret: "");
 
             app.UseGoogleAuthentication();
         }
