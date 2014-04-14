@@ -9,7 +9,7 @@
     </div>
     <div id="information-box"></div>
 </div>
-<div id="map-canvas"></div>
+<div ng-view></div>
 <div id="organizer-space" class="workspace">
     <div id="organizer-switcher">
         <img id="venue-icon" class="switcher-icon switcher-icon-active" src="~/Content/img/venue_icon.png" />
@@ -35,4 +35,7 @@
         <li><span>Forlino</span></li>
         <li><span>Jollibee</span></li>
     </ul>
+    <p>
+        <button type="button" class="btn btn-default" ng-controller="LoginController" ng-click="showModal();"><span class="glyphicon glyphicon-user"></span>Sign in</button>
+    </p>
 </div>

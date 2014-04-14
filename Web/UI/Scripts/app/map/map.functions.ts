@@ -1,5 +1,4 @@
-﻿module Burgerama {
-
+﻿module Burgerama.Map {
     export function createMapSearchBox(
         map: google.maps.Map,
         inputId: string)

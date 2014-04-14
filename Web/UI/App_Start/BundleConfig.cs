@@ -7,11 +7,10 @@ namespace Burgerama.Web.UI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                // Angular Js
                 "~/Scripts/vendor/angularjs/angular.js",
                 "~/Scripts/vendor/angularjs/angular-resource.js",
-
-                // UI-Bootstrap
+                "~/Scripts/vendor/angularjs/angular-route.js",
+                "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",
                 "~/Scripts/vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js"
             ));
 
