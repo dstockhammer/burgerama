@@ -55,14 +55,10 @@ module Burgerama.Account {
         }
 
         public checkAuth(): boolean {
-            if (this.email == null || this.token == null) {
-                //this.$location.path('/login').replace();
-                return false;
-            }
-            return true;
+            return this.email == null || this.token == null;
         }
 
-        public signIn(email: string, password: string, persist: boolean) {
+        public signIn(email: string, password: string, persist: boolean): ng.IPromise<any> {
             var deferred = this.$q.defer();
 
             var reuqestParams: ITokenRequest = {
@@ -95,7 +91,7 @@ module Burgerama.Account {
             return deferred.promise;
         }
 
-        public signOut() {
+        public signOut(): ng.IPromise<any> {
             var deferred = this.$q.defer();
 
             this.$http.post('http://localhost/burgerama/api/users/account/logout', null, null)

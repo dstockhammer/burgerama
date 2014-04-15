@@ -9,7 +9,7 @@ using Burgerama.Services.Venues.Domain;
 
 namespace Burgerama.Services.Venues.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class VenueController : ApiController
     {
         private readonly IVenueRepository _venueRepository;
@@ -30,21 +30,28 @@ namespace Burgerama.Services.Venues.Api.Controllers
         /// </example> 
         /// <returns>Returns all venues.</returns>
         [HttpGet]
-        [Route("venue")]
+        [Route("venues")]
         [ResponseType(typeof(IEnumerable<VenueModel>))]
         public IHttpActionResult GetAllVenues()
         {
-            var venues =  _venueRepository.GetAll()
-                .Select(v => new VenueModel
-                {
-                    Id = v.Id.ToString(),
-                    Title = v.Title,
-                    Location = v.Location,
-                    Url = v.Url,
-                    Description = v.Description,
-                    Rating = 0,
-                    Votes = 0
-                });
+            //var venues =  _venueRepository.GetAll()
+            //    .Select(v => new VenueModel
+            //    {
+            //        Id = v.Id.ToString(),
+            //        Title = v.Title,
+            //        Location = v.Location,
+            //        Url = v.Url,
+            //        Description = v.Description,
+            //        Rating = 0,
+            //        Votes = 0
+            //    });
+
+            var venues = new[]
+            {
+                new VenueModel { Id = Guid.NewGuid().ToString(), Title = "Venue 1" },
+                new VenueModel { Id = Guid.NewGuid().ToString(), Title = "Venue 2" },
+                new VenueModel { Id = Guid.NewGuid().ToString(), Title = "Venue 3" }
+            };
 
             return Ok(venues);
         }
@@ -58,7 +65,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
         /// <param name="venueId">The guid of the venue.</param>
         /// <returns>Returns the venue with the passed id.</returns>
         [HttpGet]
-        [Route("venue/{venueId}")]
+        [Route("venues/{venueId}")]
         [ResponseType(typeof(VenueModel))]
         public IHttpActionResult GetVenueById(Guid venueId)
         {
@@ -80,7 +87,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
         }
 
         [HttpPost]
-        [Route("venue")]
+        [Route("venues")]
         [ResponseType(typeof(bool))]
         public IHttpActionResult AddVenue(VenueModel model)
         {

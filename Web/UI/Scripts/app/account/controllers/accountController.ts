@@ -34,7 +34,7 @@ module Burgerama.Account {
             });
         }
 
-        private update() {
+        private update(): void {
             this.$scope.signedIn = this.authService.checkAuth();
             this.$scope.user = {
                 email: this.authService.email

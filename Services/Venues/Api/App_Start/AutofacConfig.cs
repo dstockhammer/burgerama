@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -11,6 +13,8 @@ namespace Burgerama.Services.Venues.Api
     {
         public static void Register(HttpConfiguration config)
         {
+            Contract.Requires<ArgumentNullException>(config != null);
+
             var container = BuildContainer();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }

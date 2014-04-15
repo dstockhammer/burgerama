@@ -24,11 +24,11 @@ module Burgerama.Account {
             this.$scope.cancel = () => this.cancel();
         }
 
-        private cancel() : void {
+        private cancel(): void {
             this.$modalInstance.dismiss();
         }
 
-        private submit() : void {
+        private submit(): void {
             this.$modalInstance.close();
 
             this.authService.signIn(this.$scope.credentials.email, this.$scope.credentials.password, this.$scope.credentials.persistent)

@@ -444,6 +444,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\map\controllers\mapController.ts" />
+    <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
+    <TypeScriptCompile Include="Scripts\app\venues\resources\venueResource.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />

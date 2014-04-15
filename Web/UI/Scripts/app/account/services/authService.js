@@ -26,11 +26,7 @@ var Burgerama;
                 });
             }
             AuthService.prototype.checkAuth = function () {
-                if (this.email == null || this.token == null) {
-                    //this.$location.path('/login').replace();
-                    return false;
-                }
-                return true;
+                return this.email == null || this.token == null;
             };
 
             AuthService.prototype.signIn = function (email, password, persist) {
