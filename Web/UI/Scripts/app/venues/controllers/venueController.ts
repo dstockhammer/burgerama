@@ -21,7 +21,7 @@ module Burgerama.Venues {
             this.load();
         }
 
-        private load(): ng.IPromise<any> {
+        private load() {
             return this.venueResource.all(data => {
                 this.$scope.venues = data;
             }, err => {

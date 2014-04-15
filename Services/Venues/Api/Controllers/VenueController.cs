@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Burgerama.Services.Venues.Api.Models;
@@ -9,7 +9,6 @@ using Burgerama.Services.Venues.Domain;
 
 namespace Burgerama.Services.Venues.Api.Controllers
 {
-    [Authorize]
     public class VenueController : ApiController
     {
         private readonly IVenueRepository _venueRepository;
@@ -86,12 +85,14 @@ namespace Burgerama.Services.Venues.Api.Controllers
             });
         }
 
+        [Authorize]
         [HttpPost]
         [Route("venues")]
         [ResponseType(typeof(bool))]
         public IHttpActionResult AddVenue(VenueModel model)
         {
-            // todo: get userId form identity
+            // todo: get userId from claims
+            var claims = ClaimsPrincipal.Current.Claims;
             var userId = Guid.NewGuid();
 
             var venue = new Venue(model.Title, model.Location, userId);

@@ -1,13 +1,9 @@
 ﻿/// <reference path="../../app.ts" />
 
 module Burgerama.Account {
-    export interface IUserData {
-        email: string;
-    }
-
     export interface ILoginScope extends ng.IScope {
         signedIn: boolean;
-        user: IUserData;
+        user: any;
 
         showSignInModal: () => void;
         signOut: () => void;
@@ -17,11 +13,10 @@ module Burgerama.Account {
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: ILoginScope,
-            private $modal, // ng.ui.IModalService ?
-            private toaster,
             private authService: IAuthService)
         {
             this.update();
+            
             this.$scope.showSignInModal = () => this.showSignInModal();
             this.$scope.signOut = () => this.signOut();
 
@@ -35,31 +30,20 @@ module Burgerama.Account {
         }
 
         private update(): void {
-            this.$scope.signedIn = this.authService.checkAuth();
-            this.$scope.user = {
-                email: this.authService.email
-            };
+            this.$scope.signedIn = this.authService.isAuthenticated();
+            this.$scope.user = this.authService.getUser();
         }
 
         private showSignInModal(): void {
-            this.$modal.open({
-                templateUrl: 'http://localhost/burgerama/Scripts/app/account/views/login.html',
-                controller: 'SignInController'
-            });
+            this.authService.signIn();
         }
 
         private signOut(): void {
-            this.authService.checkAuth();
-
-            var email = this.authService.email;
-            this.authService.signOut()
-                .then(() => {
-                    this.toaster.pop("success", "Success", "Bye, " + email + "!");
-                });
+            this.authService.signOut();
         }
     }
 }
 
-Burgerama.app.controller('AccountController', ['$rootScope', '$scope', '$modal', 'toaster', 'AuthService', ($rootScope, $scope, $modal, toaster, authService) =>
-    new Burgerama.Account.AccountController($rootScope, $scope, $modal, toaster, authService)
+Burgerama.app.controller('AccountController', ['$rootScope', '$scope', 'AuthService', ($rootScope, $scope, authService) =>
+    new Burgerama.Account.AccountController($rootScope, $scope, authService)
 ]);

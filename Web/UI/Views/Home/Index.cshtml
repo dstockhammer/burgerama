@@ -2,9 +2,7 @@
 
 <div id="map-space" class="workspace">
     <input id="map-search-box" type="text" placeholder="yo, type your g here" />
-    <div id="badge-container">
-        <img src="~/Content/img/profile.jpg" alt="Cartman Burger" />
-    </div>
+
     <div id="logo-container">
         <img src="~/Content/img/hamburger_logo.png" alt="@ViewBag.Title" />
         <span>@ViewBag.Title</span>
@@ -21,6 +19,10 @@
     </div>
 
     <div ng-controller="AccountController" style="margin: 15px;">
+        <div id="badge-container" ng-show="signedIn">
+            <img src="{{ user.picture }}" alt="{{ user.nickname }}" />
+        </div>
+
         <p ng-show="signedIn" style="color:#efefef">You are signed in as {{ user.email }}.</p>
         <button type="button" class="btn btn-default" ng-hide="signedIn" ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</button>
         <button type="button" class="btn btn-default" ng-show="signedIn" ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</button>

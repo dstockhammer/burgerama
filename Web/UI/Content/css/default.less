@@ -83,22 +83,23 @@ body {
             vertical-align: middle;
         }
     }
-    // ---------------- Badge ----------------
-    #badge-container {
-        .top-right();
-        z-index: 200;
-        overflow: hidden;
-        width: @badge-size;
-        border-radius: @badge-size;
-        border: 0.75em solid @default-background-color;
-        box-shadow: @default-shadow;
+}
 
-        img {
-            width: 100%;
-            border-radius: @badge-size;
-            background-color: #fff;
-        }
-    }  
+// ---------------- Badge ----------------
+#badge-container {
+    .top-right(@default-border-distance, 300px);
+    z-index: 200;
+    overflow: hidden;
+    width: @badge-size;
+    border-radius: @badge-size;
+    border: 0.75em solid @default-background-color;
+    box-shadow: @default-shadow;
+
+    img {
+        width: 100%;
+        border-radius: @badge-size;
+        background-color: #fff;
+    }
 }
 
 #organizer-space {

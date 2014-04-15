@@ -6,13 +6,15 @@ var Burgerama;
     Burgerama.app = angular.module('burgerama', [
         'ngResource',
         'ngRoute',
+        'ngCookies',
         'ui.bootstrap',
         'LocalStorageModule',
-        'toaster'
+        'toaster',
+        'auth0'
     ]);
 
     Burgerama.app.config([
-        '$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
+        '$httpProvider', '$routeProvider', 'authProvider', function ($httpProvider, $routeProvider, authProvider) {
             $httpProvider.interceptors.push('AuthHttpInterceptor');
 
             $routeProvider.when('/', {
@@ -20,6 +22,12 @@ var Burgerama;
                 controller: 'MapController'
             }).otherwise({
                 redirectTo: '/'
+            });
+
+            authProvider.init({
+                domain: 'burgerama.auth0.com',
+                clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
+                callbackURL: "http://localhost/burgerama/"
             });
         }]);
 })(Burgerama || (Burgerama = {}));

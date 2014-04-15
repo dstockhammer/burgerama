@@ -13,16 +13,18 @@ module Burgerama {
         // Angular modules
         'ngResource',
         'ngRoute',
+        'ngCookies',
 
         // Angular UI modules
         'ui.bootstrap',
 
         // 3rd Party Modules
         'LocalStorageModule',
-        'toaster'
+        'toaster',
+        'auth0'
     ]);
 
-    app.config(['$httpProvider', '$routeProvider', ($httpProvider: ng.IHttpProvider, $routeProvider: ng.route.IRouteProvider) => {
+    app.config(['$httpProvider', '$routeProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $routeProvider: ng.route.IRouteProvider, authProvider) => {
         $httpProvider.interceptors.push('AuthHttpInterceptor');
 
         $routeProvider
@@ -33,5 +35,11 @@ module Burgerama {
             .otherwise({
                 redirectTo: '/'
             });
+
+        authProvider.init({
+            domain: 'burgerama.auth0.com',
+            clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
+            callbackURL: "http://localhost/burgerama/"
+        });
     }]);
 }

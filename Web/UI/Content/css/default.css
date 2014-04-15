@@ -1,4 +1,4 @@
-﻿html {
+html {
   height: 100%;
 }
 body {
@@ -63,10 +63,10 @@ body {
 #map-space #logo-container span {
   vertical-align: middle;
 }
-#map-space #badge-container {
+#badge-container {
   position: absolute;
   top: 2em !important;
-  right: 2em !important;
+  right: 300px !important;
   z-index: 200;
   overflow: hidden;
   width: 9em;
@@ -74,7 +74,7 @@ body {
   border: 0.75em solid rgba(0, 0, 0, 0.7);
   box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
 }
-#map-space #badge-container img {
+#badge-container img {
   width: 100%;
   border-radius: 9em;
   background-color: #fff;

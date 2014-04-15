@@ -2,83 +2,64 @@
 var Burgerama;
 (function (Burgerama) {
     (function (Account) {
-        
-
         var AuthService = (function () {
-            function AuthService($rootScope, $location, $http, $q, $resource, localStorageService) {
+            function AuthService($rootScope, toaster, auth, authEvents, localStorageService) {
+                var _this = this;
                 this.$rootScope = $rootScope;
-                this.$location = $location;
-                this.$http = $http;
-                this.$q = $q;
-                this.$resource = $resource;
+                this.toaster = toaster;
+                this.auth = auth;
+                this.authEvents = authEvents;
                 this.localStorageService = localStorageService;
-                this.email = this.$rootScope.email = this.localStorageService.get('email');
-                this.token = this.$rootScope.token = this.localStorageService.get('token');
+                var unregistersignOutSuccess = $rootScope.$on(this.authEvents.logout, function () {
+                    return _this.signOutSuccess();
+                });
+                var unregisterSignInSuccess = $rootScope.$on(this.authEvents.loginSuccess, function () {
+                    return _this.signInSuccess();
+                });
+                var unregisterSignInError = $rootScope.$on(this.authEvents.loginFailed, function () {
+                    _this.toaster.pop("error", "Error", "Authentication failed.");
+                });
 
-                this.TokenResource = this.$resource('http://localhost/burgerama/api/users/token', {}, {
-                    create: {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        transformRequest: function (data) {
-                            return 'grant_type=' + data.grant_type + '&username=' + data.username + '&password=' + data.password;
-                        }
-                    }
+                this.$rootScope.$on('$destroy', function () {
+                    unregistersignOutSuccess();
+                    unregisterSignInSuccess();
+                    unregisterSignInError();
                 });
             }
-            AuthService.prototype.checkAuth = function () {
-                return this.email == null || this.token == null;
+            AuthService.prototype.isAuthenticated = function () {
+                return this.getUser() != null;
             };
 
-            AuthService.prototype.signIn = function (email, password, persist) {
-                var _this = this;
-                var deferred = this.$q.defer();
+            AuthService.prototype.getUser = function () {
+                return this.localStorageService.get('user');
+            };
 
-                var reuqestParams = {
-                    grant_type: 'password',
-                    username: email,
-                    password: password
-                };
+            AuthService.prototype.getToken = function () {
+                return this.localStorageService.get('token');
+            };
 
-                var tokenRequest = new this.TokenResource(reuqestParams);
-                tokenRequest.$create(function (token) {
-                    _this.email = _this.$rootScope.email = token.userName;
-                    _this.token = _this.$rootScope.token = token.access_token;
-
-                    // todo: add expiration to localStorageService
-                    if (persist) {
-                        _this.localStorageService.add('email', _this.email);
-                        _this.localStorageService.add('token', _this.token);
-                        _this.localStorageService.cookie.set('email', _this.email);
-                    } else {
-                        _this.localStorageService.remove('token');
-                    }
-
-                    _this.$rootScope.$broadcast('SignIn');
-
-                    deferred.resolve(token);
-                }, function (err) {
-                    deferred.reject(err.data);
-                });
-
-                return deferred.promise;
+            AuthService.prototype.signIn = function () {
+                this.auth.signin();
             };
 
             AuthService.prototype.signOut = function () {
-                var _this = this;
-                var deferred = this.$q.defer();
+                this.auth.signout();
+            };
 
-                this.$http.post('http://localhost/burgerama/api/users/account/logout', null, null).success(function () {
-                    _this.token = _this.$rootScope.token = null;
-                    _this.localStorageService.remove('token');
+            AuthService.prototype.signOutSuccess = function () {
+                this.localStorageService.remove('user');
+                this.localStorageService.remove('token');
 
-                    _this.$rootScope.$broadcast('SignOut');
+                this.$rootScope.$broadcast("SignOut");
+                this.toaster.pop("success", "Success", "You signed out. Bye!");
+            };
 
-                    deferred.resolve();
-                }).error(function (err) {
-                    deferred.reject(err);
-                });
+            AuthService.prototype.signInSuccess = function () {
+                this.localStorageService.add('user', this.auth.profile);
+                this.localStorageService.add('token', this.auth.idToken);
 
-                return deferred.promise;
+                this.$rootScope.$broadcast("SignIn");
+                this.toaster.pop("success", "Success", "Signed in as " + this.getUser().email + ".");
             };
             return AuthService;
         })();
@@ -88,8 +69,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.service("AuthService", [
-    '$rootScope', '$location', '$http', '$q', '$resource', 'localStorageService', function ($rootScope, $location, $http, $q, $resource, localStorageService) {
-        return new Burgerama.Account.AuthService($rootScope, $location, $http, $q, $resource, localStorageService);
+    '$rootScope', 'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', function ($rootScope, toaster, auth, authEvents, localStorageService) {
+        return new Burgerama.Account.AuthService($rootScope, toaster, auth, authEvents, localStorageService);
     }
 ]);
 //# sourceMappingURL=authService.js.map

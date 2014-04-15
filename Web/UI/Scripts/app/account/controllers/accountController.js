@@ -3,14 +3,13 @@ var Burgerama;
 (function (Burgerama) {
     (function (Account) {
         var AccountController = (function () {
-            function AccountController($rootScope, $scope, $modal, toaster, authService) {
+            function AccountController($rootScope, $scope, authService) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
-                this.$modal = $modal;
-                this.toaster = toaster;
                 this.authService = authService;
                 this.update();
+
                 this.$scope.showSignInModal = function () {
                     return _this.showSignInModal();
                 };
@@ -31,27 +30,16 @@ var Burgerama;
                 });
             }
             AccountController.prototype.update = function () {
-                this.$scope.signedIn = this.authService.checkAuth();
-                this.$scope.user = {
-                    email: this.authService.email
-                };
+                this.$scope.signedIn = this.authService.isAuthenticated();
+                this.$scope.user = this.authService.getUser();
             };
 
             AccountController.prototype.showSignInModal = function () {
-                this.$modal.open({
-                    templateUrl: 'http://localhost/burgerama/Scripts/app/account/views/login.html',
-                    controller: 'SignInController'
-                });
+                this.authService.signIn();
             };
 
             AccountController.prototype.signOut = function () {
-                var _this = this;
-                this.authService.checkAuth();
-
-                var email = this.authService.email;
-                this.authService.signOut().then(function () {
-                    _this.toaster.pop("success", "Success", "Bye, " + email + "!");
-                });
+                this.authService.signOut();
             };
             return AccountController;
         })();
@@ -61,8 +49,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('AccountController', [
-    '$rootScope', '$scope', '$modal', 'toaster', 'AuthService', function ($rootScope, $scope, $modal, toaster, authService) {
-        return new Burgerama.Account.AccountController($rootScope, $scope, $modal, toaster, authService);
+    '$rootScope', '$scope', 'AuthService', function ($rootScope, $scope, authService) {
+        return new Burgerama.Account.AccountController($rootScope, $scope, authService);
     }
 ]);
 //# sourceMappingURL=accountController.js.map

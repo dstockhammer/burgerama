@@ -116,7 +116,6 @@
     <Content Include="Content\img\red-splash-3.png" />
     <Content Include="Content\img\venue_icon.png" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\account\views\login.html" />
     <Content Include="Scripts\app\map\views\map.html" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.js" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.min.js" />
@@ -424,7 +423,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
-    <TypeScriptCompile Include="Scripts\app\account\controllers\signInController.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authService.ts" />
     <TypeScriptCompile Include="Scripts\app\map\map.functions.ts" />

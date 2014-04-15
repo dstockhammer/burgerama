@@ -1,116 +1,73 @@
 ﻿/// <reference path="../../app.ts" />
 
 module Burgerama.Account {
-    interface ITokenRequest {
-        grant_type: string;
-        username: string;
-        password: string;
-    }
-
-    // example token:
-    // {"access_token":"xx","token_type":"bearer","expires_in":1209599,"userName":"admin",".issued":"Sun, 01 Dec 2014 13:37:00 GMT",".expires":"Sun, 15 Dec 2014 00:00:00 GMT"}
-    interface IToken {
-        access_token: string;
-        token_type: string;
-        expires_in: number;
-        userName: string;
-        issued: string;
-        expires: string;
-    }
-
     export interface IAuthService {
-        email: string;
-        token: string;
-        signIn: (name: string, password: string, persist: boolean) => ng.IPromise<any>;
-        signOut: () => ng.IPromise<any>;
-        checkAuth: () => boolean;
+        isAuthenticated: () => boolean;
+        getUser(): () => any;
+        getToken(): () => string
+        signIn: () => void;
+        signOut: () => void;
     }
 
     export class AuthService implements IAuthService {
-        public email: string;
-        public token: string;
-
-        private TokenResource: any;
-
         constructor(
             private $rootScope: IBurgeramaScope,
-            private $location: ng.ILocationService,
-            private $http: ng.IHttpService,
-            private $q: ng.IQService,
-            private $resource: ng.resource.IResourceService,
+            private toaster,
+            private auth,
+            private authEvents,
             private localStorageService)
         {
-            this.email = this.$rootScope.email = this.localStorageService.get('email');
-            this.token = this.$rootScope.token = this.localStorageService.get('token');
+            var unregistersignOutSuccess = $rootScope.$on(this.authEvents.logout, () => this.signOutSuccess());
+            var unregisterSignInSuccess = $rootScope.$on(this.authEvents.loginSuccess, () => this.signInSuccess());
+            var unregisterSignInError = $rootScope.$on(this.authEvents.loginFailed, () => {
+                this.toaster.pop("error", "Error", "Authentication failed.");
+            });
 
-            this.TokenResource = this.$resource('http://localhost/burgerama/api/users/token', {}, {
-                create: {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    transformRequest: data => {
-                        return 'grant_type=' + data.grant_type + '&username=' + data.username + '&password=' + data.password;
-                    }
-                }
+            this.$rootScope.$on('$destroy', () => {
+                unregistersignOutSuccess();
+                unregisterSignInSuccess();
+                unregisterSignInError();
             });
         }
 
-        public checkAuth(): boolean {
-            return this.email == null || this.token == null;
+        public isAuthenticated(): boolean {
+            return this.getUser() != null;
         }
 
-        public signIn(email: string, password: string, persist: boolean): ng.IPromise<any> {
-            var deferred = this.$q.defer();
-
-            var reuqestParams: ITokenRequest = {
-                grant_type: 'password',
-                username: email,
-                password: password
-            };
-
-            var tokenRequest = new this.TokenResource(reuqestParams);
-            tokenRequest.$create((token: IToken) => {
-                this.email = this.$rootScope.email = token.userName;
-                this.token = this.$rootScope.token = token.access_token;
-
-                // todo: add expiration to localStorageService
-                if (persist) {
-                    this.localStorageService.add('email', this.email);
-                    this.localStorageService.add('token', this.token);
-                    this.localStorageService.cookie.set('email', this.email);
-                } else {
-                    this.localStorageService.remove('token');
-                }
-
-                this.$rootScope.$broadcast('SignIn');
-
-                deferred.resolve(token);
-            }, err => {
-                deferred.reject(err.data);
-            });
-
-            return deferred.promise;
+        public getUser() {
+            return this.localStorageService.get('user');
         }
 
-        public signOut(): ng.IPromise<any> {
-            var deferred = this.$q.defer();
+        public getToken() {
+            return this.localStorageService.get('token');
+        }
 
-            this.$http.post('http://localhost/burgerama/api/users/account/logout', null, null)
-                .success(() => {
-                    this.token = this.$rootScope.token = null;
-                    this.localStorageService.remove('token');
+        public signIn(): void {
+            this.auth.signin();
+        }
 
-                    this.$rootScope.$broadcast('SignOut');
+        public signOut(): void {
+            this.auth.signout();
+        }
 
-                    deferred.resolve();
-                }).error(err => {
-                    deferred.reject(err);
-                });
+        private signOutSuccess(): void {
+            this.localStorageService.remove('user');
+            this.localStorageService.remove('token');
 
-            return deferred.promise;
+            this.$rootScope.$broadcast("SignOut");
+            this.toaster.pop("success", "Success", "You signed out. Bye!");
+        }
+
+        private signInSuccess(): void {
+            this.localStorageService.add('user', this.auth.profile);
+            this.localStorageService.add('token', this.auth.idToken);
+
+            this.$rootScope.$broadcast("SignIn");
+            this.toaster.pop("success", "Success", "Signed in as " + this.getUser().email + ".");
         }
     }
 }
 
-Burgerama.app.service("AuthService", ['$rootScope', '$location', '$http', '$q', '$resource', 'localStorageService', ($rootScope, $location, $http, $q, $resource, localStorageService) =>
-    new Burgerama.Account.AuthService($rootScope, $location, $http, $q, $resource, localStorageService)
+Burgerama.app.service("AuthService", ['$rootScope',  'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', ($rootScope, toaster, auth, authEvents, localStorageService) =>
+    new Burgerama.Account.AuthService($rootScope, toaster, auth, authEvents, localStorageService)
 ]);
