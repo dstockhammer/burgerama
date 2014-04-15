@@ -120,6 +120,8 @@
     <Content Include="Scripts\app\map\views\map.html" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.js" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.min.js" />
+    <Content Include="Scripts\vendor\angular-toaster\angular-toaster.css" />
+    <Content Include="Scripts\vendor\angular-toaster\angular-toaster.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap.js" />
@@ -421,9 +423,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <TypeScriptCompile Include="Scripts\app\account\controllers\loginController.ts" />
-    <TypeScriptCompile Include="Scripts\app\account\controllers\loginModalController.ts" />
-    <TypeScriptCompile Include="Scripts\app\account\controllers\logoutController.ts" />
+    <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
+    <TypeScriptCompile Include="Scripts\app\account\controllers\signInController.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authService.ts" />
     <TypeScriptCompile Include="Scripts\app\map\map.functions.ts" />

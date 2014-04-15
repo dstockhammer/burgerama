@@ -30,9 +30,9 @@ namespace Burgerama.Services.Users.Api
             // Configure the application for OAuth based flow
             var oAuthOptions = new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString("/Token"), // todo correct url
+                TokenEndpointPath = new PathString("/token"), // todo correct url
                 Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"), // todo correct url
+                AuthorizeEndpointPath = new PathString("/account/ExternalLogin"), // todo correct url
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };

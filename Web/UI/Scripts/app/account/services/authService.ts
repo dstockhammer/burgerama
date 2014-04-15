@@ -21,8 +21,8 @@ module Burgerama.Account {
     export interface IAuthService {
         email: string;
         token: string;
-        login: (name: string, password: string, persist: boolean) => ng.IPromise<any>;
-        logout: () => ng.IPromise<any>;
+        signIn: (name: string, password: string, persist: boolean) => ng.IPromise<any>;
+        signOut: () => ng.IPromise<any>;
         checkAuth: () => boolean;
     }
 
@@ -62,7 +62,7 @@ module Burgerama.Account {
             return true;
         }
 
-        public login(email: string, password: string, persist: boolean) {
+        public signIn(email: string, password: string, persist: boolean) {
             var deferred = this.$q.defer();
 
             var reuqestParams: ITokenRequest = {
@@ -85,25 +85,25 @@ module Burgerama.Account {
                     this.localStorageService.remove('token');
                 }
 
-                this.$rootScope.$broadcast('login');
+                this.$rootScope.$broadcast('SignIn');
 
                 deferred.resolve(token);
             }, err => {
-                    deferred.reject(err.data);
-                });
+                deferred.reject(err.data);
+            });
 
             return deferred.promise;
         }
 
-        public logout() {
+        public signOut() {
             var deferred = this.$q.defer();
 
-            this.$http.post('http://localhost/burgerama/users/account/logout', null, null)
+            this.$http.post('http://localhost/burgerama/api/users/account/logout', null, null)
                 .success(() => {
                     this.token = this.$rootScope.token = null;
                     this.localStorageService.remove('token');
 
-                    this.$rootScope.$broadcast('logout');
+                    this.$rootScope.$broadcast('SignOut');
 
                     deferred.resolve();
                 }).error(err => {

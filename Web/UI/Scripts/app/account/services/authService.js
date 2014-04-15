@@ -33,7 +33,7 @@ var Burgerama;
                 return true;
             };
 
-            AuthService.prototype.login = function (email, password, persist) {
+            AuthService.prototype.signIn = function (email, password, persist) {
                 var _this = this;
                 var deferred = this.$q.defer();
 
@@ -57,7 +57,7 @@ var Burgerama;
                         _this.localStorageService.remove('token');
                     }
 
-                    _this.$rootScope.$broadcast('login');
+                    _this.$rootScope.$broadcast('SignIn');
 
                     deferred.resolve(token);
                 }, function (err) {
@@ -67,15 +67,15 @@ var Burgerama;
                 return deferred.promise;
             };
 
-            AuthService.prototype.logout = function () {
+            AuthService.prototype.signOut = function () {
                 var _this = this;
                 var deferred = this.$q.defer();
 
-                this.$http.post('http://localhost/burgerama/users/account/logout', null, null).success(function () {
+                this.$http.post('http://localhost/burgerama/api/users/account/logout', null, null).success(function () {
                     _this.token = _this.$rootScope.token = null;
                     _this.localStorageService.remove('token');
 
-                    _this.$rootScope.$broadcast('logout');
+                    _this.$rootScope.$broadcast('SignOut');
 
                     deferred.resolve();
                 }).error(function (err) {

@@ -1,3 +1,4 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-left', 'time-out': 2500}"></toaster-container>
 <div id="map-space" class="workspace">
     <input id="map-search-box" type="text" placeholder="yo, type your g here" />
     <div id="badge-container">
@@ -15,6 +16,13 @@
         <img id="venue-icon" class="switcher-icon switcher-icon-active" src="~/Content/img/venue_icon.png" />
         <img id="calendar-icon" class="switcher-icon" src="~/Content/img/calendar_icon.png" />
     </div>
+
+    <div ng-controller="AccountController" style="margin: 15px;">
+        <p ng-show="signedIn" style="color:#efefef">You are signed in as {{ user.email }}.</p>
+        <button type="button" class="btn btn-default" ng-hide="signedIn" ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</button>
+        <button type="button" class="btn btn-default" ng-show="signedIn" ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</button>
+    </div>
+
     <ul id="venue-list">
         <li><span>Burger and Lobster</span></li>
         <li><span>MEATmarket</span></li>
@@ -35,7 +43,4 @@
         <li><span>Forlino</span></li>
         <li><span>Jollibee</span></li>
     </ul>
-    <p>
-        <button type="button" class="btn btn-default" ng-controller="LoginController" ng-click="showModal();"><span class="glyphicon glyphicon-user"></span>Sign in</button>
-    </p>
 </div>

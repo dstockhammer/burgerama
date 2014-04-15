@@ -10,16 +10,19 @@ namespace Burgerama.Web.UI
                 "~/Scripts/vendor/angularjs/angular.js",
                 "~/Scripts/vendor/angularjs/angular-resource.js",
                 "~/Scripts/vendor/angularjs/angular-route.js",
+                "~/Scripts/vendor/angularjs/angular-animate.js",
                 "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",
-                "~/Scripts/vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js"
+                "~/Scripts/vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js",
+                "~/Scripts/vendor/angular-toaster/angular-toaster.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/burgerama")
                 .IncludeDirectory("~/Scripts/app/", "*.js", true));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                "~/Content/css/bootstrap.min.css",
-                "~/Content/css/bootstrap-theme.min.css",
+                "~/Content/css/bootstrap.css",
+                "~/Content/css/bootstrap-theme.css",
+                "~/Scripts/vendor/angular-toaster/angular-toaster.css",
                 "~/Content/css/default.css"
             ));
 

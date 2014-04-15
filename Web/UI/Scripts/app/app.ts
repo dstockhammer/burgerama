@@ -18,7 +18,8 @@ module Burgerama {
         'ui.bootstrap',
 
         // 3rd Party Modules
-        'LocalStorageModule'
+        'LocalStorageModule',
+        'toaster'
     ]);
 
     app.config(['$httpProvider', '$routeProvider', ($httpProvider: ng.IHttpProvider, $routeProvider: ng.route.IRouteProvider) => {
@@ -28,9 +29,6 @@ module Burgerama {
             .when('/', {
                 templateUrl: 'http://localhost/burgerama/Scripts/app/map/views/map.html',
                 controller: 'MapController'
-            })
-            .when('/logout', {
-                controller: 'LogoutController'
             })
             .otherwise({
                 redirectTo: '/'

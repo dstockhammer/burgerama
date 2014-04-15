@@ -7,7 +7,8 @@ var Burgerama;
         'ngResource',
         'ngRoute',
         'ui.bootstrap',
-        'LocalStorageModule'
+        'LocalStorageModule',
+        'toaster'
     ]);
 
     Burgerama.app.config([
@@ -17,8 +18,6 @@ var Burgerama;
             $routeProvider.when('/', {
                 templateUrl: 'http://localhost/burgerama/Scripts/app/map/views/map.html',
                 controller: 'MapController'
-            }).when('/logout', {
-                controller: 'LogoutController'
             }).otherwise({
                 redirectTo: '/'
             });
