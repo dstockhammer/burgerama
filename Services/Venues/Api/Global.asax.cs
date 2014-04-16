@@ -1,5 +1,9 @@
 ﻿using System.Web;
 using System.Web.Http;
+using Burgerama.Common.Authentication.Owin;
+using Microsoft.Owin;
+
+[assembly: OwinStartup(typeof(InitializeAuthentication))]
 
 namespace Burgerama.Services.Venues.Api
 {

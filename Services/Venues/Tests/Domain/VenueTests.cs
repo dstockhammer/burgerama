@@ -13,7 +13,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
             // Arrange
             const string title = "This is a test.";
             var location = new Location("test", 13.0, 37.0);
-            var userId = Guid.NewGuid();
+            var userId = "test|" + Guid.NewGuid();
 
             // Act
             var venue = new Venue(title, location, userId);
@@ -29,7 +29,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
             var id = Guid.NewGuid();
             const string title = "This is a test.";
             var location = new Location("test", 13.0, 37.0);
-            var userId = Guid.NewGuid();
+            var userId = "test|" + Guid.NewGuid();
 
             // Act
             var venue = new Venue(id, title, location, userId);
@@ -45,7 +45,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
             // Arrange
             const string title = "This is a test.";
             Location location = null;
-            var userId = Guid.NewGuid();
+            var userId = "test|" + Guid.NewGuid();
 
             // Act
             var venue = new Venue(title, location, userId);

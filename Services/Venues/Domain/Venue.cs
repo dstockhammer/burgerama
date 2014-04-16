@@ -11,13 +11,13 @@ namespace Burgerama.Services.Venues.Domain
 
         public Location Location { get; private set; }
 
-        public Guid CreatedByUser { get; private set; }
+        public string CreatedByUser { get; private set; }
 
         public string Url { get; set; }
 
         public string Description { get; set; }
 
-        public Venue(Guid id, string title, Location location, Guid createdByUser)
+        public Venue(Guid id, string title, Location location, string createdByUser)
         {
             Contract.Requires<ArgumentNullException>(location != null);
 
@@ -27,7 +27,7 @@ namespace Burgerama.Services.Venues.Domain
             CreatedByUser = createdByUser;
         }
 
-        public Venue(string title, Location location, Guid createdByUser)
+        public Venue(string title, Location location, string createdByUser)
         {
             Contract.Requires<ArgumentNullException>(location != null);
 

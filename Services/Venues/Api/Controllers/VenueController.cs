@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Burgerama.Common.Authentication.Identity;
 using Burgerama.Services.Venues.Api.Models;
 using Burgerama.Services.Venues.Core.Data;
 using Burgerama.Services.Venues.Domain;
@@ -91,9 +92,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
         [ResponseType(typeof(bool))]
         public IHttpActionResult AddVenue(VenueModel model)
         {
-            // todo: get userId from claims
-            var claims = ClaimsPrincipal.Current.Claims;
-            var userId = Guid.NewGuid();
+            var userId = ClaimsPrincipal.Current.GetUserId();
 
             var venue = new Venue(model.Title, model.Location, userId);
 
@@ -103,6 +102,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
 
             _venueRepository.SaveOrUpdate(venue);
 
+            // todo: url is not correct
             return Created("/api/venues/" + venue.Id, typeof(Venue));
         }
     }

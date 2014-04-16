@@ -13,7 +13,7 @@ namespace Burgerama.Services.Venues.Data.Converters
                 Id = venue.Id.ToString(),
                 Title = venue.Title,
                 Location = venue.Location,
-                CreatedByUser = venue.CreatedByUser.ToString(),
+                CreatedByUser = venue.CreatedByUser,
                 Url = venue.Url,
                 Description = venue.Description
             };
@@ -22,9 +22,8 @@ namespace Burgerama.Services.Venues.Data.Converters
         public static Venue ToDomain(this VenueModel venue)
         {
             var id = Guid.Parse(venue.Id);
-            var userId = Guid.Parse(venue.CreatedByUser);
 
-            return new Venue(id, venue.Title, venue.Location, userId)
+            return new Venue(id, venue.Title, venue.Location, venue.CreatedByUser)
             {
                 Url = venue.Url,
                 Description = venue.Description

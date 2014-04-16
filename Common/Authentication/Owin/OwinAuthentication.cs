@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
@@ -7,19 +8,18 @@ using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 
-namespace Burgerama.Services.Venues.Api
+namespace Burgerama.Common.Authentication.Owin
 {
-    public static class AuthConfig
+    internal static class OwinAuthentication
     {
-        // todo: move this stuff into config
         private const string Issuer = "https://burgerama.auth0.com/";
         private const string Audience = "xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z";
-        private const string Secret = "nope";
+        private const string Secret = "nope. sorry github :(";
 
         public static void Configure(IAppBuilder app)
         {
             Contract.Requires<ArgumentNullException>(app != null);
-            
+
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
             {
                 AuthenticationMode = AuthenticationMode.Active,
@@ -28,14 +28,14 @@ namespace Burgerama.Services.Venues.Api
                 {
                     new SymmetricKeyIssuerSecurityTokenProvider(Issuer, TextEncodings.Base64Url.Decode(Secret))
                 },
-                //Provider = new OAuthBearerAuthenticationProvider
-                //{
-                //    OnValidateIdentity = context =>
-                //    {
-                //        context.Ticket.Identity.AddClaim(new System.Security.Claims.Claim("foo", "bar"));
-                //        return Task.FromResult<object>(null);
-                //    }
-                //}
+                Provider = new OAuthBearerAuthenticationProvider
+                {
+                    OnValidateIdentity = context =>
+                    {
+                        context.Ticket.Identity.AddClaim(new Claim("foo", "bar"));
+                        return Task.FromResult<object>(null);
+                    }
+                }
             });
         }
     }
