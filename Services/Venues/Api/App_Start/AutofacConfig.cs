@@ -4,8 +4,8 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using Burgerama.Services.Venues.Core.Data;
-using Burgerama.Services.Venues.Data.Repositories;
+using Burgerama.Services.Venues.Data;
+using Burgerama.Services.Venues.Domain.Contracts;
 
 namespace Burgerama.Services.Venues.Api
 {
@@ -29,7 +29,6 @@ namespace Burgerama.Services.Venues.Api
             // Repositories
             builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
 
-            // Build the container
             return builder.Build();
         }
     }

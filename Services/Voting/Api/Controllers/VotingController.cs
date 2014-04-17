@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Burgerama.Messaging.Events;
-using Burgerama.Services.Voting.Core.Data;
 using Burgerama.Services.Voting.Core.Messaging;
+using Burgerama.Services.Voting.Domain.Contracts;
 
 namespace Burgerama.Services.Voting.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class VotingController : ApiController
     {
         private readonly IVenueRepository _venueRepository;
@@ -78,7 +77,8 @@ namespace Burgerama.Services.Voting.Api.Controllers
             if (venue == null)
                 return NotFound();
 
-            // todo: get the userid from identity.
+            // todo: figure out wheter to use a custom user entity with an id or just the auth0 ids.
+            //var userId = ClaimsPrincipal.Current.GetUserId();
             var userId = Guid.NewGuid();
 
             var messages = venue.AddVote(userId);

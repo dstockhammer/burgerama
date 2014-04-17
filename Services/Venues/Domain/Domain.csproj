@@ -109,6 +109,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IVenueRepository.cs" />
+    <Compile Include="Contracts\VenueRepositoryContract.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Venue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

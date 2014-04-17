@@ -2,7 +2,7 @@
 
 namespace Burgerama.Services.Venues.Endpoint
 {
-    public class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher, IWantCustomInitialization
+    public sealed class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher, IWantCustomInitialization
     {
         public void Init()
         {

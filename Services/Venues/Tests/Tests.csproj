@@ -102,8 +102,21 @@
     <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Burgerama.Common.Configuration">
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.0\lib\Burgerama.Common.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Common.MongoDb">
+      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.0\lib\Burgerama.Common.MongoDb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.9.0\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.9.0\lib\net35\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -118,14 +131,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MongoDbTestUtils.cs" />
     <Compile Include="Data\VenueRepositoryTests.cs" />
     <Compile Include="Domain\VenueTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{1D63D802-D771-4CF9-872B-292D087D10B1}</Project>
+      <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{1E812BBC-E034-4509-9C88-85F6E06A25AE}</Project>
@@ -134,6 +148,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

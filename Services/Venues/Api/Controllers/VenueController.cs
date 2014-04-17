@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
 using Burgerama.Services.Venues.Api.Models;
-using Burgerama.Services.Venues.Core.Data;
 using Burgerama.Services.Venues.Domain;
+using Burgerama.Services.Venues.Domain.Contracts;
 
 namespace Burgerama.Services.Venues.Api.Controllers
 {
@@ -34,24 +36,17 @@ namespace Burgerama.Services.Venues.Api.Controllers
         [ResponseType(typeof(IEnumerable<VenueModel>))]
         public IHttpActionResult GetAllVenues()
         {
-            //var venues =  _venueRepository.GetAll()
-            //    .Select(v => new VenueModel
-            //    {
-            //        Id = v.Id.ToString(),
-            //        Title = v.Title,
-            //        Location = v.Location,
-            //        Url = v.Url,
-            //        Description = v.Description,
-            //        Rating = 0,
-            //        Votes = 0
-            //    });
-
-            var venues = new[]
-            {
-                new VenueModel { Id = Guid.NewGuid().ToString(), Title = "Venue 1" },
-                new VenueModel { Id = Guid.NewGuid().ToString(), Title = "Venue 2" },
-                new VenueModel { Id = Guid.NewGuid().ToString(), Title = "Venue 3" }
-            };
+            var venues = _venueRepository.GetAll()
+                .Select(v => new VenueModel
+                {
+                    Id = v.Id.ToString(),
+                    Title = v.Title,
+                    Location = v.Location,
+                    Url = v.Url,
+                    Description = v.Description,
+                    Rating = 0,
+                    Votes = 0
+                });
 
             return Ok(venues);
         }
@@ -92,8 +87,9 @@ namespace Burgerama.Services.Venues.Api.Controllers
         [ResponseType(typeof(bool))]
         public IHttpActionResult AddVenue(VenueModel model)
         {
-            var userId = ClaimsPrincipal.Current.GetUserId();
+            Contract.Requires<ArgumentNullException>(model != null);
 
+            var userId = ClaimsPrincipal.Current.GetUserId();
             var venue = new Venue(model.Title, model.Location, userId);
 
             // todo: dupe check!

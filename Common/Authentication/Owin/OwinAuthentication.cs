@@ -14,7 +14,7 @@ namespace Burgerama.Common.Authentication.Owin
     {
         private const string Issuer = "https://burgerama.auth0.com/";
         private const string Audience = "xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z";
-        private const string Secret = "nope. sorry github :(";
+        private const string Secret = "nope";
 
         public static void Configure(IAppBuilder app)
         {

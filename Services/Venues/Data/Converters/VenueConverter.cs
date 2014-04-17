@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using Burgerama.Services.Venues.Data.Models;
 using Burgerama.Services.Venues.Domain;
 
@@ -8,6 +9,8 @@ namespace Burgerama.Services.Venues.Data.Converters
     {
         public static VenueModel ToModel(this Venue venue)
         {
+            Contract.Requires<ArgumentNullException>(venue != null);
+
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
@@ -21,6 +24,8 @@ namespace Burgerama.Services.Venues.Data.Converters
 
         public static Venue ToDomain(this VenueModel venue)
         {
+            Contract.Requires<ArgumentNullException>(venue != null);
+
             var id = Guid.Parse(venue.Id);
 
             return new Venue(id, venue.Title, venue.Location, venue.CreatedByUser)

@@ -1,9 +1,9 @@
 ﻿using System.Web;
-using Burgerama.Services.Voting.Core.Data;
 using Burgerama.Services.Voting.Core.DI;
 using Burgerama.Services.Voting.Core.Messaging;
-using Burgerama.Services.Voting.Data.Repositories;
+using Burgerama.Services.Voting.Data;
 using Burgerama.Services.Voting.DependencyResolution;
+using Burgerama.Services.Voting.Domain.Contracts;
 using Burgerama.Services.Voting.Endpoint;
 using Microsoft.Practices.Unity;
 

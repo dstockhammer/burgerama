@@ -1,7 +1,7 @@
 ﻿using System;
 using Burgerama.Messaging.Events.Outings;
-using Burgerama.Services.Voting.Core.Data;
 using Burgerama.Services.Voting.Domain;
+using Burgerama.Services.Voting.Domain.Contracts;
 using NServiceBus;
 
 namespace Burgerama.Services.Voting.Endpoint.Handlers

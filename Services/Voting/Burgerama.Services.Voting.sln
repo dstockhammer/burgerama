@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{4353EC3C-4797-4CC5-9108-2239EC718AC7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A4436F28-678F-4F8A-96CA-D1865621038A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{38B181A2-31EC-4C7F-9943-467805F1E1F1}"
@@ -13,14 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyResolution", "DependencyResolution\DependencyResolution.csproj", "{8CE6E041-9023-488E-8F4E-7FEBC3DEBDBF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{634A51A6-19BE-4B51-82E3-6104E5EB4E69}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint", "Endpoint\Endpoint.csproj", "{9B4B39DD-3481-4A05-81D7-02A1CFE0BB26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{0C4576E3-765D-4F91-8B32-3A7A01B29200}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EF0C8970-5938-4DA1-BAAF-1522EC7E440C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4353EC3C-4797-4CC5-9108-2239EC718AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4353EC3C-4797-4CC5-9108-2239EC718AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4353EC3C-4797-4CC5-9108-2239EC718AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4353EC3C-4797-4CC5-9108-2239EC718AC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4436F28-678F-4F8A-96CA-D1865621038A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4436F28-678F-4F8A-96CA-D1865621038A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4436F28-678F-4F8A-96CA-D1865621038A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +52,10 @@ Global
 		{9B4B39DD-3481-4A05-81D7-02A1CFE0BB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B4B39DD-3481-4A05-81D7-02A1CFE0BB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B4B39DD-3481-4A05-81D7-02A1CFE0BB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

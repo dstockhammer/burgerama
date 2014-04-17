@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Burgerama.Services.Venues.Data.Models
 {
-    internal class VenueModel
+    internal sealed class VenueModel
     {
         [BsonId]
         public string Id { get; set; }

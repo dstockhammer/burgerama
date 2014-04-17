@@ -1,6 +1,9 @@
 ﻿using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
+using Burgerama.Common.Authentication.Owin;
+using Microsoft.Owin;
+
+[assembly: OwinStartup(typeof(InitializeAuthentication))]
 
 namespace Burgerama.Services.Users.Api
 {
@@ -9,7 +12,9 @@ namespace Burgerama.Services.Users.Api
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            GlobalConfiguration.Configure(AutofacConfig.Register);
+
+            GlobalConfiguration.Configuration.EnsureInitialized();
         }
     }
 }
