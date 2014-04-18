@@ -14,7 +14,7 @@ namespace Burgerama.Services.Users.Api
             // Use camel case for JSON data.
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            // Web API routes
+            // Register Web API routes.
             config.MapHttpAttributeRoutes();
         }
     }

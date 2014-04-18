@@ -2,7 +2,7 @@
 
 module Burgerama.Account {
     export class AuthHttpInterceptor {
-        private apiUrlStart = 'http://localhost/burgerama/api';
+        private apiUrlStart = 'http://api.dev.burgerama.co.uk/';
         
         constructor(private $rootScope: IBurgeramaScope, private $q: ng.IQService, private authService: IAuthService) {
         }

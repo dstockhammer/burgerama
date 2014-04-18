@@ -1,10 +1,10 @@
 ﻿using System.Web;
 using System.Web.Http;
-using Burgerama.Common.Authentication.Owin;
+using Burgerama.Services.Voting.Api;
 using Burgerama.Services.Voting.Core.DI;
 using Microsoft.Owin;
 
-[assembly: OwinStartup(typeof(InitializeAuthentication))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace Burgerama.Services.Voting.Api
 {

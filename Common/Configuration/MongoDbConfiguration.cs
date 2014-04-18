@@ -1,14 +1,14 @@
 ﻿using System.Configuration;
 
-namespace Burgerama.Common.Configuration.Data
+namespace Burgerama.Common.Configuration
 {
-    public sealed class MongoDbConfiguration : ConfigurationSection
+    public sealed class MongoDbConfiguration : ConfigurationElement
     {
-        [ConfigurationProperty("name", IsRequired = true)]
-        public string Name
+        [ConfigurationProperty("database", IsRequired = true)]
+        public string Database
         {
-            get { return (string)this["name"]; }
-            set { this["name"] = value; }
+            get { return (string)this["database"]; }
+            set { this["database"] = value; }
         }
 
         [ConfigurationProperty("connectionString", IsRequired = true)]

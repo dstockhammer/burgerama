@@ -7,7 +7,7 @@ var Burgerama;
                 this.$rootScope = $rootScope;
                 this.$q = $q;
                 this.authService = authService;
-                this.apiUrlStart = 'http://localhost/burgerama/api';
+                this.apiUrlStart = 'http://api.dev.burgerama.co.uk/';
             }
             AuthHttpInterceptor.prototype.create = function () {
                 var _this = this;

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics.Contracts;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Burgerama.Common.Configuration;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
@@ -10,23 +12,21 @@ using Owin;
 
 namespace Burgerama.Common.Authentication.Owin
 {
-    internal static class OwinAuthentication
+    public static class AppBuilderExtensions
     {
-        private const string Issuer = "https://burgerama.auth0.com/";
-        private const string Audience = "xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z";
-        private const string Secret = "nope";
-
-        public static void Configure(IAppBuilder app)
+        public static void UseAuth0(this IAppBuilder app)
         {
             Contract.Requires<ArgumentNullException>(app != null);
+
+            var config = (ServiceConfiguration)ConfigurationManager.GetSection("burgerama.service");
 
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
             {
                 AuthenticationMode = AuthenticationMode.Active,
-                AllowedAudiences = new[] { Audience },
+                AllowedAudiences = new[] { config.Auth0.Audience },
                 IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                 {
-                    new SymmetricKeyIssuerSecurityTokenProvider(Issuer, TextEncodings.Base64Url.Decode(Secret))
+                    new SymmetricKeyIssuerSecurityTokenProvider(config.Auth0.Issuer, TextEncodings.Base64Url.Decode(config.Auth0.Secret))
                 },
                 Provider = new OAuthBearerAuthenticationProvider
                 {

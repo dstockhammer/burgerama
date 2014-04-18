@@ -24,15 +24,12 @@ namespace Burgerama.Services.Venues.Api.Controllers
         /// <summary>
         /// Get all venues.
         /// </summary>
-        /// <remarks>
-        /// todo: paging, sorting, filtering
-        /// </remarks>
         /// <example>
-        /// GET venue
-        /// </example> 
+        /// GET /venue
+        /// </example>
         /// <returns>Returns all venues.</returns>
         [HttpGet]
-        [Route("venues")]
+        [Route("")]
         [ResponseType(typeof(IEnumerable<VenueModel>))]
         public IHttpActionResult GetAllVenues()
         {
@@ -41,7 +38,12 @@ namespace Burgerama.Services.Venues.Api.Controllers
                 {
                     Id = v.Id.ToString(),
                     Title = v.Title,
-                    Location = v.Location,
+                    Location = new LocationModel
+                    {
+                        Reference = v.Location.Reference,
+                        Latitiude = v.Location.Latitiude,
+                        Longitude = v.Location.Longitude
+                    },
                     Url = v.Url,
                     Description = v.Description,
                     Rating = 0,
@@ -55,12 +57,12 @@ namespace Burgerama.Services.Venues.Api.Controllers
         /// Get a venue by id.
         /// </summary>
         /// <example>
-        /// GET venue 878f000c-e61f-4d34-a9f7-236a153c062c
-        /// </example> 
+        /// GET /venue/878f000c-e61f-4d34-a9f7-236a153c062c
+        /// </example>
         /// <param name="venueId">The guid of the venue.</param>
         /// <returns>Returns the venue with the passed id.</returns>
         [HttpGet]
-        [Route("venues/{venueId}")]
+        [Route("{venueId}")]
         [ResponseType(typeof(VenueModel))]
         public IHttpActionResult GetVenueById(Guid venueId)
         {
@@ -73,7 +75,12 @@ namespace Burgerama.Services.Venues.Api.Controllers
             {
                 Id = venue.Id.ToString(),
                 Title = venue.Title,
-                Location = venue.Location,
+                Location = new LocationModel
+                {
+                    Reference = venue.Location.Reference,
+                    Latitiude = venue.Location.Latitiude,
+                    Longitude = venue.Location.Longitude
+                },
                 Url = venue.Url,
                 Description = venue.Description,
                 Rating = 0,
@@ -81,16 +88,31 @@ namespace Burgerama.Services.Venues.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Add a venue.
+        /// </summary>
+        /// <remarks>
+        /// This operation requires authentication.
+        /// </remarks>
+        /// <example>
+        /// POST /venue/878f000c-e61f-4d34-a9f7-236a153c062c
+        /// </example>
+        /// <param name="model">The venue that should be added.</param>
+        /// <returns>Returns the location of the newly added venue.</returns>
         [Authorize]
         [HttpPost]
-        [Route("venues")]
-        [ResponseType(typeof(bool))]
+        [Route("")]
         public IHttpActionResult AddVenue(VenueModel model)
         {
             Contract.Requires<ArgumentNullException>(model != null);
 
             var userId = ClaimsPrincipal.Current.GetUserId();
-            var venue = new Venue(model.Title, model.Location, userId);
+            var location = new Location(model.Location.Reference, model.Location.Latitiude, model.Location.Longitude);
+            var venue = new Venue(model.Title, location, userId)
+            {
+                Description = model.Description,
+                Url = model.Url
+            };
 
             // todo: dupe check!
             //if (isDupe) 
@@ -98,8 +120,8 @@ namespace Burgerama.Services.Venues.Api.Controllers
 
             _venueRepository.SaveOrUpdate(venue);
 
-            // todo: url is not correct
-            return Created("/api/venues/" + venue.Id, typeof(Venue));
+            // todo get url from config or something
+            return Created("http://api.dev.burgerama.co.uk/venues/" + venue.Id, typeof(Venue));
         }
     }
 }

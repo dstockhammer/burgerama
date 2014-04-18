@@ -6,8 +6,10 @@
 *.user
 *.sln.docstates
 
-# Build results
+# Local development packages
+packages-incoming/
 
+# Build results
 [Dd]ebug/
 [Rr]elease/
 x64/

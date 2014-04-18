@@ -100,11 +100,13 @@
     <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Burgerama.Common.Configuration">
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.0\lib\Burgerama.Common.Configuration.dll</HintPath>
+    <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.1\lib\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.MongoDb">
-      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.0\lib\Burgerama.Common.MongoDb.dll</HintPath>
+    <Reference Include="Burgerama.Common.MongoDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.1\lib\Burgerama.Common.MongoDb.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.9.0.200, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

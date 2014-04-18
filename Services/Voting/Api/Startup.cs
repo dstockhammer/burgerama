@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using Burgerama.Common.Authentication.Owin;
+using Microsoft.Owin.Cors;
 using Owin;
 
-namespace Burgerama.Common.Authentication.Owin
+namespace Burgerama.Services.Voting.Api
 {
-    public sealed class InitializeAuthentication
+    public sealed class Startup
     {
         public void Configuration(IAppBuilder app)
         {
             Contract.Requires<ArgumentNullException>(app != null);
 
-            OwinAuthentication.Configure(app);
+            app.UseAuth0();
+            app.UseCors(CorsOptions.AllowAll);
         }
     }
 }

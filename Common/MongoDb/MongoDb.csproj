@@ -101,7 +101,7 @@
   <ItemGroup>
     <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.0\lib\Burgerama.Common.Configuration.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.1\lib\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.9.0\lib\net35\MongoDB.Bson.dll</HintPath>

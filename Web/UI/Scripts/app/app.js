@@ -18,7 +18,7 @@ var Burgerama;
             $httpProvider.interceptors.push('AuthHttpInterceptor');
 
             $routeProvider.when('/', {
-                templateUrl: 'http://localhost/burgerama/Scripts/app/map/views/map.html',
+                templateUrl: 'http://dev.burgerama.co.uk/Scripts/app/map/views/map.html',
                 controller: 'MapController'
             }).otherwise({
                 redirectTo: '/'
@@ -27,7 +27,7 @@ var Burgerama;
             authProvider.init({
                 domain: 'burgerama.auth0.com',
                 clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
-                callbackURL: "http://localhost/burgerama/"
+                callbackURL: "http://dev.burgerama.co.uk/"
             });
         }]);
 })(Burgerama || (Burgerama = {}));
