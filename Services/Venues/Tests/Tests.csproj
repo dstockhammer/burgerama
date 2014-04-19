@@ -104,11 +104,11 @@
   <ItemGroup>
     <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.1\lib\Burgerama.Common.Configuration.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.2\lib\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.MongoDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.1\lib\Burgerama.Common.MongoDb.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.2\lib\Burgerama.Common.MongoDb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
@@ -154,6 +154,9 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\MongoDb.confidential.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

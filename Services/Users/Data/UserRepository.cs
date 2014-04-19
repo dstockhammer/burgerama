@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Burgerama.Common.MongoDb;
+using Burgerama.Services.Users.Data.Models;
 using Burgerama.Services.Users.Domain;
 using Burgerama.Services.Users.Domain.Contracts;
 using MongoDB.Driver;
@@ -9,25 +11,30 @@ namespace Burgerama.Services.Users.Data
 {
     public sealed class UserRepository : MongoDbRepository, IUserRepository
     {
-        private MongoCollection<User> Users
+        private MongoCollection<UserModel> Users
         {
-            get { return GetCollection<User>("users"); }
+            get { return GetCollection<UserModel>("users"); }
         }
 
         public User Get(string id)
         {
-            var query = Query<User>.EQ(v => v.Id, id);
-            return Users.FindOne(query);
+            var query = Query<UserModel>.EQ(v => v.Id, id);
+            var model = Users.FindOne(query);
+            return new User(model.Id, model.Email);
         }
 
         public IEnumerable<User> GetAll()
         {
-            return Users.FindAll();
+            return Users.FindAll().Select(m => new User(m.Id, m.Email));
         }
 
         public void SaveOrUpdate(User user)
         {
-            Users.Save(user);
+            Users.Save(new UserModel
+            {
+                Id = user.Id,
+                Email = user.Email
+            });
         }
     }
 }

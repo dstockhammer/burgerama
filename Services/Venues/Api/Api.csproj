@@ -116,15 +116,15 @@
     </Reference>
     <Reference Include="Burgerama.Common.Authentication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.Authentication.0.1.1\lib\Burgerama.Common.Authentication.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.Authentication.0.1.2\lib\Burgerama.Common.Authentication.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.1\lib\Burgerama.Common.Configuration.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.2\lib\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.MongoDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.1\lib\Burgerama.Common.MongoDb.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.2\lib\Burgerama.Common.MongoDb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -222,7 +222,12 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Config\Burgerama.Service.Secure.config" />
+    <Content Include="Config\Auth0.confidential.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\MongoDb.confidential.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

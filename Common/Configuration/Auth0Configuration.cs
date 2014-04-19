@@ -2,7 +2,7 @@
 
 namespace Burgerama.Common.Configuration
 {
-    public sealed class Auth0Configuration : ConfigurationElement
+    public sealed class Auth0Configuration : ConfigurationSection
     {
         [ConfigurationProperty("issuer", IsRequired = true)]
         public string Issuer

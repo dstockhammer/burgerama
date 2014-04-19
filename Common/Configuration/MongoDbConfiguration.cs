@@ -2,7 +2,7 @@
 
 namespace Burgerama.Common.Configuration
 {
-    public sealed class MongoDbConfiguration : ConfigurationElement
+    public sealed class MongoDbConfiguration : ConfigurationSection
     {
         [ConfigurationProperty("database", IsRequired = true)]
         public string Database
