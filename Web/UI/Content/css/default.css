@@ -1,6 +1,4 @@
-html {
-  height: 100%;
-}
+html,
 body {
   height: 100%;
   margin: 0;
@@ -12,6 +10,7 @@ body {
 }
 #map-canvas {
   height: 100%;
+  position: relative;
 }
 #map-canvas #map-search-box {
   position: absolute;
@@ -126,4 +125,4 @@ body {
 #organizer-switcher {
   text-align: center;
 }
-/*# sourceMappingURL=helper-mixins.css.map */
+/*# sourceMappingURL=default.css.map */

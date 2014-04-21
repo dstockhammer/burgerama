@@ -38,7 +38,7 @@ var Burgerama;
     var Account = Burgerama.Account;
 })(Burgerama || (Burgerama = {}));
 
-Burgerama.app.factory("AuthHttpInterceptor", [
+Burgerama.app.factory('AuthHttpInterceptor', [
     '$rootScope', '$q', 'AuthService', function ($rootScope, $q, authService) {
         return new Burgerama.Account.AuthHttpInterceptor($rootScope, $q, authService).create();
     }

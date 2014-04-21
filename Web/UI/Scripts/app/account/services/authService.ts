@@ -20,7 +20,7 @@ module Burgerama.Account {
             var unregistersignOutSuccess = $rootScope.$on(this.authEvents.logout, () => this.signOutSuccess());
             var unregisterSignInSuccess = $rootScope.$on(this.authEvents.loginSuccess, () => this.signInSuccess());
             var unregisterSignInError = $rootScope.$on(this.authEvents.loginFailed, () => {
-                this.toaster.pop("error", "Error", "Authentication failed.");
+                this.toaster.pop('error', 'Error', 'Authentication failed.');
             });
 
             this.$rootScope.$on('$destroy', () => {
@@ -54,20 +54,20 @@ module Burgerama.Account {
             this.localStorageService.remove('user');
             this.localStorageService.remove('token');
 
-            this.$rootScope.$broadcast("SignOut");
-            this.toaster.pop("success", "Success", "You signed out. Bye!");
+            this.$rootScope.$broadcast('SignOut');
+            this.toaster.pop('success', 'Success', 'You signed out. Bye!');
         }
 
         private signInSuccess(): void {
             this.localStorageService.add('user', this.auth.profile);
             this.localStorageService.add('token', this.auth.idToken);
 
-            this.$rootScope.$broadcast("SignIn");
-            this.toaster.pop("success", "Success", "Signed in as " + this.getUser().email + ".");
+            this.$rootScope.$broadcast('SignIn');
+            this.toaster.pop('success', 'Success', 'Signed in as ' + this.getUser().email + '.');
         }
     }
 }
 
-Burgerama.app.service("AuthService", ['$rootScope',  'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', ($rootScope, toaster, auth, authEvents, localStorageService) =>
+Burgerama.app.service('AuthService', ['$rootScope',  'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', ($rootScope, toaster, auth, authEvents, localStorageService) =>
     new Burgerama.Account.AuthService($rootScope, toaster, auth, authEvents, localStorageService)
 ]);

@@ -1,5 +1,5 @@
-﻿/// <reference path="../../app.ts" />
-/// <reference path='../../../typings/googlemaps/google.maps.d.ts' />
+﻿// <reference path="../../app.ts" />
+// <reference path="../../../typings/googlemaps/google.maps.d.ts" />
 var Burgerama;
 (function (Burgerama) {
     (function (Map) {
@@ -13,8 +13,6 @@ var Burgerama;
         Map.places = new Array();
 
         function initialize() {
-            console.log("initializing...");
-
             Map.map = new google.maps.Map(document.getElementById('map-canvas'), Map.mapOptions);
             Map.searchBox = Map.createMapSearchBox(Map.map, 'map-search-box');
             Map.setCurrentLocation(Map.map, Map.mapOptions);

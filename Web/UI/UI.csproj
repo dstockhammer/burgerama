@@ -116,7 +116,9 @@
     <Content Include="Content\img\red-splash-3.png" />
     <Content Include="Content\img\venue_icon.png" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\map\views\map.html" />
+    <Content Include="Scripts\app\venues\views\addVenue.modal.html" />
+    <Content Include="Scripts\vendor\angular-google-maps\angular-google-maps.js" />
+    <Content Include="Scripts\vendor\angular-google-maps\angular-google-maps.min.js" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.js" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.min.js" />
     <Content Include="Scripts\vendor\angular-toaster\angular-toaster.css" />
@@ -390,6 +392,12 @@
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\vendor\angularjs\version.txt" />
+    <Content Include="Scripts\vendor\auth0\auth0-angular.js" />
+    <Content Include="Scripts\vendor\auth0\auth0-angular.min.js" />
+    <Content Include="Scripts\vendor\auth0\auth0-widget.js" />
+    <Content Include="Scripts\vendor\auth0\auth0-widget.min.js" />
+    <Content Include="Scripts\vendor\underscore\underscore.js" />
+    <Content Include="Scripts\vendor\underscore\underscore.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -425,8 +433,6 @@
     <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authService.ts" />
-    <TypeScriptCompile Include="Scripts\app\map\map.functions.ts" />
-    <TypeScriptCompile Include="Scripts\app\map\map.options.ts" />
     <Content Include="Content\css\helper-mixins.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -442,6 +448,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\map\controllers\mapController.ts" />
+    <TypeScriptCompile Include="Scripts\app\map\map.functions.ts" />
+    <TypeScriptCompile Include="Scripts\app\map\map.options.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\resources\venueResource.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />

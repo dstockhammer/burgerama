@@ -29,7 +29,7 @@ module Burgerama.Account {
     }
 }
 
-Burgerama.app.factory("AuthHttpInterceptor", ['$rootScope', '$q', 'AuthService', ($rootScope, $q, authService) =>
+Burgerama.app.factory('AuthHttpInterceptor', ['$rootScope', '$q', 'AuthService', ($rootScope, $q, authService) =>
     new Burgerama.Account.AuthHttpInterceptor($rootScope, $q, authService).create()
 ]);
  

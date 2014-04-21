@@ -1,5 +1,5 @@
-﻿/// <reference path="../../app.ts" />
-/// <reference path='../../../typings/googlemaps/google.maps.d.ts' />
+﻿// <reference path="../../app.ts" />
+// <reference path="../../../typings/googlemaps/google.maps.d.ts" />
 
 module Burgerama.Map {
 
@@ -15,8 +15,6 @@ module Burgerama.Map {
         new Array<google.maps.places.PlaceResult>();
 
     export function initialize() {
-        console.log("initializing...");
-
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         searchBox = createMapSearchBox(map, 'map-search-box');
         setCurrentLocation(map, mapOptions);

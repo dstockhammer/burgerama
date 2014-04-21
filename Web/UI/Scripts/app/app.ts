@@ -29,8 +29,7 @@ module Burgerama {
 
         $routeProvider
             .when('/', {
-                templateUrl: 'http://dev.burgerama.co.uk/Scripts/app/map/views/map.html',
-                controller: 'MapController'
+                // nothing to do for now
             })
             .otherwise({
                 redirectTo: '/'

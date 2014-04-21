@@ -12,7 +12,7 @@ namespace Burgerama.Services.Users.Tests.Data
         public void Cleanup()
         {
             var utils = new MongoDbTestUtils();
-            //utils.DropUsers();
+            utils.DropUsers();
         }
 
         [TestMethod]

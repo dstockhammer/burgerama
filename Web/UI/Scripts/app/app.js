@@ -17,10 +17,7 @@ var Burgerama;
         '$httpProvider', '$routeProvider', 'authProvider', function ($httpProvider, $routeProvider, authProvider) {
             $httpProvider.interceptors.push('AuthHttpInterceptor');
 
-            $routeProvider.when('/', {
-                templateUrl: 'http://dev.burgerama.co.uk/Scripts/app/map/views/map.html',
-                controller: 'MapController'
-            }).otherwise({
+            $routeProvider.when('/', {}).otherwise({
                 redirectTo: '/'
             });
 

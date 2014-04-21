@@ -10,27 +10,31 @@
     <div id="information-box"></div>
 </div>
 
-<div ng-view></div>
+<div ng-controller="MapController" id="map-canvas"></div>
 
 <div id="organizer-space" class="workspace">
     <div id="organizer-switcher">
         <img id="venue-icon" class="switcher-icon switcher-icon-active" src="~/Content/img/venue_icon.png" />
         <img id="calendar-icon" class="switcher-icon" src="~/Content/img/calendar_icon.png" />
     </div>
+    
+    <div ng-view></div>
 
     <div ng-controller="AccountController" style="margin: 15px;">
         <div id="badge-container" ng-show="signedIn">
-            <img src="{{ user.picture }}" alt="{{ user.nickname }}" />
+            <img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" />
         </div>
 
         <p ng-show="signedIn" style="color:#efefef">You are signed in as {{ user.email }}.</p>
-        <button type="button" class="btn btn-default" ng-hide="signedIn" ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</button>
-        <button type="button" class="btn btn-default" ng-show="signedIn" ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</button>
+        <p><button type="button" class="btn btn-default" ng-hide="signedIn" ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</button></p>
+        <p><button type="button" class="btn btn-default" ng-show="signedIn" ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</button></p>
     </div>
-    
-    <div ng-controller="VenueController">
+
+    <div ng-controller="VenueController" style="margin: 15px;">
         <ul id="venue-list" ng-repeat="venue in venues">
             <li><span>{{ venue.title }}</span></li>
         </ul>
+        <br />
+        <p><button type="button" class="btn btn-default" ng-click="showAddVenueModal();"><span class="glyphicon glyphicon-plus"></span> Add venue</button></p>
     </div>
 </div>

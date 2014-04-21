@@ -17,7 +17,7 @@ var Burgerama;
                     return _this.signInSuccess();
                 });
                 var unregisterSignInError = $rootScope.$on(this.authEvents.loginFailed, function () {
-                    _this.toaster.pop("error", "Error", "Authentication failed.");
+                    _this.toaster.pop('error', 'Error', 'Authentication failed.');
                 });
 
                 this.$rootScope.$on('$destroy', function () {
@@ -50,16 +50,16 @@ var Burgerama;
                 this.localStorageService.remove('user');
                 this.localStorageService.remove('token');
 
-                this.$rootScope.$broadcast("SignOut");
-                this.toaster.pop("success", "Success", "You signed out. Bye!");
+                this.$rootScope.$broadcast('SignOut');
+                this.toaster.pop('success', 'Success', 'You signed out. Bye!');
             };
 
             AuthService.prototype.signInSuccess = function () {
                 this.localStorageService.add('user', this.auth.profile);
                 this.localStorageService.add('token', this.auth.idToken);
 
-                this.$rootScope.$broadcast("SignIn");
-                this.toaster.pop("success", "Success", "Signed in as " + this.getUser().email + ".");
+                this.$rootScope.$broadcast('SignIn');
+                this.toaster.pop('success', 'Success', 'Signed in as ' + this.getUser().email + '.');
             };
             return AuthService;
         })();
@@ -68,7 +68,7 @@ var Burgerama;
     var Account = Burgerama.Account;
 })(Burgerama || (Burgerama = {}));
 
-Burgerama.app.service("AuthService", [
+Burgerama.app.service('AuthService', [
     '$rootScope', 'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', function ($rootScope, toaster, auth, authEvents, localStorageService) {
         return new Burgerama.Account.AuthService($rootScope, toaster, auth, authEvents, localStorageService);
     }

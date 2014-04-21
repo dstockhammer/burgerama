@@ -1,9 +1,18 @@
 ﻿/// <reference path="../../app.ts" />
 
 module Burgerama.Venues {
-    export interface IVenue extends ng.resource.IResourceService {
+    export interface IVenue {
         id: string;
         title: string;
+        location: ILocation;
+        url: string;
+        description: string;
+    }
+
+    export interface ILocation {
+        reference: string;
+        latitude: number;
+        longitude: number;
     }
 }
 
