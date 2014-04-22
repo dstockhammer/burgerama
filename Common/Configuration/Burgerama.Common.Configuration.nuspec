@@ -7,15 +7,11 @@
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
-        <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</iconUrl>
+        <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Burgerama configuration library.</description>
         <frameworkAssemblies>
             <frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
         </frameworkAssemblies>
     </metadata>
-    <files>
-        <file src="lib\Burgerama.Common.Configuration.dll" target="lib\Burgerama.Common.Configuration.dll" />
-        <file src="lib\Burgerama.Common.Configuration.pdb" target="lib\Burgerama.Common.Configuration.pdb" />
-    </files>
 </package>
