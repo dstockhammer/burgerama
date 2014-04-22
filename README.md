@@ -11,7 +11,8 @@ Just remember, this is a playground project. It has no actual business requireme
 
 Getting started
 ---------------
-In order to run burgerama website on your local machine, you have to run all the API micro-services in addition to the actual websites. This is currently only supported on Windows with local IIS and requires some set up:
+In order to run the Burgerama web frontend on your local machine, you additionally have to run all the API micro-services. Hosting the services is currently only supported on Windows with local IIS and requires some set up, as outlined below. The current goal is to deploy everything to [Azure], but we are also working on support for different platforms on top of [OWIN] / [Mono].
+Confidential configuration data like credentials should be stored in the `Config` folder of the relevant project. Files with the ending `.confidential.config` are ignored by git and thus can't be committed unintentionally. Currently there is no proper configuration management, you'll have to copy confidential configuration files around manually. 
 
 ### IIS
 The URLs http://dev.burgerama.co.uk and http://api.dev.burgerama.co.uk redirect to 127.0.0.1, i.e. to your local machine. You have to manually set up a web site in IIS for each URL. After that, let Visual Studio create the proper directory mapping by clicking the "Create Virtual Directory" button in the web settings in each UI and API project.
@@ -38,6 +39,9 @@ Each API service expects a file `Config\MongoDb.confidential.config` in the foll
 This area is work in progress. For now, go read up on [NServiceBus].
 
 
+[Azure]:http://azure.microsoft.com/
+[OWIN]:http://owin.org/
+[Mono]:http://www.mono-project.com/
 [auth0]:https://auth0.com/
-[mongoDb]:https://www.mongodb.org/
+[MongoDb]:https://www.mongodb.org/
 [NServiceBus]:http://docs.particular.net/
