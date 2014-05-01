@@ -43,6 +43,23 @@ body {
   right: 20em;
   left: 0;
 }
+#map-space #information-box {
+  position: absolute;
+  bottom: 2em !important;
+  left: 2em !important;
+  z-index: 200;
+  padding: 0.75em;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
+}
+#map-space #venue-marker {
+  position: absolute;
+  bottom: 2em !important;
+  right: 2em !important;
+  z-index: 200;
+  width: 1.5em;
+}
 #logo-container {
   display: table !important;
   position: absolute;
@@ -50,7 +67,7 @@ body {
   height: 100%;
   color: #ffffff;
   background-color: #000000;
-  z-index: 200;
+  z-index: 300;
   font-family: 'Raleway', 'sans-serif';
   font-size: 5em;
   opacity: 1;
@@ -143,15 +160,5 @@ body {
 }
 #organizer-switcher {
   text-align: center;
-}
-#information-box {
-  position: absolute;
-  bottom: 2em !important;
-  left: 2em !important;
-  z-index: 200;
-  padding: 0.75em;
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
 }
 /*# sourceMappingURL=default.css.map */

@@ -10,6 +10,7 @@
 <div id="map-space" class="workspace">
     <input id="map-search-box" type="text" placeholder="yo, type your g here" />
     <div id="information-box"></div>
+    <img id="venue-marker" class="draggable" src="~/Content/img/venue_marker.png" />
 </div>
 
 <div ng-controller="MapController" id="map-canvas"></div>
@@ -20,7 +21,7 @@
         <img id="calendar-icon" class="switcher-icon" src="~/Content/img/calendar_icon.png" />
         <img id="settings-icon" class="switcher-icon" src="~/Content/img/settings_icon.png" />
     </div>
-    
+
     <div ng-view></div>
 
     <div ng-controller="AccountController" style="margin: 15px;">
@@ -38,6 +39,6 @@
             <li><span>{{ venue.title }}</span></li>
         </ul>
         <br />
-        <p><button type="button" class="btn btn-default" ng-click="showAddVenueModal();"><span class="glyphicon glyphicon-plus"></span> Add venue</button></p>
+        @*<p><button type="button" class="btn btn-default" ng-click="showAddVenueModal();"><span class="glyphicon glyphicon-plus"></span> Add venue</button></p>*@
     </div>
 </div>

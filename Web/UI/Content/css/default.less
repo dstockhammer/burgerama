@@ -59,6 +59,22 @@ html, body {
 #map-space {
     right: 20em;
     left: 0;
+
+    #information-box {
+        .bottom-left();
+        z-index: 200;
+
+        padding: 0.75em;
+        color: @default-text-color;
+        background-color: fadein(@default-background-color, 20%);
+        box-shadow: @default-shadow;
+    }
+
+    #venue-marker {
+        .bottom-right();
+        z-index: 200;
+        width: 1.5em;
+    }
 }
 
 // ---------------- Burgerama Logo ----------------
@@ -69,7 +85,7 @@ html, body {
     height: 100%;
     color: @default-text-color;
     background-color: fadein(@default-background-color, 30%);
-    z-index: 200;
+    z-index: 300;
     font-family: 'Raleway', 'sans-serif';
     font-size: 5em;
     opacity: 1;
@@ -173,12 +189,3 @@ html, body {
     text-align: center;
 }
 
-#information-box {
-    .bottom-left();
-    z-index: 200;
-
-    padding: 0.75em;
-    color: @default-text-color;
-    background-color: fadein(@default-background-color, 20%);
-    box-shadow: @default-shadow;
-}
