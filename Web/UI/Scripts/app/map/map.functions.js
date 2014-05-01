@@ -43,8 +43,14 @@
         }
         Map.setCurrentLocation = setCurrentLocation;
 
+        // refactor this to use angular
         function showMarkerInfo(marker, place) {
-            alert(place.name);
+            var infoBox = document.getElementById('information-box');
+            var innerHTML = '<span><b>';
+            innerHTML += place.url ? '<a href = "' + place.url + '" target = "new">' : '<a>';
+            innerHTML += place.name + '</a></b> | ' + place.formatted_address + ' | </span>';
+            innerHTML += '<a>Add Venue</a>';
+            infoBox.innerHTML = innerHTML;
         }
         Map.showMarkerInfo = showMarkerInfo;
 

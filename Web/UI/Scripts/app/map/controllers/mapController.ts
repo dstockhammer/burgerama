@@ -22,6 +22,11 @@ module Burgerama.Map {
             searchBox, 'places_changed', () => { searchPlaces(map, searchBox, places, markers, mapOptions); });
         google.maps.event.addListener(
             map, 'bounds_changed', () => { setSearchBound(map, searchBox); });
+
+        // This is ugly as hell, must be translated to proper angular solution
+        var logoContainer = document.getElementById('logo-container');
+        logoContainer.className = 'hide-logo';
+        window.setTimeout(() => { logoContainer.parentNode.removeChild(logoContainer); }, 9000);
     }
     //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-html,
+﻿html,
 body {
   height: 100%;
   margin: 0;
@@ -43,24 +43,43 @@ body {
   right: 20em;
   left: 0;
 }
-#map-space #logo-container {
+#logo-container {
+  display: table !important;
   position: absolute;
-  bottom: 2em !important;
-  right: 0 !important;
+  width: 100%;
+  height: 100%;
   color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #000000;
   z-index: 200;
-  padding: 0.2em 0.4em 0.2em 0.4em;
-  font-family: sans-serif;
-  font-size: 2.5em;
-  text-shadow: 2px 2px 2px #000;
-  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
+  font-family: 'Raleway', 'sans-serif';
+  font-size: 5em;
+  opacity: 1;
 }
-#map-space #logo-container img {
-  width: 1.5em;
-}
-#map-space #logo-container span {
+#logo-container #logo-wrapper {
+  display: table-cell;
   vertical-align: middle;
+  text-align: center;
+}
+#logo-container #logo-wrapper span {
+  text-shadow: rgba(255, 255, 255, 0.3) 0 3px 11px;
+}
+#logo-container #logo-wrapper #logo-ruler {
+  width: 6em;
+  margin-top: -0.5em;
+  height: 0.03em;
+  border: rgba(0, 0, 0, 0);
+  box-shadow: rgba(255, 255, 255, 0.5) 0 28px 12px;
+  border-bottom-left-radius: 100% 250%;
+  border-bottom-right-radius: 100% 250%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+#logo-container.hide-logo {
+  opacity: 0.0;
+  -moz-transition: opacity 3s ease-out 5s;
+  -o-transition: opacity 3s ease-out 5s;
+  -webkit-transition: opacity 3s ease-out 5s;
+  transition: opacity 3s ease-out 5s;
 }
 #badge-container {
   position: absolute;
@@ -102,10 +121,10 @@ body {
   background: -o-linear-gradient(top, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.05) 60%, rgba(255, 255, 255, 0.05) 100%);
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.05) 60%, rgba(255, 255, 255, 0.05) 100%);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.05) 60%, rgba(255, 255, 255, 0.05) 100%);
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out 0;
+  -o-transition: all 0.3s ease-out 0;
+  -webkit-transition: all 0.3s ease-out 0;
+  transition: all 0.3s ease-out 0;
 }
 #venue-list li:first-child {
   border-top: 1px solid #000;
@@ -113,10 +132,10 @@ body {
 #venue-list li:hover {
   background-color: rgba(255, 0, 0, 0.7);
   box-shadow: inset 0 0 1.5em rgba(0, 0, 0, 0.7);
-  -moz-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  -webkit-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in 0;
+  -o-transition: all 0.3s ease-in 0;
+  -webkit-transition: all 0.3s ease-in 0;
+  transition: all 0.3s ease-in 0;
 }
 .switcher-icon {
   width: 2em;
@@ -124,5 +143,15 @@ body {
 }
 #organizer-switcher {
   text-align: center;
+}
+#information-box {
+  position: absolute;
+  bottom: 2em !important;
+  left: 2em !important;
+  z-index: 200;
+  padding: 0.75em;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
 }
 /*# sourceMappingURL=default.css.map */

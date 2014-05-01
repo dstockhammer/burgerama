@@ -22,6 +22,13 @@ var Burgerama;
             google.maps.event.addListener(Map.map, 'bounds_changed', function () {
                 Map.setSearchBound(Map.map, Map.searchBox);
             });
+
+            // This is ugly as hell, must be translated to proper angular solution
+            var logoContainer = document.getElementById('logo-container');
+            logoContainer.className = 'hide-logo';
+            window.setTimeout(function () {
+                logoContainer.parentNode.removeChild(logoContainer);
+            }, 9000);
         }
         Map.initialize = initialize;
 

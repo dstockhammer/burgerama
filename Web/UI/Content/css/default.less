@@ -59,27 +59,47 @@ html, body {
 #map-space {
     right: 20em;
     left: 0;
-  
-    // ---------------- Burgerama Logo ----------------
-    #logo-container {
-        .bottom-right(@right: 0);
-        color: @default-text-color;
-        background-color: @default-background-color;
-        z-index: 200;
-        padding: 0.2em 0.4em 0.2em 0.4em;
-        font-family: sans-serif;
-        font-size: 2.5em;
-        text-shadow: 2px 2px 2px #000;
-        box-shadow: @default-shadow;
+}
 
-        img {
-            width: 1.5em;
-        }
+// ---------------- Burgerama Logo ----------------
+#logo-container {
+    display: table !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: @default-text-color;
+    background-color: fadein(@default-background-color, 30%);
+    z-index: 200;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 5em;
+    opacity: 1;
+
+    #logo-wrapper {
+        display:table-cell;
+        vertical-align:middle;
+        text-align:center;
 
         span {
-            vertical-align: middle;
+            text-shadow: rgba(255,255,255,0.3) 0 3px 11px;
+        }
+
+        #logo-ruler {
+            width: 6em;
+            margin-top: -0.5em;
+            height: 0.03em;
+            border: rgba(0,0,0,0);
+            box-shadow: rgba(255, 255, 255, 0.5) 0 28px 12px;
+            border-bottom-left-radius: 100% 250%;
+            border-bottom-right-radius: 100% 250%;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
     }
+}
+
+#logo-container.hide-logo {
+    opacity: 0.0;
+    .transition(@propertyName: opacity; @transitionLength: 3s; @transitionType: ease-out; @transitionDelay: 5s);
 }
 
 // ---------------- Badge ----------------
@@ -151,4 +171,14 @@ html, body {
 
 #organizer-switcher {
     text-align: center;
+}
+
+#information-box {
+    .bottom-left();
+    z-index: 200;
+
+    padding: 0.75em;
+    color: @default-text-color;
+    background-color: fadein(@default-background-color, 20%);
+    box-shadow: @default-shadow;
 }

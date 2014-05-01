@@ -1,12 +1,14 @@
 <toaster-container toaster-options="{'position-class': 'toast-top-left', 'time-out': 2500}"></toaster-container>
 
+<div id="logo-container" ng-animate="">
+    <div id="logo-wrapper">
+        <span>BURGERAMA</span>
+        <hr id="logo-ruler" />
+    </div>
+</div>
+
 <div id="map-space" class="workspace">
     <input id="map-search-box" type="text" placeholder="yo, type your g here" />
-
-    <div id="logo-container">
-        <img src="~/Content/img/hamburger_logo.png" alt="@ViewBag.Title" />
-        <span>@ViewBag.Title</span>
-    </div>
     <div id="information-box"></div>
 </div>
 
@@ -16,6 +18,7 @@
     <div id="organizer-switcher">
         <img id="venue-icon" class="switcher-icon switcher-icon-active" src="~/Content/img/venue_icon.png" />
         <img id="calendar-icon" class="switcher-icon" src="~/Content/img/calendar_icon.png" />
+        <img id="settings-icon" class="switcher-icon" src="~/Content/img/settings_icon.png" />
     </div>
     
     <div ng-view></div>
@@ -30,7 +33,7 @@
         <p><button type="button" class="btn btn-default" ng-show="signedIn" ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</button></p>
     </div>
 
-    <div ng-controller="VenueController" style="margin: 15px;">
+    <div ng-controller="VenueController">
         <ul id="venue-list" ng-repeat="venue in venues">
             <li><span>{{ venue.title }}</span></li>
         </ul>
