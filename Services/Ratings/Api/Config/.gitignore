@@ -1,0 +1,2 @@
+# Ignore confidential configuration files
+*.confidential.config
