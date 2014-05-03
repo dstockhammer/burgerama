@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
+using System.Web.Caching;
 using Burgerama.Services.Voting.Core.DI;
 using Burgerama.Services.Voting.Core.Messaging;
 using Burgerama.Services.Voting.Data;
@@ -6,8 +8,6 @@ using Burgerama.Services.Voting.DependencyResolution;
 using Burgerama.Services.Voting.Domain.Contracts;
 using Burgerama.Services.Voting.Endpoint;
 using Microsoft.Practices.Unity;
-
-[assembly: PreApplicationStartMethod(typeof(DependencyRegistrar), "Initialize")]
 
 namespace Burgerama.Services.Voting.DependencyResolution
 {
@@ -26,7 +26,7 @@ namespace Burgerama.Services.Voting.DependencyResolution
             container.RegisterType<IVenueRepository, VenueRepository>();
 
             // Messaging
-            container.RegisterType<IEventDispatcher, EventDispatcher>();
+            container.RegisterType<IEventDispatcher, NServiceBusEventDispatcher>();
 
             // Set Unity as the Service Locator provider.
             ServiceLocator.SetServiceLocator(() => new UnityServiceLocator(container));
