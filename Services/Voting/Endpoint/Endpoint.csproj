@@ -124,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointConfig.cs" />
-    <Compile Include="EventDispatcher.cs" />
+    <Compile Include="NServiceBusEventDispatcher.cs" />
     <Compile Include="Handlers\OutingCreatedHandler.cs" />
     <Compile Include="Handlers\VenueCreatedHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

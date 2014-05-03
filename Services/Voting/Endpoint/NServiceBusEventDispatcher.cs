@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using Burgerama.Services.Voting.Core.Messaging;
 using NServiceBus;
+using NServiceBus.Unicast;
 using IEvent = Burgerama.Messaging.Events.IEvent;
 
 namespace Burgerama.Services.Voting.Endpoint
 {
-    public class EventDispatcher : IEventDispatcher
+    public class NServiceBusEventDispatcher : IEventDispatcher
     {
         private readonly IBus _bus;
 
-        public EventDispatcher(IBus bus)
+        public NServiceBusEventDispatcher()
         {
-            _bus = bus;
+            _bus = new UnicastBus();
         }
 
         public void Publish<T>(T message)
