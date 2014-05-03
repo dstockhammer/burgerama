@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Burgerama.Messaging.Events.Rating
+namespace Burgerama.Messaging.Events.Ratings
 {
     [Serializable]
     public sealed class RatingAdded : IEvent

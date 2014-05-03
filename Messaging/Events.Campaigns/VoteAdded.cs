@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Burgerama.Messaging.Events.Voting
+namespace Burgerama.Messaging.Events.Campaigns
 {
     [Serializable]
     public sealed class VoteAdded : IEvent

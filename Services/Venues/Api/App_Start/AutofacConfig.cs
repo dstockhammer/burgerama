@@ -6,6 +6,8 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
+using Burgerama.Services.Venues.Endpoint;
+using Burgerama.Services.Venues.Messaging;
 
 namespace Burgerama.Services.Venues.Api
 {
@@ -28,6 +30,9 @@ namespace Burgerama.Services.Venues.Api
 
             // Repositories
             builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
+
+            // Messaging
+            builder.RegisterType<NServiceBusEventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();
         }

@@ -17,7 +17,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
     {
         private readonly IVenueRepository _venueRepository;
 
-        public VenueController(IVenueRepository venueRepository)
+        public VenueController(IVenueRepository venueRepository, IEventHandler )
         {
             _venueRepository = venueRepository;
         }

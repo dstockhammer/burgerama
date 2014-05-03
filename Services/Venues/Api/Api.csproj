@@ -248,6 +248,10 @@
       <Project>{1E812BBC-E034-4509-9C88-85F6E06A25AE}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Endpoint\Endpoint.csproj">
+      <Project>{46308F2F-9492-43CB-8272-1F27668C6299}</Project>
+      <Name>Endpoint</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

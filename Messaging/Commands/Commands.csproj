@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{46308F2F-9492-43CB-8272-1F27668C6299}</ProjectGuid>
+    <ProjectGuid>{AA4994DE-8C51-4230-AA13-D1732BC2E943}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Burgerama.Services.Venues.Endpoint</RootNamespace>
-    <AssemblyName>Burgerama.Services.Venues.Endpoint</AssemblyName>
+    <RootNamespace>Burgerama.Messaging.Commands</RootNamespace>
+    <AssemblyName>Burgerama.Messaging.Commands</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -100,18 +99,6 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Burgerama.Messaging.Events">
-      <HintPath>..\..\..\Messaging\Events\bin\Debug\Burgerama.Messaging.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus">
-      <HintPath>..\packages\NServiceBus.Interfaces.4.4.2\lib\net40\NServiceBus.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\packages\NServiceBus.4.4.2\lib\net40\NServiceBus.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Host">
-      <HintPath>..\packages\NServiceBus.Host.4.4.2\lib\net40\NServiceBus.Host.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -121,15 +108,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NServiceBusEventDispatcher.cs" />
-    <Compile Include="Handlers\VoteAddedHandler.cs" />
-    <Compile Include="Handlers\RatingUpdatedHandler.cs" />
-    <Compile Include="EndpointConfig.cs" />
+    <Compile Include="CommandHandlerContract.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="ICommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -139,8 +121,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
-  </PropertyGroup>
 </Project>

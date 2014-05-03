@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Burgerama.Services.Voting.Core.Messaging;
 using NServiceBus;
 using NServiceBus.Unicast;
 using IEvent = Burgerama.Messaging.Events.IEvent;
 
-namespace Burgerama.Services.Voting.Endpoint
+namespace Burgerama.Services.Venues.Endpoint
 {
     public sealed class NServiceBusEventDispatcher : IEventDispatcher
     {
