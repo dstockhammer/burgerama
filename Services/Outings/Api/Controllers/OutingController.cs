@@ -1,35 +1,56 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Description;
+using Burgerama.Services.Outings.Domain;
+using Burgerama.Services.Outings.Domain.Contracts;
 
 namespace Burgerama.Services.Outings.Api.Controllers
 {
-    public class OutingController : ApiController
+    public sealed class OutingController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        private readonly IOutingRepository _outingRepository;
+
+        public OutingController(IOutingRepository outingRepository)
         {
-            return new string[] { "value1", "value2" };
+            _outingRepository = outingRepository;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        /// <summary>
+        /// Get all outings.
+        /// </summary>
+        /// <example>
+        /// GET /outing
+        /// </example>
+        /// <returns>Returns all outings.</returns>
+        [HttpGet]
+        [Route("")]
+        [ResponseType(typeof(IEnumerable<Outing>))]
+        public IHttpActionResult GetAllOutings()
         {
-            return "value";
+            var outings = _outingRepository.GetAll();
+            return Ok(outings);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        /// <summary>
+        /// Get an outing by id.
+        /// </summary>
+        /// <example>
+        /// GET /outing/878f000c-e61f-4d34-a9f7-236a153c062c
+        /// </example>
+        /// <param name="outingId">The guid of the outing.</param>
+        /// <returns>Returns the outing with the passed id.</returns>
+        [HttpGet]
+        [Route("{outingId}")]
+        [ResponseType(typeof(Outing))]
+        public IHttpActionResult GetOutingById(Guid outingId)
         {
-        }
+            var venue = _outingRepository.Get(outingId);
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+            if (venue == null)
+                return NotFound();
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            return Ok(venue);
         }
     }
 }

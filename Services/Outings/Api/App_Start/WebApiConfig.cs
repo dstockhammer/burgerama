@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace Burgerama.Services.Outings.Api
 {
@@ -6,16 +9,13 @@ namespace Burgerama.Services.Outings.Api
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            Contract.Requires<ArgumentException>(config != null);
 
-            // Web API routes
+            // Use camel case for JSON data.
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            // Register Web API routes.
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
         }
     }
 }
