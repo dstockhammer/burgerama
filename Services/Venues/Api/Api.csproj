@@ -209,6 +209,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Converters\VenueConverter.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\VenueController.cs" />

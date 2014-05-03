@@ -1,4 +1,5 @@
-﻿using Burgerama.Services.Venues.Domain;
+﻿using System;
+using Burgerama.Services.Venues.Domain;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Burgerama.Services.Venues.Data.Models
@@ -13,6 +14,9 @@ namespace Burgerama.Services.Venues.Data.Models
         public Location Location { get; set; }
 
         public string CreatedByUser { get; set; }
+        
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CreatedOn { get; set; }
 
         public string Url { get; set; }
 

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
+using Burgerama.Services.Venues.Api.Converters;
 using Burgerama.Services.Venues.Api.Models;
 using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
@@ -34,21 +35,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
         public IHttpActionResult GetAllVenues()
         {
             var venues = _venueRepository.GetAll()
-                .Select(v => new VenueModel
-                {
-                    Id = v.Id.ToString(),
-                    Title = v.Title,
-                    Location = new LocationModel
-                    {
-                        Reference = v.Location.Reference,
-                        Latitiude = v.Location.Latitiude,
-                        Longitude = v.Location.Longitude
-                    },
-                    Url = v.Url,
-                    Description = v.Description,
-                    Rating = 0,
-                    Votes = 0
-                });
+                .Select(v => v.ToModel());
 
             return Ok(venues);
         }
@@ -71,21 +58,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
             if (venue == null)
                 return NotFound();
 
-            return Ok(new VenueModel
-            {
-                Id = venue.Id.ToString(),
-                Title = venue.Title,
-                Location = new LocationModel
-                {
-                    Reference = venue.Location.Reference,
-                    Latitiude = venue.Location.Latitiude,
-                    Longitude = venue.Location.Longitude
-                },
-                Url = venue.Url,
-                Description = venue.Description,
-                Rating = 0,
-                Votes = 0
-            });
+            return Ok(venue.ToModel());
         }
 
         /// <summary>

@@ -30,12 +30,17 @@ namespace Burgerama.Services.Venues.Tests.Domain
             const string title = "This is a test.";
             var location = new Location("test", 13.0, 37.0);
             var userId = "test|" + Guid.NewGuid();
+            var createdOn = DateTime.Now;
 
             // Act
-            var venue = new Venue(id, title, location, userId);
+            var venue = new Venue(id, title, location, userId, createdOn);
 
             // Assert
             Assert.AreEqual(id, venue.Id);
+            Assert.AreEqual(title, venue.Title);
+            Assert.AreEqual(location, venue.Location);
+            Assert.AreEqual(userId, venue.CreatedByUser);
+            Assert.AreEqual(createdOn, venue.CreatedOn);
         }
 
         [TestMethod]

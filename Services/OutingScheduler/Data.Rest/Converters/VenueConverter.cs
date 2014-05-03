@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using Burgerama.Services.Venues.Data.Models;
-using Burgerama.Services.Venues.Domain;
+using Burgerama.Services.OutingScheduler.Data.Rest.Models;
+using Burgerama.Services.OutingScheduler.Domain;
 
-namespace Burgerama.Services.Venues.Data.Converters
+namespace Burgerama.Services.OutingScheduler.Data.Rest.Converters
 {
     internal static class VenueConverter
     {
@@ -15,11 +15,7 @@ namespace Burgerama.Services.Venues.Data.Converters
             {
                 Id = venue.Id.ToString(),
                 Title = venue.Title,
-                Location = venue.Location,
-                CreatedByUser = venue.CreatedByUser,
-                CreatedOn = venue.CreatedOn,
-                Url = venue.Url,
-                Description = venue.Description
+                Votes = venue.Votes
             };
         }
 
@@ -29,11 +25,7 @@ namespace Burgerama.Services.Venues.Data.Converters
 
             var id = Guid.Parse(venue.Id);
 
-            return new Venue(id, venue.Title, venue.Location, venue.CreatedByUser, venue.CreatedOn)
-            {
-                Url = venue.Url,
-                Description = venue.Description
-            };
+            return new Venue(id, venue.Title, venue.Votes);
         }
     }
 }
