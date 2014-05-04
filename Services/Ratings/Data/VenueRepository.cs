@@ -15,7 +15,7 @@ namespace Burgerama.Services.Ratings.Data
     {
         private MongoCollection<VenueModel> Venues
         {
-            get { return GetCollection<VenueModel>("ratings.venues"); }
+            get { return GetCollection<VenueModel>("venues"); }
         }
 
         public Venue Get(Guid venueId)

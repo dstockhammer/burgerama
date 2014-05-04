@@ -11,15 +11,17 @@ namespace Burgerama.Services.Ratings.Core
 
         public double Value { get; private set; }
 
-        public Rating(string user, double value)
-        {
-            Contract.Requires<ArgumentException>(user != null);
+        public string Text { get; private set; }
 
-            if (value < 0 || value > 1)
-                throw new ArgumentException();
+        public Rating(string user, double value, string text)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Requires<ArgumentOutOfRangeException>(value >= 0 && value <= 1);
+            Contract.Requires<ArgumentNullException>(text != null);
 
             User = user;
             Value = value;
+            Text = text;
         }
 
         private sealed class UserEqualityComparer : IEqualityComparer<Rating>

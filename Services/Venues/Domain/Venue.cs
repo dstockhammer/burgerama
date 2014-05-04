@@ -22,6 +22,7 @@ namespace Burgerama.Services.Venues.Domain
         public Venue(Guid id, string title, Location location, string createdByUser, DateTime createdOn)
         {
             Contract.Requires<ArgumentNullException>(location != null);
+            Contract.Requires<ArgumentNullException>(createdByUser != null);
 
             Id = id;
             Title = title;
@@ -33,6 +34,7 @@ namespace Burgerama.Services.Venues.Domain
         public Venue(string title, Location location, string createdByUser)
         {
             Contract.Requires<ArgumentNullException>(location != null);
+            Contract.Requires<ArgumentNullException>(createdByUser != null);
 
             Id = Guid.NewGuid();
             Title = title;

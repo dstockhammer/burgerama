@@ -1,4 +1,4 @@
-﻿using Burgerama.Messaging.Events.Rating;
+﻿using Burgerama.Messaging.Events.Ratings;
 using NServiceBus;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers

@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
+using Burgerama.Messaging.Events;
+using Burgerama.Messaging.Events.Venues;
 using Burgerama.Services.Venues.Api.Converters;
 using Burgerama.Services.Venues.Api.Models;
 using Burgerama.Services.Venues.Domain;
@@ -16,10 +18,12 @@ namespace Burgerama.Services.Venues.Api.Controllers
     public class VenueController : ApiController
     {
         private readonly IVenueRepository _venueRepository;
+        private readonly IEventDispatcher _eventDispatcher;
 
-        public VenueController(IVenueRepository venueRepository, IEventHandler )
+        public VenueController(IVenueRepository venueRepository, IEventDispatcher eventDispatcher)
         {
             _venueRepository = venueRepository;
+            _eventDispatcher = eventDispatcher;
         }
 
         /// <summary>
@@ -91,7 +95,12 @@ namespace Burgerama.Services.Venues.Api.Controllers
             //if (isDupe) 
             //    return Conflict();
 
-            _venueRepository.SaveOrUpdate(venue);
+            //_venueRepository.SaveOrUpdate(venue);
+            _eventDispatcher.Publish(new VenueCreated
+            {
+                VenueId = venue.Id,
+                Title = venue.Title
+            });
 
             // todo get url from config or something
             return Created("http://api.dev.burgerama.co.uk/venues/" + venue.Id, typeof(Venue));

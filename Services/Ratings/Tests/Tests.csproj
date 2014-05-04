@@ -108,6 +108,9 @@
     <Reference Include="Burgerama.Common.MongoDb">
       <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.2\lib\Burgerama.Common.MongoDb.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Events">
+      <HintPath>..\packages\Burgerama.Messaging.Events.0.1.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="MongoDB.Bson">
@@ -142,6 +145,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\MongoDb.confidential.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

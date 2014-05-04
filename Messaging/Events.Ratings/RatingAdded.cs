@@ -7,9 +7,9 @@ namespace Burgerama.Messaging.Events.Ratings
     {
         public Guid VenueId { get; set; }
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
-        public double Rating { get; set; }
+        public double Value { get; set; }
 
         public string Text { get; set; }
     }

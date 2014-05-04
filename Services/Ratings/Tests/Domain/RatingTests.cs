@@ -8,14 +8,14 @@ namespace Burgerama.Services.Ratings.Tests.Domain
     public class RatingTests
     {
         [TestMethod]
-        public void Rating_ShouldCreatedCorrectly()
+        public void Rating_ShouldBeCreatedCorrectly()
         {
             // Arrange
             var userId = string.Empty;
             const double value = 0.5d;
 
             // Act
-            var rating = new Rating(userId, value);
+            var rating = new Rating(userId, value, string.Empty);
 
             // Assert
             Assert.IsNotNull(rating);
@@ -24,34 +24,41 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Rating_ShouldNotBeAllowedToBeCreatedWithNegativeValue()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Rating_ShouldNotBeCreatedWithNegativeValue()
         {
             // Arrange
             var userId = string.Empty;
             const double value = -0.1d;
 
             // Act
-            var rating = new Rating(userId, value);
+            var rating = new Rating(userId, value, string.Empty);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Rating_ShouldNotBeAllowedToBeCreatedWithValueBiggerThanOne()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Rating_ShouldNotBeCreatedWithValueBiggerThanOne()
         {
             // Arrange
             var userId = string.Empty;
             const double value = 1.1d;
 
             // Act
-            var rating = new Rating(userId, value);
+            var rating = new Rating(userId, value, string.Empty);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void Rating_ShouldNotBeCreatedWithoutUser()
         {
-            var rating = new Rating(null, 0);
+            var rating = new Rating(null, 0, string.Empty);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Rating_ShouldNotBeCreatedWithoutText()
+        {
+            var rating = new Rating(null, 0, null);
         }
     }
 }

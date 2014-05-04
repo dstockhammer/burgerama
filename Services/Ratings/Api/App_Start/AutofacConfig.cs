@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using Burgerama.Messaging.Events;
 using Burgerama.Services.Ratings.Core.Contracts;
 using Burgerama.Services.Ratings.Data;
 using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Web.Http;
+using Burgerama.Services.Ratings.Endpoint;
 
 namespace Burgerama.Services.Ratings.Api
 {
@@ -28,6 +30,9 @@ namespace Burgerama.Services.Ratings.Api
 
             // Repositories
             builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
+
+            // Messaging
+            builder.RegisterType<NServiceBusEventDispatcher>().As<IEventDispatcher>().InstancePerApiRequest();
 
             return builder.Build();
         }

@@ -4,7 +4,7 @@ using NServiceBus;
 using NServiceBus.Unicast;
 using IEvent = Burgerama.Messaging.Events.IEvent;
 
-namespace Burgerama.Services.Venues.Endpoint
+namespace Burgerama.Services.Ratings.Endpoint
 {
     public sealed class NServiceBusEventDispatcher : IEventDispatcher
     {

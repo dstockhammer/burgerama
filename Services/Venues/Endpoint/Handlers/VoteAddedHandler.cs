@@ -1,4 +1,4 @@
-﻿using Burgerama.Messaging.Events.Voting;
+﻿using Burgerama.Messaging.Events.Campaigns;
 using NServiceBus;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers

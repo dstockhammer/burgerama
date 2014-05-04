@@ -13,7 +13,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
             // Arrange
             const string title = "This is a test.";
             var location = new Location("test", 13.0, 37.0);
-            var userId = "test|" + Guid.NewGuid();
+            const string userId = "testUserId";
 
             // Act
             var venue = new Venue(title, location, userId);
@@ -29,7 +29,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
             var id = Guid.NewGuid();
             const string title = "This is a test.";
             var location = new Location("test", 13.0, 37.0);
-            var userId = "test|" + Guid.NewGuid();
+            const string userId = "testUserId";
             var createdOn = DateTime.Now;
 
             // Act
@@ -45,15 +45,21 @@ namespace Burgerama.Services.Venues.Tests.Domain
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Venue_ShouldNotBeAllowedToBeCreatedWithoutLocation()
+        public void Venue_ShouldNotBeCreatedWithoutLocation()
+        {
+            var venue = new Venue("This is a test.", null, "testUserId");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Venue_ShouldNotBeCreatedWithoutUser()
         {
             // Arrange
             const string title = "This is a test.";
-            Location location = null;
-            var userId = "test|" + Guid.NewGuid();
+            var location = new Location("test", 13.0, 37.0);
 
             // Act
-            var venue = new Venue(title, location, userId);
+            var venue = new Venue(title, location, null);
         }
     }
 }

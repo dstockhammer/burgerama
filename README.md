@@ -37,7 +37,13 @@ Each API service expects a file `Config\MongoDb.confidential.config` in the foll
 
 ### Service Bus
 This area is work in progress. For now, go read up on [NServiceBus].
-
+To install the required infrastructure, run the following commands in the NuGet Package Manager Console:
+```
+PM> Install-NServiceBusDtc 
+PM> Install-NServiceBusMsmq
+PM> Install-NServiceBusRavenDB
+PM> Install-NServiceBusPerformanceCounters
+```
 
 [Azure]:http://azure.microsoft.com/
 [OWIN]:http://owin.org/

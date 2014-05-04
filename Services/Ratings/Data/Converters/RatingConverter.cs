@@ -14,7 +14,8 @@ namespace Burgerama.Services.Ratings.Data.Converters
             return new RatingModel
             {
                 User = rating.User,
-                Value = rating.Value
+                Value = rating.Value,
+                Text = rating.Text
             };
         }
 
@@ -22,7 +23,7 @@ namespace Burgerama.Services.Ratings.Data.Converters
         {
             Contract.Requires<ArgumentNullException>(rating != null);
 
-            return new Rating(rating.User, rating.Value);
+            return new Rating(rating.User, rating.Value, rating.Text);
         }
     }
 }
