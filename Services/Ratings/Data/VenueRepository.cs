@@ -1,8 +1,8 @@
 ﻿using Burgerama.Common.MongoDb;
-using Burgerama.Services.Ratings.Core;
-using Burgerama.Services.Ratings.Core.Contracts;
 using Burgerama.Services.Ratings.Data.Converters;
 using Burgerama.Services.Ratings.Data.Models;
+using Burgerama.Services.Ratings.Domain;
+using Burgerama.Services.Ratings.Domain.Contracts;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using System;

@@ -1,4 +1,4 @@
-﻿using Burgerama.Services.Ratings.Core;
+﻿using Burgerama.Services.Ratings.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

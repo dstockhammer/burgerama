@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Burgerama.Services.Ratings.Core.Contracts
+namespace Burgerama.Services.Ratings.Domain.Contracts
 {
     [ContractClass(typeof(VenueRepositoryContract))]
     public interface IVenueRepository

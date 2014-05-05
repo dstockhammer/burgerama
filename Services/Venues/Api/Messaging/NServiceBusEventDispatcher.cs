@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using Burgerama.Messaging.Events;
 using NServiceBus;
-using NServiceBus.Unicast;
 using IEvent = Burgerama.Messaging.Events.IEvent;
 
-namespace Burgerama.Services.Ratings.Endpoint
+namespace Burgerama.Services.Venues.Api.Messaging
 {
+    /// <summary>
+    /// todo: move this into a Burgerama.Common package.
+    /// </summary>
     public sealed class NServiceBusEventDispatcher : IEventDispatcher
     {
         private readonly IBus _bus;
 
-        public NServiceBusEventDispatcher()
+        public NServiceBusEventDispatcher(IBus bus)
         {
-            _bus = new UnicastBus();
+            _bus = bus;
         }
 
         public void Publish<T>(T message)

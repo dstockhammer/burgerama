@@ -1,14 +1,14 @@
 ﻿using Burgerama.Common.Authentication.Identity;
 using Burgerama.Messaging.Events;
 using Burgerama.Services.Ratings.Api.Models;
-using Burgerama.Services.Ratings.Core;
-using Burgerama.Services.Ratings.Core.Contracts;
 using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using Burgerama.Services.Ratings.Domain;
+using Burgerama.Services.Ratings.Domain.Contracts;
 
 namespace Burgerama.Services.Ratings.Api.Controllers
 {
@@ -28,13 +28,11 @@ namespace Burgerama.Services.Ratings.Api.Controllers
         [Route("{venueId}")]
         public HttpResponseMessage AddNewRatingToVenue(Guid venueId, [FromBody]RatingModel model)
         {
+            var venue = _venueRepository.Get(venueId);
+            if (venue == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Venue not found.");
+
             var userId = ClaimsPrincipal.Current.GetUserId();
-            
-            // todo: instead of naively creating a new venue here, the system should subscribe
-            // to VenueCreated events and keep its venues in sync. if somebody wants to add a
-            // rating to a unknow venue, it should display 404 or a similar error.
-            var venue = _venueRepository.Get(venueId) ?? new Venue(venueId);
-            
             if (venue.Ratings.Any(r => r.User == userId))
                 return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "This user already rated this venue.");
 

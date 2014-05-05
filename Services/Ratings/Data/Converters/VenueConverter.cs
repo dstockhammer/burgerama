@@ -1,9 +1,8 @@
-﻿
-using Burgerama.Services.Ratings.Core;
-using Burgerama.Services.Ratings.Data.Models;
+﻿using Burgerama.Services.Ratings.Data.Models;
 using System;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Burgerama.Services.Ratings.Domain;
 
 namespace Burgerama.Services.Ratings.Data.Converters
 {
@@ -16,6 +15,8 @@ namespace Burgerama.Services.Ratings.Data.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
+                Title = venue.Title,
+                LatestOuting = venue.LatestOuting,
                 Ratings = venue.Ratings.Select(r => r.ToModel())
             };
         }
@@ -26,7 +27,7 @@ namespace Burgerama.Services.Ratings.Data.Converters
 
             var venueId = Guid.Parse(venue.Id);
             var ratings = venue.Ratings.Select(r => r.ToDomain());
-            return new Venue(venueId, ratings);
+            return new Venue(venueId, venue.Title, ratings, venue.LatestOuting);
         }
     }
 }

@@ -131,7 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Domain.csproj">
+    <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{a4436f28-678f-4f8a-96ca-d1865621038a}</Project>
       <Name>Domain</Name>
     </ProjectReference>

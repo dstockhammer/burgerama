@@ -1,7 +1,7 @@
-﻿using Burgerama.Services.Ratings.Core;
-using Burgerama.Services.Ratings.Data.Models;
+﻿using Burgerama.Services.Ratings.Data.Models;
 using System;
 using System.Diagnostics.Contracts;
+using Burgerama.Services.Ratings.Domain;
 
 namespace Burgerama.Services.Ratings.Data.Converters
 {

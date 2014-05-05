@@ -5,9 +5,9 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Messaging.Events;
+using Burgerama.Services.Venues.Api.Messaging;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
-using Burgerama.Services.Venues.Endpoint;
 
 namespace Burgerama.Services.Venues.Api
 {
@@ -18,6 +18,7 @@ namespace Burgerama.Services.Venues.Api
             Contract.Requires<ArgumentNullException>(config != null);
 
             var container = BuildContainer();
+            NServiceBusConfig.Register(container);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 

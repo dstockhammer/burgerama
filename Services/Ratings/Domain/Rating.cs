@@ -1,9 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Burgerama.Services.Ratings.Core
+namespace Burgerama.Services.Ratings.Domain
 {
     public sealed class Rating
     {

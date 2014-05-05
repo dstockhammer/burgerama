@@ -165,6 +165,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus, Version=4.6.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.Interfaces.4.6.1\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=4.6.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.4.6.1\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.ObjectBuilder.Autofac">
+      <HintPath>..\packages\NServiceBus.Autofac.4.6.1\lib\net40\NServiceBus.ObjectBuilder.Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -220,8 +231,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\NServiceBusConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Converters\VenueConverter.cs" />
+    <Compile Include="Messaging\NServiceBusEventDispatcher.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\VenueController.cs" />
@@ -259,10 +272,6 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{1E812BBC-E034-4509-9C88-85F6E06A25AE}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Endpoint\Endpoint.csproj">
-      <Project>{46308F2F-9492-43CB-8272-1F27668C6299}</Project>
-      <Name>Endpoint</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

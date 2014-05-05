@@ -1,10 +1,10 @@
 ﻿using Burgerama.Common.Authentication.Identity;
 using Burgerama.Services.Ratings.Api.Models;
-using Burgerama.Services.Ratings.Core;
 using System;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Security.Claims;
+using Burgerama.Services.Ratings.Domain;
 
 namespace Burgerama.Services.Ratings.Api.Converters
 {

@@ -139,7 +139,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Domain.csproj">
+    <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>
       <Name>Domain</Name>
     </ProjectReference>

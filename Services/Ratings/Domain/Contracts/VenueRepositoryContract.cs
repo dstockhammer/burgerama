@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Burgerama.Services.Ratings.Core.Contracts
+namespace Burgerama.Services.Ratings.Domain.Contracts
 {
     [ContractClassFor(typeof(IVenueRepository))]
     internal abstract class VenueRepositoryContract : IVenueRepository

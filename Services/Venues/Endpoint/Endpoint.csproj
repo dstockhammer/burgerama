@@ -131,7 +131,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NServiceBusEventDispatcher.cs" />
     <Compile Include="Handlers\VoteAddedHandler.cs" />
     <Compile Include="Handlers\RatingUpdatedHandler.cs" />
     <Compile Include="EndpointConfig.cs" />

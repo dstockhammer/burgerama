@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Messaging.Events;
-using Burgerama.Services.Ratings.Core.Contracts;
+using Burgerama.Services.Ratings.Api.Messaging;
 using Burgerama.Services.Ratings.Data;
 using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Web.Http;
-using Burgerama.Services.Ratings.Endpoint;
+using Burgerama.Services.Ratings.Domain.Contracts;
 
 namespace Burgerama.Services.Ratings.Api
 {
