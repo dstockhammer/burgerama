@@ -105,6 +105,25 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Messaging.Commands.0.1.1\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.Commands.Outings">
+      <HintPath>..\packages\Burgerama.Messaging.Commands.Outings.0.1.0\lib\net451\Burgerama.Messaging.Commands.Outings.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.NServiceBus.Commands">
+      <HintPath>..\packages\Burgerama.Messaging.NServiceBus.Commands.0.1.0\lib\net451\Burgerama.Messaging.NServiceBus.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus">
+      <HintPath>..\packages\NServiceBus.Interfaces.4.6.1\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\packages\NServiceBus.4.6.1\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.ObjectBuilder.Autofac">
+      <HintPath>..\packages\NServiceBus.Autofac.4.6.1\lib\net40\NServiceBus.ObjectBuilder.Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

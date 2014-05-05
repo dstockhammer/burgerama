@@ -24,9 +24,7 @@ namespace Burgerama.Services.OutingScheduler.Services
 
             // set date to tomorrow 6 pm
             var date = DateTime.Today.AddDays(1).AddHours(18);
-
-            // todo: send command to outing service
-
+            
             return new ScheduledOuting(date, venue);
         }
 

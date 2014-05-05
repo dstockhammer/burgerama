@@ -126,6 +126,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.2\lib\Burgerama.Common.MongoDb.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messages.NServiceBus.Events">
+      <HintPath>..\packages\Burgerama.Messaging.NServiceBus.Events.0.1.0\lib\net451\Burgerama.Messages.NServiceBus.Events.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.Events">
       <HintPath>..\packages\Burgerama.Messaging.Events.0.1.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
@@ -234,7 +237,6 @@
     <Compile Include="App_Start\NServiceBusConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Converters\VenueConverter.cs" />
-    <Compile Include="Messaging\NServiceBusEventDispatcher.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\VenueController.cs" />

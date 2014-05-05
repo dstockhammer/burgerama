@@ -1,13 +1,11 @@
 using Autofac;
-using Burgerama.Messages.NServiceBus.Events;
-using Burgerama.Messaging.Events;
-using Burgerama.Services.Ratings.Data;
-using Burgerama.Services.Ratings.Domain.Contracts;
+using Burgerama.Services.Outings.Data;
+using Burgerama.Services.Outings.Domain.Contracts;
 using NServiceBus;
 
-namespace Burgerama.Services.Ratings.Endpoint
+namespace Burgerama.Services.Outings.Endpoint
 {
-    public sealed class EndpointConfig : IConfigureThisEndpoint, AsA_Client, IWantCustomInitialization
+    public class EndpointConfig : IConfigureThisEndpoint, AsA_Client, IWantCustomInitialization
     {
         public void Init()
         {
@@ -17,6 +15,7 @@ namespace Burgerama.Services.Ratings.Endpoint
                 //.DefineEndpointName("Burgerama.Service.Ratings")
                 .AutofacBuilder(container)
                 .UseTransport<Msmq>()
+                .DefiningCommandsAs(t => t.Namespace != null && t.Namespace.StartsWith("Burgerama.Messaging.Commands"))
                 .DefiningEventsAs(t => t.Namespace != null && t.Namespace.StartsWith("Burgerama.Messaging.Events"));
         }
 
@@ -25,10 +24,7 @@ namespace Burgerama.Services.Ratings.Endpoint
             var builder = new ContainerBuilder();
 
             // Repositories
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
-
-            // Messaging
-            builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
+            builder.RegisterType<OutingRepository>().As<IOutingRepository>();
 
             return builder.Build();
         }
