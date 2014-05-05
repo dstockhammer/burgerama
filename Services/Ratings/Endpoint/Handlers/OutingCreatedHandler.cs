@@ -1,10 +1,9 @@
 ﻿using Burgerama.Messaging.Events.Outings;
 using Burgerama.Services.Ratings.Domain.Contracts;
-using NServiceBus;
 
 namespace Burgerama.Services.Ratings.Endpoint.Handlers
 {
-    public sealed class OutingCreatedHandler : IHandleMessages<OutingCreated>
+    public sealed class OutingCreatedHandler // : IHandleMessages<OutingCreated>
     {
         private readonly IVenueRepository _venueRepository;
 

@@ -1,11 +1,10 @@
 ﻿using Burgerama.Messaging.Events.Venues;
 using Burgerama.Services.Ratings.Domain;
 using Burgerama.Services.Ratings.Domain.Contracts;
-using NServiceBus;
 
 namespace Burgerama.Services.Ratings.Endpoint.Handlers
 {
-    public sealed class VenueCreatedHandler : IHandleMessages<VenueCreated>
+    public sealed class VenueCreatedHandler // : IHandleMessages<VenueCreated>
     {
         private readonly IVenueRepository _venueRepository;
 

@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using Burgerama.Messages.NServiceBus.Events;
 using Burgerama.Messaging.Events;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
@@ -18,7 +17,6 @@ namespace Burgerama.Services.Venues.Api
             Contract.Requires<ArgumentNullException>(config != null);
 
             var container = BuildContainer();
-            NServiceBusConfig.Register(container);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
@@ -33,6 +31,7 @@ namespace Burgerama.Services.Venues.Api
             builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
 
             // Messaging
+            builder.RegisterMassTransit();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();
