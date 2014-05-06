@@ -95,7 +95,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
             //if (isDupe) 
             //    return Conflict();
 
-            //_venueRepository.SaveOrUpdate(venue);
+            _venueRepository.SaveOrUpdate(venue);
             _eventDispatcher.Publish(new VenueCreated
             {
                 VenueId = venue.Id,

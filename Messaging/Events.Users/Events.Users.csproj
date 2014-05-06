@@ -117,6 +117,7 @@
     <Compile Include="UserSignedIn.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Events.Users.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

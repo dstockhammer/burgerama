@@ -1,9 +1,10 @@
 ﻿using Burgerama.Messaging.Events.Outings;
 using Burgerama.Services.Ratings.Domain.Contracts;
+using MassTransit;
 
 namespace Burgerama.Services.Ratings.Endpoint.Handlers
 {
-    public sealed class OutingCreatedHandler // : IHandleMessages<OutingCreated>
+    public sealed class OutingCreatedHandler : Consumes<OutingCreated>.Context
     {
         private readonly IVenueRepository _venueRepository;
 
@@ -12,10 +13,10 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
             _venueRepository = venueRepository;
         }
 
-        public void Handle(OutingCreated message)
+        public void Consume(IConsumeContext<OutingCreated> context)
         {
-            var venue = _venueRepository.Get(message.VenueId);
-            venue.AddOuting(message.DateTime);
+            var venue = _venueRepository.Get(context.Message.VenueId);
+            venue.AddOuting(context.Message.DateTime);
             _venueRepository.SaveOrUpdate(venue);
         }
     }

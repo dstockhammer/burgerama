@@ -1,11 +1,11 @@
 ﻿using Burgerama.Messaging.Events.Ratings;
-using NServiceBus;
+using MassTransit;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers
 {
-    public sealed class RatingUpdatedHandler : IHandleMessages<RatingUpdated>
+    public sealed class RatingUpdatedHandler : Consumes<RatingUpdated>.Context
     {
-        public void Handle(RatingUpdated message)
+        public void Consume(IConsumeContext<RatingUpdated> context)
         {
             // todo: handle stuff
         }

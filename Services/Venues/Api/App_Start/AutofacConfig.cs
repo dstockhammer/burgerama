@@ -5,6 +5,7 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Messaging.Events;
+using Burgerama.Services.Venues.Api.Messaging;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
 

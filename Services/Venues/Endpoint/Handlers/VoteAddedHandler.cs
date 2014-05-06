@@ -1,11 +1,11 @@
 ﻿using Burgerama.Messaging.Events.Campaigns;
-using NServiceBus;
+using MassTransit;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers
 {
-    public sealed class VoteAddedHandler : IHandleMessages<VoteAdded>
+    public sealed class VoteAddedHandler : Consumes<VoteAdded>.Context
     {
-        public void Handle(VoteAdded message)
+        public void Consume(IConsumeContext<VoteAdded> context)
         {
             // todo: handle stuff
         }

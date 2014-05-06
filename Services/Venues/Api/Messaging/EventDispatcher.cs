@@ -2,7 +2,7 @@
 using Burgerama.Messaging.Events;
 using MassTransit;
 
-namespace Burgerama.Services.Ratings.Endpoint
+namespace Burgerama.Services.Venues.Api.Messaging
 {
     public sealed class EventDispatcher : IEventDispatcher
     {

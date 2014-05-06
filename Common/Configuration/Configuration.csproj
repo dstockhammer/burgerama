@@ -110,12 +110,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth0Configuration.cs" />
+    <Compile Include="RabbitMqConfiguration.cs" />
     <Compile Include="ServiceConfiguration.cs" />
     <Compile Include="MongoDbConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Burgerama.Common.Configuration.nuspec" />
+    <None Include="Configuration.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

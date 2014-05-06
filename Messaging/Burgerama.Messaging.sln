@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.Commands", "NSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NserviceBus.Events", "NServiceBus.Events\NserviceBus.Events.csproj", "{2AF18DB3-18CF-4530-893C-6528AA906934}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Events", "MassTransit.Events\MassTransit.Events.csproj", "{DCE8D1C9-147E-4703-A943-B5B430DF7559}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Commands", "MassTransit.Commands\MassTransit.Commands.csproj", "{B816F3B7-2BE8-460A-8B35-4329DC338D6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{2AF18DB3-18CF-4530-893C-6528AA906934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AF18DB3-18CF-4530-893C-6528AA906934}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AF18DB3-18CF-4530-893C-6528AA906934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B816F3B7-2BE8-460A-8B35-4329DC338D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B816F3B7-2BE8-460A-8B35-4329DC338D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B816F3B7-2BE8-460A-8B35-4329DC338D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B816F3B7-2BE8-460A-8B35-4329DC338D6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

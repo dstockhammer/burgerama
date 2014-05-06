@@ -116,6 +116,7 @@
     <Compile Include="VenueCreated.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Events.Venues.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

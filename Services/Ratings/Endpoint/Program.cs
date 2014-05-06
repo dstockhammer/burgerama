@@ -1,25 +1,36 @@
 ﻿using System;
-using System.Threading;
+using System.Configuration;
 using Autofac;
-using Burgerama.Messaging.Events;
+using Burgerama.Common.Configuration;
 using Burgerama.Services.Ratings.Data;
 using Burgerama.Services.Ratings.Domain.Contracts;
 using Burgerama.Services.Ratings.Endpoint.Handlers;
 using MassTransit;
+using Topshelf;
 
 namespace Burgerama.Services.Ratings.Endpoint
 {
-    public class Program
+    public sealed class Program
     {
         static void Main(string[] args)
         {
-            var container = GetAutofacContainer();
-
-            // todo: improve this. quite dodgy
-            while (true)
+            var host = HostFactory.New(cfg =>
             {
-                Thread.Sleep(1000);
-            }
+                var container = GetAutofacContainer();
+
+                cfg.SetServiceName("Burgerama.Services.Ratings.Endpoint");
+                cfg.SetDisplayName("Burgerama.Services.Ratings.Endpoint");
+                cfg.SetDescription("Burgerama.Services.Ratings.Endpoint");
+                
+                cfg.Service<EndpointService>(h =>
+                {
+                    h.ConstructUsing(s => container.Resolve<EndpointService>());
+                    h.WhenStarted(s => s.Start());
+                    h.WhenStopped(s => s.Stop());
+                });
+            });
+
+            host.Run();
         }
 
         private static IContainer GetAutofacContainer()
@@ -31,7 +42,7 @@ namespace Burgerama.Services.Ratings.Endpoint
 
             // Messaging infrastructure
             builder.Register(GetServiceBus).As<IServiceBus>().SingleInstance();
-            builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
+            builder.RegisterType<EndpointService>().AsSelf();
 
             // Event handlers
             builder.RegisterType<OutingCreatedHandler>().AsSelf();
@@ -44,8 +55,17 @@ namespace Burgerama.Services.Ratings.Endpoint
         {
             return ServiceBusFactory.New(sbc =>
             {
-                sbc.UseRabbitMq();
-                sbc.ReceiveFrom("amqp:// paste url here");
+                var config = (RabbitMqConfiguration)ConfigurationManager.GetSection("burgerama/rabbitMq");
+                var uri = string.Format("{0}/{1}/", config.Server, config.VHost);
+                var credentials = string.Format("{0}:{1}", config.UserName, config.Password);
+                var queue = typeof(Program).Assembly.GetName().Name.ToLowerInvariant();
+                
+                sbc.UseRabbitMq(r => r.ConfigureHost(new Uri("rabbitmq://" + uri + queue), h =>
+                {
+                    h.SetUsername(config.UserName);
+                    h.SetPassword(config.Password);
+                }));
+                sbc.ReceiveFrom("rabbitmq://" + credentials + "@" + uri + queue);
                 sbc.Subscribe(x => x.LoadFrom(context.Resolve<ILifetimeScope>()));
             });
         }

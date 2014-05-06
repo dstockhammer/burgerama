@@ -117,6 +117,7 @@
     <Compile Include="RatingUpdated.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Events.Ratings.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

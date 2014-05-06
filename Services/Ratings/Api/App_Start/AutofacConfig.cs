@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Messaging.Events;
-using Burgerama.Services.Ratings.Api.Messaging;
+using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Ratings.Data;
 using System;
 using System.Diagnostics.Contracts;
@@ -32,7 +32,8 @@ namespace Burgerama.Services.Ratings.Api
             builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
 
             // Messaging
-            builder.RegisterType<NServiceBusEventDispatcher>().As<IEventDispatcher>().InstancePerApiRequest();
+            builder.RegisterMassTransit();
+            builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();
         }

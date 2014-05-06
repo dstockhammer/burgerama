@@ -1,10 +1,11 @@
 ﻿using Burgerama.Messaging.Events.Venues;
 using Burgerama.Services.Ratings.Domain;
 using Burgerama.Services.Ratings.Domain.Contracts;
+using MassTransit;
 
 namespace Burgerama.Services.Ratings.Endpoint.Handlers
 {
-    public sealed class VenueCreatedHandler // : IHandleMessages<VenueCreated>
+    public sealed class VenueCreatedHandler : Consumes<VenueCreated>.Context
     {
         private readonly IVenueRepository _venueRepository;
 
@@ -13,9 +14,9 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
             _venueRepository = venueRepository;
         }
 
-        public void Handle(VenueCreated message)
+        public void Consume(IConsumeContext<VenueCreated> context)
         {
-            var venue = new Venue(message.VenueId, message.Title);
+            var venue = new Venue(context.Message.VenueId, context.Message.Title);
             _venueRepository.SaveOrUpdate(venue);
         }
     }

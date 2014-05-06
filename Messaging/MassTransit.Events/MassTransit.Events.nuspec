@@ -1,17 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>Burgerama.Common.Configuration</id>
-        <version>0.1.3</version>
-        <title>Burgerama Configuration</title>
+        <id>Burgerama.Messaging.MassTransit.Events</id>
+        <version>0.1.0</version>
+        <title>Burgerama Messaging: MassTransit Infrastructure for Events</title>
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
         <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Burgerama configuration library.</description>
-        <frameworkAssemblies>
-            <frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
-        </frameworkAssemblies>
+        <description>Burgerama MassTransit infrastructure for events.</description>
     </metadata>
 </package>
