@@ -31,9 +31,9 @@ namespace Burgerama.Web.UI
                 "~/Content/css/default.css"
             ));
 
-#if !DEBUG
-            BundleTable.EnableOptimizations = true;
-#endif
+//#if !DEBUG
+//            BundleTable.EnableOptimizations = true;
+//#endif
         }
     }
 }
