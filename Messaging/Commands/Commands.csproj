@@ -108,11 +108,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerEndpointAttribute.cs" />
     <Compile Include="CommandDispatcherContract.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatusCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Commands.nuspec" />

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Burgerama.Messaging.MassTransit.Commands</id>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
         <title>Burgerama Messaging: MassTransit Infrastructure for Commands</title>
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>

@@ -121,6 +121,9 @@
     <Reference Include="Burgerama.Messaging.Commands.Outings">
       <HintPath>..\packages\Burgerama.Messaging.Commands.Outings.0.1.0\lib\net451\Burgerama.Messaging.Commands.Outings.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit.Endpoint">
+      <HintPath>..\..\..\Messaging\MassTransit\bin\Debug\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
+    </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
     </Reference>
@@ -160,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="EndpointService.cs" />
     <Compile Include="Handlers\CreateOutingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

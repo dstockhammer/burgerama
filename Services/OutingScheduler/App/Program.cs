@@ -28,6 +28,13 @@ namespace Burgerama.Services.OutingScheduler.App
             else
             {
                 var commandDispatcher = container.Resolve<ICommandDispatcher>();
+
+                // instead of the endpoint argument, add a mappin extension method like
+                // string GetEndpointUrl(this CreateOuting) -- the question is where to 
+                // put the extension method. probably in the masstransit assembly, because
+                // it is rabbitmq specific. we don't want to add a dependency to all the
+                // command assemblies though... :/
+
                 commandDispatcher.Send(GetEndpointUrl("outings"), new CreateOuting
                 {
                     VenueId = outing.Venue.Id,
@@ -36,6 +43,11 @@ namespace Burgerama.Services.OutingScheduler.App
 
                 Console.WriteLine("OutingScheduler run successful: Outing '{0}' scheduled for '{1}' on '{2}'.", outing.Id, outing.Venue.Title, outing.Date);
             }
+
+            // disposing the bus is very important in order to unsubscribe and stop consuming.
+            // todo: how to implement this in a way that the dev is not forced dispose manually?
+            var bus = container.Resolve<IServiceBus>();
+            bus.Dispose();
         }
 
         private static IContainer GetAutofacContainer()

@@ -18,8 +18,6 @@ namespace Burgerama.Services.Outings.Endpoint.Handlers
         {
             var outing = new Outing(context.Message.Date, context.Message.VenueId);
             _outingRepository.SaveOrUpdate(outing);
-
-            //_bus.Return(StatusCode.Ok);
         }
     }
 }

@@ -1,8 +1,8 @@
-using MassTransit;
+﻿using MassTransit;
 
-namespace Burgerama.Services.Outings.Endpoint
+namespace Burgerama.Messaging.MassTransit.Endpoint.Topshelf
 {
-    public sealed class EndpointService
+    public sealed class EndpointService : IEndpointService
     {
         private readonly IServiceBus _bus;
 

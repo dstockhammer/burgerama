@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Burgerama.Messaging.Commands.Outings</id>
-        <version>0.1.0</version>
+        <version>0.1.2</version>
         <title>Burgerama Messaging: Commands for Outings</title>
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
