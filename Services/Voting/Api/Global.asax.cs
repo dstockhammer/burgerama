@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
 using Burgerama.Services.Voting.Api;
-using Burgerama.Services.Voting.Core.DI;
+using Burgerama.Services.Voting.Api.DI;
 using Microsoft.Owin;
 
 [assembly: OwinStartup(typeof(Startup))]

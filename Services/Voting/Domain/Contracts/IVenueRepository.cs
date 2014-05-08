@@ -9,7 +9,7 @@ namespace Burgerama.Services.Voting.Domain.Contracts
     {
         Venue Get(Guid venueId);
 
-        IEnumerable<Venue> GetVotesForUser(Guid userId);
+        IEnumerable<Venue> GetVotesForUser(string userId);
 
         void SaveOrUpdate(Venue venue);
     }

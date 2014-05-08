@@ -2,11 +2,11 @@
 using Burgerama.Messaging.Events.Outings;
 using Burgerama.Services.Voting.Domain;
 using Burgerama.Services.Voting.Domain.Contracts;
-using NServiceBus;
+using MassTransit;
 
 namespace Burgerama.Services.Voting.Endpoint.Handlers
 {
-    public sealed class OutingCreatedHandler : IHandleMessages<OutingCreated>
+    public sealed class OutingCreatedHandler : Consumes<OutingCreated>.Context
     {
         private readonly IVenueRepository _venueRepository;
 
@@ -17,7 +17,12 @@ namespace Burgerama.Services.Voting.Endpoint.Handlers
 
         public void Handle(OutingCreated message)
         {
-            var venue = _venueRepository.Get(message.VenueId);
+
+        }
+
+        public void Consume(IConsumeContext<OutingCreated> context)
+        {
+            var venue = _venueRepository.Get(context.Message.VenueId);
             if (venue == null)
             {
                 // call the venue service to check whether a venue with this guid exists:
@@ -27,7 +32,7 @@ namespace Burgerama.Services.Voting.Endpoint.Handlers
                 venue = new Venue(Guid.Empty);
             }
 
-            venue.AddOuting(message.OutingId);
+            venue.AddOuting(context.Message.DateTime);
             _venueRepository.SaveOrUpdate(venue);
         }
     }

@@ -29,8 +29,8 @@ namespace Burgerama.Services.Voting.Tests.Domain
         {
             // Arrange
             var id = Guid.NewGuid();
-            var outing = Guid.NewGuid();
-            var votes = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
+            var outing = DateTime.Today.AddDays(-1);
+            var votes = new[] { Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString() };
 
             // Act
             var venue = new Venue(id, outing, votes);
@@ -46,7 +46,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
         public void AddVote_ShouldWork()
         {
             // Arrange
-            var user = Guid.NewGuid();
+            var user = Guid.NewGuid().ToString();
             var venue = new Venue(Guid.NewGuid());
             
             // Act
@@ -62,8 +62,8 @@ namespace Burgerama.Services.Voting.Tests.Domain
         public void AddVote_ShouldWorkWithMultipleUsers()
         {
             // Arrange
-            var user1 = Guid.NewGuid();
-            var user2 = Guid.NewGuid();
+            var user1 = Guid.NewGuid().ToString();
+            var user2 = Guid.NewGuid().ToString();
             var venue = new Venue(Guid.NewGuid());
 
             // Act
@@ -82,8 +82,8 @@ namespace Burgerama.Services.Voting.Tests.Domain
         public void AddVote_ShouldOnlyTakeOneVotePerUser()
         {
             // Arrange
-            var user1 = Guid.NewGuid();
-            var user2 = Guid.NewGuid();
+            var user1 = Guid.NewGuid().ToString();
+            var user2 = Guid.NewGuid().ToString();
             var venue = new Venue(Guid.NewGuid());
             
             // Act
@@ -101,11 +101,11 @@ namespace Burgerama.Services.Voting.Tests.Domain
         }
 
         [TestMethod]
-        public void AddVote_ShouldOnlyWorkIfVenueHasNoOuting()
+        public void AddVote_ShouldNotWorkIfVenueHasPreviousOuting()
         {
             // Arrange
-            var user = Guid.NewGuid();
-            var venue = new Venue(Guid.NewGuid(), Guid.NewGuid());
+            var user = Guid.NewGuid().ToString();
+            var venue = new Venue(Guid.NewGuid(), DateTime.Today.AddDays(-1));
             
             // Act
             var result = venue.AddVote(user);
@@ -114,6 +114,22 @@ namespace Burgerama.Services.Voting.Tests.Domain
             Assert.IsFalse(result.Any(e => e is VoteAdded));
             Assert.AreEqual(0, venue.Votes.Count());
             Assert.IsFalse(venue.Votes.Contains(user));
+        }
+
+        [TestMethod]
+        public void AddVote_ShouldNotWorkIfVenueHasFutureOuting()
+        {
+            // Arrange
+            var user = Guid.NewGuid().ToString();
+            var venue = new Venue(Guid.NewGuid(), DateTime.Today.AddDays(1));
+
+            // Act
+            var result = venue.AddVote(user);
+
+            // Assert
+            Assert.IsTrue(result.Any(e => e is VoteAdded));
+            Assert.AreEqual(1, venue.Votes.Count());
+            Assert.IsTrue(venue.Votes.Contains(user));
         }
     }
 }

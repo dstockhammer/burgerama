@@ -25,10 +25,10 @@ namespace Burgerama.Services.Voting.Data
             return Venues.FindOne(query).ToDomain();
         }
 
-        public IEnumerable<Venue> GetVotesForUser(Guid userId)
+        public IEnumerable<Venue> GetVotesForUser(string userId)
         {
             return Venues.AsQueryable()
-                .Where(v => v.Votes.Any(id => id == userId.ToString()))
+                .Where(v => v.Votes.Any(id => id == userId))
                 .Select(m => m.ToDomain());
         }
 

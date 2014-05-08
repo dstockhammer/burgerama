@@ -11,27 +11,23 @@ namespace Burgerama.Services.Voting.Data.Converters
         public static VenueModel ToModel(this Venue venue)
         {
             Contract.Requires<ArgumentNullException>(venue != null);
+            Contract.Ensures(Contract.Result<VenueModel>() != null);
 
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
-                Outing = venue.LatestOuting.HasValue ? venue.LatestOuting.ToString() : null,
-                Votes = venue.Votes.Select(userId => userId.ToString()).ToList()
+                LatestOuting = venue.LatestOuting,
+                Votes = venue.Votes.ToList()
             };
         }
 
         public static Venue ToDomain(this VenueModel venue)
         {
             Contract.Requires<ArgumentNullException>(venue != null);
+            Contract.Ensures(Contract.Result<Venue>() != null);
 
             var id = Guid.Parse(venue.Id);
-            var outing = string.IsNullOrWhiteSpace(venue.Outing)
-                ? (Guid?)null
-                : Guid.Parse(venue.Outing);
-
-            var votings = venue.Votes.Select(Guid.Parse);
-
-            return new Venue(id, outing, votings);
+            return new Venue(id, venue.LatestOuting, venue.Votes);
         }
     }
 }

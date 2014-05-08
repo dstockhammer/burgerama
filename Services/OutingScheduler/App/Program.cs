@@ -35,7 +35,7 @@ namespace Burgerama.Services.OutingScheduler.App
                 // it is rabbitmq specific. we don't want to add a dependency to all the
                 // command assemblies though... :/
 
-                commandDispatcher.Send(GetEndpointUrl("outings"), new CreateOuting
+                commandDispatcher.Send(new CreateOuting
                 {
                     VenueId = outing.Venue.Id,
                     Date = outing.Date

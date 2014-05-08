@@ -1,11 +1,11 @@
 ﻿using Burgerama.Messaging.Events.Venues;
 using Burgerama.Services.Voting.Domain;
 using Burgerama.Services.Voting.Domain.Contracts;
-using NServiceBus;
+using MassTransit;
 
 namespace Burgerama.Services.Voting.Endpoint.Handlers
 {
-    public sealed class VenueCreatedHandler : IHandleMessages<VenueCreated>
+    public sealed class VenueCreatedHandler : Consumes<VenueCreated>.Context
     {
         private readonly IVenueRepository _venueRepository;
 
@@ -14,9 +14,9 @@ namespace Burgerama.Services.Voting.Endpoint.Handlers
             _venueRepository = venueRepository;
         }
 
-        public void Handle(VenueCreated message)
+        public void Consume(IConsumeContext<VenueCreated> context)
         {
-            var venue = new Venue(message.VenueId);
+            var venue = new Venue(context.Message.VenueId);
             _venueRepository.SaveOrUpdate(venue);
         }
     }

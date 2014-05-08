@@ -1,13 +1,12 @@
-﻿using System;
-using System.Web;
-using System.Web.Caching;
-using Burgerama.Services.Voting.Core.DI;
-using Burgerama.Services.Voting.Core.Messaging;
+﻿using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using Burgerama.Messaging.Events;
+using Burgerama.Messaging.MassTransit.Endpoint.Autofac;
+using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
+using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Voting.Data;
-using Burgerama.Services.Voting.DependencyResolution;
 using Burgerama.Services.Voting.Domain.Contracts;
-using Burgerama.Services.Voting.Endpoint;
-using Microsoft.Practices.Unity;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Burgerama.Services.Voting.DependencyResolution
 {
@@ -20,16 +19,21 @@ namespace Burgerama.Services.Voting.DependencyResolution
 
         private static void RegisterDependencies()
         {
-            var container = new UnityContainer();
+            var builder = new ContainerBuilder();
 
             // Repositories
-            container.RegisterType<IVenueRepository, VenueRepository>();
+            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
-            // Messaging
-            container.RegisterType<IEventDispatcher, NServiceBusEventDispatcher>();
+            // Messaging infrastructure
+            builder.RegisterServiceBus();
+            builder.RegisterConsumers();
+            builder.RegisterType<EndpointService>().As<IEndpointService>();
+            builder.RegisterType<EndpointHostFactory>().AsSelf().SingleInstance();
+            builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
-            // Set Unity as the Service Locator provider.
-            ServiceLocator.SetServiceLocator(() => new UnityServiceLocator(container));
+            // Set Autofac as the Service Locator provider.
+            var container = builder.Build();
+            ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
         }
     }
 }

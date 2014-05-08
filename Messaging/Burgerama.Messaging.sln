@@ -13,21 +13,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Outings", "Events.Ou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Ratings", "Events.Ratings\Events.Ratings.csproj", "{8B6F976C-5418-427E-A4CC-9BACBD8EB5FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Campaigns", "Events.Campaigns\Events.Campaigns.csproj", "{BBEBC3C5-1481-44F7-8688-B9BD2BC007BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Voting", "Events.Voting\Events.Voting.csproj", "{BBEBC3C5-1481-44F7-8688-B9BD2BC007BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Users", "Events.Users\Events.Users.csproj", "{2E6019A2-BDDF-441B-AC71-35059BCBDFBE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.Outings", "Commands.Outings\Commands.Outings.csproj", "{A079C106-F8DD-4467-805B-F4286A799772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.Commands", "NServiceBus.Commands\NServiceBus.Commands.csproj", "{B6ACE5D4-4FD0-4890-9914-3F189E026131}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NserviceBus.Events", "NServiceBus.Events\NserviceBus.Events.csproj", "{2AF18DB3-18CF-4530-893C-6528AA906934}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Events", "MassTransit.Events\MassTransit.Events.csproj", "{DCE8D1C9-147E-4703-A943-B5B430DF7559}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Commands", "MassTransit.Commands\MassTransit.Commands.csproj", "{B816F3B7-2BE8-460A-8B35-4329DC338D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit", "MassTransit\MassTransit.csproj", "{F2815BF7-F98F-4D16-8185-57B27DCA4B95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Endpoint", "MassTransit.Endpoint\MassTransit.Endpoint.csproj", "{F2815BF7-F98F-4D16-8185-57B27DCA4B95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,14 +63,6 @@ Global
 		{A079C106-F8DD-4467-805B-F4286A799772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A079C106-F8DD-4467-805B-F4286A799772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A079C106-F8DD-4467-805B-F4286A799772}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6ACE5D4-4FD0-4890-9914-3F189E026131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6ACE5D4-4FD0-4890-9914-3F189E026131}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6ACE5D4-4FD0-4890-9914-3F189E026131}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6ACE5D4-4FD0-4890-9914-3F189E026131}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2AF18DB3-18CF-4530-893C-6528AA906934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AF18DB3-18CF-4530-893C-6528AA906934}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AF18DB3-18CF-4530-893C-6528AA906934}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AF18DB3-18CF-4530-893C-6528AA906934}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCE8D1C9-147E-4703-A943-B5B430DF7559}.Release|Any CPU.ActiveCfg = Release|Any CPU

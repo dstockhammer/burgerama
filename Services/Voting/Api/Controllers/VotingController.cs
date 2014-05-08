@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Burgerama.Services.Voting.Core.Messaging;
+using Burgerama.Common.Authentication.Identity;
+using Burgerama.Messaging.Events;
 using Burgerama.Services.Voting.Domain.Contracts;
 
 namespace Burgerama.Services.Voting.Api.Controllers
@@ -77,10 +80,7 @@ namespace Burgerama.Services.Voting.Api.Controllers
             if (venue == null)
                 return NotFound();
 
-            // todo: figure out wheter to use a custom user entity with an id or just the auth0 ids.
-            //var userId = ClaimsPrincipal.Current.GetUserId();
-            var userId = Guid.NewGuid();
-
+            var userId = ClaimsPrincipal.Current.GetUserId();
             var messages = venue.AddVote(userId);
             if (messages.Any() == false)
                 return Conflict();
@@ -97,15 +97,16 @@ namespace Burgerama.Services.Voting.Api.Controllers
         /// <example>
         /// GET user/878f000c-e61f-4d34-a9f7-236a153c062c
         /// </example> 
-        /// <param name="userId">The guid of the user.</param>
+        /// <param name="userId">The id of the user.</param>
         /// <returns>Returns the ids of all venues the user has voted for.</returns>
         [HttpGet]
         [Route("user/{userId}")]
         [ResponseType(typeof(IEnumerable<Guid>))]
-        public IHttpActionResult GetVotesByUser(Guid userId)
+        public IHttpActionResult GetVotesByUser(string userId)
         {
-            var venues = _venueRepository.GetVotesForUser(userId);
+            Contract.Requires<ArgumentNullException>(userId != null);
 
+            var venues = _venueRepository.GetVotesForUser(userId);
             return Ok(venues.Select(v => v.Id));
         }
     }

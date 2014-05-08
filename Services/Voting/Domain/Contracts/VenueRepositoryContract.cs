@@ -9,11 +9,14 @@ namespace Burgerama.Services.Voting.Domain.Contracts
     {
         public Venue Get(Guid venueId)
         {
+            Contract.Ensures(Contract.Result<Venue>() != null);
+
             return default(Venue);
         }
 
-        public IEnumerable<Venue> GetVotesForUser(Guid userId)
+        public IEnumerable<Venue> GetVotesForUser(string userId)
         {
+            Contract.Requires<ArgumentNullException>(userId != null);
             Contract.Ensures(Contract.Result<IEnumerable<Venue>>() != null);
 
             return default(IEnumerable<Venue>);

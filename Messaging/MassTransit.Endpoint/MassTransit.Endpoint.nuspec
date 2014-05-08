@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Burgerama.Messaging.MassTransit.Endpoint</id>
+        <version>0.1.1</version>
+        <title>Burgerama Messaging: MassTransit Endpoint Infrastructure</title>
+        <authors>dstockhammer</authors>
+        <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
+        <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Infrastructure for hosting a MassTransit endpoint.</description>
+    </metadata>
+</package>

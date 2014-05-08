@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
-using Burgerama.Services.Outings.Data;
-using Burgerama.Services.Outings.Domain.Contracts;
+using Burgerama.Services.Voting.Data;
+using Burgerama.Services.Voting.Domain.Contracts;
 
-namespace Burgerama.Services.Outings.Endpoint
+namespace Burgerama.Services.Voting.Endpoint
 {
     public sealed class Program
     {
@@ -21,7 +21,7 @@ namespace Burgerama.Services.Outings.Endpoint
             var builder = new ContainerBuilder();
 
             // Repositories
-            builder.RegisterType<OutingRepository>().As<IOutingRepository>();
+            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
             // Messaging infrastructure
             builder.RegisterServiceBus();

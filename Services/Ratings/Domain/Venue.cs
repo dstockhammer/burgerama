@@ -19,7 +19,10 @@ namespace Burgerama.Services.Ratings.Domain
         
         public IEnumerable<Rating> Ratings
         {
-            get { return _ratings; }
+            get {            
+                Contract.Ensures(Contract.Result<IEnumerable<Rating>>() != null);
+                return _ratings;
+            }
         }
 
         public double TotalRating
@@ -60,6 +63,7 @@ namespace Burgerama.Services.Ratings.Domain
         public IEnumerable<IEvent> AddRating(Rating rating)
         {
             Contract.Requires<ArgumentNullException>(rating != null);
+            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
 
             if (LatestOuting.HasValue && LatestOuting.Value <= DateTime.Now)
                 return Enumerable.Empty<IEvent>();
@@ -81,7 +85,13 @@ namespace Burgerama.Services.Ratings.Domain
         /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
         public IEnumerable<IEvent> AddOuting(DateTime date)
         {
+            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
+            
+            // todo: when a future outing is added to a venue that already has an outing,
+            // the previous one gets overriden. this prevents rating until the date of the future
+            // outing. this is an issue that should be resolved in the next iteration.
             LatestOuting = date;
+            
             return Enumerable.Empty<IEvent>();
         }
     }
