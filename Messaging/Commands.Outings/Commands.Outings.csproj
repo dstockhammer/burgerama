@@ -101,7 +101,7 @@
   <ItemGroup>
     <Reference Include="Burgerama.Messaging.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Commands.0.1.5\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Commands.0.1.6\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

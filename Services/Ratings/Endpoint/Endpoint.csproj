@@ -102,8 +102,9 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,6 +122,9 @@
     </Reference>
     <Reference Include="Burgerama.Messaging.Events.Venues">
       <HintPath>..\packages\Burgerama.Messaging.Events.Venues.0.1.0\lib\net451\Burgerama.Messaging.Events.Venues.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit.Endpoint">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Endpoint.0.1.1\lib\net451\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -161,7 +165,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EndpointService.cs" />
     <Compile Include="Handlers\OutingCreatedHandler.cs" />
     <Compile Include="Handlers\VenueCreatedHandler.cs" />
     <Compile Include="Program.cs" />

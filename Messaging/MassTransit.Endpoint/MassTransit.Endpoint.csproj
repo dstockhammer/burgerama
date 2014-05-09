@@ -99,11 +99,9 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Common.Configuration">
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.5\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
+    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -111,18 +109,9 @@
     <Reference Include="MassTransit">
       <HintPath>..\packages\MassTransit.2.9.5\lib\net40\MassTransit.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.AutofacIntegration">
-      <HintPath>..\packages\MassTransit.Autofac.2.9.5\lib\net40\MassTransit.AutofacIntegration.dll</HintPath>
-    </Reference>
-    <Reference Include="MassTransit.Transports.RabbitMq">
-      <HintPath>..\packages\MassTransit.RabbitMQ.2.9.5\lib\net40\MassTransit.Transports.RabbitMq.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -137,7 +126,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Autofac\ContainerBuilderExtensions.cs" />
     <Compile Include="Topshelf\EndpointHostFactory.cs" />
     <Compile Include="Topshelf\EndpointService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

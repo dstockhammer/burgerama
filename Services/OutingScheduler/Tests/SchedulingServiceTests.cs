@@ -15,6 +15,8 @@ namespace Burgerama.Services.OutingScheduler.Tests
         public void NoPotentialOutings_ShouldNotScheduleOuting()
         {
             // Arrange
+            var date = DateTime.Today.AddDays(1).AddHours(19);
+
             var outing1 = Guid.NewGuid();
             var outing2 = Guid.NewGuid();
             var outing3 = Guid.NewGuid();
@@ -39,7 +41,7 @@ namespace Burgerama.Services.OutingScheduler.Tests
             var service = SetupService(outings, venues);
 
             // Act
-            var outing = service.ScheduleOuting();
+            var outing = service.ScheduleOuting(date);
 
             // Assert
             Assert.IsNull(outing);
@@ -49,6 +51,8 @@ namespace Burgerama.Services.OutingScheduler.Tests
         public void PossibleOutingsWithDifferentVotes_ShouldScheduleCorrectOuting()
         {
             // Arrange
+            var date = DateTime.Today.AddDays(1).AddHours(19);
+
             var outing1 = Guid.NewGuid();
             var outing2 = Guid.NewGuid();
             var outing3 = Guid.NewGuid();
@@ -73,7 +77,7 @@ namespace Burgerama.Services.OutingScheduler.Tests
             var service = SetupService(outings, venues);
 
             // Act
-            var outing = service.ScheduleOuting();
+            var outing = service.ScheduleOuting(date);
 
             // Assert
             Assert.AreEqual(venue3, outing.Venue.Id);
@@ -83,6 +87,8 @@ namespace Burgerama.Services.OutingScheduler.Tests
         public void VenueWithHighestVoteAlreadyHasOuting_ShouldScheduleNextBestOuting()
         {
             // Arrange
+            var date = DateTime.Today.AddDays(1).AddHours(19);
+
             var outing1 = Guid.NewGuid();
             var outing2 = Guid.NewGuid();
             var outing3 = Guid.NewGuid();
@@ -107,7 +113,7 @@ namespace Burgerama.Services.OutingScheduler.Tests
             var service = SetupService(outings, venues);
 
             // Act
-            var outing = service.ScheduleOuting();
+            var outing = service.ScheduleOuting(date);
 
             // Assert
             Assert.AreEqual(venue2, outing.Venue.Id);
@@ -117,6 +123,8 @@ namespace Burgerama.Services.OutingScheduler.Tests
         public void OutingsWithSameVotes_ShouldScheduleAnyOuting()
         {
             // Arrange
+            var date = DateTime.Today.AddDays(1).AddHours(19);
+
             var outing1 = Guid.NewGuid();
             var outing2 = Guid.NewGuid();
             var outing3 = Guid.NewGuid();
@@ -141,7 +149,7 @@ namespace Burgerama.Services.OutingScheduler.Tests
             var service = SetupService(outings, venues);
 
             // Act
-            var outing = service.ScheduleOuting();
+            var outing = service.ScheduleOuting(date);
 
             // Assert
             Assert.IsTrue(outing.Venue.Id == venue2 || outing.Venue.Id == venue3);

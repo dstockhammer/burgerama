@@ -1,4 +1,5 @@
 ﻿using System;
+using Burgerama.Messaging.Commands.Configuration;
 
 namespace Burgerama.Messaging.Commands.Outings
 {

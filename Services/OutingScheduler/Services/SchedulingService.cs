@@ -5,7 +5,7 @@ using Burgerama.Services.OutingScheduler.Domain.Contracts;
 
 namespace Burgerama.Services.OutingScheduler.Services
 {
-    public sealed class SchedulingService
+    public sealed class SchedulingService : ISchedulingService
     {
         private readonly IOutingRepository _outingRepository;
         private readonly IVenueRepository _venueRepository;
@@ -16,15 +16,12 @@ namespace Burgerama.Services.OutingScheduler.Services
             _venueRepository = venueRepository;
         }
 
-        public ScheduledOuting ScheduleOuting()
+        public ScheduledOuting ScheduleOuting(DateTime date)
         {
             var venue = DetermineVenue();
             if (venue == null)
                 return null;
 
-            // set date to tomorrow 6 pm
-            var date = DateTime.Today.AddDays(1).AddHours(18);
-            
             return new ScheduledOuting(date, venue);
         }
 

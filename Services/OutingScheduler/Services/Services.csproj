@@ -108,6 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISchedulingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchedulingService.cs" />
   </ItemGroup>

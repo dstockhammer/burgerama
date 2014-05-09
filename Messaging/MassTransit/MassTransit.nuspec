@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>Burgerama.Messaging.MassTransit.Commands</id>
-        <version>0.1.2</version>
-        <title>Burgerama Messaging: MassTransit Infrastructure for Commands</title>
+        <id>Burgerama.Messaging.MassTransit</id>
+        <version>0.1.0</version>
+        <title>Burgerama Messaging: MassTransit Infrastructure</title>
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
         <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Burgerama MassTransit infrastructure for commands.</description>
+        <description>Infrastructure for setting up messaging with MassTransit.</description>
     </metadata>
 </package>

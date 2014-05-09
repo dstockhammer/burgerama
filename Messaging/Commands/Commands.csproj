@@ -108,9 +108,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\CommandExtensions.cs" />
-    <Compile Include="Exceptions\ConfigurationException.cs" />
-    <Compile Include="EndpointQueueAttribute.cs" />
+    <Compile Include="Configuration\CommandExtensions.cs" />
+    <Compile Include="Configuration\ConfigurationException.cs" />
+    <Compile Include="Configuration\EndpointQueueAttribute.cs" />
     <Compile Include="CommandDispatcherContract.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandDispatcher.cs" />

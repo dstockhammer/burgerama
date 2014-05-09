@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using Burgerama.Messaging.Commands.Exceptions;
 
-namespace Burgerama.Messaging.Commands.Extensions
+namespace Burgerama.Messaging.Commands.Configuration
 {
     public static class CommandExtensions
     {
@@ -14,7 +13,7 @@ namespace Burgerama.Messaging.Commands.Extensions
                 .ToList();
 
             if (attributes.Count() != 1)
-                throw new ConfigurationException("The EndpointNameAttribute must be specified on every command.");
+                throw new ConfigurationException("The EndpointQueueAttribute must be specified on every command.");
 
             return attributes.First().Name;
         }

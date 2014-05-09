@@ -5,7 +5,7 @@ using Autofac;
 using Burgerama.Common.Configuration;
 using MassTransit;
 
-namespace Burgerama.Messaging.MassTransit.Endpoint.Autofac
+namespace Burgerama.Messaging.MassTransit.Autofac
 {
     public static class ContainerBuilderExtensions
     {

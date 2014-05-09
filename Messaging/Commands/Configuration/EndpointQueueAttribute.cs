@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Burgerama.Messaging.Commands
+namespace Burgerama.Messaging.Commands.Configuration
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public sealed class EndpointQueueAttribute : Attribute

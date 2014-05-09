@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Burgerama.Messaging.Commands;
+using Burgerama.Messaging.Commands.Configuration;
 using MassTransit;
 
 namespace Burgerama.Messaging.MassTransit.Commands
