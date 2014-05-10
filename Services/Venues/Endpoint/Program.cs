@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Burgerama.Messaging.MassTransit.Endpoint.Autofac;
+using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;

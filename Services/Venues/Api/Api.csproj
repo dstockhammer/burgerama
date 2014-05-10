@@ -133,6 +133,12 @@
     <Reference Include="Burgerama.Messaging.Events.Venues">
       <HintPath>..\packages\Burgerama.Messaging.Events.Venues.0.1.0\lib\net451\Burgerama.Messaging.Events.Venues.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.1.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit.Events">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.1.0\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
+    </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
     </Reference>
@@ -237,10 +243,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
-    <Compile Include="App_Start\MassTransitConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Converters\VenueConverter.cs" />
-    <Compile Include="Messaging\EventDispatcher.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\VenueController.cs" />

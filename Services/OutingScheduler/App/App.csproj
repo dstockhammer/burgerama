@@ -117,12 +117,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Commands.Outings.0.1.3\lib\net451\Burgerama.Messaging.Commands.Outings.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.1.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Commands.0.1.2\lib\net451\Burgerama.Messaging.MassTransit.Commands.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit.Endpoint">
-      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Endpoint.0.1.1\lib\net451\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Endpoint.0.1.2\lib\net451\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -135,6 +139,7 @@
     </Reference>
     <Reference Include="MassTransit.Transports.RabbitMq">
       <HintPath>..\packages\MassTransit.RabbitMQ.2.9.5\lib\net40\MassTransit.Transports.RabbitMq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -142,6 +147,7 @@
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -160,7 +166,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Config\MongoDb.confidential.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

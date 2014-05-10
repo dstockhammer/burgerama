@@ -27,7 +27,7 @@ namespace Burgerama.Services.Outings.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
-            builder.RegisterType<OutingRepository>().As<IOutingRepository>().InstancePerApiRequest();
+            builder.RegisterType<OutingRepository>().As<IOutingRepository>();
 
             return builder.Build();
         }

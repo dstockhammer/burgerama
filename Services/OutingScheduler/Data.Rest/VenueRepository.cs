@@ -8,13 +8,12 @@ using RestSharp;
 
 namespace Burgerama.Services.OutingScheduler.Data.Rest
 {
-    public sealed class VenueRepository : IVenueRepository
+    public sealed class VenueRepository : RestRepository, IVenueRepository
     {
         public IEnumerable<Venue> GetAll()
         {
-            var client = new RestClient("http://api.dev.burgerama.co.uk");
             var request = new RestRequest("venues", Method.GET);
-            var response = client.Execute<List<VenueModel>>(request);
+            var response = Client.Execute<List<VenueModel>>(request);
 
             return response.Data.Select(o => o.ToDomain());
         }

@@ -2,8 +2,8 @@
 using Autofac;
 using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Outings;
+using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Commands;
-using Burgerama.Messaging.MassTransit.Endpoint.Autofac;
 using Burgerama.Services.OutingScheduler.Data.Rest;
 using Burgerama.Services.OutingScheduler.Domain.Contracts;
 using Burgerama.Services.OutingScheduler.Services;

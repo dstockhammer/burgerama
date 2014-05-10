@@ -122,8 +122,13 @@
     <Reference Include="Burgerama.Messaging.Events.Ratings">
       <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.1.1\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.MassTransit.Endpoint">
-      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Endpoint.0.1.1\lib\net451\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
+    <Reference Include="Burgerama.Messaging.MassTransit">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.1.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit.Endpoint, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Endpoint.0.1.2\lib\net451\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -132,11 +137,12 @@
       <HintPath>..\packages\MassTransit.2.9.5\lib\net40\MassTransit.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MassTransit.AutofacIntegration">
+    <Reference Include="MassTransit.AutofacIntegration, Version=2.9.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MassTransit.Autofac.2.9.5\lib\net40\MassTransit.AutofacIntegration.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="MassTransit.Transports.RabbitMq">
+    <Reference Include="MassTransit.Transports.RabbitMq, Version=2.9.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MassTransit.RabbitMQ.2.9.5\lib\net40\MassTransit.Transports.RabbitMq.dll</HintPath>
       <Private>True</Private>
     </Reference>

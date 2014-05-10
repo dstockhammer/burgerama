@@ -5,7 +5,8 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Messaging.Events;
-using Burgerama.Services.Venues.Api.Messaging;
+using Burgerama.Messaging.MassTransit.Autofac;
+using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
 
@@ -29,10 +30,10 @@ namespace Burgerama.Services.Venues.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
+            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
             // Messaging
-            builder.RegisterMassTransit();
+            builder.RegisterServiceBus();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();
