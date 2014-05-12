@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Reflection;
+using System.Web;
 using Autofac;
 using Burgerama.Common.Configuration;
 using MassTransit;
@@ -20,7 +21,7 @@ namespace Burgerama.Messaging.MassTransit.Autofac
 
         public static ContainerBuilder RegisterConsumers(this ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
+            builder.RegisterAssemblyTypes(GetEntryAssembly())
                 .Where(t => t.BaseType == typeof(Consumes<>.Context))
                 .AsSelf();
 
@@ -34,7 +35,7 @@ namespace Burgerama.Messaging.MassTransit.Autofac
                 var config = (RabbitMqConfiguration)ConfigurationManager.GetSection("burgerama/rabbitMq");
                 var uri = string.Format("{0}/{1}/", config.Server, config.VHost);
                 var credentials = string.Format("{0}:{1}", config.UserName, config.Password);
-                var queue = Assembly.GetEntryAssembly().GetName().Name.ToLowerInvariant();
+                var queue = GetEntryAssembly().GetName().Name.ToLowerInvariant();
 
                 sbc.UseRabbitMq(r => r.ConfigureHost(new Uri("rabbitmq://" + uri + queue), h =>
                 {
@@ -44,6 +45,30 @@ namespace Burgerama.Messaging.MassTransit.Autofac
                 sbc.ReceiveFrom("rabbitmq://" + credentials + "@" + uri + queue);
                 sbc.Subscribe(x => x.LoadFrom(context.Resolve<ILifetimeScope>()));
             });
+        }
+
+        private static Assembly GetEntryAssembly()
+        {
+            return Assembly.GetEntryAssembly() ?? GetWebEntryAssembly();
+        }
+
+        private static Assembly GetWebEntryAssembly()
+        {
+            if (HttpContext.Current == null ||
+                HttpContext.Current.ApplicationInstance == null)
+            {
+                return null;
+            }
+
+            var type = HttpContext.Current.ApplicationInstance.GetType();
+            while (type != null && type.Namespace == "ASP")
+            {
+                type = type.BaseType;
+            }
+
+            return type == null
+                ? null
+                : type.Assembly;
         }
     }
 }

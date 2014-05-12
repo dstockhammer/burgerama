@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using Burgerama.Messaging.Events;
-using Burgerama.Messaging.MassTransit.Endpoint.Autofac;
+using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Voting.Data;
