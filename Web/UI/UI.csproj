@@ -134,6 +134,7 @@
     <Content Include="Scripts\vendor\angularjs\angular-csp.css" />
     <Content Include="Scripts\vendor\angularjs\angular-loader.js" />
     <Content Include="Scripts\vendor\angularjs\angular-loader.min.js" />
+    <Content Include="Scripts\vendor\angularjs\angular-messages.js" />
     <Content Include="Scripts\vendor\angularjs\angular-mocks.js" />
     <Content Include="Scripts\vendor\angularjs\angular-resource.js" />
     <Content Include="Scripts\vendor\angularjs\angular-resource.min.js" />
