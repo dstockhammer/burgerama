@@ -11,6 +11,6 @@ namespace Burgerama.Services.Outings.Data.Models
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime Date { get; set; }
 
-        public string Venue { get; set; }
+        public string VenueId { get; set; }
     }
 }

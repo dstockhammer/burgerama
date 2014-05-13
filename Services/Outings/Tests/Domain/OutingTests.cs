@@ -19,7 +19,7 @@ namespace Burgerama.Services.Outings.Tests.Domain
 
             // Assert
             Assert.AreEqual(date, outing.Date);
-            Assert.AreEqual(venue, outing.Venue);
+            Assert.AreEqual(venue, outing.VenueId);
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace Burgerama.Services.Outings.Tests.Domain
             // Assert
             Assert.AreEqual(outingId, outing.Id);
             Assert.AreEqual(date, outing.Date);
-            Assert.AreEqual(venue, outing.Venue);
+            Assert.AreEqual(venue, outing.VenueId);
         }
     }
 }

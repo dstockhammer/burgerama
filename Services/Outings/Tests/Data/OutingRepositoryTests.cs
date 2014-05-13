@@ -32,7 +32,7 @@ namespace Burgerama.Services.Outings.Tests.Data
             var loadedOuting = outingRepository.Get(outing.Id);
             Assert.IsNotNull(loadedOuting);
             Assert.AreEqual(outing.Id, loadedOuting.Id);
-            Assert.AreEqual(outing.Venue, loadedOuting.Venue);
+            Assert.AreEqual(outing.VenueId, loadedOuting.VenueId);
             Assert.IsTrue((outing.Date - loadedOuting.Date).TotalMilliseconds < 1);
         }
 

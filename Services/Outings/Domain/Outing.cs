@@ -8,20 +8,20 @@ namespace Burgerama.Services.Outings.Domain
 
         public DateTime Date { get; private set; }
 
-        public Guid Venue { get; private set; }
+        public Guid VenueId { get; private set; }
 
-        public Outing(DateTime date, Guid venue)
+        public Outing(DateTime date, Guid venueId)
         {
             Id = Guid.NewGuid();
             Date = date;
-            Venue = venue;
+            VenueId = venueId;
         }
 
-        public Outing(Guid id, DateTime date, Guid venue)
+        public Outing(Guid id, DateTime date, Guid venueId)
         {
             Id = id;
             Date = date;
-            Venue = venue;
+            VenueId = venueId;
         }
     }
 }

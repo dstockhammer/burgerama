@@ -1,5 +1,4 @@
-﻿using System;
-using Burgerama.Messaging.Commands;
+﻿using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Configuration;
 using MassTransit;
 
@@ -16,7 +15,7 @@ namespace Burgerama.Messaging.MassTransit.Commands
 
         public void Send<T>(T message) where T : class, ICommand
         {
-            _bus.GetEndpoint(new Uri(message.GetEndpointName())).Send(message);
+            _bus.GetEndpoint(message.GetEndpointUri()).Send(message);
         }
     }
 }

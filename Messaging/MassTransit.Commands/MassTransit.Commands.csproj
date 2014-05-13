@@ -99,9 +99,12 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Burgerama.Common.Configuration">
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.5\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Commands.0.1.6\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Commands.0.1.7\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -114,6 +117,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -126,7 +130,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MassTransit.Commands.nuspec" />
+    <None Include="MassTransit.Commands.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

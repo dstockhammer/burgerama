@@ -1,12 +1,13 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
-using Burgerama.Messaging.Events;
-using Burgerama.Messaging.MassTransit.Events;
-using Burgerama.Services.Ratings.Data;
 using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Web.Http;
+using Burgerama.Messaging.Events;
+using Burgerama.Messaging.MassTransit.Autofac;
+using Burgerama.Messaging.MassTransit.Events;
+using Burgerama.Services.Ratings.Data;
 using Burgerama.Services.Ratings.Domain.Contracts;
 
 namespace Burgerama.Services.Ratings.Api
@@ -29,10 +30,10 @@ namespace Burgerama.Services.Ratings.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
+            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
             // Messaging
-            builder.RegisterMassTransit();
+            builder.RegisterServiceBus();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();

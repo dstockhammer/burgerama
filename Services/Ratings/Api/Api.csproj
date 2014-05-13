@@ -131,6 +131,9 @@
     <Reference Include="Burgerama.Messaging.Events">
       <HintPath>..\packages\Burgerama.Messaging.Events.0.1.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.1.1\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit.Events">
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.1.0\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
     </Reference>
@@ -235,7 +238,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
-    <Compile Include="App_Start\MassTransitConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="Converters\VenueConverter.cs" />

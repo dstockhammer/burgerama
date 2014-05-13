@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Burgerama.Messaging.Commands;
+using Burgerama.Messaging.Commands.Configuration;
 using Burgerama.Messaging.Commands.Outings;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Commands;
@@ -31,11 +32,14 @@ namespace Burgerama.Services.OutingScheduler.App
             else
             {
                 var commandDispatcher = container.Resolve<ICommandDispatcher>();
-                commandDispatcher.Send(new CreateOuting
+                var cmd = new CreateOuting
                 {
                     VenueId = outing.Venue.Id,
                     Date = outing.Date
-                });
+                };
+
+                var uri = cmd.GetEndpointUri();
+                commandDispatcher.Send(cmd);
 
                 Console.WriteLine("OutingScheduler run successful: Outing '{0}' scheduled for '{1}' on '{2}'.", outing.Id, outing.Venue.Title, outing.Date);
             }

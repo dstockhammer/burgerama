@@ -45,12 +45,11 @@ namespace Burgerama.Services.Outings.Api.Controllers
         [ResponseType(typeof(Outing))]
         public IHttpActionResult GetOutingById(Guid outingId)
         {
-            var venue = _outingRepository.Get(outingId);
-
-            if (venue == null)
+            var outing = _outingRepository.Get(outingId);
+            if (outing == null)
                 return NotFound();
 
-            return Ok(venue);
+            return Ok(outing);
         }
     }
 }
