@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using System.Reflection;
 using System.Web;
 using Autofac;
@@ -22,7 +23,7 @@ namespace Burgerama.Messaging.MassTransit.Autofac
         public static ContainerBuilder RegisterConsumers(this ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(GetEntryAssembly())
-                .Where(t => t.BaseType == typeof(Consumes<>.Context))
+                .Where(t => t.GetInterfaces().Contains(typeof(IConsumer)))
                 .AsSelf();
 
             return builder;
@@ -54,11 +55,8 @@ namespace Burgerama.Messaging.MassTransit.Autofac
 
         private static Assembly GetWebEntryAssembly()
         {
-            if (HttpContext.Current == null ||
-                HttpContext.Current.ApplicationInstance == null)
-            {
+            if (HttpContext.Current == null || HttpContext.Current.ApplicationInstance == null)
                 return null;
-            }
 
             var type = HttpContext.Current.ApplicationInstance.GetType();
             while (type != null && type.Namespace == "ASP")
@@ -66,9 +64,7 @@ namespace Burgerama.Messaging.MassTransit.Autofac
                 type = type.BaseType;
             }
 
-            return type == null
-                ? null
-                : type.Assembly;
+            return type == null ? null : type.Assembly;
         }
     }
 }

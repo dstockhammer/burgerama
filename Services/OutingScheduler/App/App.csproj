@@ -119,7 +119,7 @@
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.1.1\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.1.2\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

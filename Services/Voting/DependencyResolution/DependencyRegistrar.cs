@@ -26,9 +26,6 @@ namespace Burgerama.Services.Voting.DependencyResolution
 
             // Messaging infrastructure
             builder.RegisterServiceBus();
-            builder.RegisterConsumers();
-            builder.RegisterType<EndpointService>().As<IEndpointService>();
-            builder.RegisterType<EndpointHostFactory>().AsSelf().SingleInstance();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             // Set Autofac as the Service Locator provider.

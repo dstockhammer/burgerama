@@ -14,6 +14,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint", "Endpoint\Endpoint.csproj", "{9B4B39DD-3481-4A05-81D7-02A1CFE0BB26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{0C4576E3-765D-4F91-8B32-3A7A01B29200}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8CE6E041-9023-488E-8F4E-7FEBC3DEBDBF} = {8CE6E041-9023-488E-8F4E-7FEBC3DEBDBF}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EF0C8970-5938-4DA1-BAAF-1522EC7E440C}"
 	ProjectSection(SolutionItems) = preProject
