@@ -16,7 +16,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             var id = Guid.NewGuid();
 
             // Act
-            var venue = new Venue(id);
+            var venue = new Venue(id, string.Empty);
 
             // Assert
             Assert.AreEqual(id, venue.Id);
@@ -33,7 +33,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             var votes = new[] { Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString() };
 
             // Act
-            var venue = new Venue(id, outing, votes);
+            var venue = new Venue(id, string.Empty, outing, votes);
 
             // Assert
             Assert.AreEqual(id, venue.Id);
@@ -47,7 +47,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
         {
             // Arrange
             var user = Guid.NewGuid().ToString();
-            var venue = new Venue(Guid.NewGuid());
+            var venue = new Venue(Guid.NewGuid(), string.Empty);
             
             // Act
             var result = venue.AddVote(user);
@@ -64,7 +64,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             // Arrange
             var user1 = Guid.NewGuid().ToString();
             var user2 = Guid.NewGuid().ToString();
-            var venue = new Venue(Guid.NewGuid());
+            var venue = new Venue(Guid.NewGuid(), string.Empty);
 
             // Act
             var result1 = venue.AddVote(user1);
@@ -84,7 +84,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
             // Arrange
             var user1 = Guid.NewGuid().ToString();
             var user2 = Guid.NewGuid().ToString();
-            var venue = new Venue(Guid.NewGuid());
+            var venue = new Venue(Guid.NewGuid(), string.Empty);
             
             // Act
             venue.AddVote(user1);
@@ -105,7 +105,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
         {
             // Arrange
             var user = Guid.NewGuid().ToString();
-            var venue = new Venue(Guid.NewGuid(), DateTime.Today.AddDays(-1));
+            var venue = new Venue(Guid.NewGuid(), string.Empty, DateTime.Today.AddDays(-1));
             
             // Act
             var result = venue.AddVote(user);
@@ -121,7 +121,7 @@ namespace Burgerama.Services.Voting.Tests.Domain
         {
             // Arrange
             var user = Guid.NewGuid().ToString();
-            var venue = new Venue(Guid.NewGuid(), DateTime.Today.AddDays(1));
+            var venue = new Venue(Guid.NewGuid(), string.Empty, DateTime.Today.AddDays(1));
 
             // Act
             var result = venue.AddVote(user);

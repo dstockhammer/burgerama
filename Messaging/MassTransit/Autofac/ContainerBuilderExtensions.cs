@@ -6,6 +6,7 @@ using System.Web;
 using Autofac;
 using Burgerama.Common.Configuration;
 using MassTransit;
+using Serilog;
 
 namespace Burgerama.Messaging.MassTransit.Autofac
 {
@@ -45,6 +46,7 @@ namespace Burgerama.Messaging.MassTransit.Autofac
                 }));
                 sbc.ReceiveFrom("rabbitmq://" + credentials + "@" + uri + queue);
                 sbc.Subscribe(x => x.LoadFrom(context.Resolve<ILifetimeScope>()));
+                sbc.UseSerilog(context.Resolve<ILogger>());
             });
         }
 

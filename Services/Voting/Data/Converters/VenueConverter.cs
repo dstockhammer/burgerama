@@ -16,6 +16,7 @@ namespace Burgerama.Services.Voting.Data.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
+                Title = venue.Title,
                 LatestOuting = venue.LatestOuting,
                 Votes = venue.Votes.ToList()
             };
@@ -27,7 +28,7 @@ namespace Burgerama.Services.Voting.Data.Converters
             Contract.Ensures(Contract.Result<Venue>() != null);
 
             var id = Guid.Parse(venue.Id);
-            return new Venue(id, venue.LatestOuting, venue.Votes);
+            return new Venue(id, venue.Title, venue.LatestOuting, venue.Votes);
         }
     }
 }

@@ -3,12 +3,12 @@
     <metadata>
         <id>Burgerama.Common.MongoDb</id>
         <version>0.1.3</version>
-        <title>Burgerama MongoDb</title>
+        <title>MongoDb</title>
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
         <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Burgerama MongoDb library.</description>
+        <description>MongoDb data access library.</description>
     </metadata>
 </package>

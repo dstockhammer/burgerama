@@ -36,7 +36,7 @@ namespace Burgerama.Services.OutingScheduler.Services
             var venues = _venueRepository.GetAll();
             var outings = _outingRepository.GetAll();
 
-            var potentialVenues = venues.Where(v => outings.Any(o => o.Venue == v.Id) == false).ToList();
+            var potentialVenues = venues.Where(v => outings.Any(o => o.VenueId == v.Id) == false).ToList();
             if (potentialVenues.Any() == false)
                 return null;
 

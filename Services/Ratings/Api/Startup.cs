@@ -1,9 +1,9 @@
-﻿
-using Burgerama.Common.Authentication.Owin;
+﻿using Burgerama.Common.Authentication.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
 using System;
 using System.Diagnostics.Contracts;
+using Serilog.Extras.MSOwin;
 
 namespace Burgerama.Services.Ratings.Api
 {
@@ -15,6 +15,7 @@ namespace Burgerama.Services.Ratings.Api
 
             app.UseAuth0();
             app.UseCors(CorsOptions.AllowAll);
+            app.UseSerilogRequestContext();
         }
     }
 }

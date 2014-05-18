@@ -13,6 +13,8 @@ namespace Burgerama.Services.Voting.Domain
 
         public Guid Id { get; private set; }
 
+        public string Title { get; private set; }
+
         public DateTime? LatestOuting { get; private set; }
 
         public IEnumerable<string> Votes
@@ -24,16 +26,17 @@ namespace Burgerama.Services.Voting.Domain
             }
         }
 
-        public Venue(Guid venueId, DateTime? latestOuting = null)
+        public Venue(Guid id, string title, DateTime? latestOuting = null)
+            : this(id, title, latestOuting, Enumerable.Empty<string>())
         {
-            Id = venueId;
-            LatestOuting = latestOuting;
-            _votes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         }
 
-        public Venue(Guid venueId, DateTime? latestOuting, IEnumerable<string> votes)
+        public Venue(Guid id, string title, DateTime? latestOuting, IEnumerable<string> votes)
         {
-            Id = venueId;
+            Contract.Requires<ArgumentNullException>(title != null);
+
+            Id = id;
+            Title = title;
             LatestOuting = latestOuting;
             _votes = new HashSet<string>(votes, StringComparer.OrdinalIgnoreCase);
         }

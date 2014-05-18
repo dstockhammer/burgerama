@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth0Configuration.cs" />
+    <Compile Include="LoggingConfiguration.cs" />
     <Compile Include="RabbitMqConfiguration.cs" />
     <Compile Include="ServiceConfiguration.cs" />
     <Compile Include="MongoDbConfiguration.cs" />

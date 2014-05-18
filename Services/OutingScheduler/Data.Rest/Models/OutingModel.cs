@@ -8,6 +8,6 @@ namespace Burgerama.Services.OutingScheduler.Data.Rest.Models
 
         public DateTime Date { get; set; }
 
-        public string Venue { get; set; }
+        public string VenueId { get; set; }
     }
 }

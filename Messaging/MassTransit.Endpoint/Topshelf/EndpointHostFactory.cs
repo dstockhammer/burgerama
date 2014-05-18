@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
+using Serilog;
+using Serilog.Extras.Topshelf;
 using Topshelf;
 
 namespace Burgerama.Messaging.MassTransit.Endpoint.Topshelf
@@ -29,6 +31,8 @@ namespace Burgerama.Messaging.MassTransit.Endpoint.Topshelf
                     h.WhenStarted(s => s.Start());
                     h.WhenStopped(s => s.Stop());
                 });
+
+                cfg.UseSerilog(_container.Resolve<ILogger>());
             });
         }
     }

@@ -9,6 +9,8 @@ namespace Burgerama.Services.Voting.Data.Models
         [BsonId]
         public string Id { get; set; }
 
+        public string Title { get; set; }
+
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? LatestOuting { get; set; }
 

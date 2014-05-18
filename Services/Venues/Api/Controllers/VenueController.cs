@@ -12,18 +12,21 @@ using Burgerama.Services.Venues.Api.Converters;
 using Burgerama.Services.Venues.Api.Models;
 using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
+using Serilog;
 
 namespace Burgerama.Services.Venues.Api.Controllers
 {
     public class VenueController : ApiController
     {
-        private readonly IVenueRepository _venueRepository;
+        private readonly ILogger _logger;
         private readonly IEventDispatcher _eventDispatcher;
+        private readonly IVenueRepository _venueRepository;
 
-        public VenueController(IVenueRepository venueRepository, IEventDispatcher eventDispatcher)
+        public VenueController(ILogger logger, IEventDispatcher eventDispatcher, IVenueRepository venueRepository)
         {
-            _venueRepository = venueRepository;
+            _logger = logger;
             _eventDispatcher = eventDispatcher;
+            _venueRepository = venueRepository;
         }
 
         /// <summary>
@@ -101,6 +104,9 @@ namespace Burgerama.Services.Venues.Api.Controllers
                 VenueId = venue.Id,
                 Title = venue.Title
             });
+
+            _logger.Information("Created venue {@Venue}.",
+                new { venue.Id, venue.Title, venue.CreatedByUser });
 
             // todo get url from config or something
             return Created("http://api.dev.burgerama.co.uk/venues/" + venue.Id, typeof(Venue));

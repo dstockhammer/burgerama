@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Burgerama.Common.Logging;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
 using Burgerama.Services.Outings.Data;
@@ -22,6 +23,9 @@ namespace Burgerama.Services.Outings.Endpoint
 
             // Repositories
             builder.RegisterType<OutingRepository>().As<IOutingRepository>();
+
+            // Logging
+            builder.RegisterModule<LoggingModule>();
 
             // Messaging infrastructure
             builder.RegisterServiceBus();

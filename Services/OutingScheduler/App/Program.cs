@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using Burgerama.Common.Logging;
 using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Outings;
 using Burgerama.Messaging.MassTransit.Autofac;
@@ -8,6 +9,7 @@ using Burgerama.Services.OutingScheduler.Data.Rest;
 using Burgerama.Services.OutingScheduler.Domain.Contracts;
 using Burgerama.Services.OutingScheduler.Services;
 using MassTransit;
+using Serilog;
 
 namespace Burgerama.Services.OutingScheduler.App
 {
@@ -15,29 +17,32 @@ namespace Burgerama.Services.OutingScheduler.App
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("OutingScheduler run started.");
+            var container = GetAutofacContainer();
+
+            var logger = container.Resolve<ILogger>();
+            logger.Information("OutingScheduler run started.");
 
             // set date to tomorrow 7 pm
             // todo: get the date passed in as parameter or read it from somewhere
             var date = DateTime.Today.AddDays(1).AddHours(19);
 
-            var container = GetAutofacContainer();
             var scheduler = container.Resolve<ISchedulingService>();
             var outing = scheduler.ScheduleOuting(date);
             if (outing == null)
             {
-                Console.WriteLine("OutingScheduler run successful: No outing was scheduled.");
+                logger.Information("OutingScheduler run successful: No outing was scheduled.");
             }
             else
             {
-                var commandDispatcher = container.Resolve<ICommandDispatcher>();
-                commandDispatcher.Send(new CreateOuting
+                var command = new CreateOuting
                 {
                     VenueId = outing.Venue.Id,
                     Date = outing.Date
-                });
+                };
 
-                Console.WriteLine("OutingScheduler run successful: Outing '{0}' scheduled for '{1}' on '{2}'.", outing.Id, outing.Venue.Title, outing.Date);
+                var commandDispatcher = container.Resolve<ICommandDispatcher>();
+                commandDispatcher.Send(command);
+                logger.Information("OutingScheduler run successful: Scheduled outing {@Outing}.", new { command.VenueId, command.Date });
             }
 
             // disposing the bus is very important in order to unsubscribe and stop consuming.
@@ -52,6 +57,9 @@ namespace Burgerama.Services.OutingScheduler.App
 
             // Services
             builder.RegisterType<SchedulingService>().As<ISchedulingService>();
+
+            // Logging
+            builder.RegisterModule<LoggingModule>();
 
             // Repositories
             builder.RegisterType<OutingRepository>().As<IOutingRepository>();

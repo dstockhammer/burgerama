@@ -21,7 +21,7 @@ namespace Burgerama.Services.Voting.Tests.Data
         {
             // Arrange
             var venueRepository = new VenueRepository();
-            var venue = new Venue(Guid.NewGuid());
+            var venue = new Venue(Guid.NewGuid(), string.Empty);
 
             // Act
             venueRepository.SaveOrUpdate(venue);
@@ -39,7 +39,7 @@ namespace Burgerama.Services.Voting.Tests.Data
         {
             // Arrange
             var venueRepository = new VenueRepository();
-            var venue = new Venue(Guid.NewGuid(), DateTime.Today.AddDays(-1), new[]
+            var venue = new Venue(Guid.NewGuid(), string.Empty, DateTime.Today.AddDays(-1), new[]
             {
                 Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()
             });

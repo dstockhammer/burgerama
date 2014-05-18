@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Burgerama.Common.Logging;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
 using Burgerama.Services.Voting.Data;
@@ -22,6 +23,9 @@ namespace Burgerama.Services.Voting.Endpoint
 
             // Repositories
             builder.RegisterType<VenueRepository>().As<IVenueRepository>();
+
+            // Logging
+            builder.RegisterModule<LoggingModule>();
 
             // Messaging infrastructure
             builder.RegisterServiceBus();

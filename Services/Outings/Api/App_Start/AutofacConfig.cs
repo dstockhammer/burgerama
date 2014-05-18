@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Burgerama.Common.Logging;
 using Burgerama.Services.Outings.Data;
 using Burgerama.Services.Outings.Domain.Contracts;
 
@@ -22,12 +23,15 @@ namespace Burgerama.Services.Outings.Api
         private static IContainer BuildContainer()
         {
             var builder = new ContainerBuilder();
-
+            
             // Web API controllers
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
             builder.RegisterType<OutingRepository>().As<IOutingRepository>();
+
+            // Logging
+            builder.RegisterModule<LoggingModule>();
 
             return builder.Build();
         }

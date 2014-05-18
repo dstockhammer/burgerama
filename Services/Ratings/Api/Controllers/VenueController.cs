@@ -9,18 +9,21 @@ using System.Security.Claims;
 using System.Web.Http;
 using Burgerama.Services.Ratings.Domain;
 using Burgerama.Services.Ratings.Domain.Contracts;
+using Serilog;
 
 namespace Burgerama.Services.Ratings.Api.Controllers
 {
     public class VenueController : ApiController
     {
-        private readonly IVenueRepository _venueRepository;
+        private readonly ILogger _logger;
         private readonly IEventDispatcher _eventDispatcher;
+        private readonly IVenueRepository _venueRepository;
 
-        public VenueController(IVenueRepository venueRepository, IEventDispatcher eventDispatcher)
+        public VenueController(ILogger logger, IEventDispatcher eventDispatcher, IVenueRepository venueRepository)
         {
-            _venueRepository = venueRepository;
+            _logger = logger;
             _eventDispatcher = eventDispatcher;
+            _venueRepository = venueRepository;
         }
 
         [Authorize]
@@ -39,6 +42,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             var events = venue.AddRating(new Rating(userId, model.Rating, model.Text ?? string.Empty));
             _venueRepository.SaveOrUpdate(venue);
             _eventDispatcher.Publish(events);
+            _logger.Information("Added rating of {Rating} to venue \"{Id}\".", model.Rating, venueId);
 
             return Request.CreateResponse(HttpStatusCode.Created);
         }

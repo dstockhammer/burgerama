@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.CommonServiceLocator;
+using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit.Autofac;
-using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Voting.Data;
 using Burgerama.Services.Voting.Domain.Contracts;
@@ -24,10 +24,13 @@ namespace Burgerama.Services.Voting.DependencyResolution
             // Repositories
             builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
+            // Logging
+            builder.RegisterModule<LoggingModule>();
+
             // Messaging infrastructure
             builder.RegisterServiceBus();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
-
+            
             // Set Autofac as the Service Locator provider.
             var container = builder.Build();
             ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));

@@ -19,7 +19,8 @@ namespace Burgerama.Services.Ratings.Domain
         
         public IEnumerable<Rating> Ratings
         {
-            get {            
+            get
+            {
                 Contract.Ensures(Contract.Result<IEnumerable<Rating>>() != null);
                 return _ratings;
             }
@@ -34,7 +35,10 @@ namespace Burgerama.Services.Ratings.Domain
             }
         }
 
-        public Venue(Guid id, string title) : this(id, title, Enumerable.Empty<Rating>()) { }
+        public Venue(Guid id, string title)
+            : this(id, title, Enumerable.Empty<Rating>())
+        {
+        }
 
         public Venue(Guid id,  string title, IEnumerable<Rating> ratings, DateTime? latestOuting = null)
         {

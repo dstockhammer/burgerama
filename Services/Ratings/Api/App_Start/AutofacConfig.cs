@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Web.Http;
+using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Events;
@@ -31,6 +32,9 @@ namespace Burgerama.Services.Ratings.Api
 
             // Repositories
             builder.RegisterType<VenueRepository>().As<IVenueRepository>();
+
+            // Logging
+            builder.RegisterModule<LoggingModule>();
 
             // Messaging
             builder.RegisterServiceBus();

@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using Burgerama.Common.Authentication.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
+using Serilog.Extras.MSOwin;
 
 namespace Burgerama.Services.Voting.Api
 {
@@ -14,6 +15,7 @@ namespace Burgerama.Services.Voting.Api
 
             app.UseAuth0();
             app.UseCors(CorsOptions.AllowAll);
+            app.UseSerilogRequestContext();
         }
     }
 }
