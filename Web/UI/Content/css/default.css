@@ -1,4 +1,4 @@
-html,
+﻿html,
 body {
   height: 100%;
   margin: 0;
@@ -8,11 +8,15 @@ body {
   position: absolute;
   height: 100%;
 }
-#map-canvas {
+#map {
   height: 100%;
   position: relative;
 }
-#map-canvas #map-search-box {
+#map #map-canvas {
+  height: 100%;
+  position: relative;
+}
+#map-search-box {
   position: absolute;
   top: 2em !important;
   left: 2em !important;
@@ -26,7 +30,7 @@ body {
   width: 20em;
   box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
 }
-#map-canvas #map-search-box:focus {
+#map-search-box:focus {
   outline: none;
 }
 .pac-container {
@@ -161,4 +165,3 @@ body {
 #organizer-switcher {
   text-align: center;
 }
-/*# sourceMappingURL=helper-mixins.css.map */

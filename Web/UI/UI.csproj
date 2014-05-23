@@ -106,6 +106,9 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\default.css">
+      <DependentUpon>default.less</DependentUpon>
+    </Content>
     <Content Include="Content\css\helper-mixins.css">
       <DependentUpon>helper-mixins.less</DependentUpon>
     </Content>
@@ -455,8 +458,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\map\controllers\mapController.ts" />
-    <TypeScriptCompile Include="Scripts\app\map\map.functions.ts" />
-    <TypeScriptCompile Include="Scripts\app\map\map.options.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\resources\venueResource.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />

@@ -9,6 +9,10 @@ module Burgerama {
         token: string;
     }
 
+    export function initialize() {
+        angular.bootstrap(document, ['burgerama']);
+    }
+
     export var app: ng.IModule = angular.module('burgerama', [
         // Angular modules
         'ngResource',
@@ -17,6 +21,8 @@ module Burgerama {
 
         // Angular UI modules
         'ui.bootstrap',
+        'ui.event',
+        'ui.map',
 
         // 3rd Party Modules
         'LocalStorageModule',
@@ -42,3 +48,14 @@ module Burgerama {
         });
     }]);
 }
+
+Burgerama.app.run(() => {
+    // todo: add a loading screen and hide it here
+});
+
+angular.element(document).ready(() => {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places&callback=Burgerama.initialize';
+    document.body.appendChild(script);
+});

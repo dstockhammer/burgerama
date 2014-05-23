@@ -19,26 +19,31 @@ html, body {
 }
 
 // Google Maps Search Box Styling
-#map-canvas {
+#map {
     height: 100%;
     position: relative;
-    
-    #map-search-box {
-        .top-left();
-        font-family: sans-serif;
-        font-size: 1.5em;
-        color: @default-text-color;
-        background-color: @default-background-color;
-        padding: 0.3em 0.5em 0.3em 0.5em;
-        border: 0;
-        z-index: 100;
-        width: 20em;
-        box-shadow: @default-shadow;
-    }
 
-    #map-search-box:focus {
-        outline: none;
+    #map-canvas {
+        height: 100%;
+        position: relative;
     }
+}
+
+#map-search-box {
+    .top-left();
+    font-family: sans-serif;
+    font-size: 1.5em;
+    color: @default-text-color;
+    background-color: @default-background-color;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    border: 0;
+    z-index: 100;
+    width: 20em;
+    box-shadow: @default-shadow;
+}
+
+#map-search-box:focus {
+    outline: none;
 }
 
 // Google Maps Search Result Custom Styling
