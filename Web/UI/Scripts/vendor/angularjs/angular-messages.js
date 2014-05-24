@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.8
+ * @license AngularJS v1.3.0-beta.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -240,7 +240,7 @@ angular.module('ngMessages', [])
 
     return {
       restrict: 'AE',
-      controller: function($scope) {
+      controller: ['$scope', function($scope) {
         this.$renderNgMessageClasses = angular.noop;
 
         var messages = [];
@@ -281,7 +281,7 @@ angular.module('ngMessages', [])
             return value !== null && value !== false && value;
           }
         };
-      },
+      }],
       require: 'ngMessages',
       link: function($scope, element, $attrs, ctrl) {
         ctrl.renderElementClasses = function(bool) {

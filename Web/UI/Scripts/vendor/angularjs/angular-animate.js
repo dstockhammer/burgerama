@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.8
+ * @license AngularJS v1.3.0-beta.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -801,7 +801,7 @@ angular.module('ngAnimate', ['ng'])
          * | 8. The animation ends and all generated CSS classes are removed from the element                                                     | class="my-animation"                                                                 |
          * | 9. The doneCallback() callback is fired (if provided)                                                                                | class="my-animation"                                                                 |
          *
-         * @param {DOMElement} element the element which will it's CSS classes changed
+         * @param {DOMElement} element the element which will its CSS classes changed
          *   removed from it
          * @param {string} add the CSS classes which will be added to the element
          * @param {string} remove the CSS class which will be removed from the element
@@ -1439,7 +1439,7 @@ angular.module('ngAnimate', ['ng'])
           //the jqLite object, so we're safe to use a single variable to house
           //the styles since there is always only one element being animated
           var oldStyle = node.getAttribute('style') || '';
-          node.setAttribute('style', oldStyle + ' ' + style);
+          node.setAttribute('style', oldStyle + '; ' + style);
         }
 
         var startTime = Date.now();
