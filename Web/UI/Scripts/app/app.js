@@ -17,7 +17,8 @@ var Burgerama;
         'ui.map',
         'LocalStorageModule',
         'toaster',
-        'auth0'
+        'auth0',
+        'truncate'
     ]);
 
     Burgerama.app.config([

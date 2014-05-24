@@ -27,7 +27,8 @@ module Burgerama {
         // 3rd Party Modules
         'LocalStorageModule',
         'toaster',
-        'auth0'
+        'auth0',
+        'truncate'
     ]);
 
     app.config(['$httpProvider', '$routeProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $routeProvider: ng.route.IRouteProvider, authProvider) => {

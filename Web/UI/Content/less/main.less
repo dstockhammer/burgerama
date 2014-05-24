@@ -1,0 +1,69 @@
+﻿@import 'bootstrap/bootstrap.less';
+
+html, body {
+    height: 100%;
+}
+
+#main, #main > .row {
+    height: 100%;
+}
+
+
+// top navbar
+.navbar-right {
+    padding-right: 2em;
+}
+
+// map
+#map-canvas {
+    height: 100%;
+    width: 66.666%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#map-search-box {
+    margin-top: 25px;
+    width: 250px;
+}
+
+.info-window {
+    h3 {
+        margin-top: 0;
+    }
+
+    .buttons {
+        display: block;
+        text-align: right;
+        margin-right: -20px;
+    }
+}
+
+
+// sidebar content
+#sidebar {
+    height: 100%;
+    overflow-y: scroll;
+
+    .nav {
+        margin: 15px 0;
+    }
+}
+
+// venues
+#venue-list {
+    margin: 0 15px 10px;
+
+    .address {
+        padding-top: 4px;
+        font-style: italic;
+        color: #808080;
+    }
+
+    .info {
+        text-align: right;
+    }
+}
+

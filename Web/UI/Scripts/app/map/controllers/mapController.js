@@ -4,70 +4,69 @@ var Burgerama;
 (function (Burgerama) {
     (function (Map) {
         var MapController = (function () {
-            function MapController($scope, $modal) {
+            function MapController($rootScope, $scope, $modal) {
                 var _this = this;
+                this.$rootScope = $rootScope;
                 this.$scope = $scope;
                 this.$modal = $modal;
-                this.markers = new Array();
-                this.places = new Array();
                 this.options = {
                     center: new google.maps.LatLng(51.51, -0.11),
                     overviewMapControl: false,
-                    scaleControl: false,
-                    streetViewControl: false,
+                    scaleControl: true,
+                    streetViewControl: true,
                     zoomControl: true,
-                    zoomControlOptions: {
-                        style: google.maps.ZoomControlStyle.LARGE,
-                        position: google.maps.ControlPosition.LEFT_CENTER
-                    },
                     mapTypeControl: false,
-                    panControl: false,
-                    zoom: 15,
-                    styles: [
-                        {
-                            stylers: [
-                                { hue: "#ffa200" },
-                                { saturation: 20 },
-                                { lightness: 10 },
-                                { gamma: 0.75 }
-                            ]
-                        },
-                        {
-                            featureType: "water",
-                            stylers: [
-                                { hue: "#0044ff" },
-                                { lightness: 40 }
-                            ]
-                        }
-                    ]
+                    panControl: true,
+                    zoom: 15
                 };
                 this.$scope.mapOptions = this.options;
+                this.$scope.markers = new Array();
+                this.$scope.places = new Array();
+
                 this.$scope.selectedVenue = null;
                 this.$scope.currentSearchTerm = '';
-                this.$scope.setZoomMessage = function (zoom) {
-                    return _this.setZoomMessage(zoom);
-                };
+
                 this.$scope.clearSearch = function () {
                     return _this.clearSearch();
                 };
                 this.$scope.showAddVenueModal = function (venue) {
                     return _this.showAddVenueModal(venue);
                 };
+                this.$scope.openMarkerInfo = function (markerInfo) {
+                    return _this.openMarkerInfo(markerInfo);
+                };
 
-                $scope.$watch('map', function (map) {
+                this.$scope.$watch('map', function (map) {
+                    _this.$scope.map = map;
+
                     // todo: add this to markup and only bind it here
-                    _this.searchBox = _this.createMapSearchBox(map, 'map-search-box');
+                    _this.searchBox = _this.createMapSearchBox('map-search-box');
                     google.maps.event.addListener(_this.searchBox, 'places_changed', function () {
-                        _this.searchPlaces(map);
+                        _this.searchPlaces();
                     });
-                    // todo: this breaks the search?
-                    //google.maps.event.addListener(map, 'bounds_changed', () => {
-                    //     this.setSearchBound(map, this.searchBox);
-                    //});
+                });
+
+                var unregisterVenuesLoaded = this.$rootScope.$on('VenuesLoaded', function (event, venues) {
+                    _this.clearMarkers();
+                    venues.forEach(function (venue) {
+                        _this.addMarker(null, venue);
+                    });
+                });
+                this.$scope.$on('$destroy', function () {
+                    return unregisterVenuesLoaded();
+                });
+
+                // todo: not sure if this is really a good way to communicate between controller.
+                // this is basically using an event as command, which seems very wrong.
+                var unregisterPanClicked = this.$rootScope.$on('PanToClicked', function (event, latitude, longitude) {
+                    _this.$scope.map.panTo(new google.maps.LatLng(latitude, longitude));
+                });
+                this.$scope.$on('$destroy', function () {
+                    return unregisterPanClicked();
                 });
             }
             MapController.prototype.clearSearch = function () {
-                this.clearMarkersFromTheMap();
+                this.clearMarkers();
                 this.$scope.currentSearchTerm = '';
                 this.$scope.selectedVenue = null;
             };
@@ -84,89 +83,94 @@ var Burgerama;
                 });
             };
 
-            MapController.prototype.setZoomMessage = function (zoom) {
-                // this is just a proof of concept. this is the way to add event listeners!
-                //console.log(zoom);
+            MapController.prototype.addMarker = function (place, venue) {
+                var _this = this;
+                // if place is null, look it up using places api
+                if (place == null) {
+                    var request = {
+                        reference: venue.location.reference
+                    };
+
+                    var service = new google.maps.places.PlacesService(this.$scope.map);
+                    service.getDetails(request, function (placeResult, status) {
+                        if (status == google.maps.places.PlacesServiceStatus.OK) {
+                            _this.addMarker(placeResult, venue);
+                        } else {
+                            console.error('an error occurred while retrieving place details');
+                        }
+                    });
+
+                    return;
+                }
+
+                var markerInfo = {
+                    venue: venue,
+                    place: place,
+                    marker: new google.maps.Marker({
+                        map: this.$scope.map,
+                        position: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+                        animation: google.maps.Animation.DROP
+                    })
+                };
+
+                // todo: bug: this adds the listener multiple times. fix plx!
+                google.maps.event.addListener(markerInfo.marker, 'click', function () {
+                    _this.openMarkerInfo(markerInfo);
+                });
+
+                this.$scope.markers.push(markerInfo);
             };
 
-            MapController.prototype.showMarkerInfo = function (marker, place) {
+            MapController.prototype.openMarkerInfo = function (markerInfo) {
                 var _this = this;
                 this.$scope.$apply(function () {
-                    _this.$scope.selectedVenue = {
+                    _this.$scope.selectedVenue = markerInfo.venue != null ? markerInfo.venue : {
                         id: '',
                         description: '',
-                        title: place.name,
-                        address: place.formatted_address,
-                        url: place.url,
+                        title: markerInfo.place.name,
+                        address: markerInfo.place.formatted_address,
+                        url: markerInfo.place.url,
                         location: {
-                            latitude: place.geometry.location.lat(),
-                            longitude: place.geometry.location.lng(),
-                            reference: place.id
-                        }
+                            latitude: markerInfo.place.geometry.location.lat(),
+                            longitude: markerInfo.place.geometry.location.lng(),
+                            reference: markerInfo.place.reference
+                        },
+                        votes: 0,
+                        rating: 0
                     };
                 });
+
+                this.$scope.venueInfoWindow.open(this.$scope.map, markerInfo.marker);
             };
 
-            MapController.prototype.createMapSearchBox = function (map, inputId) {
-                var input = document.getElementById(inputId);
-                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-                return new google.maps.places.SearchBox(input);
+            MapController.prototype.clearMarkers = function () {
+                this.$scope.markers.forEach(function (marker) {
+                    marker.marker.setMap(null);
+                });
+
+                this.$scope.markers = new Array();
             };
 
-            MapController.prototype.searchPlaces = function (map) {
+            MapController.prototype.searchPlaces = function () {
                 var _this = this;
-                this.places = this.searchBox.getPlaces();
-                this.clearMarkersFromTheMap();
+                this.$scope.places = this.searchBox.getPlaces();
+                this.clearMarkers();
+
                 var bounds = new google.maps.LatLngBounds();
-                this.places.forEach(function (place) {
-                    var marker = _this.placeMarkerOnTheMap(map, place);
-                    google.maps.event.addDomListener(marker, 'click', function () {
-                        _this.showMarkerInfo(marker, place);
-                    });
-                    _this.markers.push(marker);
+
+                this.$scope.places.forEach(function (place) {
+                    _this.addMarker(place);
                     bounds.extend(place.geometry.location);
                 });
 
-                map.fitBounds(bounds);
-                map.setZoom(this.options.zoom);
+                this.$scope.map.fitBounds(bounds);
             };
 
-            MapController.prototype.setSearchBound = function (map) {
-                var bounds = map.getBounds();
-                this.searchBox.setBounds(bounds);
-            };
-
-            MapController.prototype.setCurrentLocation = function (map) {
-                var _this = this;
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                        map.setCenter(initialLocation);
-                        map.setZoom(_this.options.zoom);
-                    });
-                }
-            };
-
-            MapController.prototype.clearMarkersFromTheMap = function () {
-                this.markers.forEach(function (marker) {
-                    marker.setMap(null);
-                });
-
-                this.markers = new Array();
-            };
-
-            MapController.prototype.placeMarkerOnTheMap = function (map, place) {
-                var image = new google.maps.MarkerImage(place.icon, new google.maps.Size(71, 71), new google.maps.Point(0, 0), new google.maps.Point(17, 34), new google.maps.Size(25, 25));
-
-                var marker = new google.maps.Marker({
-                    map: map,
-                    icon: image,
-                    title: place.name,
-                    position: place.geometry.location,
-                    animation: google.maps.Animation.DROP
-                });
-
-                return marker;
+            // todo: this is not very "angular"... refactor this if possible
+            MapController.prototype.createMapSearchBox = function (inputId) {
+                var input = document.getElementById(inputId);
+                this.$scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                return new google.maps.places.SearchBox(input);
             };
             return MapController;
         })();
@@ -176,8 +180,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('MapController', [
-    '$scope', '$modal', function ($scope, $modal) {
-        return new Burgerama.Map.MapController($scope, $modal);
+    '$rootScope', '$scope', '$modal', function ($rootScope, $scope, $modal) {
+        return new Burgerama.Map.MapController($rootScope, $scope, $modal);
     }
 ]);
 //# sourceMappingURL=mapController.js.map
