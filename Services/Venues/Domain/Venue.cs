@@ -19,6 +19,8 @@ namespace Burgerama.Services.Venues.Domain
 
         public string Description { get; set; }
 
+        public string Address { get; set; }
+
         public Venue(Guid id, string title, Location location, string createdByUser, DateTime createdOn)
         {
             Contract.Requires<ArgumentNullException>(location != null);

@@ -12,6 +12,13 @@ namespace Burgerama.Services.Venues.Domain.Contracts
             return default(Venue);
         }
 
+        public Venue GetByLocation(Location location)
+        {
+            Contract.Requires<ArgumentNullException>(location != null);
+
+            return default(Venue);
+        }
+
         public IEnumerable<Venue> GetAll()
         {
             Contract.Ensures(Contract.Result<IEnumerable<Venue>>() != null);

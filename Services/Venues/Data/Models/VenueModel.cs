@@ -21,5 +21,7 @@ namespace Burgerama.Services.Venues.Data.Models
         public string Url { get; set; }
 
         public string Description { get; set; }
+
+        public string Address { get; set; }
     }
 }

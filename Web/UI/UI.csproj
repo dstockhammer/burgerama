@@ -109,6 +109,9 @@
     <Content Include="Content\css\default.css">
       <DependentUpon>default.less</DependentUpon>
     </Content>
+    <Content Include="Content\css\default.min.css">
+      <DependentUpon>default.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\helper-mixins.css">
       <DependentUpon>helper-mixins.less</DependentUpon>
     </Content>
@@ -144,6 +147,8 @@
     <Content Include="Scripts\vendor\angularjs\angular-loader.js" />
     <Content Include="Scripts\vendor\angularjs\angular-loader.min.js" />
     <Content Include="Scripts\vendor\angularjs\angular-messages.js" />
+    <Content Include="Scripts\vendor\angularjs\angular-messages.min.js" />
+    <Content Include="Scripts\vendor\angularjs\angular-messages.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-mocks.js" />
     <Content Include="Scripts\vendor\angularjs\angular-resource.js" />
     <Content Include="Scripts\vendor\angularjs\angular-resource.min.js" />
@@ -401,6 +406,16 @@
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-loader.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-resource.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-route.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-touch.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\errors.json" />
+    <Content Include="Scripts\vendor\angularjs\version.json" />
     <Content Include="Scripts\vendor\angularjs\version.txt" />
     <Content Include="Scripts\vendor\auth0\auth0-angular.js" />
     <Content Include="Scripts\vendor\auth0\auth0-angular.min.js" />
@@ -422,28 +437,15 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-loader.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-resource.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-route.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-touch.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\errors.json" />
-    <Content Include="Scripts\vendor\angularjs\version.json" />
     <Content Include="Content\css\default.less" />
+    <Content Include="Content\css\helper-mixins.less" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
-    <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />
-    <TypeScriptCompile Include="Scripts\app\account\services\authService.ts" />
-    <Content Include="Content\css\helper-mixins.less" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -460,6 +462,9 @@
     <TypeScriptCompile Include="Scripts\app\map\controllers\mapController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\resources\venueResource.ts" />
+    <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
+    <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />
+    <TypeScriptCompile Include="Scripts\app\account\services\authService.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />

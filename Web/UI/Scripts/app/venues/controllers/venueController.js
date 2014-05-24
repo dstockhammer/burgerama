@@ -12,10 +12,6 @@ var Burgerama;
                 this.toaster = toaster;
                 this.load();
 
-                this.$scope.showAddVenueModal = function () {
-                    return _this.showAddVenueModal();
-                };
-
                 var unregisterVenueAdded = this.$rootScope.$on('VenueAdded', function (event, venue) {
                     _this.$scope.venues.push(venue);
                 });
@@ -31,37 +27,20 @@ var Burgerama;
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
             };
-
-            VenueController.prototype.showAddVenueModal = function () {
-                this.$modal.open({
-                    templateUrl: '/Scripts/app/venues/views/addVenue.modal.html',
-                    controller: 'AddVenueController'
-                });
-            };
             return VenueController;
         })();
         Venues.VenueController = VenueController;
 
         var AddVenueController = (function () {
-            function AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster) {
+            function AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
                 this.$modalInstance = $modalInstance;
                 this.venueResource = venueResource;
                 this.toaster = toaster;
-                this.$scope.venue = {
-                    id: null,
-                    title: '',
-                    location: {
-                        reference: 'no reference',
-                        latitude: 0,
-                        longitude: 0
-                    },
-                    description: '',
-                    url: ''
-                };
-
+                this.venue = venue;
+                this.$scope.venue = venue;
                 this.$scope.ok = function () {
                     return _this.ok();
                 };
@@ -79,7 +58,9 @@ var Burgerama;
                     _this.$rootScope.$broadcast('VenueAdded', _this.$scope.venue);
                 }, function (err) {
                     if (err.status == 401) {
-                        _this.toaster.pop('error', 'Unauthorized', 'You are not authorized to perform this action.');
+                        _this.toaster.pop('error', 'Unauthorized', 'You are not authorized to suggest venues. Please log in or create an account.');
+                    } else if (err.status == 409) {
+                        _this.toaster.pop('error', 'Conflict', 'This venue has already been suggested.');
                     } else {
                         _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                     }
@@ -102,8 +83,8 @@ Burgerama.app.controller('VenueController', [
     }
 ]);
 Burgerama.app.controller('AddVenueController', [
-    '$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', function ($rootScope, $scope, $modalInstance, venueResource, toaster) {
-        return new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster);
+    '$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', 'venue', function ($rootScope, $scope, $modalInstance, venueResource, toaster, venue) {
+        return new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue);
     }
 ]);
 //# sourceMappingURL=venueController.js.map

@@ -3,8 +3,6 @@
 module Burgerama.Venues {
     export interface IVenueScope extends ng.IScope {
         venues: Array<IVenue>;
-
-        showAddVenueModal: () => void;
     }
 
     export class VenueController {
@@ -16,9 +14,7 @@ module Burgerama.Venues {
             private toaster)
         {
             this.load();
-
-            this.$scope.showAddVenueModal = () => this.showAddVenueModal();
-
+            
             var unregisterVenueAdded = this.$rootScope.$on('VenueAdded', (event, venue) => {
                 this.$scope.venues.push(venue);
             });
@@ -30,13 +26,6 @@ module Burgerama.Venues {
                 this.$scope.venues = data;
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-            });
-        }
-
-        private showAddVenueModal() {
-            this.$modal.open({
-                templateUrl: '/Scripts/app/venues/views/addVenue.modal.html',
-                controller: 'AddVenueController'
             });
         }
     }
@@ -52,22 +41,12 @@ module Burgerama.Venues {
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: IAddVenueScope,
-            private $modalInstance, // ng.ui.IModalInstance ?
+            private $modalInstance,
             private venueResource,
-            private toaster) {
-
-            this.$scope.venue = {
-                id: null,
-                title: '',
-                location: {
-                    reference: 'no reference',
-                    latitude: 0,
-                    longitude: 0
-                },
-                description: '',
-                url: ''
-            };
-
+            private toaster,
+            private venue)
+        {
+            this.$scope.venue = venue;
             this.$scope.ok = () => this.ok();
             this.$scope.cancel = () => this.cancel();
         }
@@ -81,7 +60,9 @@ module Burgerama.Venues {
                 this.$rootScope.$broadcast('VenueAdded', this.$scope.venue);
             }, err => {
                 if (err.status == 401) {
-                    this.toaster.pop('error', 'Unauthorized', 'You are not authorized to perform this action.');
+                    this.toaster.pop('error', 'Unauthorized', 'You are not authorized to suggest venues. Please log in or create an account.');
+                } else if (err.status == 409) {
+                    this.toaster.pop('error', 'Conflict', 'This venue has already been suggested.');
                 } else {
                     this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 }
@@ -97,6 +78,6 @@ module Burgerama.Venues {
 Burgerama.app.controller('VenueController', ['$rootScope', '$scope', '$modal', 'VenueResource', 'toaster', ($rootScope, $scope, $modal, venueResource, toaster) =>
     new Burgerama.Venues.VenueController($rootScope, $scope, $modal, venueResource, toaster)
 ]);
-Burgerama.app.controller('AddVenueController', ['$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', ($rootScope, $scope, $modalInstance, venueResource, toaster) =>
-    new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster)
+Burgerama.app.controller('AddVenueController', ['$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', 'venue', ($rootScope, $scope, $modalInstance, venueResource, toaster, venue) =>
+    new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue)
 ]);

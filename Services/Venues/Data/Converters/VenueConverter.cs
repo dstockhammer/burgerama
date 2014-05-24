@@ -19,20 +19,22 @@ namespace Burgerama.Services.Venues.Data.Converters
                 CreatedByUser = venue.CreatedByUser,
                 CreatedOn = venue.CreatedOn,
                 Url = venue.Url,
-                Description = venue.Description
+                Description = venue.Description,
+                Address = venue.Address
             };
         }
 
         public static Venue ToDomain(this VenueModel venue)
         {
-            Contract.Requires<ArgumentNullException>(venue != null);
+            if (venue == null)
+                return null;
 
             var id = Guid.Parse(venue.Id);
-
             return new Venue(id, venue.Title, venue.Location, venue.CreatedByUser, venue.CreatedOn)
             {
                 Url = venue.Url,
-                Description = venue.Description
+                Description = venue.Description,
+                Address = venue.Address
             };
         }
     }

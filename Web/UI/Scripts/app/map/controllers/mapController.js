@@ -42,19 +42,23 @@ var Burgerama;
                     ]
                 };
                 this.$scope.mapOptions = this.options;
+                this.$scope.selectedVenue = null;
+                this.$scope.currentSearchTerm = '';
                 this.$scope.setZoomMessage = function (zoom) {
                     return _this.setZoomMessage(zoom);
                 };
-                this.$scope.showAddVenueModal = function () {
-                    return _this.showAddVenueModal();
+                this.$scope.clearSearch = function () {
+                    return _this.clearSearch();
+                };
+                this.$scope.showAddVenueModal = function (venue) {
+                    return _this.showAddVenueModal(venue);
                 };
 
                 $scope.$watch('map', function (map) {
-                    console.log(map);
-
+                    // todo: add this to markup and only bind it here
                     _this.searchBox = _this.createMapSearchBox(map, 'map-search-box');
                     google.maps.event.addListener(_this.searchBox, 'places_changed', function () {
-                        _this.searchPlaces(map, _this.searchBox, _this.places, _this.markers, _this.options);
+                        _this.searchPlaces(map);
                     });
                     // todo: this breaks the search?
                     //google.maps.event.addListener(map, 'bounds_changed', () => {
@@ -62,10 +66,21 @@ var Burgerama;
                     //});
                 });
             }
-            MapController.prototype.showAddVenueModal = function () {
+            MapController.prototype.clearSearch = function () {
+                this.clearMarkersFromTheMap();
+                this.$scope.currentSearchTerm = '';
+                this.$scope.selectedVenue = null;
+            };
+
+            MapController.prototype.showAddVenueModal = function (venue) {
                 this.$modal.open({
                     templateUrl: '/Scripts/app/venues/views/addVenue.modal.html',
-                    controller: 'AddVenueController'
+                    controller: 'AddVenueController',
+                    resolve: {
+                        venue: function () {
+                            return venue;
+                        }
+                    }
                 });
             };
 
@@ -74,61 +89,70 @@ var Burgerama;
                 //console.log(zoom);
             };
 
+            MapController.prototype.showMarkerInfo = function (marker, place) {
+                var _this = this;
+                this.$scope.$apply(function () {
+                    _this.$scope.selectedVenue = {
+                        id: '',
+                        description: '',
+                        title: place.name,
+                        address: place.formatted_address,
+                        url: place.url,
+                        location: {
+                            latitude: place.geometry.location.lat(),
+                            longitude: place.geometry.location.lng(),
+                            reference: place.id
+                        }
+                    };
+                });
+            };
+
             MapController.prototype.createMapSearchBox = function (map, inputId) {
                 var input = document.getElementById(inputId);
                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                 return new google.maps.places.SearchBox(input);
             };
 
-            MapController.prototype.searchPlaces = function (map, searchBox, places, markers, options) {
+            MapController.prototype.searchPlaces = function (map) {
                 var _this = this;
-                places = searchBox.getPlaces();
-                this.clearMarkersFromTheMap(markers);
+                this.places = this.searchBox.getPlaces();
+                this.clearMarkersFromTheMap();
                 var bounds = new google.maps.LatLngBounds();
-                places.forEach(function (place) {
+                this.places.forEach(function (place) {
                     var marker = _this.placeMarkerOnTheMap(map, place);
                     google.maps.event.addDomListener(marker, 'click', function () {
                         _this.showMarkerInfo(marker, place);
                     });
-                    markers.push(marker);
+                    _this.markers.push(marker);
                     bounds.extend(place.geometry.location);
                 });
 
                 map.fitBounds(bounds);
-                map.setZoom(options.zoom);
+                map.setZoom(this.options.zoom);
             };
 
-            MapController.prototype.setSearchBound = function (map, searchBox) {
+            MapController.prototype.setSearchBound = function (map) {
                 var bounds = map.getBounds();
-                searchBox.setBounds(bounds);
+                this.searchBox.setBounds(bounds);
             };
 
-            MapController.prototype.setCurrentLocation = function (map, options) {
+            MapController.prototype.setCurrentLocation = function (map) {
+                var _this = this;
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                         map.setCenter(initialLocation);
-                        map.setZoom(options.zoom);
+                        map.setZoom(_this.options.zoom);
                     });
                 }
             };
 
-            // todo: refactor this to use the angular way! model binding and stuff
-            MapController.prototype.showMarkerInfo = function (marker, place) {
-                var infoBox = document.getElementById('information-box');
-                var innerHTML = '<span><b>';
-                innerHTML += place.url ? '<a href = "' + place.url + '" target = "new">' : '<a>';
-                innerHTML += place.name + '</a></b> | ' + place.formatted_address + ' | </span>';
-                innerHTML += '<button type="button" class="btn btn-default" ng-click="showAddVenueModal();"><span class="glyphicon glyphicon-plus"></span> Add venue</button>';
-                infoBox.innerHTML = innerHTML;
-            };
-
-            MapController.prototype.clearMarkersFromTheMap = function (markers) {
-                markers.forEach(function (marker) {
+            MapController.prototype.clearMarkersFromTheMap = function () {
+                this.markers.forEach(function (marker) {
                     marker.setMap(null);
                 });
 
-                markers = new Array();
+                this.markers = new Array();
             };
 
             MapController.prototype.placeMarkerOnTheMap = function (map, place) {

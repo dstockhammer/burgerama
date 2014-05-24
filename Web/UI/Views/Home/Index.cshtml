@@ -1,14 +1,23 @@
 <toaster-container toaster-options="{'position-class': 'toast-top-left', 'time-out': 2500}"></toaster-container>
 
-<section id="map-space" class="workspace">
-    <input id="map-search-box" type="text" placeholder="yo, type your g here" />
-    <div id="information-box"></div>
-    <img id="venue-marker" class="draggable" src="~/Content/img/venue_marker.png" />
-</section>
-
 <section id="map" ng-controller="MapController">
+    <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" />
+
+    <div id="information-box" ng-if="selectedVenue != null">
+        <div class="content">
+            <h3>{{ selectedVenue.title }}</h3>
+            <p>{{ selectedVenue.address }}</p>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-default" ng-click="clearSearch();"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+            <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);"><span class="glyphicon glyphicon-asterisk"></span> Suggest</button>
+        </div>
+    </div>
+
+    <img id="venue-marker" class="draggable" src="~/Content/img/venue_marker.png" />
+
     <div id="map-canvas" ui-map="map" ui-options="mapOptions"
-         ui-event="{'map-zoom_changed': 'setZoomMessage(map.getZoom())' }"></div>
+            ui-event="{'map-zoom_changed': 'setZoomMessage(map.getZoom())' }"></div>
 </section>
 
 <section id="organizer-space" class="workspace">
@@ -34,7 +43,5 @@
         <ul id="venue-list" ng-repeat="venue in venues">
             <li><span>{{ venue.title }}</span></li>
         </ul>
-        <br />
-        <p style="margin: 15px;"><button type="button" class="btn btn-default" ng-click="showAddVenueModal();"><span class="glyphicon glyphicon-plus"></span> Add venue</button></p>
     </div>
 </section>
