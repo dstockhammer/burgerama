@@ -7,7 +7,7 @@ using Burgerama.Services.Venues.Data.Models;
 using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 
 namespace Burgerama.Services.Venues.Data
 {
@@ -20,13 +20,22 @@ namespace Burgerama.Services.Venues.Data
 
         public Venue Get(Guid venueId)
         {
-            var query = Query<VenueModel>.EQ(v => v.Id, venueId.ToString());
-            return Venues.FindOne(query).ToDomain();
+            return Venues.AsQueryable()
+                .SingleOrDefault(v => v.Id == venueId.ToString())
+                .ToDomain();
+        }
+
+        public Venue GetByLocation(Location location)
+        {
+            return Venues.AsQueryable()
+                .SingleOrDefault(v => v.Location.Reference == location.Reference)
+                .ToDomain();
         }
 
         public IEnumerable<Venue> GetAll()
         {
-            return Venues.FindAll().Select(v => v.ToDomain());
+            return Venues.FindAll()
+                .Select(v => v.ToDomain());
         }
 
         public void SaveOrUpdate(Venue venue)

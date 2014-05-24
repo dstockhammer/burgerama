@@ -9,7 +9,9 @@ namespace Burgerama.Services.Venues.Domain.Contracts
     {
         Venue Get(Guid venueId);
 
-        IEnumerable<Venue> GetAll(); 
+        Venue GetByLocation(Location location);
+
+        IEnumerable<Venue> GetAll();
 
         void SaveOrUpdate(Venue venue);
     }

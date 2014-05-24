@@ -86,17 +86,13 @@ namespace Burgerama.Services.Venues.Api.Controllers
         {
             Contract.Requires<ArgumentNullException>(model != null);
 
-            var userId = ClaimsPrincipal.Current.GetUserId();
-            var location = new Location(model.Location.Reference, model.Location.Latitiude, model.Location.Longitude);
-            var venue = new Venue(model.Title, location, userId)
-            {
-                Description = model.Description,
-                Url = model.Url
-            };
+            var venue = model.ToDomain(ClaimsPrincipal.Current.GetUserId());
 
-            // todo: dupe check!
-            //if (isDupe) 
-            //    return Conflict();
+            // check for duplicates by location.
+            // this is quire naive and could be improved significantly.
+            var duplicate = _venueRepository.GetByLocation(venue.Location);
+            if (duplicate != null)
+                return Conflict();
 
             _venueRepository.SaveOrUpdate(venue);
             _eventDispatcher.Publish(new VenueCreated

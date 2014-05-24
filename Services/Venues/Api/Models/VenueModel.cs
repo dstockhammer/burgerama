@@ -26,6 +26,9 @@ namespace Burgerama.Services.Venues.Api.Models
         public string Description { get; set; }
 
         [DataMember, XmlElement]
+        public string Address { get; set; }
+
+        [DataMember, XmlElement]
         public string CreatedByUser { get; set; }
 
         [DataMember, XmlElement]

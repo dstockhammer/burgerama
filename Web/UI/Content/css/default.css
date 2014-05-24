@@ -1,4 +1,4 @@
-html,
+﻿html,
 body {
   height: 100%;
   margin: 0;
@@ -8,11 +8,15 @@ body {
   position: absolute;
   height: 100%;
 }
-#map-canvas {
+#map {
   height: 100%;
   position: relative;
 }
-#map-canvas #map-search-box {
+#map #map-canvas {
+  height: 100%;
+  position: relative;
+}
+#map #map-search-box {
   position: absolute;
   top: 2em !important;
   left: 2em !important;
@@ -26,8 +30,37 @@ body {
   width: 20em;
   box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
 }
-#map-canvas #map-search-box:focus {
+#map #map-search-box:focus {
   outline: none;
+}
+#map #information-box {
+  position: absolute;
+  bottom: 2em !important;
+  left: 2em !important;
+  z-index: 200;
+  padding: 0.75em;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
+}
+#map #information-box .content {
+  padding-bottom: 10px;
+}
+#map #information-box .content h3 {
+  margin-top: 0;
+}
+#map #information-box .buttons {
+  text-align: right;
+}
+#map #information-box .buttons button {
+  display: inline-block;
+}
+#map #venue-marker {
+  bottom: 2em;
+  right: 22em;
+  z-index: 200;
+  width: 1.5em;
+  position: absolute;
 }
 .pac-container {
   background-color: rgba(0, 0, 0, 0.7);
@@ -38,27 +71,6 @@ body {
 .pac-container .pac-item:hover .pac-item-query,
 .pac-container .pac-item-selected .pac-item-query {
   color: #000;
-}
-#map-space {
-  right: 20em;
-  left: 0;
-}
-#map-space #information-box {
-  position: absolute;
-  bottom: 2em !important;
-  left: 2em !important;
-  z-index: 200;
-  padding: 0.75em;
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.7);
-}
-#map-space #venue-marker {
-  position: absolute;
-  bottom: 2em !important;
-  right: 2em !important;
-  z-index: 200;
-  width: 1.5em;
 }
 #logo-container {
   display: table !important;
@@ -161,4 +173,3 @@ body {
 #organizer-switcher {
   text-align: center;
 }
-/*# sourceMappingURL=helper-mixins.css.map */

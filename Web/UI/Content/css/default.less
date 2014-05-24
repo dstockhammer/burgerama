@@ -19,10 +19,15 @@ html, body {
 }
 
 // Google Maps Search Box Styling
-#map-canvas {
+#map {
     height: 100%;
     position: relative;
-    
+
+    #map-canvas {
+        height: 100%;
+        position: relative;
+    }
+
     #map-search-box {
         .top-left();
         font-family: sans-serif;
@@ -39,7 +44,41 @@ html, body {
     #map-search-box:focus {
         outline: none;
     }
+
+    #information-box {
+        .bottom-left();
+        z-index: 200;
+
+        padding: 0.75em;
+        color: @default-text-color;
+        background-color: fadein(@default-background-color, 20%);
+        box-shadow: @default-shadow;
+
+        .content {
+            h3 {
+                margin-top: 0;
+            }
+
+            padding-bottom: 10px;
+        }
+
+        .buttons {
+            text-align: right;
+            button {
+                display: inline-block;
+            }
+        }
+    }
+
+    #venue-marker {
+        bottom: 2em;
+        right: 22em;
+        z-index: 200;
+        width: 1.5em;
+        position: absolute;
+    }
 }
+
 
 // Google Maps Search Result Custom Styling
 .pac-container {
@@ -52,28 +91,6 @@ html, body {
     .pac-item:hover .pac-item-query,
     .pac-item-selected .pac-item-query {
         color: #000;
-    }
-}
-
-// Custom Controls over Maps
-#map-space {
-    right: 20em;
-    left: 0;
-
-    #information-box {
-        .bottom-left();
-        z-index: 200;
-
-        padding: 0.75em;
-        color: @default-text-color;
-        background-color: fadein(@default-background-color, 20%);
-        box-shadow: @default-shadow;
-    }
-
-    #venue-marker {
-        .bottom-right();
-        z-index: 200;
-        width: 1.5em;
     }
 }
 

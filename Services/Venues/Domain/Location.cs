@@ -7,16 +7,16 @@ namespace Burgerama.Services.Venues.Domain
     {
         public string Reference { get; private set; }
 
-        public double Latitiude { get; private set; }
+        public double Latitude { get; private set; }
 
         public double Longitude { get; private set; }
 
-        public Location(string reference, double latitiude, double longitude)
+        public Location(string reference, double latitude, double longitude)
         {
             Contract.Requires<ArgumentNullException>(reference != null);
 
             Reference = reference;
-            Latitiude = latitiude;
+            Latitude = latitude;
             Longitude = longitude;
         }
 
@@ -27,7 +27,7 @@ namespace Burgerama.Services.Venues.Domain
                 return false;
 
             return Reference == other.Reference
-                && Math.Abs(Latitiude - other.Latitiude) < Double.Epsilon
+                && Math.Abs(Latitude - other.Latitude) < Double.Epsilon
                 && Math.Abs(Longitude - other.Longitude) < Double.Epsilon;
         }
 
@@ -38,7 +38,7 @@ namespace Burgerama.Services.Venues.Domain
                 var hash = 17;
 
                 hash = hash * 23 + Reference.GetHashCode();
-                hash = hash * 23 + Latitiude.GetHashCode();
+                hash = hash * 23 + Latitude.GetHashCode();
                 hash = hash * 23 + Longitude.GetHashCode();
 
                 return hash;

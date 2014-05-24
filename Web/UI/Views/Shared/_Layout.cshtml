@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="burgerama" data-framework="angularjs">
+<html lang="en" data-framework="angularjs">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -10,7 +10,6 @@
 </head>
 <body>
     @RenderBody()
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places"></script>
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/burgerama")
     @RenderSection("scripts", required: false)

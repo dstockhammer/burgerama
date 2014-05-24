@@ -14,7 +14,7 @@ namespace Burgerama.Services.Venues.Api.Models
 
         [Required]
         [DataMember, XmlElement]
-        public double Latitiude { get; set; }
+        public double Latitude { get; set; }
 
         [Required]
         [DataMember, XmlElement]

@@ -3,11 +3,18 @@
 'use strict';
 var Burgerama;
 (function (Burgerama) {
+    function initialize() {
+        angular.bootstrap(document, ['burgerama']);
+    }
+    Burgerama.initialize = initialize;
+
     Burgerama.app = angular.module('burgerama', [
         'ngResource',
         'ngRoute',
         'ngCookies',
         'ui.bootstrap',
+        'ui.event',
+        'ui.map',
         'LocalStorageModule',
         'toaster',
         'auth0'
@@ -28,4 +35,15 @@ var Burgerama;
             });
         }]);
 })(Burgerama || (Burgerama = {}));
+
+Burgerama.app.run(function () {
+    // todo: add a loading screen and hide it here
+});
+
+angular.element(document).ready(function () {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places&callback=Burgerama.initialize';
+    document.body.appendChild(script);
+});
 //# sourceMappingURL=app.js.map

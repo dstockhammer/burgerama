@@ -7,6 +7,7 @@ module Burgerama.Venues {
         location: ILocation;
         url: string;
         description: string;
+        address: string;
     }
 
     export interface ILocation {

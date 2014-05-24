@@ -16,9 +16,13 @@ namespace Burgerama.Web.UI
                 "~/Scripts/vendor/auth0/auth0-angular.js",
                 "~/Scripts/vendor/auth0/auth0-widget.js",
 
-                "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",
                 "~/Scripts/vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js",
+                "~/Scripts/vendor/angular-ui-utils/ui-utils.js",
+                "~/Scripts/vendor/angular-ui-map/ui-map.js",
+
+                "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",
                 "~/Scripts/vendor/angular-toaster/angular-toaster.js"
+
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/burgerama")
