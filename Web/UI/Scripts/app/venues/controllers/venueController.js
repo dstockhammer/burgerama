@@ -38,7 +38,7 @@ var Burgerama;
             };
 
             VenueController.prototype.panTo = function (venue) {
-                this.$rootScope.$broadcast('PanToClicked', venue.location.latitude, venue.location.longitude);
+                this.$rootScope.$broadcast('PanToClicked', venue);
             };
 
             VenueController.prototype.addVote = function (venue) {

@@ -10,24 +10,31 @@ var Burgerama;
 
     Burgerama.app = angular.module('burgerama', [
         'ngResource',
-        'ngRoute',
         'ngCookies',
         'ngAnimate',
         'ui.bootstrap',
         'ui.event',
+        'ui.router',
         'ui.map',
         'LocalStorageModule',
         'toaster',
-        'auth0',
-        'truncate'
+        'truncate',
+        'auth0'
     ]);
 
     Burgerama.app.config([
-        '$httpProvider', '$routeProvider', 'authProvider', function ($httpProvider, $routeProvider, authProvider) {
+        '$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, authProvider) {
             $httpProvider.interceptors.push('AuthHttpInterceptor');
 
-            $routeProvider.when('/', {}).otherwise({
-                redirectTo: '/'
+            $urlRouterProvider.otherwise("/venues");
+            $stateProvider.state('venues', {
+                url: "/venues",
+                controller: 'VenueController',
+                templateUrl: '/Scripts/app/venues/views/list.html'
+            }).state('outings', {
+                url: "/outings",
+                controller: 'OutingController',
+                templateUrl: '/Scripts/app/outings/views/list.html'
             });
 
             authProvider.init({

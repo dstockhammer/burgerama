@@ -5938,6 +5938,15 @@ body {
 #sidebar .loading-spinner {
   margin: 10% auto;
 }
+#sidebar .no-items-available .icon {
+  color: #428bca;
+  font-size: 5em;
+  font-weight: bold;
+  text-align: center;
+}
+#sidebar .no-items-available .text {
+  margin-top: 3em;
+}
 #venue-list {
   margin: 0 15px 10px;
 }

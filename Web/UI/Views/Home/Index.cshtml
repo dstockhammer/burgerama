@@ -51,28 +51,13 @@
             </div>*@
 
             <ul class="nav nav-pills">
-                <li><a href="#">Search</a></li>
-                <li class="active"><a href="#">Venues</a></li>
-                <li><a href="#">Outings</a></li>
-                <li><a href="#">Calendar</a></li>
+                <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
+                <li ui-sref-active="active"><a ui-sref="venues">Venues</a></li>
+                <li ui-sref-active="active"><a ui-sref="outings">Outings</a></li>
+                <li ui-sref-active="active"><a ui-sref="calendar">Calendar</a></li>
             </ul>
-
-            <div ng-controller="VenueController">
-                <div class="loading-spinner spin-s" ng-hide="venues != null"></div>
-                <ul id="venue-list" class="list-group" ng-repeat="venue in venues">
-                    <li class="row list-group-item">
-                        <div class="col-xs-10 text">
-                            <h4 class="list-group-item-heading"><a href="#" ng-click="panTo(venue);">{{ venue.title }}</a></h4>
-                            <p class="list-group-item-text" ng-hide="venue.description == ''">{{ venue.description | characters:300 }}</p>
-                            <p class="list-group-item-text address" ng-hide="venue.address == ''">{{ venue.address }}</p>
-                        </div>
-                        <div class="col-xs-2 info">
-                            <span class="number">{{ venue.votes }}</span><br />
-                            <a href="#" ng-click="addVote(venue);">vote</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            
+            <section ui-view></section>
         </div>
     </div>
 </div>

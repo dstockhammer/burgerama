@@ -73,8 +73,8 @@ module Burgerama.Map {
 
             // todo: not sure if this is really a good way to communicate between controller.
             // this is basically using an event as command, which seems very wrong.
-            var unregisterPanClicked = this.$rootScope.$on('PanToClicked', (event, latitude: number, longitude: number) => {
-                this.$scope.map.panTo(new google.maps.LatLng(latitude, longitude));
+            var unregisterPanClicked = this.$rootScope.$on('PanToClicked', (event, venue: Venues.IVenue) => {
+                this.$scope.map.panTo(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
             });
             this.$scope.$on('$destroy', () => unregisterPanClicked());
         }

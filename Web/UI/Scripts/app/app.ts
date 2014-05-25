@@ -16,32 +16,37 @@ module Burgerama {
     export var app: ng.IModule = angular.module('burgerama', [
         // Angular modules
         'ngResource',
-        'ngRoute',
         'ngCookies',
         'ngAnimate',
 
         // Angular UI modules
         'ui.bootstrap',
         'ui.event',
+        'ui.router',
         'ui.map',
 
         // 3rd Party Modules
         'LocalStorageModule',
         'toaster',
-        'auth0',
-        'truncate'
+        'truncate',
+        'auth0'
     ]);
 
-    app.config(['$httpProvider', '$routeProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $routeProvider: ng.route.IRouteProvider, authProvider) => {
+    app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, authProvider) => {
         $httpProvider.interceptors.push('AuthHttpInterceptor');
 
-        $routeProvider
-            .when('/', {
-                // nothing to do for now
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
+        $urlRouterProvider.otherwise("/venues");
+        $stateProvider
+        .state('venues', {
+            url: "/venues",
+            controller: 'VenueController',
+            templateUrl: '/Scripts/app/venues/views/list.html'
+        })
+        .state('outings', {
+            url: "/outings",
+            controller: 'OutingController',
+            templateUrl: '/Scripts/app/outings/views/list.html'
+        });
 
         authProvider.init({
             domain: 'burgerama.auth0.com',

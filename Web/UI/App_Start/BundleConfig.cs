@@ -9,16 +9,15 @@ namespace Burgerama.Web.UI
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                 "~/Scripts/vendor/angularjs/angular.js",
                 "~/Scripts/vendor/angularjs/angular-resource.js",
-                "~/Scripts/vendor/angularjs/angular-route.js",
                 "~/Scripts/vendor/angularjs/angular-animate.js",
                 "~/Scripts/vendor/angularjs/angular-cookies.js",
-                "~/Scripts/vendor/angularjs/angular-animate.js",
 
                 "~/Scripts/vendor/auth0/auth0-angular.js",
                 "~/Scripts/vendor/auth0/auth0-widget.js",
 
                 "~/Scripts/vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js",
                 "~/Scripts/vendor/angular-ui-utils/ui-utils.js",
+                "~/Scripts/vendor/angular-ui-router/ui-router.js",
                 "~/Scripts/vendor/angular-ui-map/ui-map.js",
 
                 "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",

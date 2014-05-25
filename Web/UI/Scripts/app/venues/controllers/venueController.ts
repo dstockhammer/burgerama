@@ -38,7 +38,7 @@ module Burgerama.Venues {
         }
 
         private panTo(venue: IVenue) {
-            this.$rootScope.$broadcast('PanToClicked', venue.location.latitude, venue.location.longitude);
+            this.$rootScope.$broadcast('PanToClicked', venue);
         }
 
         private addVote(venue: IVenue) {
