@@ -20,12 +20,6 @@ var Burgerama;
                 var _this = this;
                 return this.outingResource.all(function (data) {
                     _this.$scope.outings = data;
-                    console.log(_this.$scope.outings);
-                    console.log(_this.$scope.outings == null);
-                    console.log(_this.$scope.outings == []);
-                    console.log(_this.$scope.outings.length);
-                    console.log(_this.$scope.outings.length == 0);
-
                     _this.$rootScope.$broadcast('OutingsLoaded', _this.$scope.outings);
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);

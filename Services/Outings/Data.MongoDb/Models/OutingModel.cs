@@ -1,7 +1,7 @@
 using System;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Burgerama.Services.Outings.Data.Models
+namespace Burgerama.Services.Outings.Data.MongoDb.Models
 {
     internal sealed class OutingModel
     {

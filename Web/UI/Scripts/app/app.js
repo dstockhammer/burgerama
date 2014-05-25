@@ -25,6 +25,10 @@ var Burgerama;
     Burgerama.app.config([
         '$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, authProvider) {
             $httpProvider.interceptors.push('AuthHttpInterceptor');
+            $httpProvider.defaults.transformResponse.push(function (responseData) {
+                Burgerama.Util.convertDateStringsToDates(responseData);
+                return responseData;
+            });
 
             $urlRouterProvider.otherwise("/venues");
             $stateProvider.state('venues', {

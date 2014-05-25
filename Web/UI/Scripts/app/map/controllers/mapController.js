@@ -56,6 +56,16 @@ var Burgerama;
                     return unregisterVenuesLoaded();
                 });
 
+                var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', function (event, outings) {
+                    _this.clearMarkers();
+                    outings.forEach(function (outing) {
+                        _this.addMarker(null, outing.venue);
+                    });
+                });
+                this.$scope.$on('$destroy', function () {
+                    return unregisterOutingsLoaded();
+                });
+
                 // todo: not sure if this is really a good way to communicate between controller.
                 // this is basically using an event as command, which seems very wrong.
                 var unregisterPanClicked = this.$rootScope.$on('PanToClicked', function (event, venue) {

@@ -34,6 +34,10 @@ module Burgerama {
 
     app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, authProvider) => {
         $httpProvider.interceptors.push('AuthHttpInterceptor');
+        $httpProvider.defaults.transformResponse.push(responseData => {
+            Util.convertDateStringsToDates(responseData);
+            return responseData;
+        });
 
         $urlRouterProvider.otherwise("/venues");
         $stateProvider

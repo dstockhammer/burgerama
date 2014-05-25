@@ -5931,6 +5931,8 @@ body {
 #sidebar {
   height: 100%;
   overflow-y: scroll;
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 #sidebar .nav {
   margin: 15px 0;
@@ -5947,16 +5949,41 @@ body {
 #sidebar .no-items-available .text {
   margin-top: 3em;
 }
-#venue-list {
+#venue-list,
+#outing-list {
   margin: 0 15px 10px;
 }
-#venue-list .address {
+#venue-list li,
+#outing-list li {
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px 5px 15px;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-transition: background-color 0.25s linear;
+  -moz-transition: background-color 0.25s linear;
+  -o-transition: background-color 0.25s linear;
+  -ms-transition: background-color 0.25s linear;
+  transition: background-color 0.25s linear;
+}
+#venue-list li:hover,
+#outing-list li:hover {
+  background-color: rgba(0, 0, 0, 0.025);
+}
+#venue-list .address,
+#outing-list .address {
   padding-top: 4px;
   font-style: italic;
   color: #808080;
 }
-#venue-list .info {
+#venue-list .info,
+#outing-list .info {
   text-align: right;
+}
+#venue-list .date,
+#outing-list .date {
+  margin: 4px 0;
+  color: #808080;
 }
 .form-control {
   font-family: "Roboto Light";

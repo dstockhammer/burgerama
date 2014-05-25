@@ -6,13 +6,13 @@
 <ul id="venue-list" class="list-group" ng-repeat="venue in venues">
     <li class="row list-group-item">
         <div class="col-xs-10 text">
-            <h4 class="list-group-item-heading"><a href="#" ng-click="panTo(venue);">{{ venue.title }}</a></h4>
+            <h4 class="list-group-item-heading"><a href ng-click="panTo(venue);">{{ venue.title }}</a></h4>
             <p class="list-group-item-text" ng-hide="venue.description == ''">{{ venue.description | characters:300 }}</p>
             <p class="list-group-item-text address" ng-hide="venue.address == ''">{{ venue.address }}</p>
         </div>
         <div class="col-xs-2 info">
-            <span class="number">{{ venue.votes }}</span><br />
-            <a href="#" ng-click="addVote(venue);">vote</a>
+            <p class="votes">{{ venue.votes }}</p>
+            <p><a href ng-click="addVote(venue);">vote</a></p>
         </div>
     </li>
 </ul>

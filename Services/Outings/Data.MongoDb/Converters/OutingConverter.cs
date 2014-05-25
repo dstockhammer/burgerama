@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using Burgerama.Services.Outings.Data.Models;
+using Burgerama.Services.Outings.Data.MongoDb.Models;
 using Burgerama.Services.Outings.Domain;
 
-namespace Burgerama.Services.Outings.Data.Converters
+namespace Burgerama.Services.Outings.Data.MongoDb.Converters
 {
     internal static class OutingConverter
     {

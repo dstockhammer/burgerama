@@ -3,6 +3,8 @@
 module Burgerama.Outings {
     export interface IOuting {
         id: string;
+        date: Date;
+        venueId: string;
         venue: Venues.IVenue;
     }
 }

@@ -71,6 +71,14 @@ module Burgerama.Map {
             });
             this.$scope.$on('$destroy', () => unregisterVenuesLoaded());
 
+            var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', (event, outings: Array<Outings.IOuting>) => {
+                this.clearMarkers();
+                outings.forEach(outing => {
+                    this.addMarker(null, outing.venue);
+                });
+            });
+            this.$scope.$on('$destroy', () => unregisterOutingsLoaded());
+
             // todo: not sure if this is really a good way to communicate between controller.
             // this is basically using an event as command, which seems very wrong.
             var unregisterPanClicked = this.$rootScope.$on('PanToClicked', (event, venue: Venues.IVenue) => {

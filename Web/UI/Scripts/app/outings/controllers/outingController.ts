@@ -23,12 +23,6 @@ module Burgerama.Outings {
         private load() {
             return this.outingResource.all(data => {
                 this.$scope.outings = data;
-                console.log(this.$scope.outings);
-                console.log(this.$scope.outings == null);
-                console.log(this.$scope.outings == []);
-                console.log(this.$scope.outings.length);
-                console.log(this.$scope.outings.length == 0);
-
                 this.$rootScope.$broadcast('OutingsLoaded', this.$scope.outings);
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);

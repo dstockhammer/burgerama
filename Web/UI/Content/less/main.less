@@ -42,7 +42,6 @@ html, body {
     }
 
     .content {
-
         position: absolute;
         text-align: center;
         top: 50%;
@@ -108,6 +107,7 @@ html, body {
     padding-right: 2em;
 }
 
+
 // map
 #map-canvas {
     height: 100%;
@@ -140,6 +140,8 @@ html, body {
 #sidebar {
     height: 100%;
     overflow-y: scroll;
+    border-left: 1px solid rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 
     .nav {
         margin: 15px 0;
@@ -163,10 +165,26 @@ html, body {
     }
 }
 
-// venues
-#venue-list {
+#venue-list, #outing-list {
     margin: 0 15px 10px;
 
+    li {
+        border: 0;
+        border-radius: 0;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        padding: 10px 5px 15px;
+        background-color: rgba(0,0,0,0);
+        -webkit-transition: background-color 0.25s linear;
+        -moz-transition: background-color 0.25s linear;
+        -o-transition: background-color 0.25s linear;
+        -ms-transition: background-color 0.25s linear;
+        transition: background-color 0.25s linear;
+    
+        &:hover {
+            background-color: rgba(0,0,0,0.025);
+        }
+    }
+    
     .address {
         padding-top: 4px;
         font-style: italic;
@@ -175,6 +193,11 @@ html, body {
 
     .info {
         text-align: right;
+    }
+
+    .date {
+        margin: 4px 0;
+        color: #808080;
     }
 }
 

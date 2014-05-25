@@ -521,6 +521,7 @@
     <TypeScriptCompile Include="Scripts\app\map\controllers\mapController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\controllers\outingController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\resources\outingResource.ts" />
+    <TypeScriptCompile Include="Scripts\app\util\date.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\resources\venueResource.ts" />
     <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />

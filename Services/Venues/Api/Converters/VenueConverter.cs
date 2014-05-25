@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using System.Security.Claims;
-using Burgerama.Common.Authentication.Identity;
 using Burgerama.Services.Venues.Api.Models;
 using Burgerama.Services.Venues.Domain;
 
