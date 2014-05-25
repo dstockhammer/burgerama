@@ -102,15 +102,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\img\calendar_icon.png" />
-    <Content Include="Content\img\hamburger_logo.png" />
-    <Content Include="Content\img\profile.jpg" />
-    <Content Include="Content\img\profile.png" />
-    <Content Include="Content\img\red-splash-1.png" />
-    <Content Include="Content\img\red-splash-2.png" />
-    <Content Include="Content\img\red-splash-3.png" />
-    <Content Include="Content\img\venue_icon.png" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\opensans\LICENSE.txt" />
+    <Content Include="Content\fonts\opensans\OpenSans-Bold.svg" />
+    <Content Include="Content\fonts\opensans\OpenSans-Regular.svg" />
+    <Content Include="Content\fonts\opensans\OpenSans-Semibold.svg" />
+    <Content Include="Content\fonts\roboto\LICENSE.txt" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.svg" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.svg" />
     <Content Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
@@ -428,9 +427,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -478,6 +477,25 @@
     <Content Include="Content\less\bootstrap\variables.less" />
     <Content Include="Content\less\bootstrap\wells.less" />
     <Content Include="Content\less\main.less" />
+    <Content Include="Content\fonts\opensans\OpenSans-Bold.eot" />
+    <Content Include="Content\fonts\opensans\OpenSans-Bold.ttf" />
+    <Content Include="Content\fonts\opensans\OpenSans-Bold.woff" />
+    <Content Include="Content\fonts\opensans\OpenSans-Regular.eot" />
+    <Content Include="Content\fonts\opensans\OpenSans-Regular.ttf" />
+    <Content Include="Content\fonts\opensans\OpenSans-Regular.woff" />
+    <Content Include="Content\fonts\opensans\OpenSans-Semibold.eot" />
+    <Content Include="Content\fonts\opensans\OpenSans-Semibold.ttf" />
+    <Content Include="Content\fonts\opensans\OpenSans-Semibold.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="Content\less\open-sans.less" />
+    <Content Include="Content\less\roboto.less" />
+    <Content Include="Content\less\bootstrap-custom.less" />
+    <Content Include="Content\less\bootstrap-variables.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -487,6 +505,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@ var Burgerama;
                 this.$modal = $modal;
                 this.venueResource = venueResource;
                 this.toaster = toaster;
+                this.$scope.venues = null;
                 this.$scope.panTo = function (venue) {
                     return _this.panTo(venue);
                 };

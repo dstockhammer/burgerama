@@ -16,6 +16,7 @@ module Burgerama.Venues {
             private venueResource,
             private toaster)
         {
+            this.$scope.venues = null;
             this.$scope.panTo = venue => this.panTo(venue);
             this.$scope.addVote = venue => this.addVote(venue);
 

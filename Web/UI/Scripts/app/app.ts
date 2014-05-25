@@ -18,6 +18,7 @@ module Burgerama {
         'ngResource',
         'ngRoute',
         'ngCookies',
+        'ngAnimate',
 
         // Angular UI modules
         'ui.bootstrap',
@@ -50,9 +51,9 @@ module Burgerama {
     }]);
 }
 
-Burgerama.app.run(() => {
-    // todo: add a loading screen and hide it here
-});
+Burgerama.app.run(['$rootScope', $rootScope => {
+    $rootScope.loaded = true;
+}]);
 
 angular.element(document).ready(() => {
     var script = document.createElement('script');

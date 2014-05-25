@@ -58,6 +58,7 @@
             </ul>
 
             <div ng-controller="VenueController">
+                <div class="loading-spinner spin-s" ng-hide="venues != null"></div>
                 <ul id="venue-list" class="list-group" ng-repeat="venue in venues">
                     <li class="row list-group-item">
                         <div class="col-xs-10 text">

@@ -12,6 +12,7 @@ var Burgerama;
         'ngResource',
         'ngRoute',
         'ngCookies',
+        'ngAnimate',
         'ui.bootstrap',
         'ui.event',
         'ui.map',
@@ -37,9 +38,10 @@ var Burgerama;
         }]);
 })(Burgerama || (Burgerama = {}));
 
-Burgerama.app.run(function () {
-    // todo: add a loading screen and hide it here
-});
+Burgerama.app.run([
+    '$rootScope', function ($rootScope) {
+        $rootScope.loaded = true;
+    }]);
 
 angular.element(document).ready(function () {
     var script = document.createElement('script');

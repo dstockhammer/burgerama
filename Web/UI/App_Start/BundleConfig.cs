@@ -12,6 +12,7 @@ namespace Burgerama.Web.UI
                 "~/Scripts/vendor/angularjs/angular-route.js",
                 "~/Scripts/vendor/angularjs/angular-animate.js",
                 "~/Scripts/vendor/angularjs/angular-cookies.js",
+                "~/Scripts/vendor/angularjs/angular-animate.js",
 
                 "~/Scripts/vendor/auth0/auth0-angular.js",
                 "~/Scripts/vendor/auth0/auth0-widget.js",

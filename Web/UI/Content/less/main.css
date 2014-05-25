@@ -1,4 +1,39 @@
-﻿/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+﻿@font-face {
+  font-family: 'Open Sans';
+  src: url('/Content/fonts/opensans/OpenSans-Regular.eot');
+  src: url('/Content/fonts/opensans/OpenSans-Regular.eot?#iefix') format('embedded-opentype'), url('/Content/fonts/opensans/OpenSans-Regular.woff') format('woff'), url('/Content/fonts/opensans/OpenSans-Regular.ttf') format('truetype'), url('/Content/fonts/opensans/OpenSans-Regular.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Open Sans Semibold';
+  src: url('/Content/fonts/opensans/OpenSans-Semibold.eot');
+  src: url('/Content/fonts/opensans/OpenSans-Semibold.eot?#iefix') format('embedded-opentype'), url('/Content/fonts/opensans/OpenSans-Semibold.woff') format('woff'), url('/Content/fonts/opensans/OpenSans-Semibold.ttf') format('truetype'), url('/Content/fonts/opensans/OpenSans-Semibold.svg#open_sanssemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Open Sans Bold';
+  src: url('/Content/fonts/opensans/OpenSans-Bold.eot');
+  src: url('/Content/fonts/opensans/OpenSans-Bold.eot?#iefix') format('embedded-opentype'), url('/Content/fonts/opensans/OpenSans-Bold.woff') format('woff'), url('/Content/fonts/opensans/OpenSans-Bold.ttf') format('truetype'), url('/Content/fonts/opensans/OpenSans-Bold.svg#open_sansbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto Thin';
+  src: url('/Content/fonts/roboto/Roboto-Thin.eot');
+  src: url('/Content/fonts/roboto/Roboto-Thin.eot?#iefix') format('embedded-opentype'), url('/Content/fonts/roboto/Roboto-Thin.woff') format('woff'), url('/Content/fonts/roboto/Roboto-Thin.ttf') format('truetype'), url('/Content/fonts/roboto/Roboto-Thin.svg#robotothin') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto Light';
+  src: url('/Content/fonts/roboto/Roboto-Light.eot');
+  src: url('/Content/fonts/roboto/Roboto-Light.eot?#iefix') format('embedded-opentype'), url('/Content/fonts/roboto/Roboto-Light.woff') format('woff'), url('/Content/fonts/roboto/Roboto-Light.ttf') format('truetype'), url('/Content/fonts/roboto/Roboto-Light.svg#robotolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -265,7 +300,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -354,7 +389,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: "Roboto Light";
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -2367,8 +2402,8 @@ input[type="button"].btn-block {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('/Content/fonts/glyphicons/glyphicons-halflings-regular.eot');
+  src: url('/Content/fonts/glyphicons/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/Content/fonts/glyphicons/glyphicons-halflings-regular.woff') format('woff'), url('/Content/fonts/glyphicons/glyphicons-halflings-regular.ttf') format('truetype'), url('/Content/fonts/glyphicons/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -5780,6 +5815,96 @@ body {
 #main > .row {
   height: 100%;
 }
+#loading-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 9999;
+  background: #fff;
+  transition: 1s all ease-out;
+}
+#loading-overlay.ng-hide-add,
+#loading-overlay.ng-hide-remove {
+  display: block !important;
+}
+#loading-overlay.ng-hide-remove,
+#loading-overlay.ng-hide-add.ng-hide-add-active {
+  opacity: 0;
+}
+#loading-overlay.ng-hide-remove.ng-hide-remove-active,
+#loading-overlay.ng-hide-add {
+  opacity: 1;
+}
+#loading-overlay .loading-spinner {
+  z-index: 10000;
+}
+#loading-overlay .content {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+}
+.loading-spinner {
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .75;
+  border-radius: 50px;
+  margin: 5% auto;
+  animation: loading .85s infinite linear;
+  -moz-animation: loading .85s infinite linear;
+  -webkit-animation: loading .85s infinite linear;
+}
+.loading-spinner.spin-s {
+  border: 5px solid #00dbff;
+  border-top: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  width: 30px;
+  height: 30px;
+}
+.loading-spinner.spin-m {
+  border: 5px solid #00dbff;
+  border-top: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  width: 50px;
+  height: 50px;
+}
+.loading-spinner.spin-l {
+  border: 20px solid #00dbff;
+  border-top: 20px solid rgba(0, 0, 0, 0);
+  border-left: 20px solid rgba(0, 0, 0, 0);
+  width: 100px;
+  height: 100px;
+  border-radius: 100px !important;
+}
+@keyframes loading {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 .navbar-right {
   padding-right: 2em;
 }
@@ -5810,6 +5935,9 @@ body {
 #sidebar .nav {
   margin: 15px 0;
 }
+#sidebar .loading-spinner {
+  margin: 10% auto;
+}
 #venue-list {
   margin: 0 15px 10px;
 }
@@ -5820,4 +5948,7 @@ body {
 }
 #venue-list .info {
   text-align: right;
+}
+.form-control {
+  font-family: "Roboto Light";
 }
