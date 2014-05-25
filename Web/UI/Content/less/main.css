@@ -1725,7 +1725,7 @@ output {
   color: #555555;
   background-color: #ffffff;
   background-image: none;
-  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1733,10 +1733,10 @@ output {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #66afe9;
+  border-color: #4285f4;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(66, 133, 244, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(66, 133, 244, 0.6);
 }
 .form-control::-moz-placeholder {
   color: #999999;
@@ -3405,7 +3405,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #555555;
   text-align: center;
   background-color: #eeeeee;
-  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
 .input-group-addon.input-sm {
@@ -5918,7 +5918,9 @@ body {
 }
 #map-search-box {
   margin-top: 25px;
-  width: 250px;
+  width: 350px;
+  border-radius: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 .info-window h3 {
   margin-top: 0;

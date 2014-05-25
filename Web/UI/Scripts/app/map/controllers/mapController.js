@@ -3,6 +3,14 @@
 var Burgerama;
 (function (Burgerama) {
     (function (Map) {
+        var MarkerType;
+        (function (MarkerType) {
+            MarkerType[MarkerType["Search"] = 0] = "Search";
+            MarkerType[MarkerType["Venue"] = 1] = "Venue";
+            MarkerType[MarkerType["Outing"] = 2] = "Outing";
+        })(MarkerType || (MarkerType = {}));
+        ;
+
         var MapController = (function () {
             function MapController($rootScope, $scope, $modal) {
                 var _this = this;
@@ -21,7 +29,6 @@ var Burgerama;
                 };
                 this.$scope.mapOptions = this.options;
                 this.$scope.markers = new Array();
-                this.$scope.places = new Array();
 
                 this.$scope.selectedVenue = null;
                 this.$scope.currentSearchTerm = '';
@@ -48,9 +55,7 @@ var Burgerama;
 
                 var unregisterVenuesLoaded = this.$rootScope.$on('VenuesLoaded', function (event, venues) {
                     _this.clearMarkers();
-                    venues.forEach(function (venue) {
-                        _this.addMarker(null, venue);
-                    });
+                    _this.addMarkersForAllVenues(venues);
                 });
                 this.$scope.$on('$destroy', function () {
                     return unregisterVenuesLoaded();
@@ -58,9 +63,7 @@ var Burgerama;
 
                 var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', function (event, outings) {
                     _this.clearMarkers();
-                    outings.forEach(function (outing) {
-                        _this.addMarker(null, outing.venue);
-                    });
+                    _this.addMarkersForAllOutings(outings);
                 });
                 this.$scope.$on('$destroy', function () {
                     return unregisterOutingsLoaded();
@@ -70,6 +73,7 @@ var Burgerama;
                 // this is basically using an event as command, which seems very wrong.
                 var unregisterPanClicked = this.$rootScope.$on('PanToClicked', function (event, venue) {
                     _this.$scope.map.panTo(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
+                    _this.$scope.map.setZoom(_this.options.zoom);
                 });
                 this.$scope.$on('$destroy', function () {
                     return unregisterPanClicked();
@@ -93,7 +97,43 @@ var Burgerama;
                 });
             };
 
-            MapController.prototype.addMarker = function (place, venue) {
+            MapController.prototype.addMarkersForAllPlaces = function (places) {
+                var _this = this;
+                var bounds = new google.maps.LatLngBounds();
+
+                places.forEach(function (place) {
+                    _this.addMarker(0 /* Search */, place);
+                    bounds.extend(place.geometry.location);
+                });
+
+                this.$scope.map.fitBounds(bounds);
+            };
+
+            MapController.prototype.addMarkersForAllVenues = function (venues) {
+                var _this = this;
+                var bounds = new google.maps.LatLngBounds();
+
+                venues.forEach(function (venue) {
+                    _this.addMarker(1 /* Venue */, null, venue);
+                    bounds.extend(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
+                });
+
+                this.$scope.map.fitBounds(bounds);
+            };
+
+            MapController.prototype.addMarkersForAllOutings = function (outings) {
+                var _this = this;
+                var bounds = new google.maps.LatLngBounds();
+
+                outings.forEach(function (outing) {
+                    _this.addMarker(2 /* Outing */, null, outing.venue);
+                    bounds.extend(new google.maps.LatLng(outing.venue.location.latitude, outing.venue.location.longitude));
+                });
+
+                this.$scope.map.fitBounds(bounds);
+            };
+
+            MapController.prototype.addMarker = function (markerType, place, venue) {
                 var _this = this;
                 // if place is null, look it up using places api
                 if (place == null) {
@@ -104,7 +144,7 @@ var Burgerama;
                     var service = new google.maps.places.PlacesService(this.$scope.map);
                     service.getDetails(request, function (placeResult, status) {
                         if (status == google.maps.places.PlacesServiceStatus.OK) {
-                            _this.addMarker(placeResult, venue);
+                            _this.addMarker(markerType, placeResult, venue);
                         } else {
                             console.error('an error occurred while retrieving place details');
                         }
@@ -119,6 +159,7 @@ var Burgerama;
                     marker: new google.maps.Marker({
                         map: this.$scope.map,
                         position: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+                        icon: this.getPinForMarkerType(markerType),
                         animation: google.maps.Animation.DROP
                     })
                 };
@@ -162,18 +203,9 @@ var Burgerama;
             };
 
             MapController.prototype.searchPlaces = function () {
-                var _this = this;
-                this.$scope.places = this.searchBox.getPlaces();
                 this.clearMarkers();
-
-                var bounds = new google.maps.LatLngBounds();
-
-                this.$scope.places.forEach(function (place) {
-                    _this.addMarker(place);
-                    bounds.extend(place.geometry.location);
-                });
-
-                this.$scope.map.fitBounds(bounds);
+                var places = this.searchBox.getPlaces();
+                this.addMarkersForAllPlaces(places);
             };
 
             // todo: this is not very "angular"... refactor this if possible
@@ -181,6 +213,20 @@ var Burgerama;
                 var input = document.getElementById(inputId);
                 this.$scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                 return new google.maps.places.SearchBox(input);
+            };
+
+            MapController.prototype.getPinForMarkerType = function (markerType) {
+                switch (markerType) {
+                    case 1 /* Venue */:
+                        return '/Content/img/map/pin-blue-hole.png';
+
+                    case 2 /* Outing */:
+                        return '/Content/img/map/pin-orange-hole.png';
+
+                    default:
+                    case 0 /* Search */:
+                        return '/Content/img/map/pin-grey-hole.png';
+                }
             };
             return MapController;
         })();

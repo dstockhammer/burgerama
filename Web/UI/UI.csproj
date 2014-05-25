@@ -110,6 +110,27 @@
     <Content Include="Content\fonts\roboto\LICENSE.txt" />
     <Content Include="Content\fonts\roboto\Roboto-Light.svg" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.svg" />
+    <Content Include="Content\img\map\pin-blue-full.png" />
+    <Content Include="Content\img\map\pin-blue-hole.png" />
+    <Content Include="Content\img\map\pin-blue-notch.png" />
+    <Content Include="Content\img\map\pin-green-full.png" />
+    <Content Include="Content\img\map\pin-green-hole.png" />
+    <Content Include="Content\img\map\pin-green-notch.png" />
+    <Content Include="Content\img\map\pin-grey-full.png" />
+    <Content Include="Content\img\map\pin-grey-hole.png" />
+    <Content Include="Content\img\map\pin-grey-notch.png" />
+    <Content Include="Content\img\map\pin-orange-full.png" />
+    <Content Include="Content\img\map\pin-orange-hole.png" />
+    <Content Include="Content\img\map\pin-orange-notch.png" />
+    <Content Include="Content\img\map\pin-pink-full.png" />
+    <Content Include="Content\img\map\pin-pink-hole.png" />
+    <Content Include="Content\img\map\pin-pink-notch.png" />
+    <Content Include="Content\img\map\pin-red-full.png" />
+    <Content Include="Content\img\map\pin-red-hole.png" />
+    <Content Include="Content\img\map\pin-red-notch.png" />
+    <Content Include="Content\img\map\pin-yellow-full.png" />
+    <Content Include="Content\img\map\pin-yellow-hole.png" />
+    <Content Include="Content\img\map\pin-yellow-notch.png" />
     <Content Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
@@ -513,7 +534,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
