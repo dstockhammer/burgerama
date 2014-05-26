@@ -139,9 +139,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data.MongoDb\Data.MongoDb.csproj">
       <Project>{C19D2955-C971-448B-9BAB-4260051DB063}</Project>
-      <Name>Data</Name>
+      <Name>Data.MongoDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>

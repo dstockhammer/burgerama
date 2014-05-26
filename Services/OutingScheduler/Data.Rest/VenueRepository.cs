@@ -15,7 +15,7 @@ namespace Burgerama.Services.OutingScheduler.Data.Rest
             var request = new RestRequest("venues", Method.GET);
             var response = Client.Execute<List<VenueModel>>(request);
 
-            return response.Data.Select(o => o.ToDomain());
+            return response.Data.Select(v => v.ToDomain());
         }
     }
 }

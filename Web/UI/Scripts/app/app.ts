@@ -16,30 +16,62 @@ module Burgerama {
     export var app: ng.IModule = angular.module('burgerama', [
         // Angular modules
         'ngResource',
-        'ngRoute',
         'ngCookies',
+        'ngAnimate',
 
         // Angular UI modules
         'ui.bootstrap',
         'ui.event',
+        'ui.router',
         'ui.map',
 
         // 3rd Party Modules
         'LocalStorageModule',
         'toaster',
+        'truncate',
         'auth0'
     ]);
 
-    app.config(['$httpProvider', '$routeProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $routeProvider: ng.route.IRouteProvider, authProvider) => {
+    app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, authProvider) => {
         $httpProvider.interceptors.push('AuthHttpInterceptor');
+        $httpProvider.defaults.transformResponse.push(responseData => {
+            Util.convertDateStringsToDates(responseData);
+            return responseData;
+        });
 
-        $routeProvider
-            .when('/', {
-                // nothing to do for now
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
+        $urlRouterProvider.otherwise('/venues');
+        $stateProvider
+        .state('search', {
+            url: '/search',
+            controller: 'SearchController',
+            templateUrl: '/Scripts/app/map/views/search.results.html'
+        })
+        .state('venues', {
+            url: '/venues',
+            controller: 'VenueController',
+            templateUrl: '/Scripts/app/venues/views/list.html'
+        })
+        .state('venue-details', {
+            url: '/venues/:venueId',
+            controller: 'VenueDetailsController',
+            templateUrl: '/Scripts/app/venues/views/details.html',
+            resolve: {
+                venueId: ['$stateParams', $stateParams => {
+                    return $stateParams.venueId;
+                }]
+            }
+        })
+        .state('outings', {
+            url: '/outings',
+            controller: 'OutingController',
+            templateUrl: '/Scripts/app/outings/views/list.html'
+        })
+        .state('calendar', {
+            url: '/calendar',
+            controller: () => {
+                console.log('not implemented yet');
+            }
+        });
 
         authProvider.init({
             domain: 'burgerama.auth0.com',
@@ -49,9 +81,9 @@ module Burgerama {
     }]);
 }
 
-Burgerama.app.run(() => {
-    // todo: add a loading screen and hide it here
-});
+Burgerama.app.run(['$rootScope', $rootScope => {
+    $rootScope.loaded = true;
+}]);
 
 angular.element(document).ready(() => {
     var script = document.createElement('script');

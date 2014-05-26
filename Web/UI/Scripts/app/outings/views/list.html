@@ -1,0 +1,17 @@
+﻿<div class="loading-spinner spin-s" ng-hide="outings != null"></div>
+<div class="no-items-available" ng-show="outings != null && outings.length == 0">
+    <div class="col-xs-2 icon"><p>:(</p></div>
+    <div class="col-xs-10 text"><p>No outings available.</p></div>
+</div>
+<ul id="outing-list" class="list-group" ng-repeat="outing in outings">
+    <li class="row list-group-item" ng-mouseenter="panTo(outing);">
+        <div class="col-xs-10 text">
+            <h4 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: outing.venue.id })">{{ outing.venue.title }}</a></h4>
+            <p class="list-group-item-text date">{{ outing.date | date:'medium'}}</p>
+            <p class="list-group-item-text" ng-hide="outing.venue.description == ''">{{ outing.venue.description | characters:300 }}</p>
+        </div>
+        <div class="col-xs-2 info">
+            <p class="rating">4.3</p>
+        </div>
+    </li>
+</ul>

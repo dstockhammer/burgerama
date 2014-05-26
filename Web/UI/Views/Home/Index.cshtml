@@ -1,47 +1,65 @@
 <toaster-container toaster-options="{'position-class': 'toast-top-left', 'time-out': 2500}"></toaster-container>
 
 <section id="map" ng-controller="MapController">
-    <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" />
+    <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" class="form-control">
 
-    <div id="information-box" ng-if="selectedVenue != null">
+    <div ng-repeat="markerInfo in markers" ui-map-marker="markers[$index].marker"
+         ui-event="{'map-click': 'openMarkerInfo(markerInfo)'}">
+    </div>
+
+    <div ui-map-info-window="venueInfoWindow" class="info-window">
         <div class="content">
             <h3>{{ selectedVenue.title }}</h3>
-            <p>{{ selectedVenue.address }}</p>
+            <p ng-hide="selectedVenue.description == ''">{{ selectedVenue.description }}</p>
+            <p ng-hide="selectedVenue.url == ''"><a href="{{ selectedVenue.url }}">{{ selectedVenue.url }}</a></p>
+            <p ng-hide="selectedVenue.address == ''">{{ selectedVenue.address }}</p>
         </div>
-        <div class="buttons">
-            <button type="button" class="btn btn-default" ng-click="clearSearch();"><span class="glyphicon glyphicon-remove"></span> Clear</button>
-            <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);"><span class="glyphicon glyphicon-asterisk"></span> Suggest</button>
+        <div class="buttons" ng-show="selectedVenue.id == ''">
+            <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);">Suggest</button>
         </div>
     </div>
 
-    <img id="venue-marker" class="draggable" src="~/Content/img/venue_marker.png" />
-
-    <div id="map-canvas" ui-map="map" ui-options="mapOptions"
-            ui-event="{'map-zoom_changed': 'setZoomMessage(map.getZoom())' }"></div>
+    <div id="map-canvas" ui-map="map" ui-options="options"></div>
 </section>
 
-<section id="organizer-space" class="workspace">
-    <div id="organizer-switcher">
-        <img id="venue-icon" class="switcher-icon switcher-icon-active" src="~/Content/img/venue_icon.png" />
-        <img id="calendar-icon" class="switcher-icon" src="~/Content/img/calendar_icon.png" />
-        <img id="settings-icon" class="switcher-icon" src="~/Content/img/settings_icon.png" />
-    </div>
-
-    <div ng-view></div>
-
-    <div ng-controller="AccountController" style="margin: 15px;">
-        <div id="badge-container" ng-show="signedIn">
-            <img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" />
+<div class="container-fluid" id="main">
+    <div class="row">
+        <div class="col-xs-8">
+            <!-- map-canvas will be postioned here -->
         </div>
 
-        <p ng-show="signedIn" style="color:#efefef">You are signed in as {{ user.email }}.</p>
-        <p><button type="button" class="btn btn-default" ng-hide="signedIn" ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</button></p>
-        <p><button type="button" class="btn btn-default" ng-show="signedIn" ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</button></p>
-    </div>
+        <div class="col-xs-4" id="sidebar">
+            <nav class="navbar navbar-primary navbar-inverse" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <h1>Burgerama</h1>
+                    </div>
 
-    <div ng-controller="VenueController">
-        <ul id="venue-list" ng-repeat="venue in venues">
-            <li><span>{{ venue.title }}</span></li>
-        </ul>
+                    <ul class="nav navbar-nav navbar-right" ng-controller="AccountController">
+                        <li ng-hide="signedIn"><a href ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+                        <li ng-show="signedIn" class="dropdown user-info">
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="user-image"><img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" class="img-circle" height="40" width="40" /></span>
+                                <span class="user-name">{{ user.given_name }} <strong>{{ user.family_name }}</strong></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href><span class="glyphicon glyphicon-wrench"></span><span class="label label-warning pull-right">NYI</span> Settings</a></li>
+                                <li><a href ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <ul class="nav navbar-secondary nav-pills">
+                <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
+                <li ui-sref-active="active"><a ui-sref="venues">Venues</a></li>
+                <li ui-sref-active="active"><a ui-sref="outings">Outings</a></li>
+                <li ui-sref-active="active" class="disabled"><a ui-sref="calendar">Calendar</a></li>
+            </ul>
+
+            <section ui-view></section>
+        </div>
     </div>
-</section>
+</div>

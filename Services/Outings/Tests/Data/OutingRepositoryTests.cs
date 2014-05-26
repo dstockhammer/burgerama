@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Burgerama.Services.Outings.Data;
+using Burgerama.Services.Outings.Data.MongoDb;
 using Burgerama.Services.Outings.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

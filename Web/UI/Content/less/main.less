@@ -1,0 +1,241 @@
+﻿// additional fonts
+@import 'open-sans.less';
+@import 'roboto.less';
+
+// custom bootstrap theme
+@import 'bootstrap-custom.less';
+
+html, body {
+    height: 100%;
+}
+
+#main, #main > .row {
+    height: 100%;
+}
+
+// loading overlay
+#loading-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    z-index: 9999;
+    background: #fff;
+    transition: 1s all ease-out;
+
+    &.ng-hide-add, &.ng-hide-remove
+    {
+        display: block !important;
+    }
+
+    &.ng-hide-remove, &.ng-hide-add.ng-hide-add-active{
+        opacity: 0;
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active, &.ng-hide-add{
+        opacity: 1;
+    }
+
+    .loading-spinner {
+        z-index: 10000;
+    }
+
+    .content {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.loading-spinner {
+    background-color: rgba(0,0,0,0);
+    opacity: .75;
+    border-radius: 50px;
+    margin: 5% auto;
+    animation: loading .85s infinite linear;
+    -moz-animation: loading .85s infinite linear;
+    -webkit-animation: loading .85s infinite linear;
+
+    &.spin-s {
+        border: 5px solid #00dbff;
+        border-top: 5px solid rgba(0,0,0,0);
+        border-left: 5px solid rgba(0,0,0,0);
+        width: 30px;
+        height: 30px;
+    }
+
+    &.spin-m {
+        border: 5px solid #00dbff;
+        border-top: 5px solid rgba(0,0,0,0);
+        border-left: 5px solid rgba(0,0,0,0);
+        width: 50px;
+        height: 50px; 
+    }
+
+    &.spin-l {
+        border: 20px solid #00dbff;
+        border-top: 20px solid rgba(0,0,0,0);
+        border-left: 20px solid rgba(0,0,0,0);
+        width: 100px;
+        height: 100px;
+        border-radius: 100px !important;
+    }
+}
+
+ @keyframes loading {
+    0% { -moz-transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); };
+}
+ @-moz-keyframes loading {
+    0% { -moz-transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); };
+}
+@-webkit-keyframes loading {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); };
+}
+
+
+// top navbar
+.navbar-right {
+    padding-right: 2em;
+}
+
+
+// map
+#map-canvas {
+    height: 100%;
+    width: 66.666%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#map-search-box {
+    margin-top: 25px;
+    width: 350px;
+    border-radius: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.info-window {
+    h3 {
+        margin-top: 0;
+    }
+
+    .buttons {
+        display: block;
+        text-align: right;
+        margin-right: -20px;
+    }
+}
+
+
+// sidebar content
+#sidebar {
+    height: 100%;
+    overflow-y: scroll;
+    border-left: 1px solid rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+
+    .navbar-primary {
+        /*background-color: @btn-primary-bg;*/
+        border-radius: 0;
+        border: 0;
+        margin: 0 -15px 5px;
+        /*box-shadow: 0 1px 4px rgba(0,0,0,0.2);*/
+
+        .navbar-header {
+            h1 {
+                margin-top: 15px;
+                font-size: @font-size-h3;
+                color: @gray-light;
+            }
+        }
+
+        .user-info {
+            // todo: the image pushes the text down by 20px, because of the limited max-height.
+            // the negative margin-top on the img pulls everything up, but 10px are still missing
+            // for the text. i have tried around for some time, but i have absolutely no
+            // idea how to pull only the text up. help plx.
+
+            img {
+                margin-right: 10px;
+                margin-top: -10px;
+            }
+
+            a {
+                max-height: @navbar-height;
+            }
+        }
+    }
+
+    .navbar-secondary {
+        margin: 15px 0;
+    }
+
+    .loading-spinner {
+        margin: 10% auto;
+    }
+
+    .no-items-available {
+        .icon {
+            color: @brand-primary;
+            font-size: 5em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .text {
+            margin-top: 3em;
+        }
+    }
+}
+
+#venue-list, #outing-list {
+    margin: 0 15px 10px;
+
+    li {
+        border: 0;
+        border-radius: 0;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        padding: 10px 5px 15px;
+        background-color: rgba(0,0,0,0);
+        -webkit-transition: background-color 0.25s linear;
+        -moz-transition: background-color 0.25s linear;
+        -o-transition: background-color 0.25s linear;
+        -ms-transition: background-color 0.25s linear;
+        transition: background-color 0.25s linear;
+    
+        &:hover {
+            background-color: rgba(0,0,0,0.025);
+        }
+    }
+    
+    .address {
+        padding-top: 4px;
+        font-style: italic;
+        color: #808080;
+    }
+
+    .info {
+        text-align: right;
+    }
+
+    .date {
+        margin: 4px 0;
+        color: #808080;
+    }
+}
+
+// style fixes
+.form-control {
+    font-family: "Roboto Light";
+}

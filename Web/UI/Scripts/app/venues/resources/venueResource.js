@@ -6,6 +6,7 @@ Burgerama.app.factory('VenueResource', [
             id: '@id'
         }, {
             all: { method: 'GET', isArray: true },
+            get: { method: 'GET' },
             save: { method: 'PUT' },
             create: { method: 'POST' },
             destroy: { method: 'DELETE' }

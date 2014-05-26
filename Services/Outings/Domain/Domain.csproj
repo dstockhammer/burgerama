@@ -110,9 +110,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IOutingRepository.cs" />
+    <Compile Include="Contracts\IVenueRepository.cs" />
     <Compile Include="Contracts\OutingRepositoryContract.cs" />
+    <Compile Include="Contracts\VenueRepositoryContract.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Outing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Venue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

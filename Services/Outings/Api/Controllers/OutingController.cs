@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Burgerama.Services.Outings.Domain;
+using Burgerama.Services.Outings.Api.Converters;
+using Burgerama.Services.Outings.Api.Models;
 using Burgerama.Services.Outings.Domain.Contracts;
 
 namespace Burgerama.Services.Outings.Api.Controllers
@@ -10,10 +12,12 @@ namespace Burgerama.Services.Outings.Api.Controllers
     public sealed class OutingController : ApiController
     {
         private readonly IOutingRepository _outingRepository;
+        private readonly IVenueRepository _venueRepository;
 
-        public OutingController(IOutingRepository outingRepository)
+        public OutingController(IOutingRepository outingRepository, IVenueRepository venueRepository)
         {
             _outingRepository = outingRepository;
+            _venueRepository = venueRepository;
         }
 
         /// <summary>
@@ -25,10 +29,12 @@ namespace Burgerama.Services.Outings.Api.Controllers
         /// <returns>Returns all outings.</returns>
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<Outing>))]
+        [ResponseType(typeof(IEnumerable<OutingModel>))]
         public IHttpActionResult GetAllOutings()
         {
-            var outings = _outingRepository.GetAll();
+            var outings = _outingRepository.GetAll()
+                .Select(o => o.ToModel(venueId => _venueRepository.Get(venueId)));
+
             return Ok(outings);
         }
 
@@ -42,14 +48,14 @@ namespace Burgerama.Services.Outings.Api.Controllers
         /// <returns>Returns the outing with the passed id.</returns>
         [HttpGet]
         [Route("{outingId}")]
-        [ResponseType(typeof(Outing))]
+        [ResponseType(typeof(OutingModel))]
         public IHttpActionResult GetOutingById(Guid outingId)
         {
             var outing = _outingRepository.Get(outingId);
             if (outing == null)
                 return NotFound();
 
-            return Ok(outing);
+            return Ok(outing.ToModel());
         }
     }
 }

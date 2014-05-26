@@ -8,6 +8,8 @@ module Burgerama.Venues {
         url: string;
         description: string;
         address: string;
+        rating: number;
+        votes: number;
     }
 
     export interface ILocation {
@@ -22,6 +24,7 @@ Burgerama.app.factory('VenueResource', ['$resource', $resource => {
         id: '@id'
     }, {
         all: { method: 'GET', isArray: true },
+        get: { method: 'GET' },
         save: { method: 'PUT' },
         create: { method: 'POST' },
         destroy: { method: 'DELETE' }
