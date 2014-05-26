@@ -1,4 +1,5 @@
-﻿var Burgerama;
+﻿// <reference path="../../app.ts" />
+var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
@@ -27,7 +28,7 @@
                     }
 
                     _this.$scope.venue = data;
-                    _this.$rootScope.$broadcast('VenuesLoaded', [_this.$scope.venue]);
+                    _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });

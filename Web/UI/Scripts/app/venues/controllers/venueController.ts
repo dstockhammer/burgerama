@@ -31,14 +31,14 @@ module Burgerama.Venues {
         private load() {
             this.venueResource.all(data => {
                 this.$scope.venues = data;
-                this.$rootScope.$broadcast('VenuesLoaded', this.$scope.venues);
+                this.$rootScope.$emit('VenuesLoaded', this.$scope.venues);
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
         }
 
         private panTo(venue: IVenue) {
-            this.$rootScope.$broadcast('VenueSelected', venue);
+            this.$rootScope.$emit('VenueSelected', venue);
         }
 
         private addVote(venue: IVenue) {

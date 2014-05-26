@@ -20,14 +20,14 @@ var Burgerama;
                 var _this = this;
                 this.outingResource.all(function (data) {
                     _this.$scope.outings = data;
-                    _this.$rootScope.$broadcast('OutingsLoaded', _this.$scope.outings);
+                    _this.$rootScope.$emit('OutingsLoaded', _this.$scope.outings);
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
             };
 
             OutingController.prototype.panTo = function (outing) {
-                this.$rootScope.$broadcast('VenueSelected', outing.venue);
+                this.$rootScope.$emit('VenueSelected', outing.venue);
             };
             return OutingController;
         })();

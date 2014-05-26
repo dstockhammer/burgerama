@@ -1,4 +1,6 @@
-﻿module Burgerama.Venues {
+﻿// <reference path="../../app.ts" />
+
+module Burgerama.Venues {
     export interface IAddVenueScope extends ng.IScope {
         venue: IVenue;
 
@@ -27,7 +29,7 @@
             var resource = new this.venueResource(this.$scope.venue);
             resource.$create(() => {
                 this.toaster.pop('success', 'Success', 'Added venue: ' + this.$scope.venue.title);
-                this.$rootScope.$broadcast('VenueAdded', this.$scope.venue);
+                this.$rootScope.$emit('VenueAdded', this.$scope.venue);
             }, err => {
                     if (err.status == 401) {
                         this.toaster.pop('error', 'Unauthorized', 'You are not authorized to suggest venues. Please log in or create an account.');

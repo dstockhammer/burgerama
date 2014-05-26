@@ -33,9 +33,8 @@ var Burgerama;
             $urlRouterProvider.otherwise('/venues');
             $stateProvider.state('search', {
                 url: '/search',
-                controller: function () {
-                    console.log('not implemented yet');
-                }
+                controller: 'SearchController',
+                templateUrl: '/Scripts/app/map/views/search.results.html'
             }).state('venues', {
                 url: '/venues',
                 controller: 'VenueController',

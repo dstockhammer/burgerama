@@ -1,4 +1,6 @@
-﻿module Burgerama.Venues {
+﻿// <reference path="../../app.ts" />
+
+module Burgerama.Venues {
     export interface IVenueDetailsScope extends ng.IScope {
         venue: IVenue;
 
@@ -28,7 +30,7 @@
                 }
 
                 this.$scope.venue = data;
-                this.$rootScope.$broadcast('VenuesLoaded', [this.$scope.venue]);
+                this.$rootScope.$emit('VenuesLoaded', [this.$scope.venue]);
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });

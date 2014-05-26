@@ -31,14 +31,14 @@ var Burgerama;
                 var _this = this;
                 this.venueResource.all(function (data) {
                     _this.$scope.venues = data;
-                    _this.$rootScope.$broadcast('VenuesLoaded', _this.$scope.venues);
+                    _this.$rootScope.$emit('VenuesLoaded', _this.$scope.venues);
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
             };
 
             VenueController.prototype.panTo = function (venue) {
-                this.$rootScope.$broadcast('VenueSelected', venue);
+                this.$rootScope.$emit('VenueSelected', venue);
             };
 
             VenueController.prototype.addVote = function (venue) {

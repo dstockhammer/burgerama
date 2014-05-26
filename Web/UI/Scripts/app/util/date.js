@@ -1,4 +1,5 @@
-﻿var Burgerama;
+﻿// <reference path="../../app.ts" />
+var Burgerama;
 (function (Burgerama) {
     (function (Util) {
         function convertDateStringsToDates(input) {

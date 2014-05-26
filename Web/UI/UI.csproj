@@ -138,6 +138,7 @@
       <DependentUpon>main.css</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\map\views\search.results.html" />
     <Content Include="Scripts\app\outings\views\list.html" />
     <Content Include="Scripts\app\venues\views\addVenue.modal.html" />
     <Content Include="Scripts\app\venues\views\details.html" />
@@ -538,6 +539,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\map\controllers\mapController.ts" />
+    <TypeScriptCompile Include="Scripts\app\map\controllers\searchController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\controllers\outingController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\resources\outingResource.ts" />
     <TypeScriptCompile Include="Scripts\app\util\date.ts" />

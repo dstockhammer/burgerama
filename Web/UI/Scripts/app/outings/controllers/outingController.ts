@@ -23,14 +23,14 @@ module Burgerama.Outings {
         private load() {
             this.outingResource.all(data => {
                 this.$scope.outings = data;
-                this.$rootScope.$broadcast('OutingsLoaded', this.$scope.outings);
+                this.$rootScope.$emit('OutingsLoaded', this.$scope.outings);
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
         }
 
         private panTo(outing: IOuting) {
-            this.$rootScope.$broadcast('VenueSelected', outing.venue);
+            this.$rootScope.$emit('VenueSelected', outing.venue);
         }
     }
 }

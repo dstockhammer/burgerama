@@ -31,6 +31,8 @@ module Burgerama.Map {
 
     export class MapController {
         private searchBox: google.maps.places.SearchBox;
+        private currentSearchResults: Array<google.maps.places.PlaceResult>;
+
         private options: google.maps.MapOptions = {
             center: new google.maps.LatLng(51.51, -0.11),
             overviewMapControl: false,
@@ -48,8 +50,11 @@ module Burgerama.Map {
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: IMapScope,
+            private $location: ng.ILocationService,
             private $modal)
         {
+            this.currentSearchResults = [];
+
             this.$scope.options = this.options;
             this.$scope.markers = new Array<IMarkerInfo>();
 
@@ -94,6 +99,30 @@ module Burgerama.Map {
                 this.$scope.map.setZoom(this.options.zoom);
             });
             this.$scope.$on('$destroy', () => unregisterVenueSelected());
+
+            var unregisterPlaceSelected = this.$rootScope.$on('PlaceSelected', (event, place: google.maps.places.PlaceResult) => {
+                var markerInfos = this.$scope.markers.filter(element => {
+                    return element.place != null && element.place.reference == place.reference;
+                });
+
+                if (markerInfos.length > 0)
+                    this.openMarkerInfo(markerInfos[0]);
+
+                this.$scope.map.panTo(place.geometry.location);
+                this.$scope.map.setZoom(this.options.zoom);
+            });
+            this.$scope.$on('$destroy', () => unregisterPlaceSelected());
+
+            var unregisterSearchResultsLoaded = this.$rootScope.$on('SearchResultsLoaded', event => {
+                if (this.currentSearchResults.length > 0) {
+                    this.clearMarkers();
+                    this.addMarkersForAllPlaces(this.currentSearchResults);
+                }
+
+                // todo: add a check to ensure this is only emitted if the results actually changed. search id maybe.
+                this.$rootScope.$emit('CurrentSearchUpdated', this.currentSearchResults);
+            });
+            this.$scope.$on('$destroy', () => unregisterSearchResultsLoaded());
         }
 
         private clearSearch() {
@@ -221,9 +250,13 @@ module Burgerama.Map {
         }
 
         private searchPlaces() {
+            this.$location.path('search');
+            this.currentSearchResults = this.searchBox.getPlaces();
+
             this.clearMarkers();
-            var places = this.searchBox.getPlaces();
-            this.addMarkersForAllPlaces(places);
+            this.addMarkersForAllPlaces(this.currentSearchResults);
+
+            this.$rootScope.$emit('CurrentSearchUpdated', this.currentSearchResults);
         }
         
         // todo: this is not very "angular"... refactor this if possible
@@ -249,6 +282,6 @@ module Burgerama.Map {
     }
 }
 
-Burgerama.app.controller('MapController', ['$rootScope', '$scope', '$modal', ($rootScope, $scope, $modal) =>
-    new Burgerama.Map.MapController($rootScope, $scope, $modal)
+Burgerama.app.controller('MapController', ['$rootScope', '$scope', '$location', '$modal', ($rootScope, $scope, $location, $modal) =>
+    new Burgerama.Map.MapController($rootScope, $scope, $location, $modal)
 ]);
