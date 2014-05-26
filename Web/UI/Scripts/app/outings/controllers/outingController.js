@@ -18,7 +18,7 @@ var Burgerama;
             }
             OutingController.prototype.load = function () {
                 var _this = this;
-                return this.outingResource.all(function (data) {
+                this.outingResource.all(function (data) {
                     _this.$scope.outings = data;
                     _this.$rootScope.$broadcast('OutingsLoaded', _this.$scope.outings);
                 }, function (err) {
@@ -27,7 +27,7 @@ var Burgerama;
             };
 
             OutingController.prototype.panTo = function (outing) {
-                this.$rootScope.$broadcast('PanToClicked', outing.venue);
+                this.$rootScope.$broadcast('VenueSelected', outing.venue);
             };
             return OutingController;
         })();

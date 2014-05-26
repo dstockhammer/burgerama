@@ -140,6 +140,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\outings\views\list.html" />
     <Content Include="Scripts\app\venues\views\addVenue.modal.html" />
+    <Content Include="Scripts\app\venues\views\details.html" />
     <Content Include="Scripts\app\venues\views\list.html" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.js" />
     <Content Include="Scripts\vendor\angular-local-storage\angular-local-storage.min.js" />
@@ -540,7 +541,9 @@
     <TypeScriptCompile Include="Scripts\app\outings\controllers\outingController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\resources\outingResource.ts" />
     <TypeScriptCompile Include="Scripts\app\util\date.ts" />
+    <TypeScriptCompile Include="Scripts\app\venues\controllers\addVenueController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
+    <TypeScriptCompile Include="Scripts\app\venues\controllers\venueDetailsController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\resources\venueResource.ts" />
     <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />

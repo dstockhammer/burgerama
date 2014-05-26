@@ -39,17 +39,39 @@ module Burgerama {
             return responseData;
         });
 
-        $urlRouterProvider.otherwise("/venues");
+        $urlRouterProvider.otherwise('/venues');
         $stateProvider
+        .state('search', {
+            url: '/search',
+            controller: () => {
+                console.log('not implemented yet');
+            }
+        })
         .state('venues', {
-            url: "/venues",
+            url: '/venues',
             controller: 'VenueController',
             templateUrl: '/Scripts/app/venues/views/list.html'
         })
+        .state('venue-details', {
+            url: '/venues/:venueId',
+            controller: 'VenueDetailsController',
+            templateUrl: '/Scripts/app/venues/views/details.html',
+            resolve: {
+                venueId: ['$stateParams', $stateParams => {
+                    return $stateParams.venueId;
+                }]
+            }
+        })
         .state('outings', {
-            url: "/outings",
+            url: '/outings',
             controller: 'OutingController',
             templateUrl: '/Scripts/app/outings/views/list.html'
+        })
+        .state('calendar', {
+            url: '/calendar',
+            controller: () => {
+                console.log('not implemented yet');
+            }
         });
 
         authProvider.init({

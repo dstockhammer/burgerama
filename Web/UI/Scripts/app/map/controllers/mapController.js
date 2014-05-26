@@ -71,14 +71,19 @@ var Burgerama;
                     return unregisterOutingsLoaded();
                 });
 
-                // todo: not sure if this is really a good way to communicate between controller.
-                // this is basically using an event as command, which seems very wrong.
-                var unregisterPanClicked = this.$rootScope.$on('PanToClicked', function (event, venue) {
+                var unregisterVenueSelected = this.$rootScope.$on('VenueSelected', function (event, venue) {
+                    var markerInfos = _this.$scope.markers.filter(function (element) {
+                        return element.venue != null && element.venue.id == venue.id;
+                    });
+
+                    if (markerInfos.length > 0)
+                        _this.openMarkerInfo(markerInfos[0]);
+
                     _this.$scope.map.panTo(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
                     _this.$scope.map.setZoom(_this.options.zoom);
                 });
                 this.$scope.$on('$destroy', function () {
-                    return unregisterPanClicked();
+                    return unregisterVenueSelected();
                 });
             }
             MapController.prototype.clearSearch = function () {
@@ -184,23 +189,20 @@ var Burgerama;
             };
 
             MapController.prototype.openMarkerInfo = function (markerInfo) {
-                var _this = this;
-                this.$scope.$apply(function () {
-                    _this.$scope.selectedVenue = markerInfo.venue != null ? markerInfo.venue : {
-                        id: '',
-                        description: '',
-                        title: markerInfo.place.name,
-                        address: markerInfo.place.formatted_address,
-                        url: markerInfo.place.url,
-                        location: {
-                            latitude: markerInfo.place.geometry.location.lat(),
-                            longitude: markerInfo.place.geometry.location.lng(),
-                            reference: markerInfo.place.reference
-                        },
-                        votes: 0,
-                        rating: 0
-                    };
-                });
+                this.$scope.selectedVenue = markerInfo.venue != null ? markerInfo.venue : {
+                    id: '',
+                    description: '',
+                    title: markerInfo.place.name,
+                    address: markerInfo.place.formatted_address,
+                    url: markerInfo.place.url,
+                    location: {
+                        latitude: markerInfo.place.geometry.location.lat(),
+                        longitude: markerInfo.place.geometry.location.lng(),
+                        reference: markerInfo.place.reference
+                    },
+                    votes: 0,
+                    rating: 0
+                };
 
                 this.$scope.venueInfoWindow.open(this.$scope.map, markerInfo.marker);
             };

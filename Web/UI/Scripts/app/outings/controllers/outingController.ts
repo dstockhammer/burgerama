@@ -21,7 +21,7 @@ module Burgerama.Outings {
         }
 
         private load() {
-            return this.outingResource.all(data => {
+            this.outingResource.all(data => {
                 this.$scope.outings = data;
                 this.$rootScope.$broadcast('OutingsLoaded', this.$scope.outings);
             }, err => {
@@ -30,7 +30,7 @@ module Burgerama.Outings {
         }
 
         private panTo(outing: IOuting) {
-            this.$rootScope.$broadcast('PanToClicked', outing.venue);
+            this.$rootScope.$broadcast('VenueSelected', outing.venue);
         }
     }
 }
