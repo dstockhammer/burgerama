@@ -60,7 +60,8 @@ module Burgerama.Venues {
             private $modalInstance,
             private venueResource,
             private toaster,
-            private venue)
+            private venue,
+            private closeCallback)
         {
             this.$scope.venue = venue;
             this.$scope.ok = () => this.ok();
@@ -69,6 +70,7 @@ module Burgerama.Venues {
 
         private ok() {
             this.$modalInstance.close();
+            this.closeCallback();
 
             var resource = new this.venueResource(this.$scope.venue);
             resource.$create(() => {
@@ -87,6 +89,7 @@ module Burgerama.Venues {
 
         private cancel() {
             this.$modalInstance.dismiss();
+            this.closeCallback();
         }
     }
 }
@@ -94,6 +97,6 @@ module Burgerama.Venues {
 Burgerama.app.controller('VenueController', ['$rootScope', '$scope', '$modal', 'VenueResource', 'toaster', ($rootScope, $scope, $modal, venueResource, toaster) =>
     new Burgerama.Venues.VenueController($rootScope, $scope, $modal, venueResource, toaster)
 ]);
-Burgerama.app.controller('AddVenueController', ['$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', 'venue', ($rootScope, $scope, $modalInstance, venueResource, toaster, venue) =>
-    new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue)
+Burgerama.app.controller('AddVenueController', ['$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', 'venue', 'closeCallback', ($rootScope, $scope, $modalInstance, venueResource, toaster, venue, closeCallback) =>
+    new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue, closeCallback)
 ]);

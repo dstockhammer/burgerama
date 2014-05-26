@@ -27,7 +27,9 @@ var Burgerama;
                     panControl: true,
                     zoom: 15
                 };
-                this.$scope.mapOptions = this.options;
+                // todo: this is used in a workaround. see showAddVenueModal() for details.
+                this.openModals = 0;
+                this.$scope.options = this.options;
                 this.$scope.markers = new Array();
 
                 this.$scope.selectedVenue = null;
@@ -86,12 +88,26 @@ var Burgerama;
             };
 
             MapController.prototype.showAddVenueModal = function (venue) {
+                var _this = this;
+                // todo: the whole openModals and closeCallback thing is a workaround for an issue
+                // with ng-click in the info window. the handler is registered every time a window
+                // is opened and is never unregistered, so the number increases every time. hopefully
+                // there is a better(proper?) way to resolve this issue, so please investigate.
+                if (this.openModals > 0)
+                    return;
+
+                this.openModals++;
                 this.$modal.open({
                     templateUrl: '/Scripts/app/venues/views/addVenue.modal.html',
                     controller: 'AddVenueController',
                     resolve: {
                         venue: function () {
                             return venue;
+                        },
+                        closeCallback: function () {
+                            return function () {
+                                _this.openModals--;
+                            };
                         }
                     }
                 });
@@ -163,11 +179,6 @@ var Burgerama;
                         animation: google.maps.Animation.DROP
                     })
                 };
-
-                // todo: bug: this adds the listener multiple times. fix plx!
-                google.maps.event.addListener(markerInfo.marker, 'click', function () {
-                    _this.openMarkerInfo(markerInfo);
-                });
 
                 this.$scope.markers.push(markerInfo);
             };

@@ -16,7 +16,7 @@ module Burgerama.Map {
 
     export interface IMapScope extends ng.IScope {
         map: google.maps.Map;
-        mapOptions: google.maps.MapOptions;
+        options: google.maps.MapOptions;
         markers: Array<IMarkerInfo>;
 
         selectedVenue: Venues.IVenue;
@@ -25,7 +25,7 @@ module Burgerama.Map {
         clearSearch: () => void;
         showAddVenueModal: (venue: Venues.IVenue) => void;
         openMarkerInfo: (markerInfo: IMarkerInfo) => void;
-
+        
         venueInfoWindow: any;
     }
 
@@ -42,12 +42,15 @@ module Burgerama.Map {
             zoom: 15
         };
 
+        // todo: this is used in a workaround. see showAddVenueModal() for details.
+        private openModals = 0;
+
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: IMapScope,
             private $modal)
         {
-            this.$scope.mapOptions = this.options;
+            this.$scope.options = this.options;
             this.$scope.markers = new Array<IMarkerInfo>();
 
             this.$scope.selectedVenue = null;
@@ -95,12 +98,23 @@ module Burgerama.Map {
         }
 
         private showAddVenueModal(venue: Venues.IVenue) {
+            // todo: the whole openModals and closeCallback thing is a workaround for an issue
+            // with ng-click in the info window. the handler is registered every time a window
+            // is opened and is never unregistered, so the number increases every time. hopefully
+            // there is a better(proper?) way to resolve this issue, so please investigate.
+            if (this.openModals > 0)
+                return;
+
+            this.openModals++;
             this.$modal.open({
                 templateUrl: '/Scripts/app/venues/views/addVenue.modal.html',
                 controller: 'AddVenueController',
                 resolve: {
                     venue: () => {
                         return venue;
+                    },
+                    closeCallback: () => {
+                        return () => { this.openModals--; };
                     }
                 }
             });
@@ -168,12 +182,7 @@ module Burgerama.Map {
                     animation: google.maps.Animation.DROP
                 })
             }
-
-            // todo: bug: this adds the listener multiple times. fix plx!
-            google.maps.event.addListener(markerInfo.marker, 'click', () => {
-                this.openMarkerInfo(markerInfo);
-            });
-
+            
             this.$scope.markers.push(markerInfo);
         }
 

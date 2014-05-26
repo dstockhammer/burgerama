@@ -49,7 +49,7 @@ var Burgerama;
         Venues.VenueController = VenueController;
 
         var AddVenueController = (function () {
-            function AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue) {
+            function AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue, closeCallback) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
@@ -57,6 +57,7 @@ var Burgerama;
                 this.venueResource = venueResource;
                 this.toaster = toaster;
                 this.venue = venue;
+                this.closeCallback = closeCallback;
                 this.$scope.venue = venue;
                 this.$scope.ok = function () {
                     return _this.ok();
@@ -68,6 +69,7 @@ var Burgerama;
             AddVenueController.prototype.ok = function () {
                 var _this = this;
                 this.$modalInstance.close();
+                this.closeCallback();
 
                 var resource = new this.venueResource(this.$scope.venue);
                 resource.$create(function () {
@@ -86,6 +88,7 @@ var Burgerama;
 
             AddVenueController.prototype.cancel = function () {
                 this.$modalInstance.dismiss();
+                this.closeCallback();
             };
             return AddVenueController;
         })();
@@ -100,8 +103,8 @@ Burgerama.app.controller('VenueController', [
     }
 ]);
 Burgerama.app.controller('AddVenueController', [
-    '$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', 'venue', function ($rootScope, $scope, $modalInstance, venueResource, toaster, venue) {
-        return new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue);
+    '$rootScope', '$scope', '$modalInstance', 'VenueResource', 'toaster', 'venue', 'closeCallback', function ($rootScope, $scope, $modalInstance, venueResource, toaster, venue, closeCallback) {
+        return new Burgerama.Venues.AddVenueController($rootScope, $scope, $modalInstance, venueResource, toaster, venue, closeCallback);
     }
 ]);
 //# sourceMappingURL=venueController.js.map

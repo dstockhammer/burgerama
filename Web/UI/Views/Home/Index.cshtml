@@ -3,7 +3,7 @@
 <section id="map" ng-controller="MapController">
     <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" class="form-control">
 
-    <div ng-repeat="markerInfo in markers" ui-map-marker="markers[$index]"
+    <div ng-repeat="markerInfo in markers" ui-map-marker="markers[$index].marker"
          ui-event="{'map-click': 'openMarkerInfo(markerInfo)'}">
     </div>
 
@@ -19,13 +19,13 @@
         </div>
     </div>
 
-    <div id="map-canvas" ui-map="map" ui-options="mapOptions"></div>
+    <div id="map-canvas" ui-map="map" ui-options="options"></div>
 </section>
 
 <div class="container-fluid" id="main">
     <div class="row">
         <div class="col-xs-8">
-            @* map-canvas will be postioned here *@
+            <!-- map-canvas will be postioned here -->
         </div>
 
         <div class="col-xs-4" id="sidebar">
