@@ -2,11 +2,11 @@
 
 <section id="map" ng-controller="MapController">
     <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" class="form-control">
-        
+
     <div ng-repeat="markerInfo in markers" ui-map-marker="markers[$index]"
          ui-event="{'map-click': 'openMarkerInfo(markerInfo)'}">
     </div>
-    
+
     <div ui-map-info-window="venueInfoWindow" class="info-window">
         <div class="content">
             <h3>{{ selectedVenue.title }}</h3>
@@ -15,8 +15,7 @@
             <p ng-hide="selectedVenue.address == ''">{{ selectedVenue.address }}</p>
         </div>
         <div class="buttons" ng-show="selectedVenue.id == ''">
-            <button type="button" class="btn btn-default" ng-click="clearSearch();"><span class="glyphicon glyphicon-remove"></span> Clear</button>
-            <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);"><span class="glyphicon glyphicon-asterisk"></span> Suggest</button>
+            <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);">Suggest</button>
         </div>
     </div>
 
@@ -30,33 +29,36 @@
         </div>
 
         <div class="col-xs-4" id="sidebar">
-            @*<div ng-controller="AccountController" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li ng-show="!signedIn">
-                <a href ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</a>
-            </li>
+            <nav class="navbar navbar-primary navbar-inverse" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <h1>Burgerama</h1>
+                    </div>
 
-            <li class="dropdown open" ng-show="signedIn">
-                <a href class="dropdown-toggle" data-toggle="dropdown">
-                    <img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" class="img-circle" width="25" />
-                    <span>{{ user.email }}</span>
-                    <span class="caret hidden-sm hidden-xs"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href><span class="glyphicon glyphicon-wrench"></span><span class="label label-warning pull-right">NYI</span> Settings</a></li>
-                    <li><a href ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>*@
+                    <ul class="nav navbar-nav navbar-right" ng-controller="AccountController">
+                        <li ng-hide="signedIn"><a href ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+                        <li ng-show="signedIn" class="dropdown user-info">
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="user-image"><img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" class="img-circle" height="40" width="40" /></span>
+                                <span class="user-name">{{ user.given_name }} <strong>{{ user.family_name }}</strong></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href><span class="glyphicon glyphicon-wrench"></span><span class="label label-warning pull-right">NYI</span> Settings</a></li>
+                                <li><a href ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-            <ul class="nav nav-pills">
+            <ul class="nav navbar-secondary nav-pills">
                 <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
                 <li ui-sref-active="active"><a ui-sref="venues">Venues</a></li>
                 <li ui-sref-active="active"><a ui-sref="outings">Outings</a></li>
-                <li ui-sref-active="active"><a ui-sref="calendar">Calendar</a></li>
+                <li ui-sref-active="active" class="disabled"><a ui-sref="calendar">Calendar</a></li>
             </ul>
-            
+
             <section ui-view></section>
         </div>
     </div>
