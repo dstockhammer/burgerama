@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Burgerama.Common.Authentication.Identity;
+using Burgerama.Messaging.Events;
+using Burgerama.Services.Voting.Domain.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Burgerama.Common.Authentication.Identity;
-using Burgerama.Messaging.Events;
-using Burgerama.Services.Voting.Domain.Contracts;
 
 namespace Burgerama.Services.Voting.Api.Controllers
 {
-    [Authorize]
+    ///[Authorize]
     public class VotingController : ApiController
     {
         private readonly IVenueRepository _venueRepository;

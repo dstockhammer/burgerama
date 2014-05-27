@@ -3,11 +3,12 @@ var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
-            function VenueDetailsController($rootScope, $scope, venueResource, toaster, venueId) {
+            function VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
                 this.venueResource = venueResource;
+                this.voteResource = voteResource;
                 this.toaster = toaster;
                 this.venueId = venueId;
                 this.$scope.venue = null;
@@ -32,10 +33,31 @@ var Burgerama;
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
+
+                this.voteResource.get({ id: this.venueId }, function (data) {
+                    _this.$scope.venue.votes = data.count();
+                    _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
+                }, function (err) {
+                    _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                });
             };
 
             VenueDetailsController.prototype.addVote = function (venue) {
-                console.log('add vote clicked');
+                var _this = this;
+                var resource = new this.voteResource(this.$scope.venue);
+                resource.$create(function () {
+                    _this.toaster.pop('success', 'Success', 'Added vote for venue: ' + _this.$scope.venue.title);
+                    _this.$rootScope.$emit('VenueVoted', _this.$scope.venue);
+                    console.log('add vote clicked');
+                }, function (err) {
+                    if (err.status == 401) {
+                        _this.toaster.pop('error', 'Unauthorized', 'You are not authorized to vote on venues. Please log in or create an account.');
+                    } else if (err.status == 409) {
+                        _this.toaster.pop('error', 'Conflict', 'You have already voted on this venue.');
+                    } else {
+                        _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                    }
+                });
             };
             return VenueDetailsController;
         })();
@@ -45,8 +67,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', 'VenueResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, toaster, venueId) {
-        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, toaster, venueId);
+    '$rootScope', '$scope', 'VenueResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
+        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId);
     }
 ]);
 //# sourceMappingURL=venueDetailsController.js.map

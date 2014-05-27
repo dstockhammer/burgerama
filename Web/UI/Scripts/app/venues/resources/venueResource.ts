@@ -20,7 +20,7 @@ module Burgerama.Venues {
 }
 
 Burgerama.app.factory('VenueResource', ['$resource', $resource => {
-    return $resource('http://api.dev.burgerama.co.uk/venues/:id', {
+    return $resource('http://api.dev.burgerama.co.uk/voting/venue/:id', {
         id: '@id'
     }, {
         all: { method: 'GET', isArray: true },

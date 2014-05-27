@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Burgerama.Common.MongoDb;
+﻿using Burgerama.Common.MongoDb;
 using Burgerama.Services.Voting.Data.Converters;
 using Burgerama.Services.Voting.Data.Models;
 using Burgerama.Services.Voting.Domain;
@@ -9,6 +6,9 @@ using Burgerama.Services.Voting.Domain.Contracts;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Burgerama.Services.Voting.Data
 {
@@ -22,7 +22,8 @@ namespace Burgerama.Services.Voting.Data
         public Venue Get(Guid venueId)
         {
             var query = Query<VenueModel>.EQ(v => v.Id, venueId.ToString());
-            return Venues.FindOne(query).ToDomain();
+            var venue = Venues.FindOne(query);
+            return venue != null ? venue.ToDomain() : null;
         }
 
         public IEnumerable<Venue> GetVotesForUser(string userId)

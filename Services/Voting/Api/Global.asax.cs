@@ -1,8 +1,7 @@
-﻿using System.Web;
-using System.Web.Http;
-using Burgerama.Services.Voting.Api;
-using Burgerama.Services.Voting.Api.DI;
+﻿using Burgerama.Services.Voting.Api;
 using Microsoft.Owin;
+using System.Web;
+using System.Web.Http;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -13,7 +12,7 @@ namespace Burgerama.Services.Voting.Api
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            GlobalConfiguration.Configuration.DependencyResolver = new HttpDependencyResolver();
+            GlobalConfiguration.Configure(AutofacConfig.Register);
 
             GlobalConfiguration.Configuration.EnsureInitialized();
         }
