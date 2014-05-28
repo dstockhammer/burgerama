@@ -3,7 +3,7 @@ using RestSharp;
 using System;
 using System.Configuration;
 
-namespace Burgerama.Common.DataAccess
+namespace Burgerama.Common.DataAccess.Rest
 {
     public abstract class RestRepository
     {

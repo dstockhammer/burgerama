@@ -1,4 +1,4 @@
-﻿using Burgerama.Common.DataAccess;
+﻿using Burgerama.Common.DataAccess.Rest;
 using Burgerama.Services.OutingScheduler.Data.Rest.Converters;
 using Burgerama.Services.OutingScheduler.Data.Rest.Models;
 using Burgerama.Services.OutingScheduler.Domain;

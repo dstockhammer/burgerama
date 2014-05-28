@@ -102,11 +102,15 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Burgerama.Common.Configuration">
+    <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Configuration.0.2.0\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.DataAccess">
-      <HintPath>..\packages\Burgerama.Common.DataAccess.0.1.1\lib\net451\Burgerama.Common.DataAccess.dll</HintPath>
+    <Reference Include="Burgerama.Common.DataAccess.MongoDB">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.1.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Common.DataAccess.Rest">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.Rest.0.1.0\lib\net451\Burgerama.Common.DataAccess.Rest.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -116,7 +120,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -136,13 +141,13 @@
     <Compile Include="VenueRestRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

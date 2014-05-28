@@ -1,4 +1,4 @@
-﻿using Burgerama.Common.DataAccess;
+﻿using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Users.Data.Models;
 using Burgerama.Services.Users.Domain;
 using Burgerama.Services.Users.Domain.Contracts;

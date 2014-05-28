@@ -4,7 +4,7 @@ using System;
 using System.Configuration;
 using System.Diagnostics.Contracts;
 
-namespace Burgerama.Common.DataAccess
+namespace Burgerama.Common.DataAccess.MongoDB
 {
     public abstract class MongoDbRepository
     {

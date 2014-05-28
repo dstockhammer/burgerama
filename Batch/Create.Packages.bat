@@ -1,0 +1,5 @@
+nuget.exe pack "..\Common\Authentication\Authentication.nuspec" -OutputDirectory "..\Common\packages-outputs"
+nuget.exe pack "..\Common\Configuration\Configuration.nuspec" -OutputDirectory "..\Common\packages-outputs"
+nuget.exe pack "..\Common\DataAccess.MongoDB\DataAccess.MongoDB.nuspec" -OutputDirectory "..\Common\packages-outputs"
+nuget.exe pack "..\Common\DataAccess.Rest\DataAccess.Rest.nuspec" -OutputDirectory "..\Common\packages-outputs"
+nuget.exe pack "..\Common\Logging\Logging.nuspec" -OutputDirectory "..\Common\packages-outputs"

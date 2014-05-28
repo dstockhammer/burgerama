@@ -1,4 +1,4 @@
-﻿using Burgerama.Common.DataAccess;
+﻿using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Venues.Data.Converters;
 using Burgerama.Services.Venues.Data.Models;
 using Burgerama.Services.Venues.Domain;

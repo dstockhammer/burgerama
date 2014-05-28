@@ -1,4 +1,4 @@
-﻿using Burgerama.Common.DataAccess;
+﻿using Burgerama.Common.DataAccess.MongoDB;
 
 namespace Burgerama.Services.Venues.Tests.Data
 {
