@@ -1,6 +1,6 @@
 ﻿Burgerama.app.factory('VoteResource', [
-    '$resource', function ($resource) {
-        return $resource('http://api.dev.burgerama.co.uk/voting/venue/:id', {
+    '$resource', 'configuration', function ($resource, config) {
+        return $resource(config.url.voting + '/venue/:id', {
             id: '@id'
         }, {
             all: { method: 'GET', isArray: true },

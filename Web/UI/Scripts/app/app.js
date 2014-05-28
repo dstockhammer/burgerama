@@ -20,10 +20,10 @@ var Burgerama;
         'toaster',
         'truncate',
         'auth0'
-    ]);
+    ]).constant('configuration', config);
 
     Burgerama.app.config([
-        '$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, authProvider) {
+        '$httpProvider', '$stateProvider', '$urlRouterProvider', 'configuration', 'authProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, config, authProvider) {
             $httpProvider.interceptors.push('AuthHttpInterceptor');
             $httpProvider.defaults.transformResponse.push(function (responseData) {
                 Burgerama.Util.convertDateStringsToDates(responseData);
@@ -61,9 +61,9 @@ var Burgerama;
             });
 
             authProvider.init({
-                domain: 'burgerama.auth0.com',
-                clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
-                callbackURL: "http://dev.burgerama.co.uk/"
+                domain: config.auth0.domain,
+                clientID: config.auth0.clientId,
+                callbackURL: config.url.fronted
             });
         }]);
 })(Burgerama || (Burgerama = {}));

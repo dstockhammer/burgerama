@@ -4,6 +4,8 @@
 'use strict';
 
 module Burgerama {
+    declare var config: any;
+
     export interface IBurgeramaScope extends ng.IRootScopeService {
         email: string;
         token: string;
@@ -12,7 +14,7 @@ module Burgerama {
     export function initialize() {
         angular.bootstrap(document, ['burgerama']);
     }
-
+    
     export var app: ng.IModule = angular.module('burgerama', [
         // Angular modules
         'ngResource',
@@ -30,9 +32,9 @@ module Burgerama {
         'toaster',
         'truncate',
         'auth0'
-    ]);
+    ]).constant('configuration', config);
 
-    app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, authProvider) => {
+    app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'configuration', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, config, authProvider) => {
         $httpProvider.interceptors.push('AuthHttpInterceptor');
         $httpProvider.defaults.transformResponse.push(responseData => {
             Util.convertDateStringsToDates(responseData);
@@ -74,9 +76,9 @@ module Burgerama {
         });
 
         authProvider.init({
-            domain: 'burgerama.auth0.com',
-            clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
-            callbackURL: "http://dev.burgerama.co.uk/"
+            domain: config.auth0.domain,
+            clientID: config.auth0.clientId,
+            callbackURL: config.url.fronted
         });
     }]);
 }

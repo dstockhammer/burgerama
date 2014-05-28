@@ -7,27 +7,28 @@ using Autofac;
 using Burgerama.Common.Configuration;
 using MassTransit;
 using Serilog;
+using Module = Autofac.Module;
 
-namespace Burgerama.Messaging.MassTransit.Autofac
+namespace Burgerama.Messaging.MassTransit
 {
-    public static class ContainerBuilderExtensions
+    /// <summary>
+    /// The MassTransit service bus module registers the service bus as <see cref="IServiceBus"/>. Additionally,
+    /// every class in the executing assembly that implements <see cref="IConsumer"/> is registered as consumer.
+    /// </summary>
+    /// <remarks>
+    /// The service bus is constructed and started the first time that <see cref="IServiceBus"/> is resolved.
+    /// </remarks>
+    public sealed class ServiceBusModule : Module
     {
-        public static ContainerBuilder RegisterServiceBus(this ContainerBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {
             builder.Register(GetServiceBus)
                 .As<IServiceBus>()
                 .SingleInstance();
 
-            return builder;
-        }
-
-        public static ContainerBuilder RegisterConsumers(this ContainerBuilder builder)
-        {
             builder.RegisterAssemblyTypes(GetEntryAssembly())
                 .Where(t => t.GetInterfaces().Contains(typeof(IConsumer)))
                 .AsSelf();
-
-            return builder;
         }
 
         private static IServiceBus GetServiceBus(IComponentContext context)

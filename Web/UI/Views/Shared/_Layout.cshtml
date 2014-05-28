@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Configuration
+<!DOCTYPE html>
 <html lang="en" data-framework="angularjs">
     <head>
         <meta charset="utf-8" />
@@ -11,6 +12,20 @@
 <body>
     <div id="loading-overlay" ng-hide="loaded"><div class="content"><div class="loading-spinner spin-m"></div></div></div>
     @RenderBody()
+    <script type="text/javascript">
+        var config = {
+            'url': {
+                'frontend':'@ConfigurationManager.AppSettings["url:frontend"]',
+                'venues': '@ConfigurationManager.AppSettings["url:venues"]',
+                'outings': '@ConfigurationManager.AppSettings["url:outings"]',
+                'voting': '@ConfigurationManager.AppSettings["url:voting"]',
+                'rating': '@ConfigurationManager.AppSettings["url:rating"]',
+            },
+            'auth0': {
+                'domain': '@ConfigurationManager.AppSettings["auth0:domain"]',
+                'clientId': '@ConfigurationManager.AppSettings["auth0:clientId"]',
+        }};
+    </script>
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/burgerama")
     @RenderSection("scripts", required: false)

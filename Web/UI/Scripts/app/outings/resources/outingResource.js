@@ -1,8 +1,8 @@
 ﻿/// <reference path="../../app.ts" />
 
 Burgerama.app.factory('OutingResource', [
-    '$resource', function ($resource) {
-        return $resource('http://api.dev.burgerama.co.uk/outings/:id', {
+    '$resource', 'configuration', function ($resource, config) {
+        return $resource(config.url.outings + '/:id', {
             id: '@id'
         }, {
             all: { method: 'GET', isArray: true }

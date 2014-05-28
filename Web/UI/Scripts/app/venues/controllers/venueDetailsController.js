@@ -44,7 +44,7 @@ var Burgerama;
 
             VenueDetailsController.prototype.addVote = function (venue) {
                 var _this = this;
-                var resource = new this.voteResource(this.$scope.venue);
+                var resource = new this.voteResource({ id: this.$scope.venue.id });
                 resource.$create(function () {
                     _this.toaster.pop('success', 'Success', 'Added vote for venue: ' + _this.$scope.venue.title);
                     _this.$rootScope.$emit('VenueVoted', _this.$scope.venue);
@@ -67,7 +67,7 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', 'VenueResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
+    '$rootScope', '$scope', 'VenueResource', 'VoteResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
         return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId);
     }
 ]);
