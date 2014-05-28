@@ -2,10 +2,10 @@
 
 call Solution.Common.bat
 call Solution.Messaging.bat
-call Solution.Services.Outings.bat
-call Solution.Services.Ratings.bat
-call Solution.Services.Users.bat
-call Solution.Services.Venues.bat
-call Solution.Services.Voting.bat
-call Solution.Services.OutingsScheduler.bat
-call Solution.Web.bat
+START cmd /c Solution.Services.Outings.bat
+START cmd /c Solution.Services.Ratings.bat
+START cmd /c Solution.Services.Users.bat
+START cmd /c Solution.Services.Venues.bat
+START cmd /c Solution.Services.Voting.bat
+START cmd /c Solution.Services.OutingsScheduler.bat
+START cmd /c Solution.Web.bat

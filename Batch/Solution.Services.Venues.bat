@@ -7,6 +7,7 @@ set slnvar="Burgerama.Services.Venues.sln"
 
 call Copy.Configs.bat %pthvar%Api\Config\
 call Copy.Configs.bat %pthvar%Endpoint\Config\
+call Copy.Configs.bat %pthvar%Tests\Config\
 
 if [%1]==[] ( call Restore.Build.bat %pthvar% %slnvar%
 ) else ( call Restore.Build.bat %pthvar% %slnvar% silent)
