@@ -27,23 +27,4 @@
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Validate Include="Burgerama.Services.Interfaces.layerdiagram">
-      <SubType>Content</SubType>
-    </Validate>
-    <Validate Include="Burgerama.Services.Interfaces.layerdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>Burgerama.Services.Interfaces.layerdiagram</DependentUpon>
-    </Validate>
-    <Validate Include="Burgerama.Services.Interfaces.layerdiagram.suppressions">
-      <SubType>Content</SubType>
-      <DependentUpon>Burgerama.Services.Interfaces.layerdiagram</DependentUpon>
-    </Validate>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Voting\Api\Api.csproj">
-      <Name>Api</Name>
-      <Project>{0c4576e3-765d-4f91-8b32-3a7a01b29200}</Project>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

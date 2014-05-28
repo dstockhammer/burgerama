@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+		<metadata>
+				<id>Burgerama.Common.DataAccess</id>
+				<version>0.1.1</version>
+				<title>Burgerama DataAccess</title>
+				<authors>dstockhammer, zoltansimari</authors>
+				<projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
+				<iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
+				<licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
+				<requireLicenseAcceptance>false</requireLicenseAcceptance>
+				<description>Data access library.</description>
+				<dependencies>
+						<group targetFramework=".NETFramework4.5.1">
+								<dependency id="mongocsharpdriver" version="1.9.1" />
+								<dependency id="RestSharp" version="104.4.0" />
+								<dependency id="Burgerama.Common.Configuration" version="0.2.0" />
+						</group>
+						<group />
+				</dependencies>
+		</metadata>
+	<files>
+		<file src="bin\Release\Burgerama.Common.DataAccess.dll" target="lib\net451\Burgerama.Common.DataAccess.dll" />
+	</files>
+</package>

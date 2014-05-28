@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Burgerama.Common.MongoDb;
+﻿using Burgerama.Common.DataAccess;
 using Burgerama.Services.Users.Data.Models;
 using Burgerama.Services.Users.Domain;
 using Burgerama.Services.Users.Domain.Contracts;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Burgerama.Services.Users.Data
 {

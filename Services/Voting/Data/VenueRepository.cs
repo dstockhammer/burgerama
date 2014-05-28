@@ -1,4 +1,4 @@
-﻿using Burgerama.Common.MongoDb;
+﻿using Burgerama.Common.DataAccess;
 using Burgerama.Services.Voting.Data.Converters;
 using Burgerama.Services.Voting.Data.Models;
 using Burgerama.Services.Voting.Domain;

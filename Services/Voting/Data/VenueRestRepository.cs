@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Burgerama.Common.DataAccess;
 using Burgerama.Services.Voting.Data.Converters;
 using Burgerama.Services.Voting.Data.Models;
 using Burgerama.Services.Voting.Domain;
-using Burgerama.Services.Voting.Domain.Contracts;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Burgerama.Services.Voting.Data
 {
