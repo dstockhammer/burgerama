@@ -2,7 +2,7 @@
 
 Burgerama.app.factory('VenueResource', [
     '$resource', function ($resource) {
-        return $resource('http://api.dev.burgerama.co.uk/voting/venue/:id', {
+        return $resource('http://api.dev.burgerama.co.uk/venues/:id', {
             id: '@id'
         }, {
             all: { method: 'GET', isArray: true },
