@@ -1,6 +1,6 @@
 ﻿using Burgerama.Services.Outings.Domain;
 
-namespace Burgerama.Services.Outings.Data.Models
+namespace Burgerama.Services.Outings.Data.Rest.Models
 {
     internal sealed class VenueModel
     {

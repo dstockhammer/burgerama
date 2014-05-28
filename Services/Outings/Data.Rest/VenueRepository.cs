@@ -1,6 +1,6 @@
 ﻿using Burgerama.Common.DataAccess.Rest;
-using Burgerama.Services.Outings.Data.Converters;
-using Burgerama.Services.Outings.Data.Models;
+using Burgerama.Services.Outings.Data.Rest.Converters;
+using Burgerama.Services.Outings.Data.Rest.Models;
 using Burgerama.Services.Outings.Domain;
 using Burgerama.Services.Outings.Domain.Contracts;
 using RestSharp;
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Burgerama.Services.Outings.Data
+namespace Burgerama.Services.Outings.Data.Rest
 {
     public sealed class VenueRepository : RestRepository, IVenueRepository
     {

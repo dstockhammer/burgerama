@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Burgerama.Services.Outings.Data")]
+[assembly: AssemblyTitle("Burgerama.Services.Outings.Data.Rest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0dbc742c-e4bf-4125-adfb-8ec27bc82df1")]
+[assembly: Guid("b2616f46-afa5-479f-b7d9-6fd224c95804")]
 
 // Version information for an assembly consists of the following four values:
 //

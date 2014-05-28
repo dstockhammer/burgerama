@@ -280,9 +280,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data.Rest\Data.Rest.csproj">
+      <Project>{d469c629-e6c6-4e88-b790-32196693e53b}</Project>
+      <Name>Data.Rest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.MongoDB\Data.MongoDB.csproj">
       <Project>{C19D2955-C971-448B-9BAB-4260051DB063}</Project>
-      <Name>Data</Name>
+      <Name>Data.MongoDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>

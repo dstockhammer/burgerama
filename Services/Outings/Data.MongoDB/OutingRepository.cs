@@ -1,6 +1,6 @@
 ﻿using Burgerama.Common.DataAccess.MongoDB;
-using Burgerama.Services.Outings.Data.Converters;
-using Burgerama.Services.Outings.Data.Models;
+using Burgerama.Services.Outings.Data.MongoDB.Converters;
+using Burgerama.Services.Outings.Data.MongoDB.Models;
 using Burgerama.Services.Outings.Domain;
 using Burgerama.Services.Outings.Domain.Contracts;
 using MongoDB.Driver;
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Burgerama.Services.Outings.Data
+namespace Burgerama.Services.Outings.Data.MongoDB
 {
     public sealed class OutingRepository : MongoDbRepository, IOutingRepository
     {

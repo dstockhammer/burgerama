@@ -1,9 +1,9 @@
-﻿using Burgerama.Services.Outings.Data.Models;
+﻿using Burgerama.Services.Outings.Data.Rest.Models;
 using Burgerama.Services.Outings.Domain;
 using System;
 using System.Diagnostics.Contracts;
 
-namespace Burgerama.Services.Outings.Data.Converters
+namespace Burgerama.Services.Outings.Data.Rest.Converters
 {
     internal static class VenueConverter
     {
