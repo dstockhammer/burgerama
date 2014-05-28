@@ -20,10 +20,10 @@ var Burgerama;
         'toaster',
         'truncate',
         'auth0'
-    ]).constant('configuration', config);
+    ]);
 
     Burgerama.app.config([
-        '$httpProvider', '$stateProvider', '$urlRouterProvider', 'configuration', 'authProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, config, authProvider) {
+        '$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, authProvider) {
             $httpProvider.interceptors.push('AuthHttpInterceptor');
             $httpProvider.defaults.transformResponse.push(function (responseData) {
                 Burgerama.Util.convertDateStringsToDates(responseData);
@@ -63,7 +63,7 @@ var Burgerama;
             authProvider.init({
                 domain: config.auth0.domain,
                 clientID: config.auth0.clientId,
-                callbackURL: config.url.fronted
+                callbackURL: config.url.frontend
             });
         }]);
 })(Burgerama || (Burgerama = {}));

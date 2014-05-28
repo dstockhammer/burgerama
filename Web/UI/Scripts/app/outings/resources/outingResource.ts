@@ -9,7 +9,7 @@ module Burgerama.Outings {
     }
 }
 
-Burgerama.app.factory('OutingResource', ['$resource', 'configuration', ($resource, config) => {
+Burgerama.app.factory('OutingResource', ['$resource', $resource => {
     return $resource(config.url.outings + '/:id', {
         id: '@id'
     }, {

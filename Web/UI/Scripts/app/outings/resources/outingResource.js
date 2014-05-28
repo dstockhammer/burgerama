@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../app.ts" />
 
 Burgerama.app.factory('OutingResource', [
-    '$resource', 'configuration', function ($resource, config) {
+    '$resource', function ($resource) {
         return $resource(config.url.outings + '/:id', {
             id: '@id'
         }, {

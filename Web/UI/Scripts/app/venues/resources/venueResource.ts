@@ -19,11 +19,12 @@ module Burgerama.Venues {
     }
 }
 
-Burgerama.app.factory('VenueResource', ['$resource', 'configuration', ($resource, config) => {
-    return $resource(config.url.voting + '/:id', {
+Burgerama.app.factory('VenueResource', ['$resource', $resource => {
+    return $resource(config.url.venues + '/:id', {
         id: '@id'
     }, {
         all: { method: 'GET', isArray: true },
-        get: { method: 'GET' }
+        get: { method: 'GET' },
+        create: { method: 'POST' }
     });
 }]);

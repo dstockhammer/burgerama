@@ -3,18 +3,33 @@
 
 'use strict';
 
+declare var config: Burgerama.IBurgeramaConfig;
+
 module Burgerama {
-    declare var config: any;
+    export interface IBurgeramaConfig {
+        url: IUrlConfig;
+        auth0: IAuth0Config;
+    }
+    export interface IUrlConfig {
+        frontend: string;
+        venues: string;
+        outings: string;
+        voting: string;
+        rating: string;
+    }
+    export interface IAuth0Config {
+        domain: string;
+        clientId: string;
+    }
 
     export interface IBurgeramaScope extends ng.IRootScopeService {
-        email: string;
-        token: string;
+        // nothing here yet
     }
 
     export function initialize() {
         angular.bootstrap(document, ['burgerama']);
     }
-    
+
     export var app: ng.IModule = angular.module('burgerama', [
         // Angular modules
         'ngResource',
@@ -32,9 +47,9 @@ module Burgerama {
         'toaster',
         'truncate',
         'auth0'
-    ]).constant('configuration', config);
+    ]);
 
-    app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'configuration', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, config, authProvider) => {
+    app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 'authProvider', ($httpProvider: ng.IHttpProvider, $stateProvider, $urlRouterProvider, authProvider) => {
         $httpProvider.interceptors.push('AuthHttpInterceptor');
         $httpProvider.defaults.transformResponse.push(responseData => {
             Util.convertDateStringsToDates(responseData);
@@ -78,7 +93,7 @@ module Burgerama {
         authProvider.init({
             domain: config.auth0.domain,
             clientID: config.auth0.clientId,
-            callbackURL: config.url.fronted
+            callbackURL: config.url.frontend
         });
     }]);
 }

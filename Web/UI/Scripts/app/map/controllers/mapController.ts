@@ -79,14 +79,10 @@ module Burgerama.Map {
                 this.clearMarkers();
                 this.addMarkersForAllVenues(venues);
             });
-            this.$scope.$on('$destroy', () => unregisterVenuesLoaded());
-
             var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', (event, outings: Array<Outings.IOuting>) => {
                 this.clearMarkers();
                 this.addMarkersForAllOutings(outings);
             });
-            this.$scope.$on('$destroy', () => unregisterOutingsLoaded());
-
             var unregisterVenueSelected = this.$rootScope.$on('VenueSelected', (event, venue: Venues.IVenue) => {
                 var markerInfos = this.$scope.markers.filter(element => {
                     return element.venue != null && element.venue.id == venue.id;
@@ -98,8 +94,6 @@ module Burgerama.Map {
                 this.$scope.map.panTo(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
                 this.$scope.map.setZoom(this.options.zoom);
             });
-            this.$scope.$on('$destroy', () => unregisterVenueSelected());
-
             var unregisterPlaceSelected = this.$rootScope.$on('PlaceSelected', (event, place: google.maps.places.PlaceResult) => {
                 var markerInfos = this.$scope.markers.filter(element => {
                     return element.place != null && element.place.reference == place.reference;
@@ -111,8 +105,6 @@ module Burgerama.Map {
                 this.$scope.map.panTo(place.geometry.location);
                 this.$scope.map.setZoom(this.options.zoom);
             });
-            this.$scope.$on('$destroy', () => unregisterPlaceSelected());
-
             var unregisterSearchResultsLoaded = this.$rootScope.$on('SearchResultsLoaded', event => {
                 if (this.currentSearchResults.length > 0) {
                     this.clearMarkers();
@@ -122,7 +114,13 @@ module Burgerama.Map {
                 // todo: add a check to ensure this is only emitted if the results actually changed. search id maybe.
                 this.$rootScope.$emit('CurrentSearchUpdated', this.currentSearchResults);
             });
-            this.$scope.$on('$destroy', () => unregisterSearchResultsLoaded());
+            this.$scope.$on('$destroy', () => {
+                unregisterVenuesLoaded();
+                unregisterOutingsLoaded();
+                unregisterVenueSelected();
+                unregisterPlaceSelected();
+                unregisterSearchResultsLoaded();
+            });
         }
 
         private clearSearch() {
