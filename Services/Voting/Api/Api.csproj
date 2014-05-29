@@ -298,9 +298,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data.MongoDB\Data.MongoDB.csproj">
       <Project>{913a2dce-6a4b-4782-bf8e-c9a2df9c92e1}</Project>
-      <Name>Data</Name>
+      <Name>Data.MongoDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}</Project>

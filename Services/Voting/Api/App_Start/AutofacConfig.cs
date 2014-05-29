@@ -4,7 +4,7 @@ using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Events;
-using Burgerama.Services.Voting.Data;
+using Burgerama.Services.Voting.Data.MongoDB;
 using Burgerama.Services.Voting.Domain.Contracts;
 using System;
 using System.Diagnostics.Contracts;

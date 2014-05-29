@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Burgerama.Services.Voting.Data.MongoDB.Models;
+using Burgerama.Services.Voting.Domain;
+using System;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Burgerama.Services.Voting.Domain;
-using Burgerama.Services.Voting.Data.Models;
 
-namespace Burgerama.Services.Voting.Data.Converters
+namespace Burgerama.Services.Voting.Data.MongoDB.Converters
 {
     internal static class VenueConverter
     {

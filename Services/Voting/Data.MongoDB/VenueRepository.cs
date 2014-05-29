@@ -1,6 +1,6 @@
 ﻿using Burgerama.Common.DataAccess.MongoDB;
-using Burgerama.Services.Voting.Data.Converters;
-using Burgerama.Services.Voting.Data.Models;
+using Burgerama.Services.Voting.Data.MongoDB.Converters;
+using Burgerama.Services.Voting.Data.MongoDB.Models;
 using Burgerama.Services.Voting.Domain;
 using Burgerama.Services.Voting.Domain.Contracts;
 using MongoDB.Driver;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Burgerama.Services.Voting.Data
+namespace Burgerama.Services.Voting.Data.MongoDB
 {
     public sealed class VenueRepository : MongoDbRepository, IVenueRepository
     {

@@ -1,13 +1,13 @@
 ﻿using Burgerama.Common.DataAccess.Rest;
-using Burgerama.Services.Voting.Data.Converters;
-using Burgerama.Services.Voting.Data.Models;
+using Burgerama.Services.Voting.Data.Rest.Converters;
+using Burgerama.Services.Voting.Data.Rest.Models;
 using Burgerama.Services.Voting.Domain;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Burgerama.Services.Voting.Data
+namespace Burgerama.Services.Voting.Data.Rest
 {
     public sealed class VenueRestRepository : RestRepository
     {
