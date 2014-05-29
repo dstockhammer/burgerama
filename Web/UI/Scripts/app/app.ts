@@ -82,7 +82,9 @@ module Burgerama {
 }
 
 Burgerama.app.run(['$rootScope', $rootScope => {
-    $rootScope.loaded = true;
+    // give people a second to admire the loading screen
+    setTimeout(() => { $rootScope.loaded = true; }, 1000);
+    
 }]);
 
 angular.element(document).ready(() => {
