@@ -1,7 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Common.Logging;
-using Burgerama.Services.Outings.Data;
+using Burgerama.Services.Outings.Data.MongoDB;
+using Burgerama.Services.Outings.Data.Rest;
 using Burgerama.Services.Outings.Domain.Contracts;
 using System;
 using System.Diagnostics.Contracts;

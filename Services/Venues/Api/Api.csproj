@@ -124,8 +124,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Configuration.0.2.0\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.DataAccess">
-      <HintPath>..\packages\Burgerama.Common.DataAccess.0.1.1\lib\net451\Burgerama.Common.DataAccess.dll</HintPath>
+    <Reference Include="Burgerama.Common.DataAccess.MongoDB">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.1.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -206,9 +206,6 @@
     <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Seq.Client.Serilog, Version=0.5.0.0, Culture=neutral, PublicKeyToken=88fe373b29b321c0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

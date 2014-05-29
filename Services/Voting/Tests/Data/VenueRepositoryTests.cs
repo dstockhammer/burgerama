@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using Burgerama.Services.Voting.Data;
+﻿using Burgerama.Services.Voting.Data.MongoDB;
 using Burgerama.Services.Voting.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 
 namespace Burgerama.Services.Voting.Tests.Data
 {

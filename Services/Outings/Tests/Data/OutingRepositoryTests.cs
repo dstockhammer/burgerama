@@ -1,4 +1,4 @@
-﻿using Burgerama.Services.Outings.Data;
+﻿using Burgerama.Services.Outings.Data.MongoDB;
 using Burgerama.Services.Outings.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

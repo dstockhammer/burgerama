@@ -122,8 +122,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Configuration.0.2.0\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.DataAccess">
-      <HintPath>..\packages\Burgerama.Common.DataAccess.0.1.1\lib\net451\Burgerama.Common.DataAccess.dll</HintPath>
+    <Reference Include="Burgerama.Common.DataAccess.MongoDB">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.1.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Common.DataAccess.Rest">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.Rest.0.1.0\lib\net451\Burgerama.Common.DataAccess.Rest.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.Logging">
       <HintPath>..\packages\Burgerama.Common.Logging.0.1.2\lib\net451\Burgerama.Common.Logging.dll</HintPath>
@@ -181,7 +184,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver">
+    <Reference Include="MongoDB.Driver, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -294,9 +298,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data.MongoDB\Data.MongoDB.csproj">
       <Project>{913a2dce-6a4b-4782-bf8e-c9a2df9c92e1}</Project>
-      <Name>Data</Name>
+      <Name>Data.MongoDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}</Project>
