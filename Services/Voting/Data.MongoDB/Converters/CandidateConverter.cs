@@ -9,7 +9,7 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Converters
 {
     internal static class CandidateConverter
     {
-        public static CandidateModel ToModel(this Candidate candidate)
+        public static CandidateModel ToModel(this Candidate candidate, string contextKey)
         {
             Contract.Requires<ArgumentNullException>(candidate != null);
             Contract.Ensures(Contract.Result<CandidateModel>() != null);
@@ -17,7 +17,9 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Converters
             return new CandidateModel
             {
                 Reference = candidate.Reference.ToString(),
-                Votes = candidate.Votes.Select(v => v.ToModel()).ToList()
+                Votes = candidate.Votes.Select(v => v.ToModel()).ToList(),
+                Expiry = candidate.Expiry,
+                ContextKey = contextKey
             };
         }
 
@@ -27,7 +29,7 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Converters
             Contract.Ensures(Contract.Result<Candidate>() != null);
 
             var id = Guid.Parse(candidate.Reference);
-            return new Candidate(id, candidate.Votes.Select(v => v.ToDomain()));
+            return new Candidate(id, candidate.Votes.Select(v => v.ToDomain()), candidate.Expiry);
         }
     }
 }

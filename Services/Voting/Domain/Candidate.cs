@@ -11,6 +11,9 @@ namespace Burgerama.Services.Voting.Domain
 
         public DateTime? Expiry { get; private set; }
 
+
+        public Candidate(Guid reference, DateTime? expiry = null) : this(reference, new List<Vote>(), expiry) { }
+
         public Candidate(Guid reference, IEnumerable<Vote> votes, DateTime? expiry = null)
         {
             Reference = reference;
@@ -18,11 +21,11 @@ namespace Burgerama.Services.Voting.Domain
             Expiry = expiry;
         }
 
-        public void AddVote(string createdBy, DateTime createdOn)
+        public void Vote(string userId, DateTime votedOn)
         {
-            if (this.Expiry < createdOn)
+            if (this.Expiry != null && this.Expiry < votedOn)
             {
-                
+                this.Votes = new List<Vote>(this.Votes) {new Vote(votedOn, userId)};
             }
         }
 

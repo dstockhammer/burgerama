@@ -31,7 +31,8 @@ namespace Burgerama.Services.Voting.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
+            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
+            builder.RegisterType<ContextRepository>().As<IContextRepository>();
 
             // Logging
             builder.RegisterModule<LoggingModule>();

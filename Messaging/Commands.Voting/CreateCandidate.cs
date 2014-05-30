@@ -7,7 +7,7 @@ namespace Burgerama.Messaging.Commands.Voting
     [EndpointQueue("burgerama.services.voting.endpoint")]
     public sealed class CreateCandidate : ICommand
     {
-        public string Context { get; set; }
+        public string ContextKey { get; set; }
 
         public string Reference { get; set; }
 

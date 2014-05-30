@@ -3,12 +3,10 @@
 namespace Burgerama.Messaging.Events.Voting
 {
     [Serializable]
-    public sealed class VoteAdded : IEvent
+    public sealed class CandidateQueued : IEvent
     {
         public string ContextKey { get; set; }
 
-        public Guid CandidateReference { get; set; }
-
-        public string UserId { get; set; }
+        public Guid Reference { get; set; }
     }
 }
