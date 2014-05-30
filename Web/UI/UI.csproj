@@ -110,6 +110,7 @@
     <Content Include="Content\fonts\roboto\LICENSE.txt" />
     <Content Include="Content\fonts\roboto\Roboto-Light.svg" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.svg" />
+    <Content Include="Content\img\burgerama-large.png" />
     <Content Include="Content\img\map\pin-blue-full.png" />
     <Content Include="Content\img\map\pin-blue-hole.png" />
     <Content Include="Content\img\map\pin-blue-notch.png" />

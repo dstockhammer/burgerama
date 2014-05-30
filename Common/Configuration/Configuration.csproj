@@ -109,6 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConfiguration.cs" />
     <Compile Include="Auth0Configuration.cs" />
     <Compile Include="LoggingConfiguration.cs" />
     <Compile Include="RabbitMqConfiguration.cs" />

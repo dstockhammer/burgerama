@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Burgerama.Common.MongoDb;
+﻿using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Venues.Data.Converters;
 using Burgerama.Services.Venues.Data.Models;
 using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Burgerama.Services.Venues.Data
 {

@@ -3,7 +3,7 @@
     <metadata>
         <id>Burgerama.Common.Logging</id>
         <version>0.1.2</version>
-        <title>Logging</title>
+        <title>Burgerama Logging</title>
         <authors>dstockhammer</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
@@ -11,4 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Logging library using Serilog.</description>
     </metadata>
+	<files>
+		<file src="bin\Release\Burgerama.Common.Logging.dll" target="lib\net451\Burgerama.Common.Logging.dll" />
+	</files>
 </package>

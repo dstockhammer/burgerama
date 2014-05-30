@@ -163,3 +163,4 @@ $RECYCLE.BIN/
 # Confidental Configuration
 *.confidential.config
 
+Common/packages-outputs/

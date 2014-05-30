@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{4353EC3C-4797-4CC5-9108-2239EC718AC7}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1E812BBC-E034-4509-9C88-85F6E06A25AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint", "Endpoint\Endpoint.csproj", "{46308F2F-9492-43CB-8272-1F27668C6299}"
-EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Design", "..\Design\Design.modelproj", "{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{46308F2F-9492-43CB-8272-1F27668C6299}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46308F2F-9492-43CB-8272-1F27668C6299}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46308F2F-9492-43CB-8272-1F27668C6299}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

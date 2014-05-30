@@ -2,7 +2,7 @@
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
-using Burgerama.Services.Outings.Data.MongoDb;
+using Burgerama.Services.Outings.Data.MongoDB;
 using Burgerama.Services.Outings.Domain.Contracts;
 
 namespace Burgerama.Services.Outings.Endpoint

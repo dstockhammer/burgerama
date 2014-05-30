@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{E69CE08F-A8E5-4B51-A4FE-12F4FED662B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDb", "MongoDb\MongoDb.csproj", "{956689D1-5642-4619-B39B-41A21CAE9B98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.MongoDB", "DataAccess.MongoDB\DataAccess.MongoDB.csproj", "{956689D1-5642-4619-B39B-41A21CAE9B98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{99EA579A-01F9-4170-AD51-DD563250A131}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Logging\Logging.csproj", "{81B6A28B-D07F-4587-BBD6-E4509C676B17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Rest", "DataAccess.Rest\DataAccess.Rest.csproj", "{9A19B8B5-F7A3-4444-A64D-2D311D5B123E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{81B6A28B-D07F-4587-BBD6-E4509C676B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B6A28B-D07F-4587-BBD6-E4509C676B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81B6A28B-D07F-4587-BBD6-E4509C676B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A19B8B5-F7A3-4444-A64D-2D311D5B123E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A19B8B5-F7A3-4444-A64D-2D311D5B123E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A19B8B5-F7A3-4444-A64D-2D311D5B123E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A19B8B5-F7A3-4444-A64D-2D311D5B123E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

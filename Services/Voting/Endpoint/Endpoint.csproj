@@ -108,14 +108,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.Configuration">
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.1.8\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
+    <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.2.0\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Common.DataAccess.MongoDB">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.1.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Common.DataAccess.Rest">
+      <HintPath>..\packages\Burgerama.Common.DataAccess.Rest.0.1.0\lib\net451\Burgerama.Common.DataAccess.Rest.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.Logging">
       <HintPath>..\packages\Burgerama.Common.Logging.0.1.2\lib\net451\Burgerama.Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Common.MongoDb">
-      <HintPath>..\packages\Burgerama.Common.MongoDb.0.1.3\lib\net451\Burgerama.Common.MongoDb.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -150,10 +154,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MassTransit.RabbitMQ.2.9.5\lib\net40\MassTransit.Transports.RabbitMq.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Bson">
+    <Reference Include="MongoDB.Bson, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver">
+    <Reference Include="MongoDB.Driver, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -164,21 +170,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Seq.Client.Serilog">
       <HintPath>..\packages\Seq.Client.Serilog.2.0.15\lib\net45\Seq.Client.Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.1.3.20\lib\net45\Serilog.dll</HintPath>
+      <HintPath>..\packages\Serilog.1.3.24\lib\net45\Serilog.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Extras.Topshelf">
-      <HintPath>..\packages\Serilog.Extras.Topshelf.1.3.20\lib\net45\Serilog.Extras.Topshelf.dll</HintPath>
+    <Reference Include="Serilog.Extras.Topshelf, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Serilog.Extras.Topshelf.1.3.24\lib\net45\Serilog.Extras.Topshelf.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx">
-      <HintPath>..\packages\Serilog.1.3.20\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\packages\Serilog.1.3.24\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Sinks.Logentries">
-      <HintPath>..\packages\Serilog.Sinks.Logentries.1.3.20\lib\net45\Serilog.Sinks.Logentries.dll</HintPath>
+    <Reference Include="Serilog.Sinks.Logentries, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Serilog.Sinks.Logentries.1.3.24\lib\net45\Serilog.Sinks.Logentries.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -214,9 +226,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data.MongoDB\Data.MongoDB.csproj">
       <Project>{913A2DCE-6A4B-4782-BF8E-C9A2DF9C92E1}</Project>
-      <Name>Data</Name>
+      <Name>Data.MongoDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}</Project>

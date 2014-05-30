@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Burgerama.Common.Configuration</id>
-        <version>0.1.8</version>
-        <title>Configuration</title>
-        <authors>dstockhammer</authors>
+        <version>0.2.0</version>
+        <title>Burgerama Configuration</title>
+        <authors>dstockhammer, zoltansimari</authors>
         <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
         <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
@@ -14,4 +14,7 @@
             <frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
         </frameworkAssemblies>
     </metadata>
+	<files>
+		<file src="bin\Release\Burgerama.Common.Configuration.dll" target="lib\net451\Burgerama.Common.Configuration.dll" />
+	</files>
 </package>

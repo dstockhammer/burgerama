@@ -2,7 +2,7 @@
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.MassTransit.Autofac;
 using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
-using Burgerama.Services.Voting.Data;
+using Burgerama.Services.Voting.Data.MongoDB;
 using Burgerama.Services.Voting.Domain.Contracts;
 
 namespace Burgerama.Services.Voting.Endpoint
