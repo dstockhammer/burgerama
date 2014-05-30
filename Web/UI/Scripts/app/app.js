@@ -61,9 +61,9 @@ var Burgerama;
             });
 
             authProvider.init({
-                domain: 'burgerama.auth0.com',
-                clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
-                callbackURL: "http://dev.burgerama.co.uk/"
+                domain: config.auth0.domain,
+                clientID: config.auth0.clientId,
+                callbackURL: config.url.frontend
             });
         }]);
 })(Burgerama || (Burgerama = {}));

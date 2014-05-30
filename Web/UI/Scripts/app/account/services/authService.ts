@@ -54,7 +54,7 @@ module Burgerama.Account {
             this.localStorageService.remove('user');
             this.localStorageService.remove('token');
 
-            this.$rootScope.$emit('SignOut');
+            this.$rootScope.$emit('UserSignedOut');
             this.toaster.pop('success', 'Success', 'You signed out. Bye!');
         }
 
@@ -62,12 +62,12 @@ module Burgerama.Account {
             this.localStorageService.add('user', this.auth.profile);
             this.localStorageService.add('token', this.auth.idToken);
 
-            this.$rootScope.$emit('SignIn');
+            this.$rootScope.$emit('UserSignedIn');
             this.toaster.pop('success', 'Success', 'Signed in as ' + this.getUser().email + '.');
         }
     }
 }
 
-Burgerama.app.service('AuthService', ['$rootScope',  'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', ($rootScope, toaster, auth, authEvents, localStorageService) =>
+Burgerama.app.service('AuthService', ['$rootScope', 'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', ($rootScope, toaster, auth, authEvents, localStorageService) =>
     new Burgerama.Account.AuthService($rootScope, toaster, auth, authEvents, localStorageService)
 ]);

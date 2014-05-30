@@ -50,7 +50,7 @@ var Burgerama;
                 this.localStorageService.remove('user');
                 this.localStorageService.remove('token');
 
-                this.$rootScope.$emit('SignOut');
+                this.$rootScope.$emit('UserSignedOut');
                 this.toaster.pop('success', 'Success', 'You signed out. Bye!');
             };
 
@@ -58,7 +58,7 @@ var Burgerama;
                 this.localStorageService.add('user', this.auth.profile);
                 this.localStorageService.add('token', this.auth.idToken);
 
-                this.$rootScope.$emit('SignIn');
+                this.$rootScope.$emit('UserSignedIn');
                 this.toaster.pop('success', 'Success', 'Signed in as ' + this.getUser().email + '.');
             };
             return AuthService;

@@ -1,5 +1,7 @@
-﻿Burgerama.app.factory('VoteResource', ['$resource', $resource => {
-    return $resource('http://api.dev.burgerama.co.uk/voting/venue/:id', {
+﻿/// <reference path="../../app.ts" />
+
+Burgerama.app.factory('VoteResource', ['$resource', $resource => {
+    return $resource(config.url.voting + '/venue/:id', {
         id: '@id'
     }, {
             all: { method: 'GET', isArray: true },

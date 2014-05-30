@@ -2,7 +2,7 @@
 
 Burgerama.app.factory('OutingResource', [
     '$resource', function ($resource) {
-        return $resource('http://api.dev.burgerama.co.uk/outings/:id', {
+        return $resource(config.url.outings + '/:id', {
             id: '@id'
         }, {
             all: { method: 'GET', isArray: true }

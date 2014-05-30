@@ -4,7 +4,7 @@ module Burgerama.Account {
     export class AuthHttpInterceptor {
         private apiUrlStart = 'http://api.dev.burgerama.co.uk/';
         
-        constructor(private $rootScope: IBurgeramaScope, private $q: ng.IQService, private authService: IAuthService) {
+        constructor(private $q: ng.IQService, private authService: IAuthService) {
         }
 
         create() {
@@ -29,7 +29,7 @@ module Burgerama.Account {
     }
 }
 
-Burgerama.app.factory('AuthHttpInterceptor', ['$rootScope', '$q', 'AuthService', ($rootScope, $q, authService) =>
-    new Burgerama.Account.AuthHttpInterceptor($rootScope, $q, authService).create()
+Burgerama.app.factory('AuthHttpInterceptor', ['$q', 'AuthService', ($q, authService) =>
+    new Burgerama.Account.AuthHttpInterceptor($q, authService).create()
 ]);
  

@@ -2,14 +2,12 @@
 
 Burgerama.app.factory('VenueResource', [
     '$resource', function ($resource) {
-        return $resource('http://api.dev.burgerama.co.uk/venues/:id', {
+        return $resource(config.url.venues + '/:id', {
             id: '@id'
         }, {
             all: { method: 'GET', isArray: true },
             get: { method: 'GET' },
-            save: { method: 'PUT' },
-            create: { method: 'POST' },
-            destroy: { method: 'DELETE' }
+            create: { method: 'POST' }
         });
     }]);
 //# sourceMappingURL=venueResource.js.map

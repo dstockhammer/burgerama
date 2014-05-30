@@ -62,18 +62,10 @@ var Burgerama;
                     _this.clearMarkers();
                     _this.addMarkersForAllVenues(venues);
                 });
-                this.$scope.$on('$destroy', function () {
-                    return unregisterVenuesLoaded();
-                });
-
                 var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', function (event, outings) {
                     _this.clearMarkers();
                     _this.addMarkersForAllOutings(outings);
                 });
-                this.$scope.$on('$destroy', function () {
-                    return unregisterOutingsLoaded();
-                });
-
                 var unregisterVenueSelected = this.$rootScope.$on('VenueSelected', function (event, venue) {
                     var markerInfos = _this.$scope.markers.filter(function (element) {
                         return element.venue != null && element.venue.id == venue.id;
@@ -85,10 +77,6 @@ var Burgerama;
                     _this.$scope.map.panTo(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
                     _this.$scope.map.setZoom(_this.options.zoom);
                 });
-                this.$scope.$on('$destroy', function () {
-                    return unregisterVenueSelected();
-                });
-
                 var unregisterPlaceSelected = this.$rootScope.$on('PlaceSelected', function (event, place) {
                     var markerInfos = _this.$scope.markers.filter(function (element) {
                         return element.place != null && element.place.reference == place.reference;
@@ -100,10 +88,6 @@ var Burgerama;
                     _this.$scope.map.panTo(place.geometry.location);
                     _this.$scope.map.setZoom(_this.options.zoom);
                 });
-                this.$scope.$on('$destroy', function () {
-                    return unregisterPlaceSelected();
-                });
-
                 var unregisterSearchResultsLoaded = this.$rootScope.$on('SearchResultsLoaded', function (event) {
                     if (_this.currentSearchResults.length > 0) {
                         _this.clearMarkers();
@@ -114,7 +98,11 @@ var Burgerama;
                     _this.$rootScope.$emit('CurrentSearchUpdated', _this.currentSearchResults);
                 });
                 this.$scope.$on('$destroy', function () {
-                    return unregisterSearchResultsLoaded();
+                    unregisterVenuesLoaded();
+                    unregisterOutingsLoaded();
+                    unregisterVenueSelected();
+                    unregisterPlaceSelected();
+                    unregisterSearchResultsLoaded();
                 });
             }
             MapController.prototype.clearSearch = function () {

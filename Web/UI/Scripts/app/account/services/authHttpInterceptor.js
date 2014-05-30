@@ -3,8 +3,7 @@ var Burgerama;
 (function (Burgerama) {
     (function (Account) {
         var AuthHttpInterceptor = (function () {
-            function AuthHttpInterceptor($rootScope, $q, authService) {
-                this.$rootScope = $rootScope;
+            function AuthHttpInterceptor($q, authService) {
                 this.$q = $q;
                 this.authService = authService;
                 this.apiUrlStart = 'http://api.dev.burgerama.co.uk/';
@@ -39,8 +38,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.factory('AuthHttpInterceptor', [
-    '$rootScope', '$q', 'AuthService', function ($rootScope, $q, authService) {
-        return new Burgerama.Account.AuthHttpInterceptor($rootScope, $q, authService).create();
+    '$q', 'AuthService', function ($q, authService) {
+        return new Burgerama.Account.AuthHttpInterceptor($q, authService).create();
     }
 ]);
 //# sourceMappingURL=authHttpInterceptor.js.map
