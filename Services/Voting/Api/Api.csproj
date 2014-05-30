@@ -289,13 +289,7 @@
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\VoteController.cs" />
-    <Compile Include="Controllers\CandidateController.cs" />
-    <Compile Include="Controllers\ContextController.cs" />
-    <Compile Include="Converters\CandidateConverter.cs" />
-    <Compile Include="Converters\ContextConverter.cs" />
     <Compile Include="Converters\VoteConverter.cs" />
-    <Compile Include="Models\CandidateModel.cs" />
-    <Compile Include="Models\ContextModel.cs" />
     <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Global.asax.cs">

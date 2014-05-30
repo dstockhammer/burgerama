@@ -26,7 +26,7 @@ namespace Burgerama.Services.Voting.Api.Controllers
         }
 
         [HttpGet]
-        [Route("context/{contextKey}/candidate/{reference}/votes")]
+        [Route("{contextKey}/candidates/{reference}/votes")]
         [ResponseType(typeof(IEnumerable<VoteModel>))]
         public IHttpActionResult GetVotes(string contextKey, Guid reference)
         {
@@ -39,9 +39,9 @@ namespace Burgerama.Services.Voting.Api.Controllers
         }
 
         [HttpPost]
-        [Route("context/{contextKey}/candidate/{reference}/votes")]
+        [Route("{contextKey}/candidates/{reference}/votes")]
         [ResponseType(typeof(IEnumerable<VoteModel>))]
-        public IHttpActionResult CreateContext(string contextKey, Guid reference, [FromBody]DateTime? votedOn = null)
+        public IHttpActionResult Vote(string contextKey, Guid reference, [FromBody]DateTime? votedOn = null)
         {
             var context = _contextRepository.Get(contextKey);
             if (context == null) return NotFound();
@@ -61,15 +61,15 @@ namespace Burgerama.Services.Voting.Api.Controllers
                 //_contextRepository.SaveOrUpdate(context);
                 //_candidateRepository.SaveOrUpdate(candidate, key);
                 // RAISE EVENT VOTEADDED
+                return Ok();
             }
             else
             {
                 candidate.Vote(ClaimsPrincipal.Current.GetUserId(), votedOn ?? DateTime.Now);
                 _candidateRepository.SaveOrUpdate(candidate, contextKey);
                 // RAISE EVENT: VOTEADDED
+                return Created(string.Format("context/{0}/candidate/{1}/votes", contextKey, reference), candidate.Votes.Select(v => v.ToModel()));
             }
-
-            return Created(string.Format("context/{0}/candidate/{1}/votes", contextKey, reference), candidate.Votes.Select(v => v.ToModel()));
         }
     }
 }
