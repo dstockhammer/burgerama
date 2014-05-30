@@ -76,7 +76,9 @@ module Burgerama {
         authProvider.init({
             domain: 'burgerama.auth0.com',
             clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
-            callbackURL: "http://dev.burgerama.co.uk/"
+            callbackURL: 'http://dev.burgerama.co.uk/',
+            callbackOnLocationHash: true,
+            showIcon: false
         });
     }]);
 }
