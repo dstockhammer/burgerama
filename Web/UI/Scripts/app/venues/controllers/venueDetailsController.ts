@@ -36,16 +36,14 @@ module Burgerama.Venues {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
 
-            this.voteResource.get({ id: this.venueId }, data => {
-                this.$scope.venue.votes = data.count();
-                this.$rootScope.$emit('VenuesLoaded', [this.$scope.venue]);
-            }, err => {
-                this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-            });
+            //this.voteResource.get({ id: this.venueId }, data => {
+            //    this.$scope.venue.votes = data.count();
+            //}, err => {
+            //    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+            //});
         }
         
         private addVote(venue: IVenue) {
-
             var resource = new this.voteResource(this.$scope.venue);
             resource.$create(() => {
                 this.toaster.pop('success', 'Success', 'Added vote for venue: ' + this.$scope.venue.title);
@@ -64,6 +62,6 @@ module Burgerama.Venues {
     }
 }
 
-Burgerama.app.controller('VenueDetailsController', ['$rootScope', '$scope', 'VenueResource', 'toaster', 'venueId', ($rootScope, $scope, venueResource, voteResource, toaster, venueId) =>
+Burgerama.app.controller('VenueDetailsController', ['$rootScope', '$scope', 'VenueResource', 'VoteResource', 'toaster', 'venueId', ($rootScope, $scope, venueResource, voteResource, toaster, venueId) =>
     new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId)
 ]);
