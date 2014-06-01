@@ -4,6 +4,11 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class LoggingConfiguration : ConfigurationSection
     {
+        public static LoggingConfiguration Load()
+        {
+            return ConfigurationManager.GetSection("burgerama/logging") as LoggingConfiguration;
+        }
+
         [ConfigurationProperty("useConsole", IsRequired = false, DefaultValue = false)]
         public bool UseConsole
         {
@@ -18,32 +23,11 @@ namespace Burgerama.Common.Configuration
             set { this["useLogentries"] = value; }
         }
 
-        [ConfigurationProperty("logentriesKey", IsRequired = false)]
+        [ConfigurationProperty("logentriesKey", IsRequired = false, DefaultValue = "")]
         public string LogentriesKey
         {
             get { return (string)this["logentriesKey"]; }
             set { this["logentriesKey"] = value; }
-        }
-
-        [ConfigurationProperty("useSeq", IsRequired = false, DefaultValue = false)]
-        public bool UseSeq
-        {
-            get { return (bool)this["useSeq"]; }
-            set { this["useSeq"] = value; }
-        }
-
-        [ConfigurationProperty("seqUrl", IsRequired = false)]
-        public string SeqUrl
-        {
-            get { return (string)this["seqUrl"]; }
-            set { this["seqUrl"] = value; }
-        }
-
-        [ConfigurationProperty("seqKey", IsRequired = false)]
-        public string SeqKey
-        {
-            get { return (string)this["seqKey"]; }
-            set { this["seqKey"] = value; }
         }
     }
 }

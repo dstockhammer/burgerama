@@ -101,7 +101,7 @@
   <ItemGroup>
     <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.2.0\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.2.1\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,7 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MongoDbRepository.cs" />
+    <Compile Include="MongoDBRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
