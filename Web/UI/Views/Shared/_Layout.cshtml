@@ -7,10 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>@ViewBag.Title</title>
         @Styles.Render("~/bundles/css")
-        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
     </head>
 <body>
     <div id="loading-overlay" ng-hide="loaded"><div class="content"><div class="loading-spinner spin-logo"></div></div></div>
+	<toaster-container toaster-options="{'position-class': 'toast-top-left', 'time-out': 2500}"></toaster-container>
     @RenderBody()
     <script type="text/javascript">
         var config = {
