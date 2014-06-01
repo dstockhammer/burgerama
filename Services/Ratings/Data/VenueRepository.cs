@@ -1,4 +1,4 @@
-﻿using Burgerama.Common.MongoDb;
+﻿using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Ratings.Data.Converters;
 using Burgerama.Services.Ratings.Data.Models;
 using Burgerama.Services.Ratings.Domain;

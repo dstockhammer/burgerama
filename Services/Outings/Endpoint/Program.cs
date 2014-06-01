@@ -1,7 +1,12 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.MassTransit.Autofac;
+<<<<<<< HEAD
 using Burgerama.Services.Outings.Data.MongoDb;
+=======
+using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
+using Burgerama.Services.Outings.Data.MongoDB;
+>>>>>>> develop
 using Burgerama.Services.Outings.Domain.Contracts;
 using MassTransit;
 using Microsoft.WindowsAzure.Jobs;

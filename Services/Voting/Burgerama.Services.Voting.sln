@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{38B181A2-31EC-4C7F-9943-467805F1E1F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{913A2DCE-6A4B-4782-BF8E-C9A2DF9C92E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.MongoDB", "Data.MongoDB\Data.MongoDB.csproj", "{913A2DCE-6A4B-4782-BF8E-C9A2DF9C92E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint", "Endpoint\Endpoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{0C4576E3-765D-4F91-8B32-3A7A01B29200}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Design", "..\Design\Design.modelproj", "{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Rest", "Data.Rest\Data.Rest.csproj", "{C5B65BB3-DE9C-4CF5-BECE-783B55C95EED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C4576E3-765D-4F91-8B32-3A7A01B29200}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C26C3A73-C0F5-4338-9DB7-3E27311DFA46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B65BB3-DE9C-4CF5-BECE-783B55C95EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B65BB3-DE9C-4CF5-BECE-783B55C95EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B65BB3-DE9C-4CF5-BECE-783B55C95EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B65BB3-DE9C-4CF5-BECE-783B55C95EED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

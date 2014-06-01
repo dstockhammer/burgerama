@@ -93,13 +93,16 @@ module Burgerama {
         authProvider.init({
             domain: config.auth0.domain,
             clientID: config.auth0.clientId,
-            callbackURL: config.url.frontend
+            callbackURL: config.url.frontend,
+            callbackOnLocationHash: true,
+            showIcon: false
         });
     }]);
 }
 
 Burgerama.app.run(['$rootScope', $rootScope => {
-    $rootScope.loaded = true;
+    // give people a second to admire the loading screen
+    setTimeout(() => { $rootScope.loaded = true; }, 1000);
 }]);
 
 angular.element(document).ready(() => {

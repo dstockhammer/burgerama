@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using Burgerama.Common.Logging;
+using Burgerama.Services.Outings.Data.MongoDB;
+using Burgerama.Services.Outings.Data.Rest;
+using Burgerama.Services.Outings.Domain.Contracts;
+using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Web.Http;
-using Autofac;
-using Autofac.Integration.WebApi;
-using Burgerama.Common.Logging;
-using Burgerama.Services.Outings.Data.MongoDb;
-using Burgerama.Services.Outings.Data.Rest;
-using Burgerama.Services.Outings.Domain.Contracts;
 
 namespace Burgerama.Services.Outings.Api
 {

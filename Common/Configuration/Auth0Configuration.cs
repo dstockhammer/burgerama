@@ -4,6 +4,11 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class Auth0Configuration : ConfigurationSection
     {
+        public static Auth0Configuration Load()
+        {
+            return ConfigurationManager.GetSection("burgerama/auth0") as Auth0Configuration;
+        }
+
         [ConfigurationProperty("issuer", IsRequired = true)]
         public string Issuer
         {

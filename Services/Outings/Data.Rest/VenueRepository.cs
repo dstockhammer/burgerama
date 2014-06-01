@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Burgerama.Common.DataAccess.Rest;
 using Burgerama.Services.Outings.Data.Rest.Converters;
 using Burgerama.Services.Outings.Data.Rest.Models;
 using Burgerama.Services.Outings.Domain;
 using Burgerama.Services.Outings.Domain.Contracts;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Burgerama.Services.Outings.Data.Rest
 {

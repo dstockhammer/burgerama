@@ -5845,10 +5845,11 @@ body {
   text-align: center;
   top: 50%;
   left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-  width: 100px;
-  height: 100px;
+  margin-top: -55px;
+  margin-left: -55px;
+  width: 130px;
+  height: 130px;
+  background: transparent url('/Content/img/burgerama-large.png') no-repeat center center;
 }
 .loading-spinner {
   background-color: rgba(0, 0, 0, 0);
@@ -5880,6 +5881,14 @@ body {
   width: 100px;
   height: 100px;
   border-radius: 100px !important;
+}
+.loading-spinner.spin-logo {
+  border: 10px solid #00dbff;
+  border-top: 10px solid rgba(0, 0, 0, 0);
+  border-left: 10px solid rgba(0, 0, 0, 0);
+  width: 116px;
+  height: 116px;
+  border-radius: 116px !important;
 }
 @keyframes loading {
   0% {

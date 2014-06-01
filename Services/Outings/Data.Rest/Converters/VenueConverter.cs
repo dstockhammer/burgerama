@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using Burgerama.Services.Outings.Data.Rest.Models;
+﻿using Burgerama.Services.Outings.Data.Rest.Models;
 using Burgerama.Services.Outings.Domain;
+using System;
+using System.Diagnostics.Contracts;
 
 namespace Burgerama.Services.Outings.Data.Rest.Converters
 {

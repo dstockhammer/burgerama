@@ -4,6 +4,11 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class RabbitMqConfiguration : ConfigurationSection
     {
+        public static RabbitMqConfiguration Load()
+        {
+            return ConfigurationManager.GetSection("burgerama/rabbitMq") as RabbitMqConfiguration;
+        }
+
         [ConfigurationProperty("server", IsRequired = true)]
         public string Server
         {
