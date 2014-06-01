@@ -23,7 +23,6 @@ namespace Burgerama.Web.UI
                 "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",
                 "~/Scripts/vendor/angular-toaster/angular-toaster.js",
                 "~/Scripts/vendor/angular-truncate/truncate.js"
-
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/burgerama")
@@ -33,10 +32,6 @@ namespace Burgerama.Web.UI
                 "~/Scripts/vendor/angular-toaster/angular-toaster.css",
                 "~/Content/less/main.css"
             ));
-
-//#if !DEBUG
-//            BundleTable.EnableOptimizations = true;
-//#endif
         }
     }
 }

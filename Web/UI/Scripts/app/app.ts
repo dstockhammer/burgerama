@@ -12,10 +12,7 @@ module Burgerama {
     }
     export interface IUrlConfig {
         frontend: string;
-        venues: string;
-        outings: string;
-        voting: string;
-        rating: string;
+        api: string;
     }
     export interface IAuth0Config {
         domain: string;
