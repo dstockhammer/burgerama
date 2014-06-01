@@ -6,7 +6,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
-using Burgerama.Messaging.MassTransit.Autofac;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
@@ -37,7 +37,7 @@ namespace Burgerama.Services.Venues.Api
             builder.RegisterModule<LoggingModule>();
 
             // Messaging
-            builder.RegisterServiceBus();
+            builder.RegisterModule<ServiceBusModule>();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();

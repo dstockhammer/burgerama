@@ -1,12 +1,7 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
-using Burgerama.Messaging.MassTransit.Autofac;
-<<<<<<< HEAD
-using Burgerama.Services.Outings.Data.MongoDb;
-=======
-using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Services.Outings.Data.MongoDB;
->>>>>>> develop
 using Burgerama.Services.Outings.Domain.Contracts;
 using MassTransit;
 using Microsoft.WindowsAzure.Jobs;
@@ -36,8 +31,7 @@ namespace Burgerama.Services.Outings.Endpoint
             builder.RegisterModule<LoggingModule>();
 
             // Messaging infrastructure
-            builder.RegisterServiceBus();
-            builder.RegisterConsumers();
+            builder.RegisterModule<ServiceBusModule>();
 
             return builder.Build();
         }

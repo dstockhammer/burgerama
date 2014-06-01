@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
-    <metadata>
-        <id>Burgerama.Messaging.Commands.Outings</id>
-        <version>0.1.3</version>
-        <title>Burgerama Messaging: Commands for Outings</title>
-        <authors>dstockhammer</authors>
-        <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
-        <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Burgerama command library for outings.</description>
-    </metadata>
+  <metadata>
+    <id>Burgerama.Messaging.Commands.Outings</id>
+    <version>0.2.0</version>
+    <title>Messaging: Commands for Outings</title>
+    <authors>Burgerama Team</authors>
+    <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/burgerama.png</iconUrl>
+    <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Commands that can be sent to the outings service.</description>
+  </metadata>
 </package>

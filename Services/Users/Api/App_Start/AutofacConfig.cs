@@ -25,7 +25,7 @@ namespace Burgerama.Services.Users.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
-            //builder.RegisterType<VenueRepository>().As<IVenueRepository>().InstancePerApiRequest();
+            //builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
             return builder.Build();
         }

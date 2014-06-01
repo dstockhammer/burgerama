@@ -12,9 +12,14 @@ namespace Burgerama.Services.Outings.Data.Rest
 {
     public sealed class VenueRepository : RestRepository, IVenueRepository
     {
+        protected override string GetTargetServiceKey()
+        {
+            return "venues";
+        }
+		
         public Venue Get(Guid venueId)
         {
-            var request = new RestRequest("venues/{id}", Method.GET);
+            var request = new RestRequest("{id}", Method.GET);
             request.AddUrlSegment("id", venueId.ToString());
             var response = Client.Execute<VenueModel>(request);
 

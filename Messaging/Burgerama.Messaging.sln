@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Events", "Events\Infrastructure.Events.csproj", "{AC1E99F8-3DDB-4EAF-93FF-AE31E117BE28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands", "Commands\Commands.csproj", "{AA4994DE-8C51-4230-AA13-D1732BC2E943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Commands", "Commands\Infrastructure.Commands.csproj", "{AA4994DE-8C51-4230-AA13-D1732BC2E943}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.Outings", "Commands.Outings\Commands.Outings.csproj", "{A079C106-F8DD-4467-805B-F4286A799772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{AC1E99F8-3DDB-4EAF-93FF-AE31E117BE28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Venues", "Events.Venues\Events.Venues.csproj", "{54F66DB9-BC41-4A1E-8A84-8F11D58F8A43}"
 EndProject
@@ -17,15 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Voting", "Events.Vot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Users", "Events.Users\Events.Users.csproj", "{2E6019A2-BDDF-441B-AC71-35059BCBDFBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.Outings", "Commands.Outings\Commands.Outings.csproj", "{A079C106-F8DD-4467-805B-F4286A799772}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint.Host", "Endpoint.Host\Endpoint.Host.csproj", "{F2815BF7-F98F-4D16-8185-57B27DCA4B95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Events.MassTransit", "MassTransit.Events\Infrastructure.Events.MassTransit.csproj", "{DCE8D1C9-147E-4703-A943-B5B430DF7559}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit", "MassTransit\MassTransit.csproj", "{C5B1118A-4D3A-4D9D-A021-D21A4F4C43C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Commands.MassTransit", "MassTransit.Commands\Infrastructure.Commands.MassTransit.csproj", "{B816F3B7-2BE8-460A-8B35-4329DC338D6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Commands", "MassTransit.Commands\MassTransit.Commands.csproj", "{B816F3B7-2BE8-460A-8B35-4329DC338D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Host", "MassTransit.Endpoint\Infrastructure.Host.csproj", "{F2815BF7-F98F-4D16-8185-57B27DCA4B95}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.MassTransit", "MassTransit\Infrastructure.MassTransit.csproj", "{C5B1118A-4D3A-4D9D-A021-D21A4F4C43C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Events", "MassTransit.Events\MassTransit.Events.csproj", "{DCE8D1C9-147E-4703-A943-B5B430DF7559}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

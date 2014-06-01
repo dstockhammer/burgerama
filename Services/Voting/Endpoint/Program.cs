@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
-using Burgerama.Messaging.MassTransit.Autofac;
-using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
+using Burgerama.Messaging.Endpoint.Host.Topshelf;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Services.Voting.Data.MongoDB;
 using Burgerama.Services.Voting.Domain.Contracts;
 
@@ -28,8 +28,7 @@ namespace Burgerama.Services.Voting.Endpoint
             builder.RegisterModule<LoggingModule>();
 
             // Messaging infrastructure
-            builder.RegisterServiceBus();
-            builder.RegisterConsumers();
+            builder.RegisterModule<ServiceBusModule>();
             builder.RegisterType<EndpointService>().As<IEndpointService>();
             builder.RegisterType<EndpointHostFactory>().AsSelf().SingleInstance();
 
