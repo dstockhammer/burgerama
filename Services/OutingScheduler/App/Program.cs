@@ -3,7 +3,7 @@ using Autofac;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Outings;
-using Burgerama.Messaging.MassTransit.Autofac;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Commands;
 using Burgerama.Services.OutingScheduler.Data.Rest;
 using Burgerama.Services.OutingScheduler.Domain.Contracts;
@@ -58,15 +58,15 @@ namespace Burgerama.Services.OutingScheduler.App
             // Services
             builder.RegisterType<SchedulingService>().As<ISchedulingService>();
 
-            // Logging
-            builder.RegisterModule<LoggingModule>();
-
             // Repositories
             builder.RegisterType<OutingRepository>().As<IOutingRepository>();
             builder.RegisterType<VenueRepository>().As<IVenueRepository>();
 
+            // Logging
+            builder.RegisterModule<LoggingModule>();
+
             // Messaging infrastructure
-            builder.RegisterServiceBus();
+            builder.RegisterModule<ServiceBusModule>();
             builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
 
             return builder.Build();

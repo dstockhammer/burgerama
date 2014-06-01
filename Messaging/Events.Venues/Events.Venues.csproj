@@ -100,8 +100,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Burgerama.Messaging.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.0.1.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

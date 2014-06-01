@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Web.Http;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
-using Burgerama.Messaging.MassTransit.Autofac;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Ratings.Data;
 using Burgerama.Services.Ratings.Domain.Contracts;
@@ -37,7 +37,7 @@ namespace Burgerama.Services.Ratings.Api
             builder.RegisterModule<LoggingModule>();
 
             // Messaging
-            builder.RegisterServiceBus();
+            builder.RegisterModule<ServiceBusModule>();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
-    <metadata>
-        <id>Burgerama.Messaging.Events.Ratings</id>
-        <version>0.1.1</version>
-        <title>Burgerama Messaging: Events for Ratings</title>
-        <authors>dstockhammer</authors>
-        <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/Web/UI/Content/img/hamburger_logo.png</iconUrl>
-        <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Burgerama events library for ratings.</description>
-    </metadata>
+  <metadata>
+    <id>Burgerama.Messaging.Events.Ratings</id>
+    <version>0.2.0</version>
+    <title>Messaging: Events for Ratings</title>
+    <authors>Burgerama Team</authors>
+    <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/burgerama.png</iconUrl>
+    <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Events that are raised by the ratings service.</description>
+  </metadata>
 </package>
