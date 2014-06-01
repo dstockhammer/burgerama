@@ -6,7 +6,6 @@ var Burgerama;
             function AuthHttpInterceptor($q, authService) {
                 this.$q = $q;
                 this.authService = authService;
-                this.apiUrlStart = 'http://api.dev.burgerama.co.uk/';
             }
             AuthHttpInterceptor.prototype.create = function () {
                 var _this = this;
@@ -19,16 +18,12 @@ var Burgerama;
 
             AuthHttpInterceptor.prototype.handleRequest = function (config) {
                 // Add bearer authentication token to API calls.
-                if (this.authService.isAuthenticated() && this.isApiUrl(config.url)) {
+                if (this.authService.isAuthenticated() && Burgerama.Util.isApiUrl(config.url)) {
                     config.headers.Authorization = 'Bearer ' + this.authService.getToken();
                 }
 
                 // Return the config or wrap it in a promise if blank.
                 return config || this.$q.when(config);
-            };
-
-            AuthHttpInterceptor.prototype.isApiUrl = function (url) {
-                return url.slice(0, this.apiUrlStart.length) == this.apiUrlStart;
             };
             return AuthHttpInterceptor;
         })();

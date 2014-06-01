@@ -16,14 +16,11 @@
         var config = {
             'url': {
                 'frontend':'@ConfigurationManager.AppSettings["url:frontend"]',
-                'venues': '@ConfigurationManager.AppSettings["url:venues"]',
-                'outings': '@ConfigurationManager.AppSettings["url:outings"]',
-                'voting': '@ConfigurationManager.AppSettings["url:voting"]',
-                'rating': '@ConfigurationManager.AppSettings["url:rating"]',
+                'api': '@ConfigurationManager.AppSettings["url:api"]'
             },
             'auth0': {
                 'domain': '@ConfigurationManager.AppSettings["auth0:domain"]',
-                'clientId': '@ConfigurationManager.AppSettings["auth0:clientId"]',
+                'clientId': '@ConfigurationManager.AppSettings["auth0:clientId"]'
         }};
     </script>
     @Scripts.Render("~/bundles/angular")

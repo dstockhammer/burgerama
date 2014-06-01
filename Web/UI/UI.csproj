@@ -543,6 +543,7 @@
     <TypeScriptCompile Include="Scripts\app\map\controllers\searchController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\controllers\outingController.ts" />
     <TypeScriptCompile Include="Scripts\app\outings\resources\outingResource.ts" />
+    <TypeScriptCompile Include="Scripts\app\util\apiUrl.ts" />
     <TypeScriptCompile Include="Scripts\app\util\date.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\addVenueController.ts" />
     <TypeScriptCompile Include="Scripts\app\venues\controllers\venueController.ts" />
