@@ -1,4 +1,6 @@
 ﻿/// <reference path="../../app.ts" />
+/// <reference path='../../../typings/angular-local-storage/angular-local-storage.d.ts' />
+/// <reference path='../../../typings/auth0/auth0.d.ts' />
 
 module Burgerama.Account {
     export interface IAuthService {
@@ -14,20 +16,8 @@ module Burgerama.Account {
             private $rootScope: IBurgeramaScope,
             private toaster,
             private auth,
-            private authEvents,
-            private localStorageService)
+            private localStorageService: ng.localStorage.ILocalStorageService)
         {
-            var unregistersignOutSuccess = $rootScope.$on(this.authEvents.logout, () => this.signOutSuccess());
-            var unregisterSignInSuccess = $rootScope.$on(this.authEvents.loginSuccess, () => this.signInSuccess());
-            var unregisterSignInError = $rootScope.$on(this.authEvents.loginFailed, () => {
-                this.toaster.pop('error', 'Error', 'Authentication failed.');
-            });
-
-            this.$rootScope.$on('$destroy', () => {
-                unregistersignOutSuccess();
-                unregisterSignInSuccess();
-                unregisterSignInError();
-            });
         }
 
         public isAuthenticated(): boolean {
@@ -43,11 +33,13 @@ module Burgerama.Account {
         }
 
         public signIn(): void {
-            this.auth.signin();
+            this.auth.signin({ popup: true })
+                .then(() => this.signInSuccess(), () => this.signInError());
         }
 
         public signOut(): void {
             this.auth.signout();
+            this.signOutSuccess();
         }
 
         private signOutSuccess(): void {
@@ -59,15 +51,19 @@ module Burgerama.Account {
         }
 
         private signInSuccess(): void {
-            this.localStorageService.add('user', this.auth.profile);
-            this.localStorageService.add('token', this.auth.idToken);
+            this.localStorageService.set('user', this.auth.profile);
+            this.localStorageService.set('token', this.auth.idToken);
 
             this.$rootScope.$emit('UserSignedIn');
             this.toaster.pop('success', 'Success', 'Signed in as ' + this.getUser().email + '.');
         }
+
+        private signInError(): void {
+            this.toaster.pop('error', 'Error', 'An error occurred :(');
+        }
     }
 }
 
-Burgerama.app.service('AuthService', ['$rootScope', 'toaster', 'auth', 'AUTH_EVENTS', 'localStorageService', ($rootScope, toaster, auth, authEvents, localStorageService) =>
-    new Burgerama.Account.AuthService($rootScope, toaster, auth, authEvents, localStorageService)
+Burgerama.app.service('AuthService', ['$rootScope', 'toaster', 'auth', 'localStorageService', ($rootScope, toaster, auth, localStorageService) =>
+    new Burgerama.Account.AuthService($rootScope, toaster, auth, localStorageService)
 ]);
