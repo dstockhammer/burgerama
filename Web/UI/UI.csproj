@@ -527,6 +527,7 @@
     <Content Include="Content\less\bootstrap-custom.less" />
     <Content Include="Content\less\bootstrap-variables.less" />
     <Content Include="Scripts\typings\jquery\jquery-tests.ts.tscparams" />
+    <None Include="Properties\PublishProfiles\burgerama.pubxml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
