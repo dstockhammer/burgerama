@@ -103,11 +103,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\fonts\opensans\LICENSE.txt" />
+    <None Include="Content\fonts\opensans\LICENSE.txt" />
     <Content Include="Content\fonts\opensans\OpenSans-Bold.svg" />
     <Content Include="Content\fonts\opensans\OpenSans-Regular.svg" />
     <Content Include="Content\fonts\opensans\OpenSans-Semibold.svg" />
-    <Content Include="Content\fonts\roboto\LICENSE.txt" />
+    <None Include="Content\fonts\roboto\LICENSE.txt" />
     <Content Include="Content\fonts\roboto\Roboto-Light.svg" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.svg" />
     <Content Include="Content\img\burgerama-large.png" />
