@@ -1,10 +1,9 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
+using Burgerama.Messaging.Endpoint.Host;
 using Burgerama.Messaging.MassTransit;
 using Burgerama.Services.Outings.Data.MongoDB;
 using Burgerama.Services.Outings.Domain.Contracts;
-using MassTransit;
-using Microsoft.WindowsAzure.Jobs;
 
 namespace Burgerama.Services.Outings.Endpoint
 {
@@ -13,11 +12,8 @@ namespace Burgerama.Services.Outings.Endpoint
         static void Main(string[] args)
         {
             var container = GetAutofacContainer();
-            var bus = container.Resolve<IServiceBus>();
-            
-            var host = new JobHost();
-            host.RunAndBlock();
-            bus.Dispose();
+            var hostFactory = container.Resolve<EndpointHostFactory>();
+            hostFactory.CreateNew().Run();
         }
 
         private static IContainer GetAutofacContainer()
@@ -32,6 +28,7 @@ namespace Burgerama.Services.Outings.Endpoint
 
             // Messaging infrastructure
             builder.RegisterModule<ServiceBusModule>();
+            builder.RegisterModule<EndpointHostModule>();
 
             return builder.Build();
         }

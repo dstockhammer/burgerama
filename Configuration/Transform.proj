@@ -1,0 +1,9 @@
+<Project ToolsVersion="4.0" DefaultTargets="Transform" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <UsingTask TaskName="TransformXml"
+             AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v12.0\Web\Microsoft.Web.Publishing.Tasks.dll"/>
+    <Target Name="Transform">
+        <TransformXml Source="$(Path)\App.config"
+                      Transform="$(Path)\App.$(Configuration).config"
+                      Destination="$(Path)\bin\$(Configuration)\$(Name).exe.config"/>
+    </Target>
+</Project>

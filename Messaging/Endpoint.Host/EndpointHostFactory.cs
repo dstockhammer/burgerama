@@ -4,7 +4,7 @@ using Serilog;
 using Serilog.Extras.Topshelf;
 using Topshelf;
 
-namespace Burgerama.Messaging.Endpoint.Host.Topshelf
+namespace Burgerama.Messaging.Endpoint.Host
 {
     public sealed class EndpointHostFactory
     {
@@ -15,7 +15,7 @@ namespace Burgerama.Messaging.Endpoint.Host.Topshelf
             _container = container;
         }
 
-        public global::Topshelf.Host CreateNew()
+        public Topshelf.Host CreateNew()
         {
             return HostFactory.New(cfg =>
             {
@@ -25,14 +25,15 @@ namespace Burgerama.Messaging.Endpoint.Host.Topshelf
                 cfg.SetDisplayName(name);
                 cfg.SetDescription(name);
 
+                cfg.UseLinuxIfAvailable();
+                cfg.UseSerilog(_container.Resolve<ILogger>());
+
                 cfg.Service<IEndpointService>(h =>
                 {
                     h.ConstructUsing(s => _container.Resolve<IEndpointService>());
                     h.WhenStarted(s => s.Start());
                     h.WhenStopped(s => s.Stop());
                 });
-
-                cfg.UseSerilog(_container.Resolve<ILogger>());
             });
         }
     }

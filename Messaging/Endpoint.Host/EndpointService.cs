@@ -1,8 +1,8 @@
 ﻿using MassTransit;
 
-namespace Burgerama.Messaging.Endpoint.Host.Topshelf
+namespace Burgerama.Messaging.Endpoint.Host
 {
-    public sealed class EndpointService : IEndpointService
+    internal sealed class EndpointService : IEndpointService
     {
         private readonly IServiceBus _bus;
 
