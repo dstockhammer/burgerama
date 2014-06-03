@@ -170,12 +170,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.Events.Campaigns">
-      <HintPath>..\packages\Burgerama.Messaging.Events.Campaigns.0.1.0\lib\net451\Burgerama.Messaging.Events.Campaigns.dll</HintPath>
-    </Reference>
     <Reference Include="Burgerama.Messaging.Events.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.0\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.Events.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.0\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -252,7 +252,6 @@
     <None Include="App.config" />
     <None Include="App.Azure.config">
       <DependentUpon>App.config</DependentUpon>
-      <SubType>Designer</SubType>
     </None>
     <None Include="App.Debug.config">
       <DependentUpon>App.config</DependentUpon>
