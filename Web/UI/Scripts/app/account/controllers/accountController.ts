@@ -20,8 +20,8 @@ module Burgerama.Account {
             this.$scope.showSignInModal = () => this.showSignInModal();
             this.$scope.signOut = () => this.signOut();
 
-            var unregisterSignIn = this.$rootScope.$on('SignIn', () => this.update());
-            var unregisterSignOut = this.$rootScope.$on('SignOut', () => this.update());
+            var unregisterSignIn = this.$rootScope.$on('UserSignedIn', () => this.update());
+            var unregisterSignOut = this.$rootScope.$on('UserSignedOut', () => this.update());
 
             this.$scope.$on('$destroy', () => {
                 unregisterSignIn();

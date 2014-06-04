@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Web;
 using Autofac;
 using Burgerama.Common.Configuration;
-using Seq;
 using Serilog;
 
 namespace Burgerama.Common.Logging
@@ -22,16 +21,16 @@ namespace Burgerama.Common.Logging
             Contract.Requires<ArgumentNullException>(context != null);
             Contract.Ensures(Contract.Result<ILogger>() != null);
 
-            var config = ConfigurationManager.GetSection("burgerama/logging") as LoggingConfiguration;
+            var config = LoggingConfiguration.Load();
             if (config == null)
                 throw new ConfigurationErrorsException("Logging must be configured.");
 
             var loggerConfig = new LoggerConfiguration();
+            loggerConfig.Enrich.WithProperty("Machine", Environment.MachineName);
+            loggerConfig.Enrich.WithProperty("Application", GetEntryAssembly().GetName().Name);
 
             if (config.UseConsole)
-            {
                 loggerConfig.WriteTo.ColoredConsole();
-            }
 
             if (config.UseLogentries)
             {
@@ -40,17 +39,6 @@ namespace Burgerama.Common.Logging
 
                 loggerConfig.WriteTo.Logentries(config.LogentriesKey);
             }
-
-            if (config.UseSeq)
-            {
-                if (string.IsNullOrWhiteSpace(config.SeqUrl))
-                    throw new ConfigurationErrorsException("To use Seq, a url must be specified.");
-
-                loggerConfig.WriteTo.Seq(config.SeqUrl, apiKey: config.SeqKey);
-            }
-
-            loggerConfig.Enrich.WithProperty("Machine", Environment.MachineName);
-            loggerConfig.Enrich.WithProperty("Application", GetEntryAssembly().GetName().Name);
                 
             var logger = loggerConfig.CreateLogger();
 

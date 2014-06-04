@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
-using Burgerama.Messaging.MassTransit.Autofac;
-using Burgerama.Messaging.MassTransit.Endpoint.Topshelf;
+using Burgerama.Messaging.Endpoint.Host;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Services.Outings.Data.MongoDB;
 using Burgerama.Services.Outings.Domain.Contracts;
 
@@ -12,7 +12,6 @@ namespace Burgerama.Services.Outings.Endpoint
         static void Main(string[] args)
         {
             var container = GetAutofacContainer();
-
             var hostFactory = container.Resolve<EndpointHostFactory>();
             hostFactory.CreateNew().Run();
         }
@@ -28,10 +27,8 @@ namespace Burgerama.Services.Outings.Endpoint
             builder.RegisterModule<LoggingModule>();
 
             // Messaging infrastructure
-            builder.RegisterServiceBus();
-            builder.RegisterConsumers();
-            builder.RegisterType<EndpointService>().As<IEndpointService>();
-            builder.RegisterType<EndpointHostFactory>().AsSelf().SingleInstance();
+            builder.RegisterModule<ServiceBusModule>();
+            builder.RegisterModule<EndpointHostModule>();
 
             return builder.Build();
         }

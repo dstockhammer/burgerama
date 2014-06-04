@@ -17,10 +17,10 @@ var Burgerama;
                     return _this.signOut();
                 };
 
-                var unregisterSignIn = this.$rootScope.$on('SignIn', function () {
+                var unregisterSignIn = this.$rootScope.$on('UserSignedIn', function () {
                     return _this.update();
                 });
-                var unregisterSignOut = this.$rootScope.$on('SignOut', function () {
+                var unregisterSignOut = this.$rootScope.$on('UserSignedOut', function () {
                     return _this.update();
                 });
 

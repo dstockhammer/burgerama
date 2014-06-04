@@ -2,7 +2,7 @@
 using Autofac.Integration.WebApi;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
-using Burgerama.Messaging.MassTransit.Autofac;
+using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Voting.Data.MongoDB;
 using Burgerama.Services.Voting.Domain.Contracts;
@@ -38,7 +38,7 @@ namespace Burgerama.Services.Voting.Api
             builder.RegisterModule<LoggingModule>();
 
             // Messaging
-            builder.RegisterServiceBus();
+            builder.RegisterModule<ServiceBusModule>();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();

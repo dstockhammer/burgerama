@@ -3,20 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{57278CA7-26EF-46D4-ABE3-70000045906B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{21E98781-43A3-4351-96FF-D63457D84B0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Azure|Any CPU = Azure|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57278CA7-26EF-46D4-ABE3-70000045906B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57278CA7-26EF-46D4-ABE3-70000045906B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57278CA7-26EF-46D4-ABE3-70000045906B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57278CA7-26EF-46D4-ABE3-70000045906B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E98781-43A3-4351-96FF-D63457D84B0E}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{21E98781-43A3-4351-96FF-D63457D84B0E}.Azure|Any CPU.Build.0 = Azure|Any CPU
 		{21E98781-43A3-4351-96FF-D63457D84B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21E98781-43A3-4351-96FF-D63457D84B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E98781-43A3-4351-96FF-D63457D84B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU

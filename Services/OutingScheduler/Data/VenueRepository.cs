@@ -11,9 +11,14 @@ namespace Burgerama.Services.OutingScheduler.Data.Rest
 {
     public sealed class VenueRepository : RestRepository, IVenueRepository
     {
+        protected override string GetTargetServiceKey()
+        {
+            return "venues";
+        }
+
         public IEnumerable<Venue> GetAll()
         {
-            var request = new RestRequest("venues", Method.GET);
+            var request = new RestRequest(Method.GET);
             var response = Client.Execute<List<VenueModel>>(request);
 
             return response.Data.Select(v => v.ToDomain());

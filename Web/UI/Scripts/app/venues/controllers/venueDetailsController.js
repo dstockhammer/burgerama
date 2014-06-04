@@ -33,13 +33,11 @@ var Burgerama;
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
-
-                this.voteResource.get({ id: this.venueId }, function (data) {
-                    _this.$scope.venue.votes = data.count();
-                    _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
-                }, function (err) {
-                    _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-                });
+                //this.voteResource.get({ id: this.venueId }, data => {
+                //    this.$scope.venue.votes = data.count();
+                //}, err => {
+                //    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                //});
             };
 
             VenueDetailsController.prototype.addVote = function (venue) {
@@ -67,7 +65,7 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', 'VenueResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
+    '$rootScope', '$scope', 'VenueResource', 'VoteResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
         return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId);
     }
 ]);

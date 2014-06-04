@@ -3,10 +3,24 @@
 
 'use strict';
 
+declare var config: Burgerama.IBurgeramaConfig;
+
 module Burgerama {
+    export interface IBurgeramaConfig {
+        url: IUrlConfig;
+        auth0: IAuth0Config;
+    }
+    export interface IUrlConfig {
+        frontend: string;
+        api: string;
+    }
+    export interface IAuth0Config {
+        domain: string;
+        clientId: string;
+    }
+
     export interface IBurgeramaScope extends ng.IRootScopeService {
-        email: string;
-        token: string;
+        // nothing here yet
     }
 
     export function initialize() {
@@ -74,9 +88,11 @@ module Burgerama {
         });
 
         authProvider.init({
-            domain: 'burgerama.auth0.com',
-            clientID: 'xlaKo4Eqj5DbAJ44BmUGQhUF548TNc4Z',
-            callbackURL: "http://dev.burgerama.co.uk/"
+            domain: config.auth0.domain,
+            clientID: config.auth0.clientId,
+            callbackURL: config.url.frontend,
+            callbackOnLocationHash: true,
+            showIcon: false
         });
     }]);
 }
@@ -84,12 +100,11 @@ module Burgerama {
 Burgerama.app.run(['$rootScope', $rootScope => {
     // give people a second to admire the loading screen
     setTimeout(() => { $rootScope.loaded = true; }, 1000);
-    
 }]);
 
 angular.element(document).ready(() => {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places&callback=Burgerama.initialize';
+    script.src = 'https://maps-api-ssl.google.com/maps/api/js?v=3.exp&key=AIzaSyDMSKCEtbHIORL8DuKSxSEXxkBGB-mqf9c&sensor=true&libraries=places&callback=Burgerama.initialize';
     document.body.appendChild(script);
 });

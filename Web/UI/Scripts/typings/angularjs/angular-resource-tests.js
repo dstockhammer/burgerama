@@ -34,6 +34,8 @@ resource = resourceClass.delete({ key: 'value' }, { key: 'value' }, function () 
 resource = resourceClass.delete({ key: 'value' }, { key: 'value' }, function () {
 }, function () {
 });
+resource.$promise.then(function (data) {
+});
 
 resource = resourceClass.get();
 resource = resourceClass.get({ key: 'value' });
@@ -65,6 +67,9 @@ resourceArray = resourceClass.query({ key: 'value' }, { key: 'value' }, function
 });
 resourceArray = resourceClass.query({ key: 'value' }, { key: 'value' }, function () {
 }, function () {
+});
+resourceArray.push(resource);
+resourceArray.$promise.then(function (data) {
 });
 
 resource = resourceClass.remove();
@@ -100,6 +105,81 @@ resource = resourceClass.save({ key: 'value' }, { key: 'value' }, function () {
 });
 
 ///////////////////////////////////////
+// IResource
+///////////////////////////////////////
+var promise;
+var arrayPromise;
+
+promise = resource.$delete();
+promise = resource.$delete({ key: 'value' });
+promise = resource.$delete({ key: 'value' }, function () {
+});
+promise = resource.$delete(function () {
+});
+promise = resource.$delete(function () {
+}, function () {
+});
+promise = resource.$delete({ key: 'value' }, function () {
+}, function () {
+});
+promise.then(function (data) {
+});
+
+promise = resource.$get();
+promise = resource.$get({ key: 'value' });
+promise = resource.$get({ key: 'value' }, function () {
+});
+promise = resource.$get(function () {
+});
+promise = resource.$get(function () {
+}, function () {
+});
+promise = resource.$get({ key: 'value' }, function () {
+}, function () {
+});
+
+arrayPromise = resourceArray[0].$query();
+arrayPromise = resourceArray[0].$query({ key: 'value' });
+arrayPromise = resourceArray[0].$query({ key: 'value' }, function () {
+});
+arrayPromise = resourceArray[0].$query(function () {
+});
+arrayPromise = resourceArray[0].$query(function () {
+}, function () {
+});
+arrayPromise = resourceArray[0].$query({ key: 'value' }, function () {
+}, function () {
+});
+arrayPromise.then(function (data) {
+});
+
+promise = resource.$remove();
+promise = resource.$remove({ key: 'value' });
+promise = resource.$remove({ key: 'value' }, function () {
+});
+promise = resource.$remove(function () {
+});
+promise = resource.$remove(function () {
+}, function () {
+});
+promise = resource.$remove({ key: 'value' }, function () {
+}, function () {
+});
+
+promise = resource.$save();
+promise = resource.$save({ key: 'value' });
+promise = resource.$save({ key: 'value' }, function () {
+});
+promise = resource.$save(function () {
+});
+promise = resource.$save(function () {
+}, function () {
+});
+promise = resource.$save({ key: 'value' }, function () {
+}, function () {
+});
+
+///////////////////////////////////////
 // IResourceService
 ///////////////////////////////////////
 var resourceService;
@@ -120,4 +200,7 @@ resourceServiceFactoryFunction = function (resourceService) {
     return resourceClass;
 };
 mod = mod.factory('factory name', resourceServiceFactoryFunction);
+///////////////////////////////////////
+// IResource
+///////////////////////////////////////
 //# sourceMappingURL=angular-resource-tests.js.map

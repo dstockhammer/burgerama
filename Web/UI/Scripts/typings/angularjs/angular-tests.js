@@ -212,9 +212,8 @@ foo.then(function (x) {
 });
 
 // angular.element() tests
-var element = angular.element("div.myApp");
-var scope = element.scope();
-
+//var element = angular.element("div.myApp");
+//var scope: ng.IScope = element.scope();
 function test_IAttributes(attributes) {
     return attributes;
 }

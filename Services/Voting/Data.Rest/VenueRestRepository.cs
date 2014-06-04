@@ -9,11 +9,16 @@ using System.Linq;
 
 namespace Burgerama.Services.Voting.Data.Rest
 {
-    public sealed class VenueRestRepository : RestRepository
+    public sealed class VenueRestRepository : RestRepository // todo: IVenueRepository
     {
+        protected override string GetTargetServiceKey()
+        {
+            return "venues";
+        }
+
         public Venue Get(Guid venueId)
         {
-            var request = new RestRequest("venues/{id}", Method.GET);
+            var request = new RestRequest("{id}", Method.GET);
             request.AddUrlSegment("id", venueId.ToString());
             var response = Client.Execute<VenueModel>(request);
 
@@ -22,7 +27,7 @@ namespace Burgerama.Services.Voting.Data.Rest
 
         public IEnumerable<Venue> GetAll()
         {
-            var request = new RestRequest("venues", Method.GET);
+            var request = new RestRequest(Method.GET);
             var response = Client.Execute<List<VenueModel>>(request);
 
             return response.Data.Select(v => v.ToDomain());

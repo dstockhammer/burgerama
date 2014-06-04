@@ -1,4 +1,4 @@
-﻿using Burgerama.Messaging.Events.Campaigns;
+﻿using Burgerama.Messaging.Events.Voting;
 using MassTransit;
 using Serilog;
 

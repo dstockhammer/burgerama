@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Diagnostics.Contracts;
 using Burgerama.Common.Configuration;
 using Microsoft.Owin.Security;
@@ -15,7 +14,7 @@ namespace Burgerama.Common.Authentication.Owin
         {
             Contract.Requires<ArgumentNullException>(app != null);
 
-            var config = ConfigurationManager.GetSection("burgerama/auth0") as Auth0Configuration;
+            var config = Auth0Configuration.Load();
             if (config == null)
                 return;
 
