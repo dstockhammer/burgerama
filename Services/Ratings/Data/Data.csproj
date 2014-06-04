@@ -171,10 +171,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\RatingConverter.cs" />
-    <Compile Include="Converters\VenueConverter.cs" />
+    <Compile Include="Converters\CandidateConverter.cs" />
     <Compile Include="Models\RatingModel.cs" />
-    <Compile Include="Models\VenueModel.cs" />
-    <Compile Include="VenueRepository.cs" />
+    <Compile Include="Models\CandidateModel.cs" />
+    <Compile Include="CandidateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

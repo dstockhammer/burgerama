@@ -9,18 +9,18 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
     public sealed class VenueCreatedHandler : Consumes<VenueCreated>.Context
     {
         private readonly ILogger _logger;
-        private readonly IVenueRepository _venueRepository;
+        private readonly ICandidateRepository _candidateRepository;
 
-        public VenueCreatedHandler(ILogger logger, IVenueRepository venueRepository)
+        public VenueCreatedHandler(ILogger logger, ICandidateRepository candidateRepository)
         {
             _logger = logger;
-            _venueRepository = venueRepository;
+            _candidateRepository = candidateRepository;
         }
 
         public void Consume(IConsumeContext<VenueCreated> context)
         {
-            var venue = new Venue(context.Message.VenueId, context.Message.Title);
-            _venueRepository.SaveOrUpdate(venue);
+            var venue = new Candidate(context.Message.VenueId, context.Message.Title);
+            _candidateRepository.SaveOrUpdate(venue);
 
             _logger.Information("Venue \"{VenueId}\" created.",
                 new { context.Message.VenueId, context.Message.Title });

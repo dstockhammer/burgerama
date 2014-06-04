@@ -10,17 +10,17 @@ namespace Burgerama.Services.Ratings.Api.Converters
 {
     internal static class VenueConverter
     {
-        public static VenueModel ToModel(this Venue venue)
+        public static VenueModel ToModel(this Candidate candidate)
         {
-            Contract.Requires<ArgumentNullException>(venue != null);
+            Contract.Requires<ArgumentNullException>(candidate != null);
 
             var userId = ClaimsPrincipal.Current.GetUserId();
 
             return new VenueModel
             {
-                Id = venue.Id.ToString(),
-                Rating = venue.Ratings.Average(r => r.Value),
-                CanUserRate = venue.Ratings.All(r => r.User != userId) 
+                Id = candidate.Reference.ToString(),
+                Rating = candidate.Ratings.Average(r => r.Value),
+                CanUserRate = candidate.Ratings.All(r => r.User != userId) 
             };
         }
     }

@@ -16,11 +16,11 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             var ratings = Enumerable.Range(1, 3).Select(i => new Rating(i.ToString(), i / 10, string.Empty));
 
             // Act
-            var venue = new Venue(id, "test venue", ratings);
+            var venue = new Candidate(id, "test venue", ratings);
 
             // Assert
             Assert.IsNotNull(venue);
-            Assert.AreEqual(id, venue.Id);
+            Assert.AreEqual(id, venue.Reference);
             Assert.AreEqual(3, venue.Ratings.Count());
         }
 
@@ -32,21 +32,21 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             var ratings = Enumerable.Range(1, 3).Select(i => new Rating(string.Empty, i / 10, string.Empty )).ToList();
 
             // Act
-            var venue = new Venue(Guid.NewGuid(), "test venue", ratings);
+            var venue = new Candidate(Guid.NewGuid(), "test venue", ratings);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Venue_ShouldNotBeCreatedWithoutRatings()
         {
-            var venue = new Venue(Guid.NewGuid(), null);
+            var venue = new Candidate(Guid.NewGuid(), null);
         }
 
         [TestMethod]
         public void TotalRating_ShouldBeCalculatedCorrectly()
         {
             // Arrange
-            var venue = new Venue(Guid.NewGuid(), "test venue");
+            var venue = new Candidate(Guid.NewGuid(), "test venue");
 
             // Act
             for(var i = 0; i < 3; i++)
@@ -63,7 +63,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         public void TotalRating_ShouldDefaultToNaN()
         {
             // Arrange
-            var venue = new Venue(Guid.NewGuid(), "test venue");
+            var venue = new Candidate(Guid.NewGuid(), "test venue");
 
             // Act
             // no ratings added
@@ -77,7 +77,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         public void VenueWithFutureOuting_RatingShouldBeAdded()
         {
             // Arrange
-            var venue = new Venue(Guid.NewGuid(), "test venue");
+            var venue = new Candidate(Guid.NewGuid(), "test venue");
             venue.AddOuting(DateTime.Today.AddDays(1));
 
             // Act
@@ -94,7 +94,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         public void VenueWithPastOuting_RatingShouldNotBeAdded()
         {
             // Arrange
-            var venue = new Venue(Guid.NewGuid(), "test venue");
+            var venue = new Candidate(Guid.NewGuid(), "test venue");
             venue.AddOuting(DateTime.Today.AddDays(-1));
 
             // Act

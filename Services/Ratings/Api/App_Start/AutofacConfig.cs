@@ -31,7 +31,7 @@ namespace Burgerama.Services.Ratings.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Repositories
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
+            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
 
             // Logging
             builder.RegisterModule<LoggingModule>();

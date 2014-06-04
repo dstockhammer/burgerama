@@ -22,7 +22,7 @@ namespace Burgerama.Services.Ratings.Endpoint
             var builder = new ContainerBuilder();
 
             // Repositories
-            builder.RegisterType<VenueRepository>().As<IVenueRepository>();
+            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
 
             // Logging
             builder.RegisterModule<LoggingModule>();

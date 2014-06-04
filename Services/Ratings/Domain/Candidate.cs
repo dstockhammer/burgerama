@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+using Burgerama.Messaging.Events;
+using Burgerama.Messaging.Events.Ratings;
+
+namespace Burgerama.Services.Ratings.Domain
+{
+    public sealed class Candidate
+    {
+        private readonly HashSet<Rating> _ratings;
+
+        public string ContextKey { get; private set; }
+
+        public Guid Reference { get; private set; }
+
+        public DateTime? OpeningDate { get; private set; }
+
+        public DateTime? CloseDate { get; private set; }
+        
+        public IEnumerable<Rating> Ratings
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<IEnumerable<Rating>>() != null);
+                return _ratings;
+            }
+        }
+
+        public double TotalRating
+        {
+            get
+            {
+                var sum = _ratings.Aggregate(0d, (current, rating) => current + rating.Value);
+                return sum / _ratings.Count();
+            }
+        }
+
+        public Candidate(string contextKey, Guid reference)
+            : this(contextKey, reference, Enumerable.Empty<Rating>())
+        {
+        }
+
+        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> ratings, DateTime? openingDate = null, DateTime? closeDate = null)
+        {
+            Contract.Requires<ArgumentNullException>(contextKey != null);
+            Contract.Requires<ArgumentNullException>(ratings != null);
+
+            var ratingsList = ratings.ToList();
+            if (ratingsList.Distinct(Rating.UserComparer).Count() != ratingsList.Count())
+                throw new ArgumentException();
+
+            ContextKey = contextKey;
+            Reference = reference;
+            OpeningDate = openingDate;
+            CloseDate = closeDate;
+            _ratings = new HashSet<Rating>(ratingsList);
+        }
+
+        /// <summary>
+        /// Adds a rating to the candidate.
+        /// </summary>
+        /// <remarks>
+        /// Only one rating per user is allowed.
+        /// Rating is only allowed between opening and close date.
+        /// </remarks>
+        /// <param name="rating">The rating.</param>
+        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
+        public IEnumerable<IEvent> AddRating(Rating rating)
+        {
+            Contract.Requires<ArgumentNullException>(rating != null);
+            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
+
+            // don't allow rating if there is not opening date
+            if (OpeningDate.HasValue == false)
+                return Enumerable.Empty<IEvent>();
+
+            // don't allow rating if campaign has not yet been opened
+            if (OpeningDate.Value >= rating.CreatedOn)
+                return Enumerable.Empty<IEvent>();
+
+            // don't allow rating if campaign has been closed
+            if (CloseDate.HasValue && CloseDate.Value <= rating.CreatedOn)
+                return Enumerable.Empty<IEvent>();
+
+            if (_ratings.Add(rating) == false)
+                return Enumerable.Empty<IEvent>();
+
+            return new IEvent[]
+            {
+                new RatingAdded { ContextKey = ContextKey, Reference = Reference, UserId = rating.UserId, Value = rating.Value, Text = string.Empty},
+                new RatingUpdated { ContextKey = ContextKey, Reference = Reference, NewTotal = TotalRating }
+            };
+        }
+
+        /// <summary>
+        /// Set the candidate to open on a specific date.
+        /// </summary>
+        /// <param name="date">The opening date.</param>
+        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
+        public IEnumerable<IEvent> OpenOn(DateTime date)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
+
+            // todo: what happens if the date has already been set? just overwrite?
+            OpeningDate = date;
+            
+            return Enumerable.Empty<IEvent>();
+        }
+
+        /// <summary>
+        /// Set the candidate to close on a specific date.
+        /// </summary>
+        /// <param name="date">The close date.</param>
+        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
+        public IEnumerable<IEvent> CloseOn(DateTime date)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
+
+            // todo: what happens if the date has already been set? just overwrite?
+            CloseDate = date;
+
+            return Enumerable.Empty<IEvent>();
+        }
+    }
+}

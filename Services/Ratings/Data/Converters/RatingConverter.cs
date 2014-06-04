@@ -1,6 +1,4 @@
 ﻿using Burgerama.Services.Ratings.Data.Models;
-using System;
-using System.Diagnostics.Contracts;
 using Burgerama.Services.Ratings.Domain;
 
 namespace Burgerama.Services.Ratings.Data.Converters
@@ -9,11 +7,12 @@ namespace Burgerama.Services.Ratings.Data.Converters
     {
         public static RatingModel ToModel(this Rating rating)
         {
-            Contract.Requires<ArgumentNullException>(rating != null);
+            if (rating == null)
+                return null;
 
             return new RatingModel
             {
-                User = rating.User,
+                UserId = rating.UserId,
                 Value = rating.Value,
                 Text = rating.Text
             };
@@ -21,9 +20,10 @@ namespace Burgerama.Services.Ratings.Data.Converters
 
         public static Rating ToDomain(this RatingModel rating)
         {
-            Contract.Requires<ArgumentNullException>(rating != null);
+            if (rating == null)
+                return null;
 
-            return new Rating(rating.User, rating.Value, rating.Text);
+            return new Rating(rating.CreatedOn, rating.UserId, rating.Value, rating.Text);
         }
     }
 }
