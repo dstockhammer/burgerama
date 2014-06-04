@@ -138,6 +138,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Events.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.3\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit">
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
     </Reference>
@@ -166,7 +169,7 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Cors">
       <HintPath>..\packages\Microsoft.Owin.Cors.2.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
-    </Reference>    
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>

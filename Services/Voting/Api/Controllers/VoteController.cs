@@ -1,12 +1,11 @@
-﻿using Burgerama.Common.Authentication.Identity;
-using Burgerama.Messaging.Events;
+﻿using Burgerama.Messaging.Events;
+using Burgerama.Messaging.Events.Voting;
 using Burgerama.Services.Voting.Api.Converters;
 using Burgerama.Services.Voting.Api.Models;
 using Burgerama.Services.Voting.Domain.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -18,7 +17,10 @@ namespace Burgerama.Services.Voting.Api.Controllers
         private readonly ICandidateRepository _candidateRepository;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public VoteController(ICandidateRepository candidateRepository, IContextRepository contextRepository, IEventDispatcher eventDispatcher)
+        public VoteController(
+            ICandidateRepository candidateRepository, 
+            IContextRepository contextRepository, 
+            IEventDispatcher eventDispatcher)
         {
             _candidateRepository = candidateRepository;
             _contextRepository = contextRepository;
@@ -41,35 +43,43 @@ namespace Burgerama.Services.Voting.Api.Controllers
         [HttpPost]
         [Route("{contextKey}/candidates/{reference}/votes")]
         [ResponseType(typeof(IEnumerable<VoteModel>))]
-        public IHttpActionResult Vote(string contextKey, Guid reference, [FromBody]DateTime? votedOn = null)
+        public IHttpActionResult Vote(string contextKey, Guid reference, [FromBody]DateTime? votedOn)
         {
+            var userId = "test";//ClaimsPrincipal.Current.GetUserId();
             var context = _contextRepository.Get(contextKey);
+            var voted = votedOn ?? DateTime.Now;
+
             if (context == null) return NotFound();
 
             var candidate = _candidateRepository.Get(reference, contextKey);
 
+            // If this is the first vote
             if (candidate == null)
             {
-                //candidate = new Candidate(reference);
-                //candidate.Vote(ClaimsPrincipal.Current.GetUserId(), votedOn ?? DateTime.Now);
-                // ENQUEUE CANDIDATE
-                // RAISE EVENT: CANDIDATEENQUEUED
-                // ON COMMAND: CREATECANDIDATE
-                // DEQUEUE CANDIDATE
-                //var context = _contextRepository.Get(contextKey);
-                //context.AddCandidate(reference);
-                //_contextRepository.SaveOrUpdate(context);
-                //_candidateRepository.SaveOrUpdate(candidate, key);
-                // RAISE EVENT VOTEADDED
+                _eventDispatcher.Publish(new TriedToVoteUnknownCandidate
+                {
+                    Reference = reference,
+                    ContextKey = contextKey,
+                    UserId = userId,
+                    VotedOn = voted
+                });
+
                 return Ok();
             }
-            else
+
+            candidate.Vote(userId, voted);
+            _candidateRepository.SaveOrUpdate(candidate, contextKey);
+
+            _eventDispatcher.Publish(new VoteAdded
             {
-                candidate.Vote(ClaimsPrincipal.Current.GetUserId(), votedOn ?? DateTime.Now);
-                _candidateRepository.SaveOrUpdate(candidate, contextKey);
-                // RAISE EVENT: VOTEADDED
-                return Created(string.Format("context/{0}/candidate/{1}/votes", contextKey, reference), candidate.Votes.Select(v => v.ToModel()));
-            }
+                CandidateReference = candidate.Reference,
+                ContextKey = contextKey,
+                UserId = userId,
+                TotalOfVotes = candidate.Votes.Count()
+            });
+
+            var uri = new Uri(this.Url.Content(string.Format("~/{0}/candidates/{1}/votes", contextKey, reference)));
+            return Created(uri, candidate.Votes.Select(v => v.ToModel()));
         }
     }
 }

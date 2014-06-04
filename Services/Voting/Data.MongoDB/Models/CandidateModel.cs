@@ -17,10 +17,5 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Models
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? Expiry { get; set; }
-
-        public CandidateModel()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
     }
 }

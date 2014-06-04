@@ -6,6 +6,8 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Models
     internal class ContextModel
     {
         [BsonId]
+        public string Id { get; set; }
+
         public string ContextKey { get; set; }
 
         public ICollection<string> Candidates { get; set; }

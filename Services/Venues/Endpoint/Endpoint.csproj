@@ -163,6 +163,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Logging.0.2.0\lib\net451\Burgerama.Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Commands">
+      <HintPath>..\packages\Burgerama.Messaging.Commands.0.2.0\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.Commands.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Commands.Voting.0.2.3\lib\net451\Burgerama.Messaging.Commands.Voting.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.Endpoint.Host">
       <HintPath>..\packages\Burgerama.Messaging.Endpoint.Host.0.2.1\lib\net451\Burgerama.Messaging.Endpoint.Host.dll</HintPath>
     </Reference>
@@ -175,11 +181,14 @@
       <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.0\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.Events.Voting">
-      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.0\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.3\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.MassTransit.Commands">
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Commands.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.Commands.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -243,6 +252,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\TriedToVoteUnknownCandidateHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Handlers\VoteAddedHandler.cs" />
     <Compile Include="Handlers\RatingUpdatedHandler.cs" />

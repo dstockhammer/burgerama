@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
+using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Endpoint.Host;
 using Burgerama.Messaging.MassTransit;
+using Burgerama.Messaging.MassTransit.Commands;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
 
@@ -27,6 +29,7 @@ namespace Burgerama.Services.Venues.Endpoint
             builder.RegisterModule<LoggingModule>();
 
             // Messaging infrastructure
+            builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
             builder.RegisterModule<ServiceBusModule>();
             builder.RegisterModule<EndpointHostModule>();
 

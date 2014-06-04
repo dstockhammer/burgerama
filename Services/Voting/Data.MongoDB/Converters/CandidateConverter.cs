@@ -16,6 +16,7 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Converters
 
             return new CandidateModel
             {
+                Id = candidate.Id,
                 Reference = candidate.Reference.ToString(),
                 Votes = candidate.Votes.Select(v => v.ToModel()).ToList(),
                 Expiry = candidate.Expiry,
@@ -29,7 +30,7 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Converters
             Contract.Ensures(Contract.Result<Candidate>() != null);
 
             var id = Guid.Parse(candidate.Reference);
-            return new Candidate(id, candidate.Votes.Select(v => v.ToDomain()), candidate.Expiry);
+            return new Candidate(candidate.Id, id, candidate.Votes.Select(v => v.ToDomain()), candidate.Expiry);
         }
     }
 }

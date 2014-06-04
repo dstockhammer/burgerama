@@ -4,9 +4,9 @@ namespace Burgerama.Services.Voting.Tests.Data
 {
     internal sealed class MongoDbTestUtils : MongoDbRepository
     {
-        internal void DropVenues()
+        internal void DropCandidates()
         {
-            GetCollection<object>("venues").Drop();
+            GetCollection<object>("candidates").Drop();
         }
     }
 }

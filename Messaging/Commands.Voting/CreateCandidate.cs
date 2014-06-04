@@ -11,6 +11,8 @@ namespace Burgerama.Messaging.Commands.Voting
 
         public string Reference { get; set; }
 
-        public DateTime ExpiryDate { get; set; }
+        public string UserId { get; set; }
+
+        public DateTime VotedOn { get; set; }
     }
 }

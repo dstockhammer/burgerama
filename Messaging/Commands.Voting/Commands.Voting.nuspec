@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>Burgerama.Messaging.Events.Voting</id>
+    <id>Burgerama.Messaging.Commands.Voting</id>
     <version>0.2.3</version>
-    <title>Messaging: Events for Voting</title>
+    <title>Messaging: Commands for Voting</title>
     <authors>Burgerama Team</authors>
     <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/burgerama.png</iconUrl>
     <licenseUrl>https://raw.githubusercontent.com/dstockhammer/burgerama/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Events that are raised by the voting service.</description>
+    <description>Commands that can be sent to the voting service.</description>
   </metadata>
 </package>

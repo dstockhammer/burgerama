@@ -30,23 +30,24 @@ var Burgerama;
 
                     _this.$scope.venue = data;
                     _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
+
+                    _this.voteResource.all({ id: _this.venueId }, function (data) {
+                        _this.$scope.venue.votes = data.length;
+                    }, function (err) {
+                        _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                    });
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
-                //this.voteResource.get({ id: this.venueId }, data => {
-                //    this.$scope.venue.votes = data.count();
-                //}, err => {
-                //    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-                //});
             };
 
             VenueDetailsController.prototype.addVote = function (venue) {
                 var _this = this;
                 var resource = new this.voteResource(this.$scope.venue);
-                resource.$create(function () {
+                resource.$create(function (data) {
                     _this.toaster.pop('success', 'Success', 'Added vote for venue: ' + _this.$scope.venue.title);
                     _this.$rootScope.$emit('VenueVoted', _this.$scope.venue);
-                    console.log('add vote clicked');
+                    _this.$scope.venue.votes = data["0"];
                 }, function (err) {
                     if (err.status == 401) {
                         _this.toaster.pop('error', 'Unauthorized', 'You are not authorized to vote on venues. Please log in or create an account.');

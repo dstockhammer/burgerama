@@ -114,7 +114,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VoteAdded.cs" />
-    <Compile Include="CandidateQueued.cs" />
+    <Compile Include="TriedToVoteUnknownCandidate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Events.Voting.nuspec" />
