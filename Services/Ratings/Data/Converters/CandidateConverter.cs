@@ -17,7 +17,7 @@ namespace Burgerama.Services.Ratings.Data.Converters
                 ContextKey = candidate.ContextKey,
                 Reference = candidate.Reference.ToString(),
                 OpeningDate = candidate.OpeningDate,
-                CloseDate = candidate.CloseDate,
+                ClosingDate = candidate.ClosingDate,
                 Ratings = candidate.Ratings.Select(r => r.ToModel())
             };
         }
@@ -41,7 +41,7 @@ namespace Burgerama.Services.Ratings.Data.Converters
 
             var reference = Guid.Parse(candidate.Reference);
             var ratings = candidate.Ratings.Select(r => r.ToDomain());
-            return new Candidate(candidate.ContextKey, reference, ratings, candidate.OpeningDate, candidate.CloseDate);
+            return new Candidate(candidate.ContextKey, reference, ratings, candidate.OpeningDate, candidate.ClosingDate);
         }
 
         public static PotentialCandidate ToPotential(this CandidateModel candidate)

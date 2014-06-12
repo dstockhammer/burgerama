@@ -30,15 +30,23 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
             {
                 _logger.Error("Tried to create candidate \"{Reference}\" in context \"{ContextKey}\", but it already exists.",
                     new { context.Message.Reference, context.Message.ContextKey });
+
+                return;
             }
 
-            candidate = new Candidate(context.Message.ContextKey, context.Message.Reference, Enumerable.Empty<Rating>(), context.Message.OpeningDate, context.Message.CloseDate);
+            candidate = new Candidate(context.Message.ContextKey, context.Message.Reference, Enumerable.Empty<Rating>());
 
             var events = new List<IEvent>
             {
                 new CandidateCreated { ContextKey = context.Message.ContextKey, Reference = context.Message.Reference }
             };
 
+            if (context.Message.OpeningDate.HasValue)
+                events.AddRange(candidate.OpenOn(context.Message.OpeningDate.Value));
+
+            if (context.Message.ClosingDate.HasValue)
+                events.AddRange(candidate.CloseOn(context.Message.ClosingDate.Value));
+            
             var potentialCandidate = _candidateRepository.GetPotential(context.Message.Reference, context.Message.ContextKey);
             if (potentialCandidate != null)
             {

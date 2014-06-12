@@ -3,6 +3,7 @@ using Autofac;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Outings;
+using Burgerama.Messaging.Commands.Ratings;
 using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Commands;
 using Burgerama.Services.OutingScheduler.Data.Rest;
@@ -15,6 +16,8 @@ namespace Burgerama.Services.OutingScheduler.App
 {
     public sealed class Program
     {
+        private const string VenueContextKey = "venues";
+
         public static void Main(string[] args)
         {
             var container = GetAutofacContainer();
@@ -24,7 +27,7 @@ namespace Burgerama.Services.OutingScheduler.App
 
             // set date to tomorrow 7 pm
             // todo: get the date passed in as parameter or read it from somewhere
-            var date = DateTime.Today.AddDays(1).AddHours(19);
+            var date = DateTime.Today.AddDays(-1).AddHours(19);
 
             var scheduler = container.Resolve<ISchedulingService>();
             var outing = scheduler.ScheduleOuting(date);
@@ -34,15 +37,30 @@ namespace Burgerama.Services.OutingScheduler.App
             }
             else
             {
-                var command = new CreateOuting
+                var commandDispatcher = container.Resolve<ICommandDispatcher>();
+
+                commandDispatcher.Send(new CreateOuting
                 {
                     VenueId = outing.Venue.Id,
                     Date = outing.Date
-                };
+                });
 
-                var commandDispatcher = container.Resolve<ICommandDispatcher>();
-                commandDispatcher.Send(command);
-                logger.Information("OutingScheduler run successful: Scheduled outing {@Outing}.", new { command.VenueId, command.Date });
+                commandDispatcher.Send(new OpenCandidate
+                {
+                    ContextKey = VenueContextKey,
+                    Reference = outing.Venue.Id,
+                    OpeningDate = outing.Date
+                });
+
+                // todo: close voting
+                //commandDispatcher.Send(new Burgerama.Messaging.Commands.Voting.CloseCandidate
+                //{
+                //    ContextKey = VenueContextKey,
+                //    Reference = outing.Venue.Id,
+                //    ClosingDate = DateTime.Now
+                //});
+
+                logger.Information("OutingScheduler run successful: Scheduled outing {@Outing}.", new { outing.Venue.Id, outing.Date });
             }
 
             // disposing the bus is very important in order to unsubscribe and stop consuming.

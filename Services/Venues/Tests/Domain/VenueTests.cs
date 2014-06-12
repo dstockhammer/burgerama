@@ -37,7 +37,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
 
             // Assert
             Assert.AreEqual(id, venue.Id);
-            Assert.AreEqual(title, venue.Title);
+            Assert.AreEqual(title, venue.Name);
             Assert.AreEqual(location, venue.Location);
             Assert.AreEqual(userId, venue.CreatedByUser);
             Assert.AreEqual(createdOn, venue.CreatedOn);
@@ -60,6 +60,17 @@ namespace Burgerama.Services.Venues.Tests.Domain
 
             // Act
             var venue = new Venue(title, location, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Venue_ShouldNotBeCreatedWithoutTitle()
+        {
+            // Arrange
+            var location = new Location("test", 13.0, 37.0);
+
+            // Act
+            var venue = new Venue(null, location, "testUserId");
         }
     }
 }

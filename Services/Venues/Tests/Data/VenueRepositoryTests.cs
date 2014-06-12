@@ -32,7 +32,7 @@ namespace Burgerama.Services.Venues.Tests.Data
             var loadedVenue = venueRepository.Get(venue.Id);
             Assert.IsNotNull(loadedVenue);
             Assert.AreEqual(venue.Id, loadedVenue.Id);
-            Assert.AreEqual(venue.Title, loadedVenue.Title);
+            Assert.AreEqual(venue.Name, loadedVenue.Name);
             Assert.AreEqual(venue.Location, loadedVenue.Location);
         }
 
@@ -55,7 +55,7 @@ namespace Burgerama.Services.Venues.Tests.Data
             var loadedVenue = venueRepository.Get(venue.Id);
             Assert.IsNotNull(loadedVenue);
             Assert.AreEqual(venue.Id, loadedVenue.Id);
-            Assert.AreEqual(venue.Title, loadedVenue.Title);
+            Assert.AreEqual(venue.Name, loadedVenue.Name);
             Assert.AreEqual(venue.Location, loadedVenue.Location);
             Assert.AreEqual("http://burgerama.co.uk", loadedVenue.Url);
             Assert.AreEqual("This is a test.", loadedVenue.Description);

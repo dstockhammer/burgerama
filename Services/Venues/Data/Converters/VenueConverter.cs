@@ -14,13 +14,14 @@ namespace Burgerama.Services.Venues.Data.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
-                Title = venue.Title,
+                Name = venue.Name,
                 Location = venue.Location,
                 CreatedByUser = venue.CreatedByUser,
                 CreatedOn = venue.CreatedOn,
                 Url = venue.Url,
                 Description = venue.Description,
-                Address = venue.Address
+                Address = venue.Address,
+                TotalRating = venue.TotalRating
             };
         }
 
@@ -30,11 +31,12 @@ namespace Burgerama.Services.Venues.Data.Converters
                 return null;
 
             var id = Guid.Parse(venue.Id);
-            return new Venue(id, venue.Title, venue.Location, venue.CreatedByUser, venue.CreatedOn)
+            return new Venue(id, venue.Name, venue.Location, venue.CreatedByUser, venue.CreatedOn)
             {
                 Url = venue.Url,
                 Description = venue.Description,
-                Address = venue.Address
+                Address = venue.Address,
+                TotalRating = venue.TotalRating
             };
         }
     }

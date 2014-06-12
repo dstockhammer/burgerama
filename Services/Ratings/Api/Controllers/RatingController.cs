@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
 using Burgerama.Messaging.Events;
@@ -29,10 +30,12 @@ namespace Burgerama.Services.Ratings.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{context}/{reference}")]
+        [Route("{contextKey}/{reference}")]
         [ResponseType(typeof(IEnumerable<RatingModel>))]
-        public IHttpActionResult ShowAllRatings(string contextKey, Guid reference, [FromBody] RatingModel model)
+        public IHttpActionResult GetAllRatingsForCandidate(string contextKey, Guid reference)
         {
+            Contract.Requires<ArgumentNullException>(contextKey != null);
+
             // first, check all real (= well known) candidates
             var candidate = _candidateRepository.Get(reference, contextKey);
             if (candidate != null)
@@ -48,10 +51,13 @@ namespace Burgerama.Services.Ratings.Api.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("{context}/{reference}")]
+        [Route("{contextKey}/{reference}")]
         [ResponseType(typeof(IEnumerable<RatingModel>))]
-        public IHttpActionResult AddNewRatingToVenue(string contextKey, Guid reference, [FromBody]RatingModel model)
+        public IHttpActionResult AddRatingToCandidate(string contextKey, Guid reference, [FromBody]RatingModel model)
         {
+            Contract.Requires<ArgumentNullException>(contextKey != null);
+            Contract.Requires<ArgumentNullException>(model != null);
+
             var userId = ClaimsPrincipal.Current.GetUserId();
 
             // todo: validate rating?

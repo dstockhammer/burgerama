@@ -14,7 +14,7 @@ namespace Burgerama.Services.Venues.Api.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
-                Title = venue.Title,
+                Title = venue.Name,
                 Location = new LocationModel
                 {
                     Reference = venue.Location.Reference,
@@ -26,8 +26,8 @@ namespace Burgerama.Services.Venues.Api.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
-                Rating = 0, // todo
-                Votes = 0 // todo
+                TotalRating = venue.TotalRating,
+                TotalVotes = 0 // todo
             };
         }
 
@@ -42,6 +42,7 @@ namespace Burgerama.Services.Venues.Api.Converters
                 Description = venue.Description,
                 Url = venue.Url,
                 Address = venue.Address
+                // do NOT set TotalRating or TotalVotes!
             };
         }
     }

@@ -5,8 +5,10 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Burgerama.Common.Logging;
+using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit;
+using Burgerama.Messaging.MassTransit.Commands;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Venues.Data;
 using Burgerama.Services.Venues.Domain.Contracts;
@@ -39,6 +41,7 @@ namespace Burgerama.Services.Venues.Api
             // Messaging
             builder.RegisterModule<ServiceBusModule>();
             builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
+            builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
 
             return builder.Build();
         }

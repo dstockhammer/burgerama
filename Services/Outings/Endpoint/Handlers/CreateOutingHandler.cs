@@ -1,4 +1,6 @@
 ﻿using Burgerama.Messaging.Commands.Outings;
+using Burgerama.Messaging.Events;
+using Burgerama.Messaging.Events.Outings;
 using Burgerama.Services.Outings.Domain;
 using Burgerama.Services.Outings.Domain.Contracts;
 using MassTransit;
@@ -9,11 +11,13 @@ namespace Burgerama.Services.Outings.Endpoint.Handlers
     public sealed class CreateOutingHandler : Consumes<CreateOuting>.Context
     {
         private readonly ILogger _logger;
+        private readonly IEventDispatcher _eventDispatcher;
         private readonly IOutingRepository _outingRepository;
 
-        public CreateOutingHandler(ILogger logger, IOutingRepository outingRepository)
+        public CreateOutingHandler(ILogger logger, IEventDispatcher eventDispatcher, IOutingRepository outingRepository)
         {
             _logger = logger;
+            _eventDispatcher = eventDispatcher;
             _outingRepository = outingRepository;
         }
 
@@ -22,7 +26,15 @@ namespace Burgerama.Services.Outings.Endpoint.Handlers
             var outing = new Outing(context.Message.Date, context.Message.VenueId);
             _outingRepository.SaveOrUpdate(outing);
 
-            _logger.Information("Created outing {@Outing} with Id \"{Id}\".", new { context.Message.VenueId, context.Message.Date }, outing.Id);
+            _eventDispatcher.Publish(new OutingCreated
+            {
+                OutingId = outing.Id,
+                VenueId = outing.VenueId,
+                DateTime = outing.Date
+            });
+
+            _logger.Information("Created outing {@Outing} with Id \"{Id}\".",
+                new { context.Message.VenueId, context.Message.Date }, outing.Id);
         }
     }
 }

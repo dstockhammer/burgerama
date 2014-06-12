@@ -9,7 +9,7 @@ namespace Burgerama.Services.Venues.Data.Models
         [BsonId]
         public string Id { get; set; }
         
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public Location Location { get; set; }
 
@@ -23,5 +23,7 @@ namespace Burgerama.Services.Venues.Data.Models
         public string Description { get; set; }
 
         public string Address { get; set; }
+
+        public double TotalRating { get; set; }
     }
 }

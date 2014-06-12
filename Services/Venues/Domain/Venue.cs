@@ -7,7 +7,7 @@ namespace Burgerama.Services.Venues.Domain
     {
         public Guid Id { get; private set; }
 
-        public string Title { get; private set; }
+        public string Name { get; private set; }
 
         public Location Location { get; private set; }
 
@@ -21,28 +21,38 @@ namespace Burgerama.Services.Venues.Domain
 
         public string Address { get; set; }
 
-        public Venue(Guid id, string title, Location location, string createdByUser, DateTime createdOn)
+        /// <summary>
+        /// todo: probably the rating shouldn't be added directly to the venue,
+        /// but rather to a seperate model to make the intention clear.
+        /// </summary>
+        public double TotalRating { get; set; }
+
+        public Venue(Guid id, string name, Location location, string createdByUser, DateTime createdOn)
         {
+            Contract.Requires<ArgumentNullException>(name != null);
             Contract.Requires<ArgumentNullException>(location != null);
             Contract.Requires<ArgumentNullException>(createdByUser != null);
 
             Id = id;
-            Title = title;
+            Name = name;
             Location = location;
             CreatedByUser = createdByUser;
             CreatedOn = createdOn;
+            TotalRating = 0;
         }
 
-        public Venue(string title, Location location, string createdByUser)
+        public Venue(string name, Location location, string createdByUser)
         {
+            Contract.Requires<ArgumentNullException>(name != null);
             Contract.Requires<ArgumentNullException>(location != null);
             Contract.Requires<ArgumentNullException>(createdByUser != null);
 
             Id = Guid.NewGuid();
-            Title = title;
+            Name = name;
             Location = location;
             CreatedByUser = createdByUser;
             CreatedOn = DateTime.Now;
+            TotalRating = 0;
         }
     }
 }

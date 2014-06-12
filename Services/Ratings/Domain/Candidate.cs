@@ -17,7 +17,7 @@ namespace Burgerama.Services.Ratings.Domain
 
         public DateTime? OpeningDate { get; private set; }
 
-        public DateTime? CloseDate { get; private set; }
+        public DateTime? ClosingDate { get; private set; }
         
         public IEnumerable<Rating> Ratings
         {
@@ -42,7 +42,7 @@ namespace Burgerama.Services.Ratings.Domain
         {
         }
 
-        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> ratings, DateTime? openingDate = null, DateTime? closeDate = null)
+        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> ratings, DateTime? openingDate = null, DateTime? closingDate = null)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
             Contract.Requires<ArgumentNullException>(ratings != null);
@@ -54,7 +54,7 @@ namespace Burgerama.Services.Ratings.Domain
             ContextKey = contextKey;
             Reference = reference;
             OpeningDate = openingDate;
-            CloseDate = closeDate;
+            ClosingDate = closingDate;
             _ratings = new HashSet<Rating>(ratingsList);
         }
 
@@ -76,12 +76,12 @@ namespace Burgerama.Services.Ratings.Domain
             if (OpeningDate.HasValue == false)
                 return Enumerable.Empty<IEvent>();
 
-            // don't allow rating if campaign has not yet been opened
+            // don't allow rating if candidate has not yet been opened
             if (OpeningDate.Value >= rating.CreatedOn)
                 return Enumerable.Empty<IEvent>();
 
-            // don't allow rating if campaign has been closed
-            if (CloseDate.HasValue && CloseDate.Value <= rating.CreatedOn)
+            // don't allow rating if candidate has been closed
+            if (ClosingDate.HasValue && ClosingDate.Value <= rating.CreatedOn)
                 return Enumerable.Empty<IEvent>();
 
             if (_ratings.Add(rating) == false)
@@ -103,10 +103,16 @@ namespace Burgerama.Services.Ratings.Domain
         {
             Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
 
-            // todo: what happens if the date has already been set? just overwrite?
+            // don't overwrite the date
+            if (OpeningDate.HasValue)
+                return Enumerable.Empty<IEvent>();
+
             OpeningDate = date;
-            
-            return Enumerable.Empty<IEvent>();
+
+            return new IEvent[]
+            {
+                new CandidateOpened { ContextKey = ContextKey, Reference = Reference, OpeningDate = date }
+            };
         }
 
         /// <summary>
@@ -118,10 +124,16 @@ namespace Burgerama.Services.Ratings.Domain
         {
             Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
 
-            // todo: what happens if the date has already been set? just overwrite?
-            CloseDate = date;
+            // don't overwrite the date
+            if (ClosingDate.HasValue)
+                return Enumerable.Empty<IEvent>();
 
-            return Enumerable.Empty<IEvent>();
+            ClosingDate = date;
+
+            return new IEvent[]
+            {
+                new CandidateClosed { ContextKey = ContextKey, Reference = Reference, ClosingDate = date }
+            };
         }
     }
 }

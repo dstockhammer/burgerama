@@ -35,9 +35,9 @@ namespace Burgerama.Services.Venues.Api.Models
         public DateTime CreatedOn { get; set; }
 
         [DataMember, XmlElement]
-        public int Votes { get; set; }
+        public int TotalVotes { get; set; }
 
         [DataMember, XmlElement]
-        public double Rating { get; set; }
+        public double TotalRating { get; set; }
     }
 }

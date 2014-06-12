@@ -15,7 +15,7 @@ namespace Burgerama.Services.Ratings.Data.Models
         public DateTime? OpeningDate { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime? CloseDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
         
         public IEnumerable<RatingModel> Ratings { get; set; }
     }

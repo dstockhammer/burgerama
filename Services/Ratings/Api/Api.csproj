@@ -120,10 +120,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Authentication.0.2.0\lib\net451\Burgerama.Common.Authentication.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.DataAccess.MongoDB">
+    <Reference Include="Burgerama.Common.Configuration">
+      <HintPath>..\packages\Burgerama.Common.Configuration.0.2.1\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Common.DataAccess.MongoDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.2.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.Logging">
+    <Reference Include="Burgerama.Common.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Logging.0.2.0\lib\net451\Burgerama.Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -132,7 +137,7 @@
     </Reference>
     <Reference Include="Burgerama.Messaging.Events.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.2\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.3\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -258,7 +263,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />

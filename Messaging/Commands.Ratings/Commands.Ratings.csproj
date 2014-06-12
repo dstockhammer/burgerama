@@ -119,6 +119,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloseCandidate.cs" />
+    <Compile Include="OpenCandidate.cs" />
     <Compile Include="CreateCandidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

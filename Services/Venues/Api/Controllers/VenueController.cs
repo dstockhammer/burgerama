@@ -6,11 +6,12 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
+using Burgerama.Messaging.Commands;
+using Burgerama.Messaging.Commands.Ratings;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.Events.Venues;
 using Burgerama.Services.Venues.Api.Converters;
 using Burgerama.Services.Venues.Api.Models;
-using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
 using Serilog;
 
@@ -18,14 +19,18 @@ namespace Burgerama.Services.Venues.Api.Controllers
 {
     public class VenueController : ApiController
     {
+        private const string VenueContextKey = "venues";
+
         private readonly ILogger _logger;
         private readonly IEventDispatcher _eventDispatcher;
+        private readonly ICommandDispatcher _commandDispatcher;
         private readonly IVenueRepository _venueRepository;
 
-        public VenueController(ILogger logger, IEventDispatcher eventDispatcher, IVenueRepository venueRepository)
+        public VenueController(ILogger logger, IEventDispatcher eventDispatcher, ICommandDispatcher commandDispatcher, IVenueRepository venueRepository)
         {
             _logger = logger;
             _eventDispatcher = eventDispatcher;
+            _commandDispatcher = commandDispatcher;
             _venueRepository = venueRepository;
         }
 
@@ -75,7 +80,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
         /// This operation requires authentication.
         /// </remarks>
         /// <example>
-        /// POST /venue/878f000c-e61f-4d34-a9f7-236a153c062c
+        /// POST /venue
         /// </example>
         /// <param name="model">The venue that should be added.</param>
         /// <returns>Returns the location of the newly added venue.</returns>
@@ -89,7 +94,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
             var venue = model.ToDomain(ClaimsPrincipal.Current.GetUserId());
 
             // check for duplicates by location.
-            // this is quire naive and could be improved significantly.
+            // todo: this is quite naive and can be improved significantly.
             var duplicate = _venueRepository.GetByLocation(venue.Location);
             if (duplicate != null)
                 return Conflict();
@@ -98,14 +103,28 @@ namespace Burgerama.Services.Venues.Api.Controllers
             _eventDispatcher.Publish(new VenueCreated
             {
                 VenueId = venue.Id,
-                Title = venue.Title
+                Title = venue.Name
             });
 
-            _logger.Information("Created venue {@Venue}.",
-                new { venue.Id, venue.Title, venue.CreatedByUser });
+            _commandDispatcher.Send(new CreateCandidate
+            {
+                ContextKey = VenueContextKey,
+                Reference = venue.Id
+            });
 
-            // todo get url from config or something
-            return Created("http://api.dev.burgerama.co.uk/venues/" + venue.Id, typeof(Venue));
+            // todo: enable voting
+            //_commandDispatcher.Send(new Burgerama.Messaging.Commands.Voting.CreateCandidate
+            //{
+            //    ContextKey = VenueContextKey,
+            //    Reference = venue.Id,
+            //    OpeningDate = venue.CreatedOn
+            //});
+
+            _logger.Information("Created venue {@Venue}.",
+                new { venue.Id, Title = venue.Name, venue.CreatedByUser });
+
+            var uri = new Uri(Url.Content(string.Format("~/{0}", venue.Id)));
+            return Created(uri, venue.ToModel());
         }
     }
 }
