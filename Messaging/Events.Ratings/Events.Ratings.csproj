@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CandidateCreated.cs" />
     <Compile Include="RatingAdded.cs" />
     <Compile Include="RatingUpdated.cs" />
     <Compile Include="TriedToRateUnknownCandidate.cs" />

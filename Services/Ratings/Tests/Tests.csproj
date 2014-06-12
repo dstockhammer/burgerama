@@ -184,7 +184,7 @@
   <ItemGroup>
     <Compile Include="Data\MongoDbTestUtils.cs" />
     <Compile Include="Domain\RatingTests.cs" />
-    <Compile Include="Domain\VenueTests.cs" />
+    <Compile Include="Domain\CandidateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using Burgerama.Common.Logging;
-using Burgerama.Messaging.Endpoint.Host.Topshelf;
+using Burgerama.Messaging.Endpoint.Host;
+using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit;
+using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Ratings.Data;
 using Burgerama.Services.Ratings.Domain.Contracts;
 
@@ -29,8 +31,8 @@ namespace Burgerama.Services.Ratings.Endpoint
 
             // Messaging infrastructure
             builder.RegisterModule<ServiceBusModule>();
-            builder.RegisterType<EndpointService>().As<IEndpointService>();
-            builder.RegisterType<EndpointHostFactory>().AsSelf().SingleInstance();
+            builder.RegisterModule<EndpointHostModule>();
+            builder.RegisterType<EventDispatcher>().As<IEventDispatcher>();
 
             return builder.Build();
         }

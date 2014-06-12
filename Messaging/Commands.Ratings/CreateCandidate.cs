@@ -10,5 +10,9 @@ namespace Burgerama.Messaging.Commands.Ratings
         public string ContextKey { get; set; }
 
         public Guid Reference { get; set; }
+
+        public DateTime? OpeningDate { get; set; }
+
+        public DateTime? CloseDate { get; set; }
     }
 }

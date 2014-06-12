@@ -16,7 +16,7 @@ namespace Burgerama.Services.Ratings.Api.Models
 
         [Required]
         [DataMember, XmlElement]
-        public double Rating { get; set; }
+        public double Value { get; set; }
 
         [DataMember, XmlElement]
         public string Text { get; set; }

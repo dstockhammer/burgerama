@@ -13,13 +13,15 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Arrange
             var userId = string.Empty;
             const double value = 0.5d;
+            var dateCreated = DateTime.Now;
 
             // Act
-            var rating = new Rating(userId, value, string.Empty);
+            var rating = new Rating(dateCreated, userId, value, string.Empty);
 
             // Assert
             Assert.IsNotNull(rating);
-            Assert.AreEqual(userId, rating.User);
+            Assert.AreEqual(dateCreated, rating.CreatedOn);
+            Assert.AreEqual(userId, rating.UserId);
             Assert.AreEqual(value, rating.Value);
         }
 
@@ -30,9 +32,10 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Arrange
             var userId = string.Empty;
             const double value = -0.1d;
+            var dateCreated = DateTime.Now;
 
             // Act
-            var rating = new Rating(userId, value, string.Empty);
+            var rating = new Rating(dateCreated, userId, value, string.Empty);
         }
 
         [TestMethod]
@@ -42,23 +45,24 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Arrange
             var userId = string.Empty;
             const double value = 1.1d;
+            var dateCreated = DateTime.Now;
 
             // Act
-            var rating = new Rating(userId, value, string.Empty);
+            var rating = new Rating(dateCreated, userId, value, string.Empty);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Rating_ShouldNotBeCreatedWithoutUser()
         {
-            var rating = new Rating(null, 0, string.Empty);
+            var rating = new Rating(DateTime.Now, null, 0, string.Empty);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Rating_ShouldNotBeCreatedWithoutText()
         {
-            var rating = new Rating(null, 0, null);
+            var rating = new Rating(DateTime.Now, null, 0, null);
         }
     }
 }
