@@ -37,12 +37,12 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
             // first, check all real (= well known) candidates
-            var candidate = _candidateRepository.Get(reference, contextKey);
+            var candidate = _candidateRepository.Get(contextKey, reference);
             if (candidate != null)
                 return Ok(candidate.Ratings.Select(r => r.ToModel()));
            
             // if there is no real candidate, check the potential ones
-            var potentialCandidate = _candidateRepository.GetPotential(reference, contextKey);
+            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
             if (potentialCandidate != null)
                 Ok(potentialCandidate.Ratings.Select(r => r.ToModel()));
             
@@ -63,7 +63,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             // todo: validate rating?
             var rating = new Rating(DateTime.Now, userId, model.Value, model.Text);
 
-            var candidate = _candidateRepository.Get(reference, contextKey);
+            var candidate = _candidateRepository.Get(contextKey, reference);
             if (candidate != null)
             {
                 if (candidate.Ratings.Any(r => r.UserId == userId))
@@ -72,14 +72,14 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                 var events = candidate.AddRating(new Rating(DateTime.Now, userId, model.Value, model.Text ?? string.Empty));
                 _candidateRepository.SaveOrUpdate(candidate);
                 _eventDispatcher.Publish(events);
-                _logger.Information("Added rating of {Rating} to candidate \"{Reference}\".", model.Value, reference);
+                _logger.Information("Added rating of {Rating} to candidate {Reference}.", model.Value, reference);
 
                 var candidateUri = new Uri(Url.Content(string.Format("~/{0}/{1}", contextKey, reference)));
                 return Created(candidateUri, candidate.Ratings.Select(v => v.ToModel()));
             }
 
             // todo: verify if context exists? rules on how to deal with this situation could also be configured in the context
-            var potentialCandidate = _candidateRepository.GetPotential(reference, contextKey);
+            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
             if (potentialCandidate == null)
             {
                 potentialCandidate = new PotentialCandidate(contextKey, reference);
@@ -95,7 +95,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
 
             potentialCandidate.AddRating(rating);
             _candidateRepository.SaveOrUpdate(potentialCandidate);
-            _logger.Information("Added rating of {Rating} to unknown candidate \"{Reference}\".", model.Value, reference);
+            _logger.Information("Added rating of {Rating} to unknown candidate {Reference}.", model.Value, reference);
 
             var uri = new Uri(Url.Content(string.Format("~/{0}/{1}", contextKey, reference)));
             return Created(uri, potentialCandidate.Ratings.Select(r => r.ToModel()));

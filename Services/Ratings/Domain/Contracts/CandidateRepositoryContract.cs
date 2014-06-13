@@ -7,14 +7,14 @@ namespace Burgerama.Services.Ratings.Domain.Contracts
     [ContractClassFor(typeof(ICandidateRepository))]
     internal abstract class CandidateRepositoryContract : ICandidateRepository
     {
-        public Candidate Get(Guid reference, string contextKey)
+        public Candidate Get(string contextKey, Guid reference)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
             return default(Candidate);
         }
 
-        public PotentialCandidate GetPotential(Guid reference, string contextKey)
+        public PotentialCandidate GetPotential(string contextKey, Guid reference)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 

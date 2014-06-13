@@ -254,6 +254,7 @@
     <Compile Include="Handlers\CreateCandidateHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CandidateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

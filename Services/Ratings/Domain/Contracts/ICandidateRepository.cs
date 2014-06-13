@@ -7,9 +7,9 @@ namespace Burgerama.Services.Ratings.Domain.Contracts
     [ContractClass(typeof(CandidateRepositoryContract))]
     public interface ICandidateRepository
     {
-        Candidate Get(Guid reference, string contextKey);
+        Candidate Get(string contextKey, Guid reference);
 
-        PotentialCandidate GetPotential(Guid reference, string contextKey);
+        PotentialCandidate GetPotential(string contextKey, Guid reference);
 
         IEnumerable<Candidate> GetAll(string contextKey);
 

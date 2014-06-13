@@ -6,6 +6,7 @@ using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Events;
 using Burgerama.Services.Ratings.Data;
 using Burgerama.Services.Ratings.Domain.Contracts;
+using Burgerama.Services.Ratings.Endpoint.Services;
 
 namespace Burgerama.Services.Ratings.Endpoint
 {
@@ -25,6 +26,9 @@ namespace Burgerama.Services.Ratings.Endpoint
 
             // Repositories
             builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
+
+            // Services
+            builder.RegisterType<CandidateService>().AsSelf();
 
             // Logging
             builder.RegisterModule<LoggingModule>();

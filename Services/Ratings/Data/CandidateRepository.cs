@@ -24,14 +24,14 @@ namespace Burgerama.Services.Ratings.Data
             get { return GetCollection<CandidateModel>("potential_candidates"); }
         }
 
-        public Candidate Get(Guid reference, string contextKey)
+        public Candidate Get(string contextKey, Guid reference)
         {
             return Candidates.AsQueryable()
                 .SingleOrDefault(c => c.Reference == reference.ToString() && c.ContextKey == contextKey)
                 .ToDomain();
         }
 
-        public PotentialCandidate GetPotential(Guid reference, string contextKey)
+        public PotentialCandidate GetPotential(string contextKey, Guid reference)
         {
             return PotentialCandidates.AsQueryable()
                 .SingleOrDefault(c => c.Reference == reference.ToString() && c.ContextKey == contextKey)

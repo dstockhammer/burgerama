@@ -33,7 +33,7 @@ namespace Burgerama.Services.Outings.Endpoint.Handlers
                 DateTime = outing.Date
             });
 
-            _logger.Information("Created outing {@Outing} with Id \"{Id}\".",
+            _logger.Information("Created outing {@Outing} with Id {Id}.",
                 new { context.Message.VenueId, context.Message.Date }, outing.Id);
         }
     }
