@@ -3,15 +3,19 @@ var Burgerama;
 (function (Burgerama) {
     (function (Outings) {
         var OutingController = (function () {
-            function OutingController($rootScope, $scope, outingResource, toaster) {
+            function OutingController($rootScope, $scope, $modal, outingResource, toaster) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
+                this.$modal = $modal;
                 this.outingResource = outingResource;
                 this.toaster = toaster;
                 this.$scope.outings = null;
                 this.$scope.panTo = function (outing) {
                     return _this.panTo(outing);
+                };
+                this.$scope.addRating = function (venue) {
+                    return _this.addRating(venue);
                 };
 
                 this.load();
@@ -29,6 +33,22 @@ var Burgerama;
             OutingController.prototype.panTo = function (outing) {
                 this.$rootScope.$emit('VenueSelected', outing.venue);
             };
+
+            OutingController.prototype.addRating = function (venue) {
+                this.$modal.open({
+                    templateUrl: '/Scripts/app/ratings/views/addRating.modal.html',
+                    controller: 'AddRatingController',
+                    resolve: {
+                        context: function () {
+                            return {
+                                key: "venues",
+                                reference: venue.id,
+                                title: venue.name
+                            };
+                        }
+                    }
+                });
+            };
             return OutingController;
         })();
         Outings.OutingController = OutingController;
@@ -37,8 +57,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('OutingController', [
-    '$rootScope', '$scope', 'OutingResource', 'toaster', function ($rootScope, $scope, outingResource, toaster) {
-        return new Burgerama.Outings.OutingController($rootScope, $scope, outingResource, toaster);
+    '$rootScope', '$scope', '$modal', 'OutingResource', 'toaster', function ($rootScope, $scope, $modal, outingResource, toaster) {
+        return new Burgerama.Outings.OutingController($rootScope, $scope, $modal, outingResource, toaster);
     }
 ]);
 //# sourceMappingURL=outingController.js.map

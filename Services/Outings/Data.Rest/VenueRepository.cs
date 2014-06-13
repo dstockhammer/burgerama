@@ -16,7 +16,7 @@ namespace Burgerama.Services.Outings.Data.Rest
         {
             return "venues";
         }
-		
+
         public Venue Get(Guid venueId)
         {
             var request = new RestRequest("{id}", Method.GET);

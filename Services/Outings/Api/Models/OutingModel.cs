@@ -14,9 +14,6 @@ namespace Burgerama.Services.Outings.Api.Models
         public DateTime Date { get; set; }
 
         [DataMember, XmlElement]
-        public string VenueId { get; set; }
-
-        [DataMember, XmlElement]
         public VenueModel Venue { get; set; }
     }
 }

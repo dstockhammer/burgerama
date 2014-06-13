@@ -46,7 +46,7 @@ module Burgerama.Venues {
         private addVote(venue: IVenue) {
             var resource = new this.voteResource(this.$scope.venue);
             resource.$create(() => {
-                this.toaster.pop('success', 'Success', 'Added vote for venue: ' + this.$scope.venue.title);
+                this.toaster.pop('success', 'Success', 'Added vote for venue: ' + this.$scope.venue.name);
                 this.$rootScope.$emit('VenueVoted', this.$scope.venue);
                 console.log('add vote clicked');
             }, err => {

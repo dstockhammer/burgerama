@@ -37,8 +37,8 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
                     Reference = venue.Id
                 });
 
-                _logger.Information("Created rating candidate for venue \"{Reference}\".",
-                    new { context.Message.Reference });
+                _logger.Information("Created rating candidate for venue {Reference}.",
+                   context.Message.Reference);
             }
         }
     }

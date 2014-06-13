@@ -27,8 +27,8 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
             var venue = _venueRepository.Get(context.Message.Reference);
             if (venue == null)
             {
-                _logger.Error("Tried to update rating for unknown venue \"{Reference}\".",
-                    new { context.Message.Reference });
+                _logger.Error("Tried to update rating for unknown venue {Reference}.",
+                    context.Message.Reference);
 
                 return;
             }
@@ -36,8 +36,8 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
             venue.TotalRating = context.Message.NewTotal;
             _venueRepository.SaveOrUpdate(venue);
 
-            _logger.Information("Rating for venue \"{Reference}\" updated to {NewTotal}.",
-                new { context.Message.Reference, context.Message.NewTotal });
+            _logger.Information("Rating for venue {Reference} updated to {NewTotal}.",
+                context.Message.Reference, context.Message.NewTotal);
         }
     }
 }

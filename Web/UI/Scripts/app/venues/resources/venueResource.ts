@@ -3,7 +3,7 @@
 module Burgerama.Venues {
     export interface IVenue {
         id: string;
-        title: string;
+        name: string;
         location: ILocation;
         url: string;
         description: string;

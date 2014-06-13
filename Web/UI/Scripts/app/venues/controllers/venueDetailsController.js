@@ -44,7 +44,7 @@ var Burgerama;
                 var _this = this;
                 var resource = new this.voteResource(this.$scope.venue);
                 resource.$create(function () {
-                    _this.toaster.pop('success', 'Success', 'Added vote for venue: ' + _this.$scope.venue.title);
+                    _this.toaster.pop('success', 'Success', 'Added vote for venue: ' + _this.$scope.venue.name);
                     _this.$rootScope.$emit('VenueVoted', _this.$scope.venue);
                     console.log('add vote clicked');
                 }, function (err) {

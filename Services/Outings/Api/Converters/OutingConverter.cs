@@ -15,11 +15,10 @@ namespace Burgerama.Services.Outings.Api.Converters
             {
                 Id = outing.Id.ToString(),
                 Date = outing.Date,
-                VenueId = outing.VenueId.ToString()
+                Venue = venueResolver == null
+                    ? new VenueModel { Id = outing.VenueId.ToString() }
+                    : venueResolver(outing.VenueId).ToModel()
             };
-
-            if (venueResolver != null)
-                model.Venue = venueResolver(outing.VenueId).ToModel();
 
             return model;
         }

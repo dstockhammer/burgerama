@@ -6,7 +6,7 @@ namespace Burgerama.Services.Outings.Data.Rest.Models
     {
         public string Id { get; set; }
 
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public LocationModel Location { get; set; }
 
@@ -15,5 +15,7 @@ namespace Burgerama.Services.Outings.Data.Rest.Models
         public string Description { get; set; }
 
         public string Address { get; set; }
+
+        public double Rating { get; set; }
     }
 }

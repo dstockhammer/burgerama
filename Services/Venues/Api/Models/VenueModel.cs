@@ -13,7 +13,7 @@ namespace Burgerama.Services.Venues.Api.Models
 
         [Required]
         [DataMember, XmlElement]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [DataMember, XmlElement]

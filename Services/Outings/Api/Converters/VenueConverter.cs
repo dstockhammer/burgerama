@@ -14,11 +14,12 @@ namespace Burgerama.Services.Outings.Api.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
-                Title = venue.Title,
+                Name = venue.Name,
                 Location = venue.Location,
                 Url = venue.Url,
                 Description = venue.Description,
-                Address = venue.Address
+                Address = venue.Address,
+                Rating = venue.Rating
             };
         }
     }

@@ -211,7 +211,7 @@ var Burgerama;
                 this.$scope.selectedVenue = markerInfo.venue != null ? markerInfo.venue : {
                     id: '',
                     description: '',
-                    title: markerInfo.place.name,
+                    name: markerInfo.place.name,
                     address: markerInfo.place.formatted_address,
                     url: markerInfo.place.url,
                     location: {

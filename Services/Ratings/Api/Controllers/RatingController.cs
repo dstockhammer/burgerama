@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
 using Burgerama.Messaging.Events;
@@ -58,6 +60,9 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             Contract.Requires<ArgumentNullException>(contextKey != null);
             Contract.Requires<ArgumentNullException>(model != null);
 
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
             var userId = ClaimsPrincipal.Current.GetUserId();
 
             // todo: validate rating?
@@ -70,12 +75,15 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                     return Conflict();
 
                 var events = candidate.AddRating(new Rating(DateTime.Now, userId, model.Value, model.Text ?? string.Empty));
+
                 _candidateRepository.SaveOrUpdate(candidate);
                 _eventDispatcher.Publish(events);
-                _logger.Information("Added rating of {Rating} to candidate {Reference}.", model.Value, reference);
+
+                _logger.Information("Added rating of {Rating} to candidate {Reference}.",
+                    model.Value, reference);
 
                 var candidateUri = new Uri(Url.Content(string.Format("~/{0}/{1}", contextKey, reference)));
-                return Created(candidateUri, candidate.Ratings.Select(v => v.ToModel()));
+                return Created(candidateUri, rating.ToModel());
             }
 
             // todo: verify if context exists? rules on how to deal with this situation could also be configured in the context
@@ -95,10 +103,12 @@ namespace Burgerama.Services.Ratings.Api.Controllers
 
             potentialCandidate.AddRating(rating);
             _candidateRepository.SaveOrUpdate(potentialCandidate);
-            _logger.Information("Added rating of {Rating} to unknown candidate {Reference}.", model.Value, reference);
+
+            _logger.Information("Added rating of {Rating} to unknown candidate {Reference}.",
+                model.Value, reference);
 
             var uri = new Uri(Url.Content(string.Format("~/{0}/{1}", contextKey, reference)));
-            return Created(uri, potentialCandidate.Ratings.Select(r => r.ToModel()));
+            return Created(uri, rating.ToModel());
         }
     }
 }

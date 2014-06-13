@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.10
+ * @license AngularJS v1.3.0-beta.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -497,6 +497,13 @@ angular.module('ngResource', ['ng']).
         function Resource(value) {
           shallowClearAndCopy(value || {}, this);
         }
+
+        Resource.prototype.toJSON = function () {
+          var data = extend({}, this);
+          delete data.$promise;
+          delete data.$resolved;
+          return data;
+        };
 
         forEach(actions, function (action, name) {
           var hasBody = /^(POST|PUT|PATCH)$/i.test(action.method);

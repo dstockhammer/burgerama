@@ -6,14 +6,14 @@ namespace Burgerama.Services.OutingScheduler.Domain
     {
         public Guid Id { get; private set; }
 
-        public string Title { get; private set; }
+        public string Name { get; private set; }
 
         public int Votes { get; private set; }
         
-        public Venue(Guid id, string title, int votes)
+        public Venue(Guid id, string name, int votes)
         {
             Id = id;
-            Title = title;
+            Name = name;
             Votes = votes;
         }
     }

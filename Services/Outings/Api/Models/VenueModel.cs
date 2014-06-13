@@ -12,7 +12,7 @@ namespace Burgerama.Services.Outings.Api.Models
         public string Id { get; set; }
 
         [DataMember, XmlElement]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         [DataMember, XmlElement]
         public LocationModel Location { get; set; }
@@ -25,5 +25,8 @@ namespace Burgerama.Services.Outings.Api.Models
 
         [DataMember, XmlElement]
         public string Address { get; set; }
+
+        [DataMember, XmlElement]
+        public double Rating { get; set; }
     }
 }

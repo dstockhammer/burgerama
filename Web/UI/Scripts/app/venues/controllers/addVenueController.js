@@ -27,7 +27,7 @@ var Burgerama;
 
                 var resource = new this.venueResource(this.$scope.venue);
                 resource.$create(function () {
-                    _this.toaster.pop('success', 'Success', 'Added venue: ' + _this.$scope.venue.title);
+                    _this.toaster.pop('success', 'Success', 'Added venue: ' + _this.$scope.venue.name);
                     _this.$rootScope.$emit('VenueAdded', _this.$scope.venue);
                 }, function (err) {
                     if (err.status == 401) {

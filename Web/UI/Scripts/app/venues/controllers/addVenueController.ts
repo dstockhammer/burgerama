@@ -16,7 +16,8 @@ module Burgerama.Venues {
             private venueResource,
             private toaster,
             private venue,
-            private closeCallback) {
+            private closeCallback)
+        {
             this.$scope.venue = venue;
             this.$scope.ok = () => this.ok();
             this.$scope.cancel = () => this.cancel();
@@ -28,17 +29,17 @@ module Burgerama.Venues {
 
             var resource = new this.venueResource(this.$scope.venue);
             resource.$create(() => {
-                this.toaster.pop('success', 'Success', 'Added venue: ' + this.$scope.venue.title);
+                this.toaster.pop('success', 'Success', 'Added venue: ' + this.$scope.venue.name);
                 this.$rootScope.$emit('VenueAdded', this.$scope.venue);
             }, err => {
-                    if (err.status == 401) {
-                        this.toaster.pop('error', 'Unauthorized', 'You are not authorized to suggest venues. Please log in or create an account.');
-                    } else if (err.status == 409) {
-                        this.toaster.pop('error', 'Conflict', 'This venue has already been suggested.');
-                    } else {
-                        this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-                    }
-                });
+                if (err.status == 401) {
+                    this.toaster.pop('error', 'Unauthorized', 'You are not authorized to suggest venues. Please log in or create an account.');
+                } else if (err.status == 409) {
+                    this.toaster.pop('error', 'Conflict', 'This venue has already been suggested.');
+                } else {
+                    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                }
+            });
         }
 
         private cancel() {

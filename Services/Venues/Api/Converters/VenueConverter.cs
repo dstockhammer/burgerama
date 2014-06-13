@@ -14,7 +14,7 @@ namespace Burgerama.Services.Venues.Api.Converters
             return new VenueModel
             {
                 Id = venue.Id.ToString(),
-                Title = venue.Name,
+                Name = venue.Name,
                 Location = new LocationModel
                 {
                     Reference = venue.Location.Reference,
@@ -37,7 +37,7 @@ namespace Burgerama.Services.Venues.Api.Converters
             Contract.Requires<ArgumentNullException>(userId != null);
 
             var location = new Location(venue.Location.Reference, venue.Location.Latitude, venue.Location.Longitude);
-            return new Venue(venue.Title, location, userId)
+            return new Venue(venue.Name, location, userId)
             {
                 Description = venue.Description,
                 Url = venue.Url,

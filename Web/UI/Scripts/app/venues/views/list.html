@@ -6,7 +6,7 @@
 <ul id="venue-list" class="list-group" ng-repeat="venue in venues">
     <li class="row list-group-item" ng-mouseenter="panTo(venue);">
         <div class="col-xs-10 text">
-            <h4 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: venue.id })">{{ venue.title }}</a></h4>
+            <h4 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: venue.id })">{{ venue.name }}</a></h4>
             <p class="list-group-item-text" ng-hide="venue.description == ''">{{ venue.description | characters:300 }}</p>
             <p class="list-group-item-text address" ng-hide="venue.address == ''">{{ venue.address }}</p>
         </div>

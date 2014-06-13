@@ -224,7 +224,7 @@ module Burgerama.Map {
                 : {
                     id: '',
                     description: '',
-                    title:  markerInfo.place.name,
+                    name:  markerInfo.place.name,
                     address:  markerInfo.place.formatted_address,
                     url: markerInfo.place.url,
                     location: {
