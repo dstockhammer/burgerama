@@ -87,22 +87,20 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             }
 
             // todo: verify if context exists? rules on how to deal with this situation could also be configured in the context
-            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
-            if (potentialCandidate == null)
-            {
-                potentialCandidate = new PotentialCandidate(contextKey, reference);
-                _eventDispatcher.Publish(new TriedToRateUnknownCandidate
-                {
-                    ContextKey = contextKey,
-                    Reference = reference
-                });
-            }
+            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference)
+                ?? new PotentialCandidate(contextKey, reference);
 
             if (potentialCandidate.Ratings.Any(r => r.UserId == userId))
                 return Conflict();
 
             potentialCandidate.AddRating(rating);
+
             _candidateRepository.SaveOrUpdate(potentialCandidate);
+            _eventDispatcher.Publish(new TriedToRateUnknownCandidate
+            {
+                ContextKey = contextKey,
+                Reference = reference
+            });
 
             _logger.Information("Added rating of {Rating} to unknown candidate {Reference}.",
                 model.Value, reference);

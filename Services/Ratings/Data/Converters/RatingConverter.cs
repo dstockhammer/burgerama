@@ -12,6 +12,7 @@ namespace Burgerama.Services.Ratings.Data.Converters
 
             return new RatingModel
             {
+                CreatedOn = rating.CreatedOn,
                 UserId = rating.UserId,
                 Value = rating.Value,
                 Text = rating.Text

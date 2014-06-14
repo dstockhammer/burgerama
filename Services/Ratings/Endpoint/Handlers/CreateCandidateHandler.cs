@@ -30,7 +30,7 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
                 return;
             }
 
-            _candidateService.CreateCandidate(context.Message.ContextKey, context.Message.Reference);
+            _candidateService.CreateCandidate(context.Message.ContextKey, context.Message.Reference, context.Message.OpeningDate, context.Message.ClosingDate);
         }
     }
 }

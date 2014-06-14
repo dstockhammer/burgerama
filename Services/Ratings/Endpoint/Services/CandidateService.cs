@@ -40,13 +40,13 @@ namespace Burgerama.Services.Ratings.Endpoint.Services
             var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
             if (potentialCandidate != null)
             {
-                _logger.Information("Validated potential candidate {Reference} in context {ContextKey} and transferred {RatingCount} existing ratings.",
-                    reference, contextKey, potentialCandidate.Ratings.Count());
-
                 foreach (var rating in potentialCandidate.Ratings)
                 {
                     events.AddRange(candidate.AddRating(rating));
                 }
+
+                _logger.Information("Validated potential candidate {Reference} in context {ContextKey} and transferred {RatingCount} of {PotentialRatingCount} existing ratings.",
+                    reference, contextKey, candidate.Ratings.Count(), potentialCandidate.Ratings.Count());
 
                 _candidateRepository.Delete(potentialCandidate);
             }

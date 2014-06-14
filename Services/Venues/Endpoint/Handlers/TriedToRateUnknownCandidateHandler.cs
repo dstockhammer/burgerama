@@ -1,4 +1,5 @@
-﻿using Burgerama.Messaging.Commands;
+﻿using System;
+using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Ratings;
 using Burgerama.Messaging.Events.Ratings;
 using Burgerama.Services.Venues.Domain.Contracts;
@@ -34,8 +35,9 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
                 _commandDispatcher.Send(new CreateCandidate
                 {
                     ContextKey = VenueContextKey,
-                    Reference = venue.Id
-                });
+                    Reference = venue.Id,
+                    OpeningDate = DateTime.Today // todo: figure out a good way to get the REAL opening date
+                 });
 
                 _logger.Information("Created rating candidate for venue {Reference}.",
                    context.Message.Reference);
