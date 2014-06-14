@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Burgerama.Messaging.Events;
+using Magnum.Reflection;
 using MassTransit;
 
 namespace Burgerama.Messaging.MassTransit.Events
@@ -22,7 +23,9 @@ namespace Burgerama.Messaging.MassTransit.Events
         {
             foreach (var message in messages)
             {
-                _bus.Publish(message);
+                // reflection is needed because otherwise the events are typed as
+                // IEvent and thus can't be subscribed
+                _bus.FastInvoke(new[] { message.GetType() }, "Publish", message);
             }
         }
     }
