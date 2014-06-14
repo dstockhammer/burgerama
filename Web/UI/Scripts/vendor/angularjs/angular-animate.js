@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.12
+ * @license AngularJS v1.3.0-beta.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -360,10 +360,6 @@ angular.module('ngAnimate', ['ng'])
       }
     }
 
-    function prepareElement(element) {
-      return element && angular.element(element);
-    }
-
     function stripCommentsFromElement(element) {
       return angular.element(extractElementNode(element));
     }
@@ -572,7 +568,7 @@ angular.module('ngAnimate', ['ng'])
       /**
        * @ngdoc service
        * @name $animate
-       * @kind function
+       * @function
        *
        * @description
        * The `$animate` service provides animation detection support while performing DOM operations (enter, leave and move) as well as during addClass and removeClass operations.
@@ -592,7 +588,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name $animate#enter
-         * @kind function
+         * @function
          *
          * @description
          * Appends the element to the parentElement element that resides in the document and then runs the enter animation. Once
@@ -622,10 +618,6 @@ angular.module('ngAnimate', ['ng'])
          * @param {function()=} doneCallback the callback function that will be called once the animation is complete
         */
         enter : function(element, parentElement, afterElement, doneCallback) {
-          element = angular.element(element);
-          parentElement = prepareElement(parentElement);
-          afterElement = prepareElement(afterElement);
-
           this.enabled(false, element);
           $delegate.enter(element, parentElement, afterElement);
           $rootScope.$$postDigest(function() {
@@ -637,7 +629,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name $animate#leave
-         * @kind function
+         * @function
          *
          * @description
          * Runs the leave animation operation and, upon completion, removes the element from the DOM. Once
@@ -665,7 +657,6 @@ angular.module('ngAnimate', ['ng'])
          * @param {function()=} doneCallback the callback function that will be called once the animation is complete
         */
         leave : function(element, doneCallback) {
-          element = angular.element(element);
           cancelChildAnimations(element);
           this.enabled(false, element);
           $rootScope.$$postDigest(function() {
@@ -678,7 +669,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name $animate#move
-         * @kind function
+         * @function
          *
          * @description
          * Fires the move DOM operation. Just before the animation starts, the animate service will either append it into the parentElement container or
@@ -709,10 +700,6 @@ angular.module('ngAnimate', ['ng'])
          * @param {function()=} doneCallback the callback function that will be called once the animation is complete
         */
         move : function(element, parentElement, afterElement, doneCallback) {
-          element = angular.element(element);
-          parentElement = prepareElement(parentElement);
-          afterElement = prepareElement(afterElement);
-
           cancelChildAnimations(element);
           this.enabled(false, element);
           $delegate.move(element, parentElement, afterElement);
@@ -752,7 +739,6 @@ angular.module('ngAnimate', ['ng'])
          * @param {function()=} doneCallback the callback function that will be called once the animation is complete
         */
         addClass : function(element, className, doneCallback) {
-          element = angular.element(element);
           element = stripCommentsFromElement(element);
           performAnimation('addClass', className, element, null, null, function() {
             $delegate.addClass(element, className);
@@ -789,7 +775,6 @@ angular.module('ngAnimate', ['ng'])
          * @param {function()=} doneCallback the callback function that will be called once the animation is complete
         */
         removeClass : function(element, className, doneCallback) {
-          element = angular.element(element);
           element = stripCommentsFromElement(element);
           performAnimation('removeClass', className, element, null, null, function() {
             $delegate.removeClass(element, className);
@@ -816,7 +801,7 @@ angular.module('ngAnimate', ['ng'])
          * | 8. The animation ends and all generated CSS classes are removed from the element                                                     | class="my-animation"                                                                 |
          * | 9. The doneCallback() callback is fired (if provided)                                                                                | class="my-animation"                                                                 |
          *
-         * @param {DOMElement} element the element which will have its CSS classes changed
+         * @param {DOMElement} element the element which will its CSS classes changed
          *   removed from it
          * @param {string} add the CSS classes which will be added to the element
          * @param {string} remove the CSS class which will be removed from the element
@@ -824,7 +809,6 @@ angular.module('ngAnimate', ['ng'])
          *   CSS classes have been set on the element
          */
         setClass : function(element, add, remove, doneCallback) {
-          element = angular.element(element);
           element = stripCommentsFromElement(element);
           performAnimation('setClass', [add, remove], element, null, null, function() {
             $delegate.setClass(element, add, remove);
@@ -834,7 +818,7 @@ angular.module('ngAnimate', ['ng'])
         /**
          * @ngdoc method
          * @name $animate#enabled
-         * @kind function
+         * @function
          *
          * @param {boolean=} value If provided then set the animation on or off.
          * @param {DOMElement=} element If provided then the element will be used to represent the enable/disable operation
@@ -1408,7 +1392,7 @@ angular.module('ngAnimate', ['ng'])
         });
 
         element.addClass(activeClassName);
-        var eventCacheKey = elementData.cacheKey + ' ' + activeClassName;
+        var eventCacheKey = elementData.eventCacheKey + ' ' + activeClassName;
         var timings = getElementAnimationDetails(element, eventCacheKey);
 
         var maxDuration = Math.max(timings.transitionDuration, timings.animationDuration);
