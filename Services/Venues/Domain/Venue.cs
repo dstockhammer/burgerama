@@ -25,7 +25,7 @@ namespace Burgerama.Services.Venues.Domain
         /// todo: probably the rating shouldn't be added directly to the venue,
         /// but rather to a seperate model to make the intention clear.
         /// </summary>
-        public double TotalRating { get; set; }
+        public double? TotalRating { get; set; }
 
         public Venue(Guid id, string name, Location location, string createdByUser, DateTime createdOn)
         {
@@ -38,7 +38,6 @@ namespace Burgerama.Services.Venues.Domain
             Location = location;
             CreatedByUser = createdByUser;
             CreatedOn = createdOn;
-            TotalRating = 0;
         }
 
         public Venue(string name, Location location, string createdByUser)
@@ -52,7 +51,6 @@ namespace Burgerama.Services.Venues.Domain
             Location = location;
             CreatedByUser = createdByUser;
             CreatedOn = DateTime.Now;
-            TotalRating = 0;
         }
     }
 }

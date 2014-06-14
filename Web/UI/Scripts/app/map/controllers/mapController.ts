@@ -232,8 +232,8 @@ module Burgerama.Map {
                         longitude: markerInfo.place.geometry.location.lng(),
                         reference: markerInfo.place.reference,
                     },
-                    votes: 0,
-                    rating: 0
+                    totalVotes: 0,
+                    totalRating: null
                 };
 
             this.$scope.venueInfoWindow.open(this.$scope.map, markerInfo.marker);

@@ -8,8 +8,8 @@ module Burgerama.Venues {
         url: string;
         description: string;
         address: string;
-        rating: number;
-        votes: number;
+        totalRating: number;
+        totalVotes: number;
     }
 
     export interface ILocation {

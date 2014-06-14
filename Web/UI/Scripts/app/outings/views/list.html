@@ -11,7 +11,7 @@
             <p class="list-group-item-text" ng-hide="outing.venue.description == ''">{{ outing.venue.description | characters:300 }}</p>
         </div>
         <div class="col-xs-2 info">
-            <p class="rating">{{ outing.venue.rating }}</p>
+            <rating-stats ng-model="outing.venue.totalRating"></rating-stats>
             <p><a href ng-click="addRating(outing.venue);">rate</a></p>
         </div>
     </li>

@@ -10,6 +10,7 @@ module Burgerama.Ratings {
     export interface IAddRatingScope extends ng.IScope {
         context: IRatingContext
         rating: Rating;
+        ratingError: boolean;
 
         starValue: number;
         starText: string;
@@ -28,6 +29,7 @@ module Burgerama.Ratings {
             private $modalInstance,
             private ratingResource,
             private toaster,
+            private starRatingService: IStarRatingService,
             private context: IRatingContext)
         {
             this.$scope.rating = new Rating();
@@ -46,6 +48,13 @@ module Burgerama.Ratings {
         }
 
         private ok() {
+            this.$scope.ratingError = typeof(this.$scope.rating.value) === 'undefined'
+                || this.$scope.rating.value < 0
+                || this.$scope.rating.value > 1;
+            
+            if (this.$scope.ratingError)
+                return;
+
             this.$modalInstance.close();
 
             var resource = new this.ratingResource(this.$scope.rating);
@@ -68,43 +77,16 @@ module Burgerama.Ratings {
         }
 
         private hoverStar(star: number) {
-            this.$scope.starText = this.getTextForStar(star);
+            this.$scope.starText = this.starRatingService.getTextForStar(star);
         }
 
         private leaveStar() {
-            this.$scope.starText = this.getTextForStar(this.$scope.starValue);
-            this.$scope.rating.value = this.normalizeRatingForStar(this.$scope.starValue);
-
-            console.log('leave', this.$scope.starValue, this.$scope.starText);
-        }
-
-        private normalizeRatingForStar(star: number): number {
-            var min = 1;
-            var max = 5;
-            
-            return (star - min) / (max - min);
-        }
-
-        private getTextForStar(star: number): string {
-            switch (star) {
-                case 1:
-                    return 'Hate it!';
-                case 2:
-                    return 'Dislike it';
-                case 3:
-                    return "It's okay";
-                case 4:
-                    return 'Like it';
-                case 5:
-                    return 'Love it!';
-
-                default:
-                    return null;
-            }
+            this.$scope.starText = this.starRatingService.getTextForStar(this.$scope.starValue);
+            this.$scope.rating.value = this.starRatingService.normalizeRating(this.$scope.starValue);
         }
     }
 }
 
-Burgerama.app.controller('AddRatingController', ['$rootScope', '$scope', '$modalInstance', 'RatingResource', 'toaster', 'context', ($rootScope, $scope, $modalInstance, ratingResource, toaster, context) =>
-    new Burgerama.Ratings.AddRatingController($rootScope, $scope, $modalInstance, ratingResource, toaster, context)
+Burgerama.app.controller('AddRatingController', ['$rootScope', '$scope', '$modalInstance', 'RatingResource', 'toaster', 'StarRatingService', 'context', ($rootScope, $scope, $modalInstance, ratingResource, toaster, starRatingService, context) =>
+    new Burgerama.Ratings.AddRatingController($rootScope, $scope, $modalInstance, ratingResource, toaster, starRatingService, context)
 ]);

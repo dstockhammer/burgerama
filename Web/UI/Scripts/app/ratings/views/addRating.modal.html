@@ -4,11 +4,11 @@
         <h4 class="modal-title">Rate {{ context.title }}</h4>
     </div>
     <div class="modal-body">
-        <div class="form-group" ng-class="{'has-error': add_rating_modal.Value.$dirty && add_rating_modal.Value.$invalid}">
-            <div class="col-sm-12">
-                <!--<rating ng-model="starValue" max="5" readonly="false" on-hover="hoverStar(value)" on-leave="leaveStar()"></rating>-->
-                <!--<span ng-show="starText != null">{{ starText }}</span>-->
-                <input ng-model="rating.value" type="text" class="form-control" placeholder="Value (this is going to be replaced with stars)" id="Value" name="Value" required autofocus>
+        <div class="form-group">
+            <div class="col-sm-12 star-rating">
+                <rating class="stars" ng-model="$parent.starValue" max="5" readonly="false" on-hover="hoverStar(value)" on-leave="leaveStar()"></rating>
+                <span class="caption" ng-show="starText != null">{{ starText }}</span>
+                <span class="caption error" ng-show="ratingError && starText == null">Rating is required!</span>
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error': add_rating_modal.Text.$dirty && add_rating_modal.Text.$invalid}">

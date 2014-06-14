@@ -6015,6 +6015,24 @@ body {
   margin: 4px 0;
   color: #808080;
 }
+.star-rating .stars {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.star-rating .stars .glyphicon-star {
+  color: #f0ad4e;
+  text-shadow: 0 0 1px #eeeeee;
+}
+.star-rating .stars .glyphicon-star-empty {
+  color: #999999;
+  text-shadow: 0 0 1px #eeeeee;
+}
+.star-rating .caption {
+  color: #999999;
+}
+.star-rating .error {
+  color: #a94442;
+}
 .form-control {
   font-family: "Roboto Light";
 }

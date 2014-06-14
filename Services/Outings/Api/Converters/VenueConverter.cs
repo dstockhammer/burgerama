@@ -19,7 +19,7 @@ namespace Burgerama.Services.Outings.Api.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
-                Rating = venue.Rating
+                TotalRating = venue.TotalRating
             };
         }
     }

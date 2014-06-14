@@ -11,8 +11,9 @@
             <p class="list-group-item-text address" ng-hide="venue.address == ''">{{ venue.address }}</p>
         </div>
         <div class="col-xs-2 info">
-            <p class="votes">{{ venue.votes }}</p>
-            <p><a href ng-click="addVote(venue);">vote</a></p>
+            <rating-stats ng-model="venue.totalRating" ng-show="venue.totalRating != null"></rating-stats>
+            <p class="votes" ng-hide="venue.totalRating != null">{{ venue.totalVotes }}</p>
+            <p><a href ng-click="addVote(venue);" ng-hide="venue.totalRating != null">vote</a></p>
         </div>
     </li>
 </ul>

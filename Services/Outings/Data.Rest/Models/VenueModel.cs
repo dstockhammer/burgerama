@@ -16,6 +16,6 @@ namespace Burgerama.Services.Outings.Data.Rest.Models
 
         public string Address { get; set; }
 
-        public double Rating { get; set; }
+        public double? TotalRating { get; set; }
     }
 }

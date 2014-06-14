@@ -17,9 +17,9 @@ namespace Burgerama.Services.Outings.Domain
 
         public string Address { get; private set; }
 
-        public double Rating { get; private set; }
+        public double? TotalRating { get; private set; }
 
-        public Venue(Guid id, string name, LocationModel location, string url, string description, string address, double rating)
+        public Venue(Guid id, string name, LocationModel location, string url, string description, string address, double? totalRating)
         {
             Contract.Requires<ArgumentNullException>(location != null);
 
@@ -29,7 +29,7 @@ namespace Burgerama.Services.Outings.Domain
             Url = url;
             Description = description;
             Address = address;
-            Rating = rating;
+            TotalRating = totalRating;
         }
     }
 }

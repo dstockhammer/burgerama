@@ -27,6 +27,6 @@ namespace Burgerama.Services.Outings.Api.Models
         public string Address { get; set; }
 
         [DataMember, XmlElement]
-        public double Rating { get; set; }
+        public double? TotalRating { get; set; }
     }
 }

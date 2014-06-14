@@ -3,13 +3,14 @@ var Burgerama;
 (function (Burgerama) {
     (function (Ratings) {
         var AddRatingController = (function () {
-            function AddRatingController($rootScope, $scope, $modalInstance, ratingResource, toaster, context) {
+            function AddRatingController($rootScope, $scope, $modalInstance, ratingResource, toaster, starRatingService, context) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
                 this.$modalInstance = $modalInstance;
                 this.ratingResource = ratingResource;
                 this.toaster = toaster;
+                this.starRatingService = starRatingService;
                 this.context = context;
                 this.$scope.rating = new Ratings.Rating();
                 this.$scope.rating.context = context.key;
@@ -35,6 +36,11 @@ var Burgerama;
             }
             AddRatingController.prototype.ok = function () {
                 var _this = this;
+                this.$scope.ratingError = typeof (this.$scope.rating.value) === 'undefined' || this.$scope.rating.value < 0 || this.$scope.rating.value > 1;
+
+                if (this.$scope.ratingError)
+                    return;
+
                 this.$modalInstance.close();
 
                 var resource = new this.ratingResource(this.$scope.rating);
@@ -57,39 +63,12 @@ var Burgerama;
             };
 
             AddRatingController.prototype.hoverStar = function (star) {
-                this.$scope.starText = this.getTextForStar(star);
+                this.$scope.starText = this.starRatingService.getTextForStar(star);
             };
 
             AddRatingController.prototype.leaveStar = function () {
-                this.$scope.starText = this.getTextForStar(this.$scope.starValue);
-                this.$scope.rating.value = this.normalizeRatingForStar(this.$scope.starValue);
-
-                console.log('leave', this.$scope.starValue, this.$scope.starText);
-            };
-
-            AddRatingController.prototype.normalizeRatingForStar = function (star) {
-                var min = 1;
-                var max = 5;
-
-                return (star - min) / (max - min);
-            };
-
-            AddRatingController.prototype.getTextForStar = function (star) {
-                switch (star) {
-                    case 1:
-                        return 'Hate it!';
-                    case 2:
-                        return 'Dislike it';
-                    case 3:
-                        return "It's okay";
-                    case 4:
-                        return 'Like it';
-                    case 5:
-                        return 'Love it!';
-
-                    default:
-                        return null;
-                }
+                this.$scope.starText = this.starRatingService.getTextForStar(this.$scope.starValue);
+                this.$scope.rating.value = this.starRatingService.normalizeRating(this.$scope.starValue);
             };
             return AddRatingController;
         })();
@@ -99,8 +78,8 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('AddRatingController', [
-    '$rootScope', '$scope', '$modalInstance', 'RatingResource', 'toaster', 'context', function ($rootScope, $scope, $modalInstance, ratingResource, toaster, context) {
-        return new Burgerama.Ratings.AddRatingController($rootScope, $scope, $modalInstance, ratingResource, toaster, context);
+    '$rootScope', '$scope', '$modalInstance', 'RatingResource', 'toaster', 'StarRatingService', 'context', function ($rootScope, $scope, $modalInstance, ratingResource, toaster, starRatingService, context) {
+        return new Burgerama.Ratings.AddRatingController($rootScope, $scope, $modalInstance, ratingResource, toaster, starRatingService, context);
     }
 ]);
 //# sourceMappingURL=addRatingController.js.map

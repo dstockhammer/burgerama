@@ -38,6 +38,6 @@ namespace Burgerama.Services.Venues.Api.Models
         public int TotalVotes { get; set; }
 
         [DataMember, XmlElement]
-        public double TotalRating { get; set; }
+        public double? TotalRating { get; set; }
     }
 }

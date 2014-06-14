@@ -245,6 +245,32 @@ html, body {
     }
 }
 
+// star rating
+.star-rating {
+    .stars {
+        font-size: 1.5em;
+        cursor: pointer;
+
+        .glyphicon-star {
+            color: @brand-warning;
+            text-shadow: 0 0 1px @gray-lighter;
+        }
+
+        .glyphicon-star-empty {
+            color: @gray-light;
+            text-shadow: 0 0 1px @gray-lighter;
+        }
+    }
+
+    .caption {
+        color: @gray-light;
+    }
+    
+     .error {
+         color: @alert-danger-text;
+     }
+}
+
 // style fixes
 .form-control {
     font-family: "Roboto Light";

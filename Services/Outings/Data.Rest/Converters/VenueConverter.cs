@@ -19,7 +19,7 @@ namespace Burgerama.Services.Outings.Data.Rest.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
-                Rating = venue.Rating
+                TotalRating = venue.TotalRating
             };
         }
 
@@ -29,7 +29,7 @@ namespace Burgerama.Services.Outings.Data.Rest.Converters
                 return null;
 
             var id = Guid.Parse(venue.Id);
-            return new Venue(id, venue.Name, venue.Location, venue.Url, venue.Description, venue.Address, venue.Rating);
+            return new Venue(id, venue.Name, venue.Location, venue.Url, venue.Description, venue.Address, venue.TotalRating);
         }
     }
 }
