@@ -171,7 +171,6 @@
     <Content Include="Scripts\vendor\angularjs\angular-loader.min.js" />
     <Content Include="Scripts\vendor\angularjs\angular-messages.js" />
     <Content Include="Scripts\vendor\angularjs\angular-messages.min.js" />
-    <Content Include="Scripts\vendor\angularjs\angular-messages.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-mocks.js" />
     <Content Include="Scripts\vendor\angularjs\angular-resource.js" />
     <Content Include="Scripts\vendor\angularjs\angular-resource.min.js" />
@@ -630,16 +629,6 @@
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\vendor\angularjs\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-loader.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-resource.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-route.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular-touch.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\angular.min.js.map" />
-    <Content Include="Scripts\vendor\angularjs\errors.json" />
-    <Content Include="Scripts\vendor\angularjs\version.json" />
     <Content Include="Scripts\vendor\angularjs\version.txt" />
     <Content Include="Scripts\vendor\auth0\auth0-angular.js" />
     <Content Include="Scripts\vendor\auth0\auth0-angular.min.js" />
@@ -730,6 +719,17 @@
     <Content Include="Content\less\bootstrap-variables.less" />
     <Content Include="Scripts\typings\jquery\jquery-tests.ts.tscparams" />
     <None Include="Properties\PublishProfiles\burgerama.pubxml" />
+    <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-loader.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-messages.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-resource.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-route.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular-touch.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\angular.min.js.map" />
+    <Content Include="Scripts\vendor\angularjs\errors.json" />
+    <Content Include="Scripts\vendor\angularjs\version.json" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

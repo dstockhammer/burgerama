@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.11
+ * @license AngularJS v1.3.0-beta.12
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -585,7 +585,14 @@ angular.module('ngResource', ['ng']).
                 if (action.isArray) {
                   value.length = 0;
                   forEach(data, function (item) {
-                    value.push(new Resource(item));
+                    if (typeof item === "object") {
+                      value.push(new Resource(item));
+                    } else {
+                      // Valid JSON values may be string literals, and these should not be converted
+                      // into objects. These items will not have access to the Resource prototype
+                      // methods, but unfortunately there
+                      value.push(item);
+                    }
                   });
                 } else {
                   shallowClearAndCopy(data, value);
