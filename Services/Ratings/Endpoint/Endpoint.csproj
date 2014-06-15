@@ -260,6 +260,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+	<None Include="App.Azure.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Debug.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Release.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
     <None Include="Config\Logging.confidential.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
