@@ -4,8 +4,9 @@ module Burgerama.Ratings {
     export interface IStarRatingService {
         denormalizeRating: (value: number) => number;
         normalizeRating: (value: number) => number;
-
+        formatTotalRating: (value: number) => string;
         getTextForStar: (star: number) => string;
+        calculateRatingStats: (ratings: Array<Rating>) => any;
     }
 
     export class StarRatingService implements IStarRatingService {
@@ -18,6 +19,12 @@ module Burgerama.Ratings {
 
         public normalizeRating(value: number): number {
             return (value - this.starMin) / (this.starMax - this.starMin);
+        }
+
+        public formatTotalRating(value) {
+            return value == null
+                ? 'No ratings'
+                : this.denormalizeRating(value).toFixed(1);
         }
 
         public getTextForStar(star: number): string {
@@ -36,6 +43,27 @@ module Burgerama.Ratings {
                 default:
                     return null;
             }
+        }
+
+        public calculateRatingStats(ratings: Array<Ratings.Rating>) {
+            var stats = {
+                1: { total: 0, percent: 0 },
+                2: { total: 0, percent: 0 },
+                3: { total: 0, percent: 0 },
+                4: { total: 0, percent: 0 },
+                5: { total: 0, percent: 0 }
+            }
+
+            ratings.forEach((rating: Ratings.Rating) => {
+                var star = this.denormalizeRating(rating.value);
+                stats[star].total++;
+            });
+
+            for (var i = 1; i <= 5; i++) {
+                stats[i].percent = 100 / ratings.length * stats[i].total;
+            }
+
+            return stats;
         }
     }
 }

@@ -22,7 +22,7 @@ module Burgerama.Venues {
 
             this.load();
 
-            var unregisterVenueAdded = this.$rootScope.$on('VenueAdded', (event, venue) => {
+            var unregisterVenueAdded = this.$rootScope.$on('VenueAdded', (event, venue: IVenue) => {
                 this.$scope.venues.push(venue);
             });
             this.$scope.$on('$destroy', () => unregisterVenueAdded());

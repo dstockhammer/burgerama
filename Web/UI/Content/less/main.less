@@ -212,11 +212,12 @@ html, body {
 #venue-list, #outing-list {
     margin: 0 15px 10px;
 
-    li {
+    li.list-group-item {
         border: 0;
         border-radius: 0;
         box-shadow: 0 1px 4px rgba(0,0,0,0.2);
         padding: 10px 5px 15px;
+        margin-bottom: 15px;
         background-color: rgba(0,0,0,0);
         -webkit-transition: background-color 0.25s linear;
         -moz-transition: background-color 0.25s linear;
@@ -231,8 +232,8 @@ html, body {
     
     .address {
         padding-top: 4px;
+        color: @gray-light;
         font-style: italic;
-        color: #808080;
     }
 
     .info {
@@ -243,16 +244,33 @@ html, body {
         margin: 4px 0;
         color: #808080;
     }
+
+    h3.above-col  {
+        margin: 0 15px 10px;
+    }
 }
 
 // star rating
 .star-rating {
+    .total {
+        font-family: @headings-font-family;
+        font-weight: bold;
+        font-size: 3em;
+        color: @brand-secondary;
+    }
+
+    .count {
+        color: @gray-light;
+        font-style: italic;
+        font-size: 0.9em;
+    }
+
     .stars {
         font-size: 1.5em;
         cursor: pointer;
 
         .glyphicon-star {
-            color: @brand-warning;
+            color: @brand-secondary;
             text-shadow: 0 0 1px @gray-lighter;
         }
 
@@ -261,7 +279,7 @@ html, body {
             text-shadow: 0 0 1px @gray-lighter;
         }
     }
-
+    
     .caption {
         color: @gray-light;
     }
@@ -269,7 +287,63 @@ html, body {
      .error {
          color: @alert-danger-text;
      }
+          
+     &.compact {
+         .total {
+             margin: -10px 0;
+         }
+
+         .stars {
+            font-size: .85em;
+            cursor: default;
+        }
+     }
 }
+
+.star-rating-details {
+    border-left: 1px solid @gray-lighter;
+    font-size: 0.9em;
+    padding-left: 5px;
+
+    li {
+        list-style: none;
+        margin: 0;
+
+        .text {
+            height: 15px;
+            line-height: 15px;
+        }
+
+        .progress {
+            height: 15px;
+            line-height: 15px;
+            margin-bottom: 1px;
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            -o-box-shadow: none;
+
+            .progress-bar {
+                height: 15px;
+                line-height: 15px;
+                background-color: lighten(@brand-secondary, 40%);
+                /*border-left: 1px solid @gray-light;*/
+                border-right: 1px solid @brand-secondary;
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                -o-box-shadow: none;
+            }
+        }
+    }
+}
+
+.rating-detail {
+    margin: 15px 0;
+}
+
 
 // style fixes
 .form-control {

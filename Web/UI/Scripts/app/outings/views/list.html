@@ -3,10 +3,10 @@
     <div class="col-xs-2 icon"><p>:(</p></div>
     <div class="col-xs-10 text"><p>No outings available.</p></div>
 </div>
-<ul id="outing-list" class="list-group" ng-repeat="outing in outings">
-    <li class="row list-group-item" ng-mouseenter="panTo(outing);">
+<ul id="outing-list" class="list-group">
+    <li class="row list-group-item" ng-mouseenter="panTo(outing);" ng-repeat="outing in outings">
         <div class="col-xs-10 text">
-            <h4 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: outing.venue.id })">{{ outing.venue.name }}</a></h4>
+            <h3 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: outing.venue.id })">{{ outing.venue.name }}</a></h3>
             <p class="list-group-item-text date">{{ outing.date | date:'medium'}}</p>
             <p class="list-group-item-text" ng-hide="outing.venue.description == ''">{{ outing.venue.description | characters:300 }}</p>
         </div>

@@ -5,15 +5,19 @@ module Burgerama.Ratings {
         constructor(private starRatingService: IStarRatingService) {}
 
         restrict = 'EA';
-        template = '<p class="rating">{{ totalRating }}</p>';
+        templateUrl = '/Scripts/app/ratings/views/ratingStats.directive.html';
         require = '^ngModel';
         scope = {
-            ngModel: '='
+            ngModel: '=',
+            ratingsCount: '@',
+            extended: '@'
         }
         link = (scope, element, attrs) => {
-            scope.totalRating = scope.ngModel == null
-                ? 'No ratings'
-                : this.starRatingService.denormalizeRating(scope.ngModel);
+            scope.totalRating = this.starRatingService.formatTotalRating(scope.ngModel);
+
+            scope.$watch('ngModel', value => {
+                scope.totalRating = this.starRatingService.formatTotalRating(value);
+            });
         }
     }
 }

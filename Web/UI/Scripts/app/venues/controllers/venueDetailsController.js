@@ -3,15 +3,19 @@ var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
-            function VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
+            function VenueDetailsController($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
+                this.toaster = toaster;
+                this.starRatingService = starRatingService;
                 this.venueResource = venueResource;
                 this.voteResource = voteResource;
-                this.toaster = toaster;
+                this.ratingResource = ratingResource;
                 this.venueId = venueId;
                 this.$scope.venue = null;
+                this.$scope.ratings = null;
+                this.$scope.ratingStats = null;
                 this.$scope.addVote = function (venue) {
                     return _this.addVote(venue);
                 };
@@ -20,16 +24,23 @@ var Burgerama;
             }
             VenueDetailsController.prototype.load = function () {
                 var _this = this;
-                this.venueResource.get({ id: this.venueId }, function (data) {
-                    if (data == null) {
+                this.venueResource.get({ id: this.venueId }, function (venue) {
+                    if (venue == null) {
                         _this.toaster.pop('error', 'Venue not found', 'The venue with id ' + _this.venueId + ' was found.');
 
                         // todo: redirect to /venues
                         return;
                     }
 
-                    _this.$scope.venue = data;
+                    _this.$scope.venue = venue;
                     _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
+
+                    if (venue.totalRating != null) {
+                        _this.ratingResource.all({ context: 'venues', reference: venue.id }, function (ratings) {
+                            _this.$scope.ratings = ratings;
+                            _this.$scope.ratingStats = _this.starRatingService.calculateRatingStats(ratings);
+                        });
+                    }
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
@@ -65,8 +76,9 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', 'VenueResource', 'VoteResource', 'toaster', 'venueId', function ($rootScope, $scope, venueResource, voteResource, toaster, venueId) {
-        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId);
+    '$rootScope', '$scope', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'venueId',
+    function ($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
+        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId);
     }
 ]);
 //# sourceMappingURL=venueDetailsController.js.map

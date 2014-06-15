@@ -15,6 +15,10 @@ var Burgerama;
                 return (value - this.starMin) / (this.starMax - this.starMin);
             };
 
+            StarRatingService.prototype.formatTotalRating = function (value) {
+                return value == null ? 'No ratings' : this.denormalizeRating(value).toFixed(1);
+            };
+
             StarRatingService.prototype.getTextForStar = function (star) {
                 switch (star) {
                     case 1:
@@ -31,6 +35,28 @@ var Burgerama;
                     default:
                         return null;
                 }
+            };
+
+            StarRatingService.prototype.calculateRatingStats = function (ratings) {
+                var _this = this;
+                var stats = {
+                    1: { total: 0, percent: 0 },
+                    2: { total: 0, percent: 0 },
+                    3: { total: 0, percent: 0 },
+                    4: { total: 0, percent: 0 },
+                    5: { total: 0, percent: 0 }
+                };
+
+                ratings.forEach(function (rating) {
+                    var star = _this.denormalizeRating(rating.value);
+                    stats[star].total++;
+                });
+
+                for (var i = 1; i <= 5; i++) {
+                    stats[i].percent = 100 / ratings.length * stats[i].total;
+                }
+
+                return stats;
             };
             return StarRatingService;
         })();

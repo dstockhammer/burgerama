@@ -7,13 +7,19 @@ var Burgerama;
                 var _this = this;
                 this.starRatingService = starRatingService;
                 this.restrict = 'EA';
-                this.template = '<p class="rating">{{ totalRating }}</p>';
+                this.templateUrl = '/Scripts/app/ratings/views/ratingStats.directive.html';
                 this.require = '^ngModel';
                 this.scope = {
-                    ngModel: '='
+                    ngModel: '=',
+                    ratingsCount: '@',
+                    extended: '@'
                 };
                 this.link = function (scope, element, attrs) {
-                    scope.totalRating = scope.ngModel == null ? 'No ratings' : _this.starRatingService.denormalizeRating(scope.ngModel);
+                    scope.totalRating = _this.starRatingService.formatTotalRating(scope.ngModel);
+
+                    scope.$watch('ngModel', function (value) {
+                        scope.totalRating = _this.starRatingService.formatTotalRating(value);
+                    });
                 };
             }
             return RatingStatsDirective;

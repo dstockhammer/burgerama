@@ -142,6 +142,7 @@
     <Content Include="Scripts\app\map\views\search.results.html" />
     <Content Include="Scripts\app\outings\views\list.html" />
     <Content Include="Scripts\app\ratings\views\addRating.modal.html" />
+    <Content Include="Scripts\app\ratings\views\ratingStats.directive.html" />
     <Content Include="Scripts\app\venues\views\addVenue.modal.html" />
     <Content Include="Scripts\app\venues\views\details.html" />
     <Content Include="Scripts\app\venues\views\list.html" />

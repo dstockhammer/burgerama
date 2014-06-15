@@ -5983,12 +5983,13 @@ body {
 #outing-list {
   margin: 0 15px 10px;
 }
-#venue-list li,
-#outing-list li {
+#venue-list li.list-group-item,
+#outing-list li.list-group-item {
   border: 0;
   border-radius: 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 10px 5px 15px;
+  margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
   -webkit-transition: background-color 0.25s linear;
   -moz-transition: background-color 0.25s linear;
@@ -5996,15 +5997,15 @@ body {
   -ms-transition: background-color 0.25s linear;
   transition: background-color 0.25s linear;
 }
-#venue-list li:hover,
-#outing-list li:hover {
+#venue-list li.list-group-item:hover,
+#outing-list li.list-group-item:hover {
   background-color: rgba(0, 0, 0, 0.025);
 }
 #venue-list .address,
 #outing-list .address {
   padding-top: 4px;
+  color: #999999;
   font-style: italic;
-  color: #808080;
 }
 #venue-list .info,
 #outing-list .info {
@@ -6015,12 +6016,27 @@ body {
   margin: 4px 0;
   color: #808080;
 }
+#venue-list h3.above-col,
+#outing-list h3.above-col {
+  margin: 0 15px 10px;
+}
+.star-rating .total {
+  font-family: "Roboto Light", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 3em;
+  color: #e7711b;
+}
+.star-rating .count {
+  color: #999999;
+  font-style: italic;
+  font-size: 0.9em;
+}
 .star-rating .stars {
   font-size: 1.5em;
   cursor: pointer;
 }
 .star-rating .stars .glyphicon-star {
-  color: #f0ad4e;
+  color: #e7711b;
   text-shadow: 0 0 1px #eeeeee;
 }
 .star-rating .stars .glyphicon-star-empty {
@@ -6032,6 +6048,51 @@ body {
 }
 .star-rating .error {
   color: #a94442;
+}
+.star-rating.compact .total {
+  margin: -10px 0;
+}
+.star-rating.compact .stars {
+  font-size: .85em;
+  cursor: default;
+}
+.star-rating-details {
+  border-left: 1px solid #eeeeee;
+  font-size: 0.9em;
+  padding-left: 5px;
+}
+.star-rating-details li {
+  list-style: none;
+  margin: 0;
+}
+.star-rating-details li .text {
+  height: 15px;
+  line-height: 15px;
+}
+.star-rating-details li .progress {
+  height: 15px;
+  line-height: 15px;
+  margin-bottom: 1px;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+}
+.star-rating-details li .progress .progress-bar {
+  height: 15px;
+  line-height: 15px;
+  background-color: #fae4d4;
+  /*border-left: 1px solid @gray-light;*/
+  border-right: 1px solid #e7711b;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+}
+.rating-detail {
+  margin: 15px 0;
 }
 .form-control {
   font-family: "Roboto Light";

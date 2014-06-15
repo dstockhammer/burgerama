@@ -4,8 +4,8 @@ module Burgerama.Ratings {
     export class Rating {
         context: string;
         reference: string;
-        userId: string;
         createdOn: Date;
+        userId: string;
         value: number;
         text: string;
     }

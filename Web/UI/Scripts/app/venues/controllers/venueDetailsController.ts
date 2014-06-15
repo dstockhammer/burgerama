@@ -3,6 +3,8 @@
 module Burgerama.Venues {
     export interface IVenueDetailsScope extends ng.IScope {
         venue: IVenue;
+        ratings: Array<Ratings.Rating>;
+        ratingStats: any;
 
         addVote: (venue: IVenue) => void;
     }
@@ -11,27 +13,38 @@ module Burgerama.Venues {
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: IVenueDetailsScope,
+            private toaster,
+            private starRatingService: Ratings.IStarRatingService,
             private venueResource,
             private voteResource,
-            private toaster,
+            private ratingResource,
             private venueId)
         {
             this.$scope.venue = null;
+            this.$scope.ratings = null;
+            this.$scope.ratingStats = null;
             this.$scope.addVote = venue => this.addVote(venue);
 
             this.load();
         }
 
         private load() {
-            this.venueResource.get({ id: this.venueId }, data => {
-                if (data == null) {
+            this.venueResource.get({ id: this.venueId }, (venue: IVenue) => {
+                if (venue == null) {
                     this.toaster.pop('error', 'Venue not found', 'The venue with id ' + this.venueId + ' was found.');
                     // todo: redirect to /venues
                     return;
                 }
 
-                this.$scope.venue = data;
+                this.$scope.venue = venue;
                 this.$rootScope.$emit('VenuesLoaded', [this.$scope.venue]);
+
+                if (venue.totalRating != null) {
+                    this.ratingResource.all({ context: 'venues', reference: venue.id }, (ratings: Array<Ratings.Rating>) => {
+                        this.$scope.ratings = ratings;
+                        this.$scope.ratingStats = this.starRatingService.calculateRatingStats(ratings);
+                    });
+                }
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
@@ -62,6 +75,7 @@ module Burgerama.Venues {
     }
 }
 
-Burgerama.app.controller('VenueDetailsController', ['$rootScope', '$scope', 'VenueResource', 'VoteResource', 'toaster', 'venueId', ($rootScope, $scope, venueResource, voteResource, toaster, venueId) =>
-    new Burgerama.Venues.VenueDetailsController($rootScope, $scope, venueResource, voteResource, toaster, venueId)
+Burgerama.app.controller('VenueDetailsController', ['$rootScope', '$scope', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'venueId',
+    ($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) =>
+        new Burgerama.Venues.VenueDetailsController($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId)
 ]);

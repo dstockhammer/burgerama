@@ -18,7 +18,6 @@ namespace Burgerama.Services.Ratings.Domain
         {
             Contract.Requires<ArgumentNullException>(userId != null);
             Contract.Requires<ArgumentOutOfRangeException>(value >= 0 && value <= 1);
-            Contract.Requires<ArgumentNullException>(text != null);
 
             CreatedOn = createdOn;
             UserId = userId;
