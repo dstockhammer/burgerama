@@ -27,7 +27,7 @@ namespace Burgerama.Services.OutingScheduler.App
 
             // set date to tomorrow 7 pm
             // todo: get the date passed in as parameter or read it from somewhere
-            var date = DateTime.Today.AddDays(1).AddHours(19);
+            var date = DateTime.Today.AddDays(-1).AddHours(19);
 
             var scheduler = container.Resolve<ISchedulingService>();
             var outing = scheduler.ScheduleOuting(date);

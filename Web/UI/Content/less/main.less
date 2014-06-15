@@ -342,6 +342,34 @@ html, body {
 
 .rating-detail {
     margin: 15px 0;
+    padding: 0 5px;
+    list-style-type: none;
+
+    li {
+        padding-top: 5px;
+
+        .review {
+            margin-bottom: 10px;
+        }
+
+        .author, .date {
+            font-size: .9em;
+            color: @gray-light;
+            margin: 0;
+        }
+
+        .date {
+            padding-bottom: 10px;
+            border-bottom: 1px solid @gray-lighter;
+        }
+    }
+
+    li:last-child {
+        .date {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+    }
 }
 
 

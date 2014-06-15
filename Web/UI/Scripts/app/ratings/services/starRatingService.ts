@@ -23,7 +23,7 @@ module Burgerama.Ratings {
 
         public formatTotalRating(value) {
             return value == null
-                ? 'No ratings'
+                ? 'n/a'
                 : this.denormalizeRating(value).toFixed(1);
         }
 

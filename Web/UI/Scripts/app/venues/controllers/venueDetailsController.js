@@ -3,10 +3,11 @@ var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
-            function VenueDetailsController($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
+            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
+                this.$modal = $modal;
                 this.toaster = toaster;
                 this.starRatingService = starRatingService;
                 this.venueResource = venueResource;
@@ -16,8 +17,12 @@ var Burgerama;
                 this.$scope.venue = null;
                 this.$scope.ratings = null;
                 this.$scope.ratingStats = null;
+                this.$scope.ratingOrder = true;
                 this.$scope.addVote = function (venue) {
                     return _this.addVote(venue);
+                };
+                this.$scope.addRating = function (venue) {
+                    return _this.addRating(venue);
                 };
 
                 this.load();
@@ -68,6 +73,22 @@ var Burgerama;
                     }
                 });
             };
+
+            VenueDetailsController.prototype.addRating = function (venue) {
+                this.$modal.open({
+                    templateUrl: '/Scripts/app/ratings/views/addRating.modal.html',
+                    controller: 'AddRatingController',
+                    resolve: {
+                        context: function () {
+                            return {
+                                key: "venues",
+                                reference: venue.id,
+                                title: venue.name
+                            };
+                        }
+                    }
+                });
+            };
             return VenueDetailsController;
         })();
         Venues.VenueDetailsController = VenueDetailsController;
@@ -76,9 +97,9 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'venueId',
-    function ($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
-        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId);
+    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'venueId',
+    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
+        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId);
     }
 ]);
 //# sourceMappingURL=venueDetailsController.js.map

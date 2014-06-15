@@ -16,7 +16,7 @@ var Burgerama;
             };
 
             StarRatingService.prototype.formatTotalRating = function (value) {
-                return value == null ? 'No ratings' : this.denormalizeRating(value).toFixed(1);
+                return value == null ? 'n/a' : this.denormalizeRating(value).toFixed(1);
             };
 
             StarRatingService.prototype.getTextForStar = function (star) {
