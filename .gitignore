@@ -9,6 +9,9 @@
 # Local development packages
 packages-incoming/
 
+# Visual Studio 2013
+Visual Studio 2013/
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
