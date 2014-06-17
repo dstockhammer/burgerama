@@ -31,6 +31,9 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
                     context.Message.Reference, context.Message.ContextKey);
 
                 candidate = _candidateService.CreateCandidate(context.Message.ContextKey, context.Message.Reference);
+
+                if (candidate == null)
+                    return;
             }
 
             var events = candidate.OpenOn(context.Message.OpeningDate);

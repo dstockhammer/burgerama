@@ -188,6 +188,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{92DC1120-22F4-48FF-82E9-B80A4E48C039}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>
       <Name>Domain</Name>

@@ -28,10 +28,13 @@ namespace Burgerama.Services.Ratings.Domain
             }
         }
 
-        public double TotalRating
+        public double? TotalRating
         {
             get
             {
+                if (_ratings.Any() == false)
+                    return null;
+
                 var sum = _ratings.Aggregate(0d, (current, rating) => current + rating.Value);
                 return sum / _ratings.Count();
             }
@@ -72,16 +75,7 @@ namespace Burgerama.Services.Ratings.Domain
             Contract.Requires<ArgumentNullException>(rating != null);
             Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
 
-            // don't allow rating if there is not opening date
-            if (OpeningDate.HasValue == false)
-                return Enumerable.Empty<IEvent>();
-
-            // don't allow rating if candidate has not yet been opened
-            if (OpeningDate.Value >= rating.CreatedOn)
-                return Enumerable.Empty<IEvent>();
-
-            // don't allow rating if candidate has been closed
-            if (ClosingDate.HasValue && ClosingDate.Value <= rating.CreatedOn)
+            if (AllowRatingOnDate(rating.CreatedOn) == false)
                 return Enumerable.Empty<IEvent>();
 
             if (_ratings.Add(rating) == false)
@@ -90,7 +84,7 @@ namespace Burgerama.Services.Ratings.Domain
             return new IEvent[]
             {
                 new RatingAdded { ContextKey = ContextKey, Reference = Reference, UserId = rating.UserId, Value = rating.Value, Text = string.Empty},
-                new RatingUpdated { ContextKey = ContextKey, Reference = Reference, NewTotal = TotalRating }
+                new RatingUpdated { ContextKey = ContextKey, Reference = Reference, NewTotal = TotalRating.Value }
             };
         }
 
@@ -134,6 +128,37 @@ namespace Burgerama.Services.Ratings.Domain
             {
                 new CandidateClosed { ContextKey = ContextKey, Reference = Reference, ClosingDate = date }
             };
+        }
+
+        public bool CanUserRate(string userId)
+        {
+            if (userId == null)
+                return false;
+
+            if (AllowRatingOnDate(DateTime.Now) == false)
+                return false;
+
+            if (Ratings.Any(r => r.UserId == userId))
+                return false;
+
+            return true;
+        }
+
+        private bool AllowRatingOnDate(DateTime date)
+        {
+            // don't allow rating if there is not opening date
+            if (OpeningDate.HasValue == false)
+                return false;
+
+            // don't allow rating if candidate has not yet been opened
+            if (OpeningDate.Value >= date)
+                return false;
+
+            // don't allow rating if candidate has been closed
+            if (ClosingDate.HasValue && ClosingDate.Value <= date)
+                return false;
+
+            return true;
         }
     }
 }

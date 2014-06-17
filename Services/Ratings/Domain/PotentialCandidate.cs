@@ -22,10 +22,13 @@ namespace Burgerama.Services.Ratings.Domain
             }
         }
 
-        public double TotalRating
+        public double? TotalRating
         {
             get
             {
+                if (_ratings.Any() == false)
+                    return null;
+
                 var sum = _ratings.Aggregate(0d, (current, rating) => current + rating.Value);
                 return sum / _ratings.Count();
             }

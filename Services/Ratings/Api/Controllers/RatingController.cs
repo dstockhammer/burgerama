@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
 using Burgerama.Messaging.Events;
@@ -22,17 +20,70 @@ namespace Burgerama.Services.Ratings.Api.Controllers
     {
         private readonly ILogger _logger;
         private readonly IEventDispatcher _eventDispatcher;
+        private readonly IContextRepository _contextRepository;
         private readonly ICandidateRepository _candidateRepository;
 
-        public RatingController(ILogger logger, IEventDispatcher eventDispatcher, ICandidateRepository candidateRepository)
+        public RatingController(ILogger logger, IEventDispatcher eventDispatcher, IContextRepository contextRepository, ICandidateRepository candidateRepository)
         {
             _logger = logger;
             _eventDispatcher = eventDispatcher;
+            _contextRepository = contextRepository;
             _candidateRepository = candidateRepository;
         }
 
         [HttpGet]
         [Route("{contextKey}/{reference}")]
+        [ResponseType(typeof(IEnumerable<RatingModel>))]
+        public IHttpActionResult GetRatingSummaryForCandidate(string contextKey, Guid reference)
+        {
+            Contract.Requires<ArgumentNullException>(contextKey != null);
+
+            var model = new CandidateModel
+            {
+                ContextKey = contextKey,
+                Reference = reference
+            };
+
+            // first, check all real (= well known) candidates
+            var candidate = _candidateRepository.Get(contextKey, reference);
+            if (candidate != null)
+            {
+                model.IsValidated = true;
+                model.OpeningDate = candidate.OpeningDate;
+                model.ClosingDate = candidate.ClosingDate;
+                model.RatingsCount = candidate.Ratings.Count();
+                model.TotalRating = candidate.TotalRating;
+                model.CanUserRate = candidate.CanUserRate(ClaimsPrincipal.Current.GetUserId());
+
+                return Ok(model);
+            }
+            
+            // if there is no real candidate, check the potential ones
+            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
+            if (potentialCandidate != null)
+            {
+                model.IsValidated = false;
+                model.RatingsCount = potentialCandidate.Ratings.Count();
+                model.TotalRating = potentialCandidate.TotalRating;
+                model.CanUserRate = true;
+
+                return Ok(model);
+            }
+
+            // if no candidate is found at all, check if the context is valid
+            var context = _contextRepository.Get(contextKey);
+            if (context == null)
+                return BadRequest("Invalid context.");
+
+            // if the context is valid, still return an empty, not validated model in order to allow users to rate
+            model.IsValidated = false;
+            model.CanUserRate = true;
+
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [Route("{contextKey}/{reference}/ratings")]
         [ResponseType(typeof(IEnumerable<RatingModel>))]
         public IHttpActionResult GetAllRatingsForCandidate(string contextKey, Guid reference)
         {
@@ -42,18 +93,24 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             var candidate = _candidateRepository.Get(contextKey, reference);
             if (candidate != null)
                 return Ok(candidate.Ratings.Select(r => r.ToModel()));
-           
+
             // if there is no real candidate, check the potential ones
             var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
             if (potentialCandidate != null)
                 Ok(potentialCandidate.Ratings.Select(r => r.ToModel()));
-            
+
+            // if no candidate is found at all, check if the context is valid,
+            // in order to determine the correct error type
+            var context = _contextRepository.Get(contextKey);
+            if (context == null)
+                return BadRequest("Invalid context.");
+
             return NotFound();
         }
 
         [Authorize]
         [HttpPost]
-        [Route("{contextKey}/{reference}")]
+        [Route("{contextKey}/{reference}/ratings")]
         [ResponseType(typeof(IEnumerable<RatingModel>))]
         public IHttpActionResult AddRatingToCandidate(string contextKey, Guid reference, [FromBody]RatingModel model)
         {
@@ -86,9 +143,20 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                 return Created(candidateUri, rating.ToModel());
             }
 
-            // todo: verify if context exists? rules on how to deal with this situation could also be configured in the context
-            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference)
-                ?? new PotentialCandidate(contextKey, reference);
+            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
+            if (potentialCandidate == null)
+            {
+                // if there isn't already a potential candidate, validate the context
+                var context = _contextRepository.Get(contextKey);
+                if (context == null)
+                    return BadRequest("Invalid context.");
+
+                // if the context is valid, use it to determine whether rating an unknown candidate is allowed
+                if (context.AllowToRateUnknownCandidates == false)
+                    return NotFound();
+
+                potentialCandidate = new PotentialCandidate(contextKey, reference);
+            }
 
             if (potentialCandidate.Ratings.Any(r => r.UserId == userId))
                 return Conflict();

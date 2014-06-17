@@ -162,6 +162,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ContextRepositoryContract.cs" />
+    <Compile Include="Contracts\IContextRepository.cs" />
     <Compile Include="PotentialCandidate.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Contracts\ICandidateRepository.cs" />

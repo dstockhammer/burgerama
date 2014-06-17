@@ -21,6 +21,7 @@ namespace Burgerama.Services.Ratings.Data.Converters
                 Ratings = candidate.Ratings.Select(r => r.ToModel())
             };
         }
+
         public static CandidateModel ToModel(this PotentialCandidate candidate)
         {
             if (candidate == null)

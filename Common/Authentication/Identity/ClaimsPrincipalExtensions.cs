@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 namespace Burgerama.Common.Authentication.Identity
 {
@@ -8,9 +6,11 @@ namespace Burgerama.Common.Authentication.Identity
     {
         public static string GetUserId(this ClaimsPrincipal principal)
         {
-            Contract.Requires<ArgumentNullException>(principal != null);
+            if (principal == null)
+                return null;
 
-            return principal.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+            var userId = principal.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            return userId == null ? null : userId.Value;
         }
     }
 }

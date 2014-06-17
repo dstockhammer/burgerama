@@ -170,8 +170,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextRepository.cs" />
+    <Compile Include="Converters\ContextConverter.cs" />
     <Compile Include="Converters\RatingConverter.cs" />
     <Compile Include="Converters\CandidateConverter.cs" />
+    <Compile Include="Models\ContextModel.cs" />
     <Compile Include="Models\RatingModel.cs" />
     <Compile Include="Models\CandidateModel.cs" />
     <Compile Include="CandidateRepository.cs" />

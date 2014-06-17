@@ -11,6 +11,8 @@ namespace Burgerama.Services.Ratings.Domain
 
         public string ContextKey { get; private set; }
 
+        public bool AllowToRateUnknownCandidates { get; private set; }
+
         public IEnumerable<Guid> Candidates
         {
             get
@@ -20,19 +22,23 @@ namespace Burgerama.Services.Ratings.Domain
             }
         }
 
-        public Context(string contextKey) : this(contextKey, Enumerable.Empty<Guid>()) { }
+        public Context(string contextKey, bool allowToRateUnknownCandidates)
+            : this(contextKey, allowToRateUnknownCandidates, Enumerable.Empty<Guid>())
+        {
+        }
 
-        public Context(string contextKey, IEnumerable<Guid> candidates)
+        public Context(string contextKey, bool allowToRateUnknownCandidates, IEnumerable<Guid> candidates)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
             ContextKey = contextKey;
+            AllowToRateUnknownCandidates = allowToRateUnknownCandidates;
             _candidates = new HashSet<Guid>(candidates);
         }
 
-        public void AddCandidate(Guid reference)
+        public bool AddCandidate(Guid reference)
         {
-            _candidates.Add(reference);
+            return _candidates.Add(reference);
         }
     }
 }
