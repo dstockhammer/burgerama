@@ -3,6 +3,7 @@
 module Burgerama.Outings {
     export interface IOutingScope extends ng.IScope {
         outings: Array<IOuting>;
+        candidates: Array<Ratings.Candidate>;
 
         panTo: (outing: IOuting) => void;
         addRating: (venue: Venues.IVenue) => void;
@@ -13,10 +14,12 @@ module Burgerama.Outings {
             private $rootScope: IBurgeramaScope,
             private $scope: IOutingScope,
             private $modal,
+            private toaster,
             private outingResource,
-            private toaster)
+            private candidateResource)
         {
             this.$scope.outings = null;
+            this.$scope.candidates = [];
             this.$scope.panTo = outing => this.panTo(outing);
             this.$scope.addRating = venue => this.addRating(venue);
 
@@ -24,9 +27,17 @@ module Burgerama.Outings {
         }
 
         private load() {
-            this.outingResource.all(data => {
-                this.$scope.outings = data;
+            this.outingResource.all((outings: Array<IOuting>) => {
+                this.$scope.outings = outings;
                 this.$rootScope.$emit('OutingsLoaded', this.$scope.outings);
+
+                outings.forEach((outing: IOuting) => {
+                    if (typeof(this.$scope.candidates[outing.venue.id]) === 'undefined') {
+                        this.candidateResource.get({ context: 'venues', reference: outing.venue.id }, (candidate: Ratings.Candidate) => {
+                            this.$scope.candidates[outing.venue.id] = candidate;
+                        });
+                    }
+                });
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
@@ -54,6 +65,6 @@ module Burgerama.Outings {
     }
 }
 
-Burgerama.app.controller('OutingController', ['$rootScope', '$scope', '$modal', 'OutingResource', 'toaster', ($rootScope, $scope, $modal, outingResource, toaster) =>
-    new Burgerama.Outings.OutingController($rootScope, $scope, $modal, outingResource, toaster)
+Burgerama.app.controller('OutingController', ['$rootScope', '$scope', '$modal', 'toaster', 'OutingResource', 'CandidateResource', ($rootScope, $scope, $modal, toaster, outingResource, candidateResource) =>
+    new Burgerama.Outings.OutingController($rootScope, $scope, $modal, toaster, outingResource, candidateResource)
 ]);

@@ -5997,9 +5997,17 @@ body {
   -ms-transition: background-color 0.25s linear;
   transition: background-color 0.25s linear;
 }
+#venue-list li.list-group-item button,
+#outing-list li.list-group-item button {
+  display: none;
+}
 #venue-list li.list-group-item:hover,
 #outing-list li.list-group-item:hover {
   background-color: rgba(0, 0, 0, 0.025);
+}
+#venue-list li.list-group-item:hover button,
+#outing-list li.list-group-item:hover button {
+  display: inline-block;
 }
 #venue-list .address,
 #outing-list .address {

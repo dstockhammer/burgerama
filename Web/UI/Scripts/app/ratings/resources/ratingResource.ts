@@ -12,7 +12,7 @@ module Burgerama.Ratings {
 }
 
 Burgerama.app.factory('RatingResource', ['$resource', $resource => {
-    return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference', {
+    return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference/ratings', {
         reference: '@reference',
         context: '@context'
     }, {

@@ -224,9 +224,17 @@ html, body {
         -o-transition: background-color 0.25s linear;
         -ms-transition: background-color 0.25s linear;
         transition: background-color 0.25s linear;
+
+        button {
+            display: none;
+        }
     
         &:hover {
             background-color: rgba(0,0,0,0.025);
+
+            button {
+                display: inline-block;
+            }
         }
     }
     

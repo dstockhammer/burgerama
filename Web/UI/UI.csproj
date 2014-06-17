@@ -552,6 +552,7 @@
     <TypeScriptCompile Include="Scripts\app\outings\resources\outingResource.ts" />
     <TypeScriptCompile Include="Scripts\app\ratings\controllers\addRatingController.ts" />
     <TypeScriptCompile Include="Scripts\app\ratings\directives\ratingStatsDirective.ts" />
+    <TypeScriptCompile Include="Scripts\app\ratings\resources\candidateResource.ts" />
     <TypeScriptCompile Include="Scripts\app\ratings\resources\ratingResource.ts" />
     <TypeScriptCompile Include="Scripts\app\ratings\services\starRatingService.ts" />
     <TypeScriptCompile Include="Scripts\app\util\apiUrl.ts" />

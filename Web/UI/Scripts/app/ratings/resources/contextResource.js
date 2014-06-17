@@ -2,24 +2,23 @@
 var Burgerama;
 (function (Burgerama) {
     (function (Ratings) {
-        var Rating = (function () {
-            function Rating() {
+        var Candidate = (function () {
+            function Candidate() {
             }
-            return Rating;
+            return Candidate;
         })();
-        Ratings.Rating = Rating;
+        Ratings.Candidate = Candidate;
     })(Burgerama.Ratings || (Burgerama.Ratings = {}));
     var Ratings = Burgerama.Ratings;
 })(Burgerama || (Burgerama = {}));
 
-Burgerama.app.factory('RatingResource', [
+Burgerama.app.factory('CandidateResource', [
     '$resource', function ($resource) {
-        return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference/ratings', {
+        return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference', {
             reference: '@reference',
             context: '@context'
         }, {
-            all: { method: 'GET', isArray: true },
-            create: { method: 'POST' }
+            get: { method: 'GET' }
         });
     }]);
-//# sourceMappingURL=ratingResource.js.map
+//# sourceMappingURL=contextResource.js.map

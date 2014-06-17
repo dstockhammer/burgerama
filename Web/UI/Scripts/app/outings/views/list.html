@@ -12,6 +12,7 @@
         </div>
         <div class="col-xs-2 info">
             <rating-stats ng-model="outing.venue.totalRating"></rating-stats>
+            <button type="button" class="btn btn-primary pull-right" ng-show="candidates[outing.venue.id].canUserRate" ng-click="addRating(venue);"><span class="glyphicon glyphicon-star"></span> Rate</button>
         </div>
     </li>
 </ul>

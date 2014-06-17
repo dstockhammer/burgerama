@@ -11,7 +11,7 @@
     <li class="row list-group-item">
         <h3 class="above-col list-group-item-heading">
             Ratings summary
-            <button type="button" class="btn btn-default pull-right" ng-click="addRating(venue);"><span class="glyphicon glyphicon-pencil"></span> Add rating</button>
+            <button type="button" class="btn btn-primary pull-right" ng-click="addRating(venue);"><span class="glyphicon glyphicon-star"></span> Add rating</button>
         </h3>
         <div class="col-xs-2">
             <rating-stats ng-model="venue.totalRating" ratings-count="{{ ratings.length }}"></rating-stats>
@@ -43,7 +43,7 @@
             <button type="button" class="btn btn-default btn-xs" ng-click="ratingOrder = !ratingOrder">
                 <span class="glyphicon glyphicon" ng-class="{'glyphicon-sort-by-order': !ratingOrder, 'glyphicon-sort-by-order-alt': ratingOrder}"></span>
             </button>
-            <button type="button" class="btn btn-default pull-right" ng-click="addRating(venue);"><span class="glyphicon glyphicon-pencil"></span> Add review</button>
+            <button type="button" class="btn btn-primary pull-right" ng-click="addRating(venue);"><span class="glyphicon glyphicon-pencil"></span> Add review</button>
         </h3>
         
         <ul class="rating-detail">
