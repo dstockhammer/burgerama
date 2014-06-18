@@ -8,7 +8,7 @@ namespace Burgerama.Services.Voting.Domain.Contracts
     {
         public Context Get(string contextKey)
         {
-            Contract.Ensures(Contract.Result<Context>() != null);
+            Contract.Requires<ArgumentNullException>(contextKey != null);
 
             return default(Context);
         }

@@ -17,11 +17,7 @@ namespace Burgerama.Services.Voting.Endpoint.Handlers
         private readonly IContextRepository _contextRepository;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public CreateCandidateHandler(
-            ILogger logger, 
-            ICandidateRepository candidateRepository, 
-            IContextRepository contextRepository, 
-            IEventDispatcher eventDispatcher)
+        public CreateCandidateHandler(ILogger logger, ICandidateRepository candidateRepository, IContextRepository contextRepository, IEventDispatcher eventDispatcher)
         {
             _logger = logger;
             _candidateRepository = candidateRepository;
@@ -33,24 +29,24 @@ namespace Burgerama.Services.Voting.Endpoint.Handlers
         {
             var reference = Guid.Parse(context.Message.Reference);
             var contextKey = context.Message.ContextKey;
-            var candidate = _candidateRepository.Get(reference, contextKey);
+            var candidate = _candidateRepository.Get(contextKey, reference);
 
             if (candidate == null)
             {
-                candidate = new Candidate(reference);
-                _candidateRepository.SaveOrUpdate(candidate, contextKey);
+                candidate = new Candidate(contextKey, reference);
+                _candidateRepository.SaveOrUpdate(candidate);
 
                 var votingContext = _contextRepository.Get(contextKey);
                 votingContext.AddCandidate(reference);
                 _contextRepository.SaveOrUpdate(votingContext);
                 
-                _logger.Information(
-                    "Candidate with \"{Reference}\" reference is created under \"{ContextKey}\" context.",
+                _logger.Information("Candidate with {Reference} reference is created under {ContextKey} context.",
                     new { context.Message.Reference, contextKey });
             }
 
-            candidate.Vote(context.Message.UserId, context.Message.VotedOn);
-            _candidateRepository.SaveOrUpdate(candidate, contextKey);
+            var vote = new Vote(context.Message.VotedOn, context.Message.UserId);
+            candidate.AddVote(vote);
+            _candidateRepository.SaveOrUpdate(candidate);
 
             _eventDispatcher.Publish(new VoteAdded
             {

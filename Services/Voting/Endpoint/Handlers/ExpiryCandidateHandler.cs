@@ -23,16 +23,15 @@ namespace Burgerama.Services.Voting.Endpoint.Handlers
         public void Consume(IConsumeContext<ExpireCandidate> context)
         {
             var reference = Guid.Parse(context.Message.Reference);
-            var candidate = _candidateRepository.Get(reference, context.Message.ContextKey);
+            var candidate = _candidateRepository.Get(context.Message.ContextKey, reference);
 
             if (candidate != null)
             {
-                candidate.ExpireOn(context.Message.ExpiryDate);
-                _candidateRepository.SaveOrUpdate(candidate, context.Message.ContextKey);
+                candidate.CloseOn(context.Message.ExpiryDate);
+                _candidateRepository.SaveOrUpdate(candidate);
 
-                _logger.Information(
-                    "Expiration date \"{ExpiryDate}\" set on candidate with \"{Reference}\" reference under \"{ContextKey}\" context.",
-                    new { context.Message.ExpiryDate, context.Message.Reference, context.Message.ContextKey });
+                _logger.Information("Expiration date {ExpiryDate} set on candidate with {Reference} reference under {ContextKey} context.",
+                    context.Message.ExpiryDate, context.Message.Reference, context.Message.ContextKey);
             }
         }
     }

@@ -13,8 +13,8 @@ namespace Burgerama.Services.Voting.Api.Converters
 
             return new VoteModel
             {
-                CreatedBy = vote.CreatedBy,
-                CreatedOn = vote.CreatedOn
+                CreatedOn = vote.CreatedOn,
+                UserId = vote.UserId
             };
         }
 
@@ -22,7 +22,7 @@ namespace Burgerama.Services.Voting.Api.Converters
         {
             Contract.Requires<ArgumentNullException>(vote != null);
 
-            return new Vote(vote.CreatedOn, vote.CreatedBy);
+            return new Vote(vote.CreatedOn, vote.UserId);
         }
     }
 }

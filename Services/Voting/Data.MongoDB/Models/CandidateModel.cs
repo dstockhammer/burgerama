@@ -4,18 +4,19 @@ using System.Collections.Generic;
 
 namespace Burgerama.Services.Voting.Data.MongoDB.Models
 {
-    internal class CandidateModel
+    internal sealed class CandidateModel
     {
-        [BsonId]
-        public string Id { get; set; }
-
-        public string Reference { get; set; }
-
         public string ContextKey { get; set; }
 
-        public ICollection<VoteModel> Votes { get; set; }
+        [BsonId]
+        public string Reference { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime? Expiry { get; set; }
+        public DateTime? OpeningDate { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime? ClosingDate { get; set; }
+
+        public IEnumerable<VoteModel> Votes { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Burgerama.Common.DataAccess.MongoDB;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Voting.Data.MongoDB.Converters;
 using Burgerama.Services.Voting.Data.MongoDB.Models;
 using Burgerama.Services.Voting.Domain;
@@ -6,29 +8,64 @@ using Burgerama.Services.Voting.Domain.Contracts;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using System;
+using MongoDB.Driver.Linq;
 
 namespace Burgerama.Services.Voting.Data.MongoDB
 {
-    public sealed class CandidateRepository : MongoDbRepository, ICandidateRepository
+    public class CandidateRepository : MongoDbRepository, ICandidateRepository
     {
         private MongoCollection<CandidateModel> Candidates
         {
             get { return GetCollection<CandidateModel>("candidates"); }
         }
 
-        public Candidate Get(Guid reference, string contextKey)
+        private MongoCollection<CandidateModel> PotentialCandidates
         {
-            var query = Query.And(
-                Query<CandidateModel>.EQ(c => c.Reference, reference.ToString()),
-                Query<CandidateModel>.EQ(c => c.ContextKey, contextKey));
-
-            var candidate = Candidates.FindOne(query);
-            return candidate != null ? candidate.ToDomain() : null;
+            get { return GetCollection<CandidateModel>("potential_candidates"); }
         }
 
-        public void SaveOrUpdate(Candidate candidate, string contextKey)
+        public Candidate Get(string contextKey, Guid reference)
         {
-            Candidates.Save(candidate.ToModel(contextKey));
+            return Candidates.AsQueryable()
+                .SingleOrDefault(c => c.Reference == reference.ToString() && c.ContextKey == contextKey)
+                .ToDomain();
+        }
+
+        public PotentialCandidate GetPotential(string contextKey, Guid reference)
+        {
+            return PotentialCandidates.AsQueryable()
+                .SingleOrDefault(c => c.Reference == reference.ToString() && c.ContextKey == contextKey)
+                .ToPotential();
+        }
+
+        public IEnumerable<Candidate> GetAll(string contextKey)
+        {
+            return Candidates.AsQueryable()
+                .Where(c => c.ContextKey == contextKey)
+                .Select(v => v.ToDomain());
+        }
+
+        public IEnumerable<PotentialCandidate> GetAllPotential(string contextKey)
+        {
+            return PotentialCandidates.AsQueryable()
+                .Where(c => c.ContextKey == contextKey)
+                .Select(v => v.ToPotential());
+        }
+
+        public void SaveOrUpdate(Candidate candidate)
+        {
+            Candidates.Save(candidate.ToModel());
+        }
+
+        public void SaveOrUpdate(PotentialCandidate candidate)
+        {
+            PotentialCandidates.Save(candidate.ToModel());
+        }
+
+        public void Delete(PotentialCandidate candidate)
+        {
+            var query = Query<CandidateModel>.EQ(c => c.Reference, candidate.Reference.ToString());
+            PotentialCandidates.Remove(query);
         }
     }
 }

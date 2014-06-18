@@ -9,7 +9,7 @@ namespace Burgerama.Services.Voting.Tests.Data
     [TestClass]
     public class CandidateRepositoryTests
     {
-        const string ContextKey = "venues";
+        private const string ContextKey = "test";
         
         [TestCleanup]
         public void Cleanup()
@@ -23,17 +23,18 @@ namespace Burgerama.Services.Voting.Tests.Data
         {
             // Arrange
             var candidateRepository = new CandidateRepository();
-            var candidate = new Candidate(Guid.NewGuid());
+            var candidate = new Candidate(ContextKey, Guid.NewGuid());
 
             // Act
-            candidateRepository.SaveOrUpdate(candidate, ContextKey);
+            candidateRepository.SaveOrUpdate(candidate);
 
             // Assert
-            var loadedCandidate = candidateRepository.Get(candidate.Reference, ContextKey);
+            var loadedCandidate = candidateRepository.Get(ContextKey, candidate.Reference);
             Assert.IsNotNull(loadedCandidate);
             Assert.AreEqual(candidate.Reference, loadedCandidate.Reference);
             Assert.AreEqual(candidate.Votes.Count(), loadedCandidate.Votes.Count());
-            Assert.AreEqual(candidate.Expiry, loadedCandidate.Expiry);
+            Assert.AreEqual(candidate.OpeningDate, loadedCandidate.OpeningDate);
+            Assert.AreEqual(candidate.ClosingDate, loadedCandidate.ClosingDate);
         }
     }
 }

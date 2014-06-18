@@ -146,6 +146,12 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Burgerama.Messaging.Events">
+      <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Messaging.Events.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.3\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -156,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Candidate.cs" />
+    <Compile Include="PotentialCandidate.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Contracts\CandidateRepositoryContract.cs" />
     <Compile Include="Contracts\ContextRepositoryContract.cs" />
@@ -163,6 +170,9 @@
     <Compile Include="Contracts\IContextRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vote.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

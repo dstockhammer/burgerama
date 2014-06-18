@@ -1,36 +1,58 @@
-﻿
-using Burgerama.Services.Voting.Data.MongoDB.Models;
+﻿using Burgerama.Services.Voting.Data.MongoDB.Models;
 using Burgerama.Services.Voting.Domain;
 using System;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Burgerama.Services.Voting.Data.MongoDB.Converters
 {
     internal static class CandidateConverter
     {
-        public static CandidateModel ToModel(this Candidate candidate, string contextKey)
+        public static CandidateModel ToModel(this Candidate candidate)
         {
-            Contract.Requires<ArgumentNullException>(candidate != null);
-            Contract.Ensures(Contract.Result<CandidateModel>() != null);
+            if (candidate == null)
+                return null;
 
             return new CandidateModel
             {
-                Id = candidate.Id,
+                ContextKey = candidate.ContextKey,
                 Reference = candidate.Reference.ToString(),
-                Votes = candidate.Votes.Select(v => v.ToModel()).ToList(),
-                Expiry = candidate.Expiry,
-                ContextKey = contextKey
+                OpeningDate = candidate.OpeningDate,
+                ClosingDate = candidate.ClosingDate,
+                Votes = candidate.Votes.Select(v => v.ToModel())
+            };
+        }
+
+        public static CandidateModel ToModel(this PotentialCandidate candidate)
+        {
+            if (candidate == null)
+                return null;
+
+            return new CandidateModel
+            {
+                ContextKey = candidate.ContextKey,
+                Reference = candidate.Reference.ToString(),
+                Votes = candidate.Votes.Select(v => v.ToModel())
             };
         }
 
         public static Candidate ToDomain(this CandidateModel candidate)
         {
-            Contract.Requires<ArgumentNullException>(candidate != null);
-            Contract.Ensures(Contract.Result<Candidate>() != null);
+            if (candidate == null)
+                return null;
 
-            var id = Guid.Parse(candidate.Reference);
-            return new Candidate(candidate.Id, id, candidate.Votes.Select(v => v.ToDomain()), candidate.Expiry);
+            var reference = Guid.Parse(candidate.Reference);
+            var votes = candidate.Votes.Select(v => v.ToDomain());
+            return new Candidate(candidate.ContextKey, reference, votes, candidate.OpeningDate, candidate.ClosingDate);
+        }
+
+        public static PotentialCandidate ToPotential(this CandidateModel candidate)
+        {
+            if (candidate == null)
+                return null;
+
+            var reference = Guid.Parse(candidate.Reference);
+            var votes = candidate.Votes.Select(v => v.ToDomain());
+            return new PotentialCandidate(candidate.ContextKey, reference, votes);
         }
     }
 }

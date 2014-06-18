@@ -58,6 +58,7 @@ namespace Burgerama.Services.Ratings.Domain
             Reference = reference;
             OpeningDate = openingDate;
             ClosingDate = closingDate;
+
             _ratings = new HashSet<Rating>(ratingsList);
         }
 

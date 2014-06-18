@@ -1,10 +1,11 @@
-﻿using Burgerama.Common.DataAccess.MongoDB;
+﻿using System.Linq;
+using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Voting.Data.MongoDB.Converters;
 using Burgerama.Services.Voting.Data.MongoDB.Models;
 using Burgerama.Services.Voting.Domain;
 using Burgerama.Services.Voting.Domain.Contracts;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 
 namespace Burgerama.Services.Voting.Data.MongoDB
 {
@@ -17,9 +18,9 @@ namespace Burgerama.Services.Voting.Data.MongoDB
 
         public Context Get(string contextKey)
         {
-            var query = Query<ContextModel>.EQ(v => v.ContextKey, contextKey);
-            var context = Contexts.FindOne(query);
-            return context != null ? context.ToDomain() : null;
+            return Contexts.AsQueryable()
+                .SingleOrDefault(c => c.ContextKey == contextKey)
+                .ToDomain();
         }
 
         public void SaveOrUpdate(Context context)

@@ -1,8 +1,5 @@
-﻿
-using Burgerama.Services.Voting.Data.MongoDB.Models;
+﻿using Burgerama.Services.Voting.Data.MongoDB.Models;
 using Burgerama.Services.Voting.Domain;
-using System;
-using System.Diagnostics.Contracts;
 
 namespace Burgerama.Services.Voting.Data.MongoDB.Converters
 {
@@ -10,22 +7,22 @@ namespace Burgerama.Services.Voting.Data.MongoDB.Converters
     {
         public static VoteModel ToModel(this Vote vote)
         {
-            Contract.Requires<ArgumentNullException>(vote != null);
-            Contract.Ensures(Contract.Result<VoteModel>() != null);
+            if (vote == null)
+                return null;
 
             return new VoteModel
             {
-                CreatedBy = vote.CreatedBy,
-                CreatedOn = vote.CreatedOn
+                CreatedOn = vote.CreatedOn,
+                UserId = vote.UserId
             };
         }
 
         public static Vote ToDomain(this VoteModel vote)
         {
-            Contract.Requires<ArgumentNullException>(vote != null);
-            Contract.Ensures(Contract.Result<Vote>() != null);
+            if (vote == null)
+                return null;
 
-            return new Vote(vote.CreatedOn, vote.CreatedBy);
+            return new Vote(vote.CreatedOn, vote.UserId);
         }
     }
 }

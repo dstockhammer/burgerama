@@ -12,8 +12,7 @@ namespace Burgerama.Services.Voting.Api.Models
         [DataMember, XmlElement]
         public DateTime CreatedOn { get; set; }
 
-        [Required]
         [DataMember, XmlElement]
-        public string CreatedBy { get; set; }
+        public string UserId { get; set; }
     }
 }

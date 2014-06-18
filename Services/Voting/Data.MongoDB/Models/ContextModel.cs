@@ -1,15 +1,16 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using System;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
 namespace Burgerama.Services.Voting.Data.MongoDB.Models
 {
-    internal class ContextModel
+    internal sealed class ContextModel
     {
         [BsonId]
-        public string Id { get; set; }
-
         public string ContextKey { get; set; }
 
-        public ICollection<string> Candidates { get; set; }
+        public bool AllowToVoteForUnknownCandidates { get; set; }
+
+        public IEnumerable<Guid> Candidates { get; set; }
     }
 }
