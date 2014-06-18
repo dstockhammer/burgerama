@@ -1,63 +1,58 @@
-<section id="map" ng-controller="MapController">
-    <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" class="form-control">
+<ui-layout options="{ flow : 'column', sizes: [ '65%' ] }">
 
-    <div ng-repeat="markerInfo in markers" ui-map-marker="markers[$index].marker"
-         ui-event="{'map-click': 'openMarkerInfo(markerInfo)'}">
-    </div>
+    <section id="map" ng-controller="MapController">
+        <input id="map-search-box" type="text" placeholder="Search for places..." ng-model="currentSearchTerm" class="form-control">
 
-    <div ui-map-info-window="venueInfoWindow" class="info-window">
-        <div class="content">
-            <h3>{{ selectedVenue.name }}</h3>
-            <p ng-hide="selectedVenue.description == ''">{{ selectedVenue.description }}</p>
-            <p ng-hide="selectedVenue.url == ''"><a href="{{ selectedVenue.url }}">{{ selectedVenue.url }}</a></p>
-            <p ng-hide="selectedVenue.address == ''">{{ selectedVenue.address }}</p>
-        </div>
-        <div class="buttons" ng-show="selectedVenue.id == ''">
-            <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);">Suggest</button>
-        </div>
-    </div>
-
-    <div id="map-canvas" ui-map="map" ui-options="options"></div>
-</section>
-
-<div class="container-fluid" id="main">
-    <div class="row">
-        <div class="col-xs-8">
-            <!-- map-canvas will be postioned here -->
+        <div ng-repeat="markerInfo in markers" ui-map-marker="markers[$index].marker"
+             ui-event="{'map-click': 'openMarkerInfo(markerInfo)'}">
         </div>
 
-        <div class="col-xs-4" id="sidebar">
-            <nav class="navbar navbar-primary navbar-inverse" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <h1>Burgerama</h1>
-                    </div>
+        <div ui-map-info-window="venueInfoWindow" class="info-window">
+            <div class="content">
+                <h3>{{ selectedVenue.name }}</h3>
+                <p ng-hide="selectedVenue.description == ''">{{ selectedVenue.description }}</p>
+                <p ng-hide="selectedVenue.url == ''"><a href="{{ selectedVenue.url }}">{{ selectedVenue.url }}</a></p>
+                <p ng-hide="selectedVenue.address == ''">{{ selectedVenue.address }}</p>
+            </div>
+            <div class="buttons" ng-show="selectedVenue.id == ''">
+                <button type="button" class="btn btn-primary" ng-click="showAddVenueModal(selectedVenue);">Suggest</button>
+            </div>
+        </div>
 
-                    <ul class="nav navbar-nav navbar-right" ng-controller="AccountController">
-                        <li ng-hide="signedIn"><a href ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
-                        <li ng-show="signedIn" class="dropdown user-info">
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="user-image"><img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" class="img-circle" height="40" width="40" /></span>
-                                <span class="user-name">{{ user.given_name }} <strong>{{ user.family_name }}</strong></span>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href><span class="glyphicon glyphicon-wrench"></span><span class="label label-warning pull-right">NYI</span> Settings</a></li>
-                                <li><a href ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+        <div id="map-canvas" ui-map="map" ui-options="options"></div>
+    </section>
+
+    <div class="container-fluid" id="sidebar">
+        <nav class="navbar navbar-primary navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h1>Burgerama</h1>
                 </div>
-            </nav>
 
-            <ul class="nav navbar-secondary nav-pills">
-                <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
-                <li ui-sref-active="active"><a ui-sref="venues">Venues</a></li>
-                <li ui-sref-active="active"><a ui-sref="outings">Outings</a></li>
-                <li ui-sref-active="active" class="disabled"><a ui-sref="calendar">Calendar</a></li>
-            </ul>
+                <ul class="nav navbar-nav navbar-right" ng-controller="AccountController">
+                    <li ng-hide="signedIn"><a href ng-click="showSignInModal();"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+                    <li ng-show="signedIn" class="dropdown user-info">
+                        <a href class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="user-image"><img ng-src="{{ user.picture }}" alt="{{ user.nickname }}" class="img-circle" height="40" width="40" /></span>
+                            <span class="user-name">{{ user.given_name }} <strong>{{ user.family_name }}</strong></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href><span class="glyphicon glyphicon-wrench"></span><span class="label label-warning pull-right">NYI</span> Settings</a></li>
+                            <li><a href ng-click="signOut();"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-            <section ui-view></section>
-        </div>
+        <ul class="nav navbar-secondary nav-pills">
+            <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
+            <li ui-sref-active="active"><a ui-sref="venues">Venues</a></li>
+            <li ui-sref-active="active"><a ui-sref="outings">Outings</a></li>
+            <li ui-sref-active="active" class="disabled"><a ui-sref="calendar">Calendar</a></li>
+        </ul>
+
+        <section ui-view></section>
     </div>
-</div>
+</ui-layout>

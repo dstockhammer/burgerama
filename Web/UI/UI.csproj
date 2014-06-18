@@ -155,6 +155,8 @@
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap.js" />
     <Content Include="Scripts\vendor\angular-ui-bootstrap\ui-bootstrap.min.js" />
+    <Content Include="Scripts\vendor\angular-ui-layout\ui-layout.css" />
+    <Content Include="Scripts\vendor\angular-ui-layout\ui-layout.js" />
     <Content Include="Scripts\vendor\angular-ui-map\ui-map.js" />
     <Content Include="Scripts\vendor\angular-ui-map\ui-map.min.js" />
     <Content Include="Scripts\vendor\angular-ui-router\ui-router.js" />

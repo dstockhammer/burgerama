@@ -17,6 +17,10 @@ html, body {
 }
 
 // top navbar
+.navbar {
+    z-index: 999999;
+}
+
 .navbar-right {
     padding-right: 2em;
 }
@@ -25,7 +29,7 @@ html, body {
 // map
 #map-canvas {
     height: 100%;
-    width: 66.666%;
+    width: 100%;
     position: absolute;
     left: 0;
     top: 0;
@@ -51,11 +55,11 @@ html, body {
     }
 }
 
-
-// sidebar content
+// sidebar
 #sidebar {
     height: 100%;
     overflow-y: scroll;
+    margin-left: -1px;
     border-left: 1px solid rgba(0,0,0,0.3);
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 

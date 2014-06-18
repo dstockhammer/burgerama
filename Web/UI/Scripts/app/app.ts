@@ -38,6 +38,7 @@ module Burgerama {
         'ui.event',
         'ui.router',
         'ui.map',
+        'ui.layout',
 
         // 3rd Party Modules
         'LocalStorageModule',

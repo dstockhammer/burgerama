@@ -16,6 +16,7 @@ var Burgerama;
         'ui.event',
         'ui.router',
         'ui.map',
+        'ui.layout',
         'LocalStorageModule',
         'toaster',
         'truncate',

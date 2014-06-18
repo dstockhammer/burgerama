@@ -19,6 +19,7 @@ namespace Burgerama.Web.UI
                 "~/Scripts/vendor/angular-ui-utils/ui-utils.js",
                 "~/Scripts/vendor/angular-ui-router/ui-router.js",
                 "~/Scripts/vendor/angular-ui-map/ui-map.js",
+                "~/Scripts/vendor/angular-ui-layout/ui-layout.js",
 
                 "~/Scripts/vendor/angular-local-storage/angular-local-storage.js",
                 "~/Scripts/vendor/angular-toaster/angular-toaster.js",
@@ -30,6 +31,7 @@ namespace Burgerama.Web.UI
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                 "~/Scripts/vendor/angular-toaster/angular-toaster.css",
+                "~/Scripts/vendor/angular-ui-layout/ui-layout.css",
                 "~/Content/less/main.css"
             ));
         }
