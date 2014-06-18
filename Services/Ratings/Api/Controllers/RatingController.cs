@@ -48,12 +48,15 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             var candidate = _candidateRepository.Get(contextKey, reference);
             if (candidate != null)
             {
+                var userId = ClaimsPrincipal.Current.GetUserId();
+
                 model.IsValidated = true;
                 model.OpeningDate = candidate.OpeningDate;
                 model.ClosingDate = candidate.ClosingDate;
                 model.RatingsCount = candidate.Ratings.Count();
                 model.TotalRating = candidate.TotalRating;
-                model.CanUserRate = candidate.CanUserRate(ClaimsPrincipal.Current.GetUserId());
+                model.UserRating = candidate.Ratings.SingleOrDefault(r => r.UserId == userId).ToModel();
+                model.CanUserRate = candidate.CanUserRate(userId);
 
                 return Ok(model);
             }
@@ -62,10 +65,13 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
             if (potentialCandidate != null)
             {
+                var userId = ClaimsPrincipal.Current.GetUserId();
+
                 model.IsValidated = false;
                 model.RatingsCount = potentialCandidate.Ratings.Count();
                 model.TotalRating = potentialCandidate.TotalRating;
-                model.CanUserRate = true;
+                model.UserRating = potentialCandidate.Ratings.SingleOrDefault(r => r.UserId == userId).ToModel();
+                model.CanUserRate = model.UserRating == null;
 
                 return Ok(model);
             }

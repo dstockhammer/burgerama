@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../app.ts" />
 
 module Burgerama.Venues {
-    export interface IVenue {
+    export class Venue {
         id: string;
         name: string;
-        location: ILocation;
+        location: Location;
         url: string;
         description: string;
         address: string;
@@ -12,7 +12,7 @@ module Burgerama.Venues {
         totalVotes: number;
     }
 
-    export interface ILocation {
+    export class Location {
         reference: string;
         latitude: number;
         longitude: number;

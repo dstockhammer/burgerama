@@ -10,6 +10,7 @@ module Burgerama.Ratings {
         ratingsCount: number;
         totalRating: number;
         canUserRate: boolean;
+        userRating: Rating;
     }
 }
 

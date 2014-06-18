@@ -2,11 +2,11 @@
 
 module Burgerama.Outings {
     export interface IOutingScope extends ng.IScope {
-        outings: Array<IOuting>;
+        outings: Array<Outing>;
         candidates: Array<Ratings.Candidate>;
 
-        panTo: (outing: IOuting) => void;
-        addRating: (venue: Venues.IVenue) => void;
+        panTo: (outing: Outing) => void;
+        addRating: (venue: Venues.Venue) => void;
     }
 
     export class OutingController {
@@ -27,11 +27,11 @@ module Burgerama.Outings {
         }
 
         private load() {
-            this.outingResource.all((outings: Array<IOuting>) => {
+            this.outingResource.all((outings: Array<Outing>) => {
                 this.$scope.outings = outings;
                 this.$rootScope.$emit('OutingsLoaded', this.$scope.outings);
 
-                outings.forEach((outing: IOuting) => {
+                outings.forEach((outing: Outing) => {
                     if (typeof(this.$scope.candidates[outing.venue.id]) === 'undefined') {
                         this.candidateResource.get({ context: 'venues', reference: outing.venue.id }, (candidate: Ratings.Candidate) => {
                             this.$scope.candidates[outing.venue.id] = candidate;
@@ -43,11 +43,11 @@ module Burgerama.Outings {
             });
         }
 
-        private panTo(outing: IOuting) {
+        private panTo(outing: Outing) {
             this.$rootScope.$emit('VenueSelected', outing.venue);
         }
 
-        private addRating(venue: Venues.IVenue) {
+        private addRating(venue: Venues.Venue) {
             this.$modal.open({
                 templateUrl: '/Scripts/app/ratings/views/addRating.modal.html',
                 controller: 'AddRatingController',

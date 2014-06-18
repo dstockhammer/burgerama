@@ -3,7 +3,7 @@ var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
-            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
+            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, candidateResource, venueId) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
@@ -13,8 +13,11 @@ var Burgerama;
                 this.venueResource = venueResource;
                 this.voteResource = voteResource;
                 this.ratingResource = ratingResource;
+                this.candidateResource = candidateResource;
                 this.venueId = venueId;
+                this.venuesContextKey = 'venues';
                 this.$scope.venue = null;
+                this.$scope.candidate = null;
                 this.$scope.ratings = null;
                 this.$scope.ratingStats = null;
                 this.$scope.ratingOrder = true;
@@ -41,7 +44,11 @@ var Burgerama;
                     _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
 
                     if (venue.totalRating != null) {
-                        _this.ratingResource.all({ context: 'venues', reference: venue.id }, function (ratings) {
+                        _this.candidateResource.get({ context: _this.venuesContextKey, reference: venue.id }, function (candidate) {
+                            _this.$scope.candidate = candidate;
+                        });
+
+                        _this.ratingResource.all({ context: _this.venuesContextKey, reference: venue.id }, function (ratings) {
                             _this.$scope.ratings = ratings;
                             _this.$scope.ratingStats = _this.starRatingService.calculateRatingStats(ratings);
                         });
@@ -75,13 +82,14 @@ var Burgerama;
             };
 
             VenueDetailsController.prototype.addRating = function (venue) {
+                var _this = this;
                 this.$modal.open({
                     templateUrl: '/Scripts/app/ratings/views/addRating.modal.html',
                     controller: 'AddRatingController',
                     resolve: {
                         context: function () {
                             return {
-                                key: "venues",
+                                key: _this.venuesContextKey,
                                 reference: venue.id,
                                 title: venue.name
                             };
@@ -97,9 +105,9 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'venueId',
-    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId) {
-        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, venueId);
+    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'CandidateResource', 'venueId',
+    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, candidateResource, venueId) {
+        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, candidateResource, venueId);
     }
 ]);
 //# sourceMappingURL=venueDetailsController.js.map

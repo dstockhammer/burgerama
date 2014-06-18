@@ -11,7 +11,7 @@ module Burgerama.Map {
     export interface IMarkerInfo {
         marker: google.maps.Marker;
         place: google.maps.places.PlaceResult;
-        venue: Venues.IVenue;
+        venue: Venues.Venue;
     }
 
     export interface IMapScope extends ng.IScope {
@@ -19,11 +19,11 @@ module Burgerama.Map {
         options: google.maps.MapOptions;
         markers: Array<IMarkerInfo>;
 
-        selectedVenue: Venues.IVenue;
+        selectedVenue: Venues.Venue;
         currentSearchTerm: any;
 
         clearSearch: () => void;
-        showAddVenueModal: (venue: Venues.IVenue) => void;
+        showAddVenueModal: (venue: Venues.Venue) => void;
         openMarkerInfo: (markerInfo: IMarkerInfo) => void;
         
         venueInfoWindow: any;
@@ -41,7 +41,7 @@ module Burgerama.Map {
             zoomControl: true,
             mapTypeControl: false,
             panControl: true,
-            zoom: 15
+            zoom: 16
         };
 
         // todo: this is used in a workaround. see showAddVenueModal() for details.
@@ -75,15 +75,15 @@ module Burgerama.Map {
                 });
             });
 
-            var unregisterVenuesLoaded = this.$rootScope.$on('VenuesLoaded', (event, venues: Array<Venues.IVenue>) => {
+            var unregisterVenuesLoaded = this.$rootScope.$on('VenuesLoaded', (event, venues: Array<Venues.Venue>) => {
                 this.clearMarkers();
                 this.addMarkersForAllVenues(venues);
             });
-            var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', (event, outings: Array<Outings.IOuting>) => {
+            var unregisterOutingsLoaded = this.$rootScope.$on('OutingsLoaded', (event, outings: Array<Outings.Outing>) => {
                 this.clearMarkers();
                 this.addMarkersForAllOutings(outings);
             });
-            var unregisterVenueSelected = this.$rootScope.$on('VenueSelected', (event, venue: Venues.IVenue) => {
+            var unregisterVenueSelected = this.$rootScope.$on('VenueSelected', (event, venue: Venues.Venue) => {
                 var markerInfos = this.$scope.markers.filter(element => {
                     return element.venue != null && element.venue.id == venue.id;
                 });
@@ -129,7 +129,7 @@ module Burgerama.Map {
             this.$scope.selectedVenue = null;
         }
 
-        private showAddVenueModal(venue: Venues.IVenue) {
+        private showAddVenueModal(venue: Venues.Venue) {
             // todo: the whole openModals and closeCallback thing is a workaround for an issue
             // with ng-click in the info window. the handler is registered every time a window
             // is opened and is never unregistered, so the number increases every time. hopefully
@@ -160,10 +160,15 @@ module Burgerama.Map {
                 bounds.extend(place.geometry.location);
             });
             
-            this.$scope.map.fitBounds(bounds);
+            if (places.length == 1) {
+                this.$scope.map.panTo(places[0].geometry.location);
+                this.$scope.map.setZoom(this.options.zoom);
+            } else {
+                this.$scope.map.fitBounds(bounds);
+            }
         }
 
-        private addMarkersForAllVenues(venues: Array<Venues.IVenue>) {
+        private addMarkersForAllVenues(venues: Array<Venues.Venue>) {
             var bounds = new google.maps.LatLngBounds();
 
             venues.forEach(venue => {
@@ -171,10 +176,16 @@ module Burgerama.Map {
                 bounds.extend(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
             });
 
-            this.$scope.map.fitBounds(bounds);
+            if (venues.length == 1) {
+                var location = new google.maps.LatLng(venues[0].location.latitude, venues[0].location.longitude);
+                this.$scope.map.panTo(location);
+                this.$scope.map.setZoom(this.options.zoom);
+            } else {
+                this.$scope.map.fitBounds(bounds);
+            }
         }
 
-        private addMarkersForAllOutings(outings: Array<Outings.IOuting>) {
+        private addMarkersForAllOutings(outings: Array<Outings.Outing>) {
             var bounds = new google.maps.LatLngBounds();
 
             outings.forEach(outing => {
@@ -182,10 +193,16 @@ module Burgerama.Map {
                 bounds.extend(new google.maps.LatLng(outing.venue.location.latitude, outing.venue.location.longitude));
             });
 
-            this.$scope.map.fitBounds(bounds);
+            if (outings.length == 1) {
+                var location = new google.maps.LatLng(outings[0].venue.location.latitude, outings[0].venue.location.longitude);
+                this.$scope.map.panTo(location);
+                this.$scope.map.setZoom(this.options.zoom);
+            } else {
+                this.$scope.map.fitBounds(bounds);
+            }
         }
 
-        private addMarker(markerType: MarkerType, place: google.maps.places.PlaceResult, venue?: Venues.IVenue) {
+        private addMarker(markerType: MarkerType, place: google.maps.places.PlaceResult, venue?: Venues.Venue) {
             // if place is null, look it up using places api
             if (place == null) {
                 var request = {

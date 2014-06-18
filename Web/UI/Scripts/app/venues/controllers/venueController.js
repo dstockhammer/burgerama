@@ -29,8 +29,8 @@ var Burgerama;
             }
             VenueController.prototype.load = function () {
                 var _this = this;
-                this.venueResource.all(function (data) {
-                    _this.$scope.venues = data;
+                this.venueResource.all(function (venues) {
+                    _this.$scope.venues = venues;
                     _this.$rootScope.$emit('VenuesLoaded', _this.$scope.venues);
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);

@@ -7,12 +7,17 @@
     <li class="row list-group-item" ng-mouseenter="panTo(outing);" ng-repeat="outing in outings">
         <div class="col-xs-10 text">
             <h3 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: outing.venue.id })">{{ outing.venue.name }}</a></h3>
-            <p class="list-group-item-text date">{{ outing.date | date:'medium'}}</p>
             <p class="list-group-item-text" ng-hide="outing.venue.description == ''">{{ outing.venue.description | characters:300 }}</p>
+            <p class="list-group-item-text text-sub text-muted">{{ outing.date | date:'medium'}}</p>
         </div>
         <div class="col-xs-2 info">
             <rating-stats ng-model="outing.venue.totalRating"></rating-stats>
-            <button type="button" class="btn btn-primary pull-right" ng-show="candidates[outing.venue.id].canUserRate" ng-click="addRating(venue);"><span class="glyphicon glyphicon-star"></span> Rate</button>
+            <button type="button" class="btn btn-primary pull-right" ng-show="candidates[outing.venue.id].canUserRate" ng-click="addRating(outing.venue);">
+                <span class="glyphicon glyphicon-star"></span> Rate
+            </button>
+            <button type="button" class="btn btn-success pull-right" ng-show="candidates[outing.venue.id].userRating" disabled="disabled">
+                <span class="glyphicon glyphicon-ok"></span> Rated
+            </button>
         </div>
     </li>
 </ul>

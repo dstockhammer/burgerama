@@ -1,0 +1,103 @@
+﻿#loading-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    z-index: 9999;
+    background: #fff;
+    -moz-transition: 1s all ease-out;
+    -o-transition: 1s all ease-out;
+    -webkit-transition: 1s all ease-out;
+    transition: 1s all ease-out;
+
+    &.ng-hide-add, &.ng-hide-remove {
+        display: block !important;
+    }
+
+    &.ng-hide-remove, &.ng-hide-add.ng-hide-add-active {
+        opacity: 0;
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active, &.ng-hide-add {
+        opacity: 1;
+    }
+
+    .loading-spinner {
+        z-index: 10000;
+    }
+
+    .content {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        margin-top: -55px;
+        margin-left: -55px;
+        width: 130px;
+        height: 130px;
+        background: transparent url('/Content/img/burgerama-large.png') no-repeat center center;
+    }
+}
+
+.loading-spinner {
+    background-color: rgba(0,0,0,0);
+    opacity: .75;
+    border-radius: 50px;
+    margin: 5% auto;
+    -o-animation: loading .85s infinite linear;
+    -moz-animation: loading .85s infinite linear;
+    -webkit-animation: loading .85s infinite linear;
+    animation: loading .85s infinite linear;
+
+    &.spin-s {
+        border: 5px solid #00dbff;
+        border-top: 5px solid rgba(0,0,0,0);
+        border-left: 5px solid rgba(0,0,0,0);
+        width: 30px;
+        height: 30px;
+    }
+
+    &.spin-m {
+        border: 5px solid #00dbff;
+        border-top: 5px solid rgba(0,0,0,0);
+        border-left: 5px solid rgba(0,0,0,0);
+        width: 50px;
+        height: 50px;
+    }
+
+    &.spin-l {
+        border: 20px solid #00dbff;
+        border-top: 20px solid rgba(0,0,0,0);
+        border-left: 20px solid rgba(0,0,0,0);
+        width: 100px;
+        height: 100px;
+        border-radius: 100px !important;
+    }
+
+    &.spin-logo {
+        border: 10px solid #00dbff;
+        border-top: 10px solid rgba(0,0,0,0);
+        border-left: 10px solid rgba(0,0,0,0);
+        width: 116px;
+        height: 116px;
+        border-radius: 116px !important;
+    }
+}
+
+@keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); };
+}
+@-moz-keyframes loading {
+    0% { -moz-transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); };
+}
+@-webkit-keyframes loading {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); };
+}
+@-o-keyframes loading {
+    0% { -o-transform: rotate(0deg); }
+    100% { -o-transform: rotate(360deg); };
+}

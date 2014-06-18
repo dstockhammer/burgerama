@@ -5,6 +5,9 @@
 // custom bootstrap theme
 @import 'bootstrap-custom.less';
 
+// burgerama style files
+@import 'loading.less';
+
 html, body {
     height: 100%;
 }
@@ -12,105 +15,6 @@ html, body {
 #main, #main > .row {
     height: 100%;
 }
-
-// loading overlay
-#loading-overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    z-index: 9999;
-    background: #fff;
-    transition: 1s all ease-out;
-
-    &.ng-hide-add, &.ng-hide-remove
-    {
-        display: block !important;
-    }
-
-    &.ng-hide-remove, &.ng-hide-add.ng-hide-add-active{
-        opacity: 0;
-    }
-
-    &.ng-hide-remove.ng-hide-remove-active, &.ng-hide-add{
-        opacity: 1;
-    }
-
-    .loading-spinner {
-        z-index: 10000;
-    }
-
-    .content {
-        position: absolute;
-        text-align: center;
-        top: 50%;
-        left: 50%;
-        margin-top: -55px;
-        margin-left: -55px;
-        width: 130px;
-        height: 130px;
-        background: transparent url('/Content/img/burgerama-large.png') no-repeat center center;
-    }
-}
-
-.loading-spinner {
-    background-color: rgba(0,0,0,0);
-    opacity: .75;
-    border-radius: 50px;
-    margin: 5% auto;
-    animation: loading .85s infinite linear;
-    -moz-animation: loading .85s infinite linear;
-    -webkit-animation: loading .85s infinite linear;
-
-    &.spin-s {
-        border: 5px solid #00dbff;
-        border-top: 5px solid rgba(0,0,0,0);
-        border-left: 5px solid rgba(0,0,0,0);
-        width: 30px;
-        height: 30px;
-    }
-
-    &.spin-m {
-        border: 5px solid #00dbff;
-        border-top: 5px solid rgba(0,0,0,0);
-        border-left: 5px solid rgba(0,0,0,0);
-        width: 50px;
-        height: 50px; 
-    }
-
-    &.spin-l {
-        border: 20px solid #00dbff;
-        border-top: 20px solid rgba(0,0,0,0);
-        border-left: 20px solid rgba(0,0,0,0);
-        width: 100px;
-        height: 100px;
-        border-radius: 100px !important;
-    }
-
-    &.spin-logo {
-        border: 10px solid #00dbff;
-        border-top: 10px solid rgba(0,0,0,0);
-        border-left: 10px solid rgba(0,0,0,0);
-        width: 116px;
-        height: 116px;
-        border-radius: 116px !important;
-    }
-}
-
- @keyframes loading {
-    0% { -moz-transform: rotate(0deg); }
-    100% { -moz-transform: rotate(360deg); };
-}
- @-moz-keyframes loading {
-    0% { -moz-transform: rotate(0deg); }
-    100% { -moz-transform: rotate(360deg); };
-}
-@-webkit-keyframes loading {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); };
-}
-
 
 // top navbar
 .navbar-right {
@@ -156,11 +60,9 @@ html, body {
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 
     .navbar-primary {
-        /*background-color: @btn-primary-bg;*/
-        border-radius: 0;
         border: 0;
+        border-radius: 0;
         margin: 0 -15px 5px;
-        /*box-shadow: 0 1px 4px rgba(0,0,0,0.2);*/
 
         .navbar-header {
             h1 {
@@ -212,6 +114,18 @@ html, body {
 #venue-list, #outing-list {
     margin: 0 15px 10px;
 
+    h3 {
+        line-height: 1.5;
+
+        &.above-col {
+            margin: 0 15px 10px;
+        }
+    }
+
+    .text-sub {
+        padding-top: .85em;
+    }
+
     li.list-group-item {
         border: 0;
         border-radius: 0;
@@ -219,42 +133,38 @@ html, body {
         padding: 10px 5px 15px;
         margin-bottom: 15px;
         background-color: rgba(0,0,0,0);
-        -webkit-transition: background-color 0.25s linear;
-        -moz-transition: background-color 0.25s linear;
-        -o-transition: background-color 0.25s linear;
-        -ms-transition: background-color 0.25s linear;
-        transition: background-color 0.25s linear;
+        -webkit-transition: background-color 0.2s linear;
+        -moz-transition: background-color 0.2s linear;
+        -o-transition: background-color 0.2s linear;
+        transition: background-color 0.2s linear;
 
         button {
-            display: none;
+            opacity: 0;
+            -moz-transition: opacity 0.2s linear;
+            -o-transition: opacity 0.2s linear;
+            -webkit-transition: opacity 0.2s linear;
+            transition: opacity 0.2s linear;
+
+            &.btn-xs {
+                margin-bottom: 5px;
+            }
         }
-    
+
         &:hover {
             background-color: rgba(0,0,0,0.025);
 
             button {
-                display: inline-block;
+                opacity: 1;
+                -moz-transition: opacity 0.2s linear;
+                -o-transition: opacity 0.2s linear;
+                -webkit-transition: opacity 0.2s linear;
+                transition: opacity 0.2s linear;
             }
         }
-    }
-    
-    .address {
-        padding-top: 4px;
-        color: @gray-light;
-        font-style: italic;
     }
 
     .info {
         text-align: right;
-    }
-
-    .date {
-        margin: 4px 0;
-        color: #808080;
-    }
-
-    h3.above-col  {
-        margin: 0 15px 10px;
     }
 }
 
@@ -265,12 +175,6 @@ html, body {
         font-weight: bold;
         font-size: 3em;
         color: @brand-secondary;
-    }
-
-    .count {
-        color: @gray-light;
-        font-style: italic;
-        font-size: 0.9em;
     }
 
     .stars {
@@ -287,16 +191,18 @@ html, body {
             text-shadow: 0 0 1px @gray-lighter;
         }
     }
-    
+
     .caption {
         color: @gray-light;
     }
-    
+
      .error {
          color: @alert-danger-text;
      }
-          
+
      &.compact {
+        min-height: 80px;
+
          .total {
              margin: -10px 0;
          }
@@ -310,16 +216,16 @@ html, body {
 
 .star-rating-details {
     border-left: 1px solid @gray-lighter;
-    font-size: 0.9em;
-    padding-left: 5px;
+    padding: 0 0 10px 5px;
 
     li {
         list-style: none;
         margin: 0;
 
-        .text {
+        .text-muted {
             height: 15px;
             line-height: 15px;
+            font-size: 0.9em;
         }
 
         .progress {
@@ -328,28 +234,26 @@ html, body {
             margin-bottom: 1px;
             background-color: transparent;
             border-radius: 0;
-            box-shadow: none;
             -moz-box-shadow: none;
             -webkit-box-shadow: none;
             -o-box-shadow: none;
+            box-shadow: none;
 
             .progress-bar {
                 height: 15px;
                 line-height: 15px;
                 background-color: lighten(@brand-secondary, 40%);
-                /*border-left: 1px solid @gray-light;*/
                 border-right: 1px solid @brand-secondary;
-                box-shadow: none;
                 -moz-box-shadow: none;
                 -webkit-box-shadow: none;
                 -o-box-shadow: none;
+                box-shadow: none;
             }
         }
     }
 }
 
-.rating-detail {
-    margin: 15px 0;
+.star-rating-details-list {
     padding: 0 5px;
     list-style-type: none;
 

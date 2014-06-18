@@ -2,10 +2,10 @@
 
 module Burgerama.Venues {
     export interface IVenueScope extends ng.IScope {
-        venues: Array<IVenue>;
+        venues: Array<Venue>;
 
-        panTo: (venue: IVenue) => void;
-        addVote: (venue: IVenue) => void;
+        panTo: (venue: Venue) => void;
+        addVote: (venue: Venue) => void;
     }
 
     export class VenueController {
@@ -22,26 +22,26 @@ module Burgerama.Venues {
 
             this.load();
 
-            var unregisterVenueAdded = this.$rootScope.$on('VenueAdded', (event, venue: IVenue) => {
+            var unregisterVenueAdded = this.$rootScope.$on('VenueAdded', (event, venue: Venue) => {
                 this.$scope.venues.push(venue);
             });
             this.$scope.$on('$destroy', () => unregisterVenueAdded());
         }
 
         private load() {
-            this.venueResource.all(data => {
-                this.$scope.venues = data;
+            this.venueResource.all((venues: Array<Venue>) => {
+                this.$scope.venues = venues;
                 this.$rootScope.$emit('VenuesLoaded', this.$scope.venues);
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
         }
 
-        private panTo(venue: IVenue) {
+        private panTo(venue: Venue) {
             this.$rootScope.$emit('VenueSelected', venue);
         }
 
-        private addVote(venue: IVenue) {
+        private addVote(venue: Venue) {
             console.log('add vote clicked');
         }
     }

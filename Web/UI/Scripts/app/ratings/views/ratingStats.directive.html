@@ -1,7 +1,7 @@
 ﻿<div class="star-rating compact">
     <p class="total">{{ totalRating }}</p>
     <rating class="stars" ng-model="totalRating" max="5" readonly="true"></rating>
-    <p class="count" ng-show="ratingsCount">
+    <p class="text-muted" ng-show="ratingsCount">
         <ng-pluralize count="ratingsCount" when="{'0': 'No ratings', 'one': '1 rating', 'other': '{} ratings'}"></ng-pluralize>
     </p>
 </div>

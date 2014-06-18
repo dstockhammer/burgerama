@@ -2,7 +2,7 @@
 
 module Burgerama.Venues {
     export interface IAddVenueScope extends ng.IScope {
-        venue: IVenue;
+        venue: Venue;
 
         ok: () => void;
         cancel: () => void;

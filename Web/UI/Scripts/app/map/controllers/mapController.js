@@ -26,7 +26,7 @@ var Burgerama;
                     zoomControl: true,
                     mapTypeControl: false,
                     panControl: true,
-                    zoom: 15
+                    zoom: 16
                 };
                 // todo: this is used in a workaround. see showAddVenueModal() for details.
                 this.openModals = 0;
@@ -146,7 +146,12 @@ var Burgerama;
                     bounds.extend(place.geometry.location);
                 });
 
-                this.$scope.map.fitBounds(bounds);
+                if (places.length == 1) {
+                    this.$scope.map.panTo(places[0].geometry.location);
+                    this.$scope.map.setZoom(this.options.zoom);
+                } else {
+                    this.$scope.map.fitBounds(bounds);
+                }
             };
 
             MapController.prototype.addMarkersForAllVenues = function (venues) {
@@ -158,7 +163,13 @@ var Burgerama;
                     bounds.extend(new google.maps.LatLng(venue.location.latitude, venue.location.longitude));
                 });
 
-                this.$scope.map.fitBounds(bounds);
+                if (venues.length == 1) {
+                    var location = new google.maps.LatLng(venues[0].location.latitude, venues[0].location.longitude);
+                    this.$scope.map.panTo(location);
+                    this.$scope.map.setZoom(this.options.zoom);
+                } else {
+                    this.$scope.map.fitBounds(bounds);
+                }
             };
 
             MapController.prototype.addMarkersForAllOutings = function (outings) {
@@ -170,7 +181,13 @@ var Burgerama;
                     bounds.extend(new google.maps.LatLng(outing.venue.location.latitude, outing.venue.location.longitude));
                 });
 
-                this.$scope.map.fitBounds(bounds);
+                if (outings.length == 1) {
+                    var location = new google.maps.LatLng(outings[0].venue.location.latitude, outings[0].venue.location.longitude);
+                    this.$scope.map.panTo(location);
+                    this.$scope.map.setZoom(this.options.zoom);
+                } else {
+                    this.$scope.map.fitBounds(bounds);
+                }
             };
 
             MapController.prototype.addMarker = function (markerType, place, venue) {

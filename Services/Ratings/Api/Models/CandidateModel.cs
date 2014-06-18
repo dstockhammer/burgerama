@@ -30,5 +30,8 @@ namespace Burgerama.Services.Ratings.Api.Models
 
         [DataMember, XmlElement]
         public bool CanUserRate { get; set; }
+
+        [DataMember, XmlElement]
+        public RatingModel UserRating { get; set; }
     }
 }

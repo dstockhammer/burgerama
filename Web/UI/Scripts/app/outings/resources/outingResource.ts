@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../app.ts" />
 
 module Burgerama.Outings {
-    export interface IOuting {
+    export class Outing {
         id: string;
         date: Date;
-        venue: Venues.IVenue;
+        venue: Venues.Venue;
     }
 }
 

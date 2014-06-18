@@ -21,4 +21,4 @@ Burgerama.app.factory('CandidateResource', [
             get: { method: 'GET' }
         });
     }]);
-//# sourceMappingURL=contextResource.js.map
+//# sourceMappingURL=candidateResource.js.map

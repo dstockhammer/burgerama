@@ -518,6 +518,7 @@
     <Content Include="Content\less\bootstrap-custom.less" />
     <Content Include="Content\less\bootstrap-variables.less" />
     <Content Include="Scripts\typings\jquery\jquery-tests.ts.tscparams" />
+    <Content Include="Content\less\loading.less" />
     <None Include="Properties\PublishProfiles\burgerama.pubxml" />
     <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
