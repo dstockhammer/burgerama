@@ -146,14 +146,6 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Burgerama.Messaging.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Messaging.Events.Voting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.0\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -163,13 +155,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\VenueRepositoryContract.cs" />
-    <Compile Include="Contracts\IVenueRepository.cs" />
+    <Compile Include="Candidate.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Contracts\CandidateRepositoryContract.cs" />
+    <Compile Include="Contracts\ContextRepositoryContract.cs" />
+    <Compile Include="Contracts\ICandidateRepository.cs" />
+    <Compile Include="Contracts\IContextRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Venue.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Vote.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

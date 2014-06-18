@@ -166,6 +166,9 @@
     <Reference Include="Burgerama.Messaging.Commands">
       <HintPath>..\packages\Burgerama.Messaging.Commands.0.2.0\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Commands.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Commands.Voting.0.2.3\lib\net451\Burgerama.Messaging.Commands.Voting.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.Commands.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Commands.Ratings.0.2.1\lib\net451\Burgerama.Messaging.Commands.Ratings.dll</HintPath>
@@ -255,6 +258,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\TriedToVoteUnknownCandidateHandler.cs" />
     <Compile Include="Handlers\TriedToRateUnknownCandidateHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Handlers\VoteAddedHandler.cs" />

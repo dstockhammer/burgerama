@@ -172,10 +172,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\VenueConverter.cs" />
-    <Compile Include="Models\VenueModel.cs" />
+    <Compile Include="CandidateRepository.cs" />
+    <Compile Include="ContextRepository.cs" />
+    <Compile Include="Converters\CandidateConverter.cs" />
+    <Compile Include="Converters\ContextConverter.cs" />
+    <Compile Include="Converters\VoteConverter.cs" />
+    <Compile Include="Models\CandidateModel.cs" />
+    <Compile Include="Models\ContextModel.cs" />
+    <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VenueRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">

@@ -63,19 +63,19 @@ module Burgerama.Venues {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
 
-            //this.voteResource.get({ id: this.venueId }, data => {
-            //    this.$scope.venue.votes = data.count();
-            //}, err => {
-            //    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-            //});
+            this.voteResource.all({ id: this.venueId }, data => {
+                this.$scope.venue.votes = data.length;
+            }, err => {
+                this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+            });   
         }
         
         private addVote(venue: Venue) {
             var resource = new this.voteResource(this.$scope.venue);
-            resource.$create(() => {
+            resource.$create((data) => {
                 this.toaster.pop('success', 'Success', 'Added vote for venue: ' + this.$scope.venue.name);
                 this.$rootScope.$emit('VenueVoted', this.$scope.venue);
-                console.log('add vote clicked');
+                this.$scope.venue.votes = data["0"];
             }, err => {
                 if (err.status == 401) {
                     this.toaster.pop('error', 'Unauthorized', 'You are not authorized to vote on venues. Please log in or create an account.');
@@ -98,8 +98,8 @@ module Burgerama.Venues {
                             reference: venue.id,
                             title: venue.name
                         };
-                    }
-                }
+    }
+}
             });
         }
     }

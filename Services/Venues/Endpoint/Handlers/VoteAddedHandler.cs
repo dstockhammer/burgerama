@@ -17,7 +17,7 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
         {
             // todo: handle stuff
 
-            _logger.Information("Added vote by {UserId} to venue {VenueId}.",
+            _logger.Information("Added vote by {UserId} to venue {CandidateReference}.",
                 context.Message.UserId, context.Message.CandidateReference);
         }
     }

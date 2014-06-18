@@ -167,7 +167,7 @@
     </Reference>
     <Reference Include="Burgerama.Messaging.Events.Voting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.0\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.3\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
@@ -198,9 +198,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\MongoDbTestUtils.cs" />
-    <Compile Include="Data\VenueRepositoryTests.cs" />
+    <Compile Include="Data\CandidateRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\VenueTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data.MongoDB\Data.MongoDB.csproj">
@@ -214,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\" />
+    <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
