@@ -5,13 +5,14 @@
 </div>
 <ul id="outing-list" class="list-group" ng-repeat="place in places">
     <li class="row list-group-item">
-        <div class="col-xs-10 text">
+        <div class="info pull-right">
+            <p><img ng-src="{{ place.icon }}" width="25" /></p>
+        </div>
+
+        <div class="content">
             <h3 class="list-group-item-heading"><a href ng-click="panTo(place)">{{ place.name }}</a></h3>
             <p class="list-group-item-text" ng-hide="venue.description == ''">{{ venue.description | characters:300 }}</p>
             <p class="list-group-item-text text-muted" ng-hide="place.formatted_address == ''">{{ place.formatted_address }}</p>
-        </div>
-        <div class="col-xs-2 info">
-            <p><img ng-src="{{ place.icon }}" width="25"/></p>
         </div>
     </li>
 </ul>

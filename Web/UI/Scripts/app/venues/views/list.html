@@ -5,15 +5,16 @@
 </div>
 <ul id="venue-list" class="list-group">
     <li class="row list-group-item" ng-mouseenter="panTo(venue);" ng-repeat="venue in venues">
-        <div class="col-xs-10 text">
-            <h3 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: venue.id })">{{ venue.name }}</a></h3>
-            <p class="list-group-item-text" ng-hide="venue.description == ''">{{ venue.description | characters:300 }}</p>
-            <p class="list-group-item-text text-sub text-muted" ng-hide="venue.address == ''">{{ venue.address }}</p>
-        </div>
-        <div class="col-xs-2 info">
+        <div class="info pull-right">
             <rating-stats ng-model="venue.totalRating" ng-show="venue.totalRating != null"></rating-stats>
             <p class="votes" ng-hide="venue.totalRating != null">{{ venue.totalVotes }}</p>
             <p><a href ng-click="addVote(venue);" ng-hide="venue.totalRating != null">vote</a></p>
+        </div>
+
+        <div class="content">
+            <h3 class="list-group-item-heading"><a href ui-sref="venue-details({ venueId: venue.id })">{{ venue.name }}</a></h3>
+            <p class="list-group-item-text" ng-hide="venue.description == ''">{{ venue.description | characters:300 }}</p>
+            <p class="list-group-item-text text-sub text-muted" ng-hide="venue.address == ''">{{ venue.address }}</p>
         </div>
     </li>
 </ul>

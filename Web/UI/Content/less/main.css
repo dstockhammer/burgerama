@@ -5926,11 +5926,11 @@ body {
 #main > .row {
   height: 100%;
 }
-.navbar {
-  z-index: 999999;
+.ui-splitbar {
+  z-index: 900;
 }
-.navbar-right {
-  padding-right: 2em;
+.navbar {
+  z-index: 950;
 }
 #map-canvas {
   height: 100%;
@@ -5960,6 +5960,9 @@ body {
   margin-left: -1px;
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+#sidebar .navbar-right {
+  padding-right: 2em;
 }
 #sidebar .navbar-primary {
   border: 0;
@@ -6001,10 +6004,6 @@ body {
 #outing-list h3 {
   line-height: 1.5;
 }
-#venue-list h3.above-col,
-#outing-list h3.above-col {
-  margin: 0 15px 10px;
-}
 #venue-list .text-sub,
 #outing-list .text-sub {
   padding-top: .85em;
@@ -6014,13 +6013,29 @@ body {
   border: 0;
   border-radius: 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 10px 5px 15px;
+  padding: 10px 15px 15px;
   margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
   -webkit-transition: background-color 0.2s linear;
   -moz-transition: background-color 0.2s linear;
   -o-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
+}
+#venue-list li.list-group-item .info,
+#outing-list li.list-group-item .info {
+  width: 90px;
+}
+#venue-list li.list-group-item .info.pull-left,
+#outing-list li.list-group-item .info.pull-left {
+  text-align: left;
+}
+#venue-list li.list-group-item .info.pull-right,
+#outing-list li.list-group-item .info.pull-right {
+  text-align: right;
+}
+#venue-list li.list-group-item .content,
+#outing-list li.list-group-item .content {
+  overflow: hidden;
 }
 #venue-list li.list-group-item button,
 #outing-list li.list-group-item button {
@@ -6045,10 +6060,6 @@ body {
   -o-transition: opacity 0.2s linear;
   -webkit-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
-}
-#venue-list .info,
-#outing-list .info {
-  text-align: right;
 }
 .star-rating .total {
   font-family: "Roboto Light", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -6094,6 +6105,7 @@ body {
 }
 .star-rating-details li .text-muted {
   height: 15px;
+  padding-left: 15px;
   line-height: 15px;
   font-size: 0.9em;
 }

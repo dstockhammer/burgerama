@@ -16,13 +16,13 @@ html, body {
     height: 100%;
 }
 
-// top navbar
-.navbar {
-    z-index: 999999;
-}
 
-.navbar-right {
-    padding-right: 2em;
+// display navbar above splitbar, but below loading overlay
+.ui-splitbar {
+    z-index: 900;
+}
+.navbar {
+    z-index: 950;
 }
 
 
@@ -62,6 +62,10 @@ html, body {
     margin-left: -1px;
     border-left: 1px solid rgba(0,0,0,0.3);
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+
+    .navbar-right {
+        padding-right: 2em;
+    }
 
     .navbar-primary {
         border: 0;
@@ -120,10 +124,6 @@ html, body {
 
     h3 {
         line-height: 1.5;
-
-        &.above-col {
-            margin: 0 15px 10px;
-        }
     }
 
     .text-sub {
@@ -134,13 +134,29 @@ html, body {
         border: 0;
         border-radius: 0;
         box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        padding: 10px 5px 15px;
+        padding: 10px 15px 15px;
         margin-bottom: 15px;
         background-color: rgba(0,0,0,0);
         -webkit-transition: background-color 0.2s linear;
         -moz-transition: background-color 0.2s linear;
         -o-transition: background-color 0.2s linear;
         transition: background-color 0.2s linear;
+
+        .info {
+            width: 90px;
+
+            &.pull-left {
+                text-align: left;
+            }
+
+            &.pull-right {
+                text-align: right;
+            }
+        }
+
+        .content {
+            overflow: hidden;
+        }
 
         button {
             opacity: 0;
@@ -165,10 +181,6 @@ html, body {
                 transition: opacity 0.2s linear;
             }
         }
-    }
-
-    .info {
-        text-align: right;
     }
 }
 
@@ -228,6 +240,7 @@ html, body {
 
         .text-muted {
             height: 15px;
+            padding-left: 15px;
             line-height: 15px;
             font-size: 0.9em;
         }

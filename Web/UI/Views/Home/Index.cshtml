@@ -9,7 +9,7 @@
 
         <div ui-map-info-window="venueInfoWindow" class="info-window">
             <div class="content">
-                <h3>{{ selectedVenue.name }}</h3>
+                <h3 class="text-primary">{{ selectedVenue.name }}</h3>
                 <p ng-hide="selectedVenue.description == ''">{{ selectedVenue.description }}</p>
                 <p ng-hide="selectedVenue.url == ''"><a href="{{ selectedVenue.url }}">{{ selectedVenue.url }}</a></p>
                 <p ng-hide="selectedVenue.address == ''">{{ selectedVenue.address }}</p>
