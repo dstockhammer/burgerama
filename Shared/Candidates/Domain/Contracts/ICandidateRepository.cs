@@ -7,17 +7,21 @@ namespace Burgerama.Shared.Candidates.Domain.Contracts
     [ContractClass(typeof(CandidateRepositoryContract))]
     public interface ICandidateRepository
     {
-        Candidate<T> Get<T>(string contextKey, Guid reference)
-            where T : class;
+        TCandidate Get<TCandidate, TItem>(string contextKey, Guid reference)
+            where TCandidate : Candidate<TItem>
+            where TItem : class;
 
-        PotentialCandidate<T> GetPotential<T>(string contextKey, Guid reference)
-            where T : class;
+        TCandidate GetPotential<TCandidate, TItem>(string contextKey, Guid reference)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class;
 
-        IEnumerable<Candidate<T>> GetAll<T>(string contextKey)
-            where T : class;
+        IEnumerable<TCandidate> GetAll<TCandidate, TItem>(string contextKey)
+            where TCandidate : Candidate<TItem>
+            where TItem : class;
 
-        IEnumerable<PotentialCandidate<T>> GetAllPotential<T>(string contextKey)
-            where T : class;
+        IEnumerable<TCandidate> GetAllPotential<TCandidate, TItem>(string contextKey)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class;
 
         void SaveOrUpdate<T>(Candidate<T> candidate)
             where T : class;

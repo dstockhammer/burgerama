@@ -35,7 +35,7 @@ namespace Burgerama.Shared.Candidates.Services
 
         public void CreateCandidate(string contextKey, Guid reference, DateTime? openingDate = null, DateTime? closingDate = null)
         {
-            var candidate = _candidateRepository.Get<T>(contextKey, reference);
+            var candidate = _candidateRepository.Get<Candidate<T>, T>(contextKey, reference);
             if (candidate != null)
             {
                 _logger.Error("Tried to create candidate {Reference} in context {ContextKey}, but it already exists.",
@@ -49,7 +49,7 @@ namespace Burgerama.Shared.Candidates.Services
 
         public void CloseCandidate(string contextKey, Guid reference, DateTime closingDate)
         {
-            var candidate = _candidateRepository.Get<T>(contextKey, reference);
+            var candidate = _candidateRepository.Get<Candidate<T>, T>(contextKey, reference);
             if (candidate == null)
             {
                 _logger.Warning("Tried to close candidate {Reference} in context {ContextKey}, but it doesn't exist. Creating candidate...",
@@ -77,7 +77,7 @@ namespace Burgerama.Shared.Candidates.Services
 
         public void OpenCandidate(string contextKey, Guid reference, DateTime openingDate)
         {
-            var candidate = _candidateRepository.Get<T>(contextKey, reference);
+            var candidate = _candidateRepository.Get<Candidate<T>, T>(contextKey, reference);
             if (candidate == null)
             {
                 _logger.Warning("Tried to open candidate {Reference} in context {ContextKey}, but it doesn't exist. Creating candidate...",
@@ -129,15 +129,15 @@ namespace Burgerama.Shared.Candidates.Services
             if (closingDate.HasValue)
                 events.AddRange(candidate.CloseOn(closingDate.Value));
 
-            var potentialCandidate = _candidateRepository.GetPotential<T>(contextKey, reference);
+            var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate<T>, T>(contextKey, reference);
             if (potentialCandidate != null)
             {
-                foreach (var rating in potentialCandidate.Items)
+                foreach (var item in potentialCandidate.Items)
                 {
-                    events.AddRange(candidate.AddItem(rating));
+                    events.AddRange(candidate.AddItem(item));
                 }
 
-                _logger.Information("Validated potential candidate {Reference} in context {ContextKey} and transferred {RatingCount} of {PotentialRatingCount} existing ratings.",
+                _logger.Information("Validated potential candidate {Reference} in context {ContextKey} and transferred {ItemCount} of {PotentialItemCount} existing items.",
                     reference, contextKey, candidate.Items.Count(), potentialCandidate.Items.Count());
 
                 _candidateRepository.Delete(potentialCandidate);

@@ -7,38 +7,42 @@ namespace Burgerama.Shared.Candidates.Domain.Contracts
     [ContractClassFor(typeof(ICandidateRepository))]
     internal abstract class CandidateRepositoryContract : ICandidateRepository
     {
-        public Candidate<T> Get<T>(string contextKey, Guid reference)
-            where T : class
+        public TCandidate Get<TCandidate, TItem>(string contextKey, Guid reference)
+            where TCandidate : Candidate<TItem>
+            where TItem : class
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
-            return default(Candidate<T>);
+            return default(TCandidate);
         }
 
-        public PotentialCandidate<T> GetPotential<T>(string contextKey, Guid reference)
-            where T : class
+        public TCandidate GetPotential<TCandidate, TItem>(string contextKey, Guid reference)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
-            return default(PotentialCandidate<T>);
+            return default(TCandidate);
         }
 
-        public IEnumerable<Candidate<T>> GetAll<T>(string contextKey)
-            where T : class
+        public IEnumerable<TCandidate> GetAll<TCandidate, TItem>(string contextKey)
+            where TCandidate : Candidate<TItem>
+            where TItem : class
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Candidate<T>>>() != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TCandidate>>() != null);
 
-            return default(IEnumerable<Candidate<T>>);
+            return default(IEnumerable<TCandidate>);
         }
 
-        public IEnumerable<PotentialCandidate<T>> GetAllPotential<T>(string contextKey)
-            where T : class
+        public IEnumerable<TCandidate> GetAllPotential<TCandidate, TItem>(string contextKey)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
-            Contract.Ensures(Contract.Result<IEnumerable<PotentialCandidate<T>>>() != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TCandidate>>() != null);
 
-            return default(IEnumerable<PotentialCandidate<T>>);
+            return default(IEnumerable<TCandidate>);
         }
 
         public void SaveOrUpdate<T>(Candidate<T> candidate)

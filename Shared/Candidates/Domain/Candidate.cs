@@ -98,7 +98,7 @@ namespace Burgerama.Shared.Candidates.Domain
         /// <summary>
         /// Returns whether the candidate allows adding items on a specific date.
         /// </summary>
-        public bool IsActive(DateTime date)
+        public bool IsActiveOn(DateTime date)
         {
             // don't allow rating if there is not opening date
             if (OpeningDate.HasValue == false)

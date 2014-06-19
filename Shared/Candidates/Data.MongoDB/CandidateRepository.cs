@@ -33,36 +33,40 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB
             _candidateFactory = candidateFactory;
         }
 
-        public Candidate<T> Get<T>(string contextKey, Guid reference)
-            where T : class
+        public TCandidate Get<TCandidate, TItem>(string contextKey, Guid reference)
+            where TCandidate : Candidate<TItem>
+            where TItem : class
         {
-            return GetCandidates<T>().AsQueryable()
+            return GetCandidates<TItem>().AsQueryable()
                 .SingleOrDefault(c => c.Reference == reference.ToString() && c.ContextKey == contextKey)
-                .ToDomain(_candidateFactory);
+                .ToDomain<TCandidate, TItem>(_candidateFactory);
         }
 
-        public PotentialCandidate<T> GetPotential<T>(string contextKey, Guid reference)
-            where T : class
+        public TCandidate GetPotential<TCandidate, TItem>(string contextKey, Guid reference)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class
         {
-            return GetPotentialCandidates<T>().AsQueryable()
+            return GetPotentialCandidates<TItem>().AsQueryable()
                 .SingleOrDefault(c => c.Reference == reference.ToString() && c.ContextKey == contextKey)
-                .ToPotential(_candidateFactory);
+                .ToPotential<TCandidate, TItem>(_candidateFactory);
         }
 
-        public IEnumerable<Candidate<T>> GetAll<T>(string contextKey)
-            where T : class
+        public IEnumerable<TCandidate> GetAll<TCandidate, TItem>(string contextKey)
+            where TCandidate : Candidate<TItem>
+            where TItem : class
         {
-            return GetCandidates<T>().AsQueryable()
+            return GetCandidates<TItem>().AsQueryable()
                 .Where(c => c.ContextKey == contextKey)
-                .Select(v => v.ToDomain(_candidateFactory));
+                .Select(v => v.ToDomain<TCandidate, TItem>(_candidateFactory));
         }
 
-        public IEnumerable<PotentialCandidate<T>> GetAllPotential<T>(string contextKey)
-            where T : class
+        public IEnumerable<TCandidate> GetAllPotential<TCandidate, TItem>(string contextKey)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class
         {
-            return GetCandidates<T>().AsQueryable()
+            return GetCandidates<TItem>().AsQueryable()
                 .Where(c => c.ContextKey == contextKey)
-                .Select(v => v.ToPotential(_candidateFactory));
+                .Select(v => v.ToPotential<TCandidate, TItem>(_candidateFactory));
         }
 
         public void SaveOrUpdate<T>(Candidate<T> candidate)

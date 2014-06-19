@@ -37,26 +37,28 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB.Converters
             };
         }
 
-        public static Candidate<T> ToDomain<T>(this CandidateModel<T> candidate, ICandidateFactory factory)
-            where T : class
+        public static TCandidate ToDomain<TCandidate, TItem>(this CandidateModel<TItem> candidate, ICandidateFactory factory)
+            where TCandidate : Candidate<TItem>
+            where TItem : class
         {
             if (candidate == null)
                 return null;
 
             var reference = Guid.Parse(candidate.Reference);
 
-            return factory.Create<T>(candidate.ContextKey, reference, candidate.Items, candidate.OpeningDate, candidate.ClosingDate);
+            return (TCandidate)factory.Create(candidate.ContextKey, reference, candidate.Items, candidate.OpeningDate, candidate.ClosingDate);
         }
 
-        public static PotentialCandidate<T> ToPotential<T>(this CandidateModel<T> candidate, ICandidateFactory factory)
-            where T : class
+        public static TCandidate ToPotential<TCandidate, TItem>(this CandidateModel<TItem> candidate, ICandidateFactory factory)
+            where TCandidate : PotentialCandidate<TItem>
+            where TItem : class
         {
             if (candidate == null)
                 return null;
 
             var reference = Guid.Parse(candidate.Reference);
 
-            return factory.CreatePotential<T>(candidate.ContextKey, reference, candidate.Items);
+            return (TCandidate)factory.CreatePotential(candidate.ContextKey, reference, candidate.Items);
         }
     }
 }

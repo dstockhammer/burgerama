@@ -187,6 +187,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.2.1\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Data.MongoDB">
+      <HintPath>..\..\..\Shared\Candidates\Data.MongoDB\bin\Debug\Burgerama.Shared.Candidates.Data.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Domain">
+      <HintPath>..\..\..\Shared\Candidates\Domain\bin\Debug\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Services">
+      <HintPath>..\..\..\Shared\Candidates\Services\bin\Debug\Burgerama.Shared.Candidates.Services.dll</HintPath>
+    </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
     </Reference>
@@ -256,7 +265,6 @@
     <Compile Include="Handlers\CreateCandidateHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CandidateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -283,10 +291,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{92DC1120-22F4-48FF-82E9-B80A4E48C039}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>
       <Name>Domain</Name>
