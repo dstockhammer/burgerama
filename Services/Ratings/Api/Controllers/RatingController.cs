@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
 using Burgerama.Messaging.Events;
@@ -7,11 +8,10 @@ using Burgerama.Messaging.Events.Ratings;
 using Burgerama.Services.Ratings.Api.Converters;
 using Burgerama.Services.Ratings.Api.Models;
 using System;
-using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using Burgerama.Services.Ratings.Domain;
-using Burgerama.Services.Ratings.Domain.Contracts;
+using Burgerama.Shared.Candidates.Domain.Contracts;
 using Serilog;
 
 namespace Burgerama.Services.Ratings.Api.Controllers
@@ -45,7 +45,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             };
 
             // first, check all real (= well known) candidates
-            var candidate = _candidateRepository.Get(contextKey, reference);
+            var candidate = _candidateRepository.Get<Candidate, Rating>(contextKey, reference);
             if (candidate != null)
             {
                 var userId = ClaimsPrincipal.Current.GetUserId();
@@ -53,24 +53,24 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                 model.IsValidated = true;
                 model.OpeningDate = candidate.OpeningDate;
                 model.ClosingDate = candidate.ClosingDate;
-                model.RatingsCount = candidate.Ratings.Count();
+                model.RatingsCount = candidate.Items.Count();
                 model.TotalRating = candidate.TotalRating;
-                model.UserRating = candidate.Ratings.SingleOrDefault(r => r.UserId == userId).ToModel();
+                model.UserRating = candidate.Items.SingleOrDefault(r => r.UserId == userId).ToModel();
                 model.CanUserRate = candidate.CanUserRate(userId);
 
                 return Ok(model);
             }
             
             // if there is no real candidate, check the potential ones
-            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
+            var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate, Rating>(contextKey, reference);
             if (potentialCandidate != null)
             {
                 var userId = ClaimsPrincipal.Current.GetUserId();
 
                 model.IsValidated = false;
-                model.RatingsCount = potentialCandidate.Ratings.Count();
+                model.RatingsCount = potentialCandidate.Items.Count();
                 model.TotalRating = potentialCandidate.TotalRating;
-                model.UserRating = potentialCandidate.Ratings.SingleOrDefault(r => r.UserId == userId).ToModel();
+                model.UserRating = potentialCandidate.Items.SingleOrDefault(r => r.UserId == userId).ToModel();
                 model.CanUserRate = model.UserRating == null;
 
                 return Ok(model);
@@ -96,14 +96,14 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
             // first, check all real (= well known) candidates
-            var candidate = _candidateRepository.Get(contextKey, reference);
+            var candidate = _candidateRepository.Get<Candidate, Rating>(contextKey, reference);
             if (candidate != null)
-                return Ok(candidate.Ratings.Select(r => r.ToModel()));
+                return Ok(candidate.Items.Select(r => r.ToModel()));
 
             // if there is no real candidate, check the potential ones
-            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
+            var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate, Rating>(contextKey, reference);
             if (potentialCandidate != null)
-                Ok(potentialCandidate.Ratings.Select(r => r.ToModel()));
+                Ok(potentialCandidate.Items.Select(r => r.ToModel()));
 
             // if no candidate is found at all, check if the context is valid,
             // in order to determine the correct error type
@@ -131,13 +131,13 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             // todo: validate rating?
             var rating = new Rating(DateTime.Now, userId, model.Value, model.Text);
 
-            var candidate = _candidateRepository.Get(contextKey, reference);
+            var candidate = _candidateRepository.Get<Candidate, Rating>(contextKey, reference);
             if (candidate != null)
             {
-                if (candidate.Ratings.Any(r => r.UserId == userId))
+                if (candidate.Items.Any(r => r.UserId == userId))
                     return Conflict();
 
-                var events = candidate.AddRating(new Rating(DateTime.Now, userId, model.Value, model.Text ?? string.Empty));
+                var events = candidate.AddItem(new Rating(DateTime.Now, userId, model.Value, model.Text ?? string.Empty));
 
                 _candidateRepository.SaveOrUpdate(candidate);
                 _eventDispatcher.Publish(events);
@@ -149,7 +149,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                 return Created(candidateUri, rating.ToModel());
             }
 
-            var potentialCandidate = _candidateRepository.GetPotential(contextKey, reference);
+            var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate, Rating>(contextKey, reference);
             if (potentialCandidate == null)
             {
                 // if there isn't already a potential candidate, validate the context
@@ -158,16 +158,16 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                     return BadRequest("Invalid context.");
 
                 // if the context is valid, use it to determine whether rating an unknown candidate is allowed
-                if (context.AllowToRateUnknownCandidates == false)
+                if (context.GracefullyHandleUnknownCandidates == false)
                     return NotFound();
 
                 potentialCandidate = new PotentialCandidate(contextKey, reference);
             }
 
-            if (potentialCandidate.Ratings.Any(r => r.UserId == userId))
+            if (potentialCandidate.Items.Any(r => r.UserId == userId))
                 return Conflict();
 
-            potentialCandidate.AddRating(rating);
+            potentialCandidate.AddItem(rating);
 
             _candidateRepository.SaveOrUpdate(potentialCandidate);
             _eventDispatcher.Publish(new TriedToRateUnknownCandidate
