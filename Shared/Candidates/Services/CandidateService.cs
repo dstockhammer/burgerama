@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Burgerama.Messaging.Events;
-using Burgerama.Messaging.Events.Candidates;
 using Burgerama.Shared.Candidates.Domain;
 using Burgerama.Shared.Candidates.Domain.Contracts;
 using Burgerama.Shared.Candidates.Services.Contracts;
@@ -118,10 +117,7 @@ namespace Burgerama.Shared.Candidates.Services
             }
 
             var candidate = _candidateFactory.Create<T>(contextKey, reference);
-            var events = new List<IEvent>
-            {
-                new CandidateCreated { ContextKey = contextKey, Reference = reference }
-            };
+            var events = candidate.OnCreateSuccess().ToList();
 
             if (openingDate.HasValue)
                 events.AddRange(candidate.OpenOn(openingDate.Value));

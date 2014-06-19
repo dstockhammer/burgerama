@@ -32,6 +32,14 @@ namespace Burgerama.Services.Ratings.Domain
             }
         }
 
+        public override IEnumerable<IEvent> OnCreateSuccess()
+        {
+            return new IEvent[]
+            {
+                new CandidateCreated { ContextKey = ContextKey, Reference = Reference }
+            };
+        }
+
         public override IEnumerable<IEvent> AddItem(Rating rating)
         {
             Contract.Requires<ArgumentNullException>(rating != null);
@@ -40,8 +48,6 @@ namespace Burgerama.Services.Ratings.Domain
             if (IsActiveOn(rating.CreatedOn) == false)
                 return Enumerable.Empty<IEvent>();
 
-
-
             if (_items.Add(rating) == false)
                 return Enumerable.Empty<IEvent>();
 
@@ -49,6 +55,22 @@ namespace Burgerama.Services.Ratings.Domain
             {
                 new RatingAdded { ContextKey = ContextKey, Reference = Reference, UserId = rating.UserId, Value = rating.Value, Text = string.Empty},
                 new RatingUpdated { ContextKey = ContextKey, Reference = Reference, NewTotal = TotalRating.Value }
+            };
+        }
+
+        protected override IEnumerable<IEvent> OnOpeningSuccess(DateTime date)
+        {
+            return new IEvent[]
+            {
+                new CandidateOpened { ContextKey = ContextKey, Reference = Reference, OpeningDate = date }
+            };
+        }
+
+        protected override IEnumerable<IEvent> OnClosingSuccess(DateTime date)
+        {
+            return new IEvent[]
+            {
+                new CandidateClosed { ContextKey = ContextKey, Reference = Reference, ClosingDate = date }
             };
         }
 

@@ -124,10 +124,10 @@
     <Compile Include="Contracts\IContextRepository.cs" />
     <Compile Include="PotentialCandidate.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Domain.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

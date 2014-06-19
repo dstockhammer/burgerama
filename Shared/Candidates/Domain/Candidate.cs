@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using Burgerama.Messaging.Events;
-using Burgerama.Messaging.Events.Candidates;
 
 namespace Burgerama.Shared.Candidates.Domain
 {
@@ -31,6 +30,7 @@ namespace Burgerama.Shared.Candidates.Domain
         protected Candidate(string contextKey, Guid reference)
             : this(contextKey, reference, Enumerable.Empty<T>())
         {
+            Contract.Requires<ArgumentNullException>(contextKey != null);
         }
 
         protected Candidate(string contextKey, Guid reference, IEnumerable<T> items, DateTime? openingDate = null, DateTime? closingDate = null)
@@ -44,6 +44,15 @@ namespace Burgerama.Shared.Candidates.Domain
             ClosingDate = closingDate;
 
             _items = new HashSet<T>(items);
+        }
+        
+        public virtual IEnumerable<IEvent> OnCreateSuccess()
+        {
+            // todo: it is definitely a code smell that this method is public and must be 
+            // called manually... but with the return IEnumerable<IEvent> there is currently
+            // no other way to raise events in the constructor. maybe that means it's time
+            // to rethink this strategy for domain events.
+            return Enumerable.Empty<IEvent>();
         }
 
         /// <summary>
@@ -64,14 +73,21 @@ namespace Burgerama.Shared.Candidates.Domain
 
             // don't overwrite the date
             if (OpeningDate.HasValue)
-                return Enumerable.Empty<IEvent>();
+                return OnOpeningError(date);
 
             OpeningDate = date;
 
-            return new IEvent[]
-            {
-                new CandidateOpened { ContextKey = ContextKey, Reference = Reference, OpeningDate = date }
-            };
+            return OnOpeningSuccess(date);
+        }
+
+        protected virtual IEnumerable<IEvent> OnOpeningSuccess(DateTime date)
+        {
+            return Enumerable.Empty<IEvent>();
+        }
+
+        protected virtual IEnumerable<IEvent> OnOpeningError(DateTime date)
+        {
+            return Enumerable.Empty<IEvent>();
         }
 
         /// <summary>
@@ -85,14 +101,21 @@ namespace Burgerama.Shared.Candidates.Domain
 
             // don't overwrite the date
             if (ClosingDate.HasValue)
-                return Enumerable.Empty<IEvent>();
+                return OnClosingError(date);
 
             ClosingDate = date;
 
-            return new IEvent[]
-            {
-                new CandidateClosed { ContextKey = ContextKey, Reference = Reference, ClosingDate = date }
-            };
+            return OnClosingSuccess(date);
+        }
+
+        protected virtual IEnumerable<IEvent> OnClosingSuccess(DateTime date)
+        {
+            return Enumerable.Empty<IEvent>();
+        }
+
+        protected virtual IEnumerable<IEvent> OnClosingError(DateTime date)
+        {
+            return Enumerable.Empty<IEvent>();
         }
 
         /// <summary>
