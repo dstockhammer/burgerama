@@ -10,16 +10,6 @@ namespace Burgerama.Services.Ratings.Domain
 {
     public sealed class Candidate : Candidate<Rating>
     {
-        public Candidate(string contextKey, Guid reference)
-            : base(contextKey, reference)
-        {
-        }
-
-        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> items, DateTime? openingDate = null, DateTime? closingDate = null)
-            : base(contextKey, reference, items, openingDate, closingDate)
-        {
-        }
-
         public double? TotalRating
         {
             get
@@ -30,6 +20,16 @@ namespace Burgerama.Services.Ratings.Domain
                 var sum = _items.Aggregate(0d, (current, rating) => current + rating.Value);
                 return sum / _items.Count();
             }
+        }
+
+        public Candidate(string contextKey, Guid reference)
+            : base(contextKey, reference)
+        {
+        }
+
+        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> items, DateTime? openingDate = null, DateTime? closingDate = null)
+            : base(contextKey, reference, items, openingDate, closingDate)
+        {
         }
 
         public override IEnumerable<IEvent> OnCreateSuccess()

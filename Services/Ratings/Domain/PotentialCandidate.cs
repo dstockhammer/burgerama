@@ -7,16 +7,6 @@ namespace Burgerama.Services.Ratings.Domain
 {
     public sealed class PotentialCandidate : PotentialCandidate<Rating>
     {
-        public PotentialCandidate(string contextKey, Guid reference)
-            : base(contextKey, reference)
-        {
-        }
-
-        public PotentialCandidate(string contextKey, Guid reference, IEnumerable<Rating> items)
-            : base(contextKey, reference, items)
-        {
-        }
-
         public double? TotalRating
         {
             get
@@ -27,6 +17,16 @@ namespace Burgerama.Services.Ratings.Domain
                 var sum = _items.Aggregate(0d, (current, rating) => current + rating.Value);
                 return sum / _items.Count();
             }
+        }
+
+        public PotentialCandidate(string contextKey, Guid reference)
+            : base(contextKey, reference)
+        {
+        }
+
+        public PotentialCandidate(string contextKey, Guid reference, IEnumerable<Rating> items)
+            : base(contextKey, reference, items)
+        {
         }
     }
 }
