@@ -147,6 +147,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.2.1\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Data.MongoDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.MongoDB.0.2.0\lib\net451\Burgerama.Shared.Candidates.Data.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.0\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
+    </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
     </Reference>
@@ -313,10 +325,6 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{a4436f28-678f-4f8a-96ca-d1865621038a}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{92dc1120-22f4-48ff-82e9-b80a4e48c039}</Project>
-      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
