@@ -158,6 +158,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Domain">
+      <HintPath>..\Api\Bin\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="MongoDB.Bson, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
@@ -182,16 +185,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\MongoDbTestUtils.cs" />
-    <Compile Include="Domain\RatingTests.cs" />
     <Compile Include="Domain\CandidateTests.cs" />
+    <Compile Include="Domain\RatingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{92DC1120-22F4-48FF-82E9-B80A4E48C039}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A4436F28-678F-4F8A-96CA-D1865621038A}</Project>
       <Name>Domain</Name>

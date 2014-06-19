@@ -4,81 +4,51 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.Events.Ratings;
+using Burgerama.Shared.Candidates.Domain;
 
 namespace Burgerama.Services.Ratings.Domain
 {
-    public sealed class Candidate
+    public sealed class Candidate : Candidate<Rating>
     {
-        private readonly HashSet<Rating> _ratings;
-
-        public string ContextKey { get; private set; }
-
-        public Guid Reference { get; private set; }
-
-        public DateTime? OpeningDate { get; private set; }
-
-        public DateTime? ClosingDate { get; private set; }
-        
-        public IEnumerable<Rating> Ratings
+        public Candidate(string contextKey, Guid reference)
+            : base(contextKey, reference)
         {
-            get
-            {
-                Contract.Ensures(Contract.Result<IEnumerable<Rating>>() != null);
-                return _ratings;
-            }
+        }
+
+        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> items, DateTime? openingDate = null, DateTime? closingDate = null)
+            : base(contextKey, reference, items, openingDate, closingDate)
+        {
         }
 
         public double? TotalRating
         {
             get
             {
-                if (_ratings.Any() == false)
+                if (_items.Any() == false)
                     return null;
 
-                var sum = _ratings.Aggregate(0d, (current, rating) => current + rating.Value);
-                return sum / _ratings.Count();
+                var sum = _items.Aggregate(0d, (current, rating) => current + rating.Value);
+                return sum / _items.Count();
             }
         }
 
-        public Candidate(string contextKey, Guid reference)
-            : this(contextKey, reference, Enumerable.Empty<Rating>())
+        public override IEnumerable<IEvent> OnCreateSuccess()
         {
+            return new IEvent[]
+            {
+                new CandidateCreated { ContextKey = ContextKey, Reference = Reference }
+            };
         }
 
-        public Candidate(string contextKey, Guid reference, IEnumerable<Rating> ratings, DateTime? openingDate = null, DateTime? closingDate = null)
-        {
-            Contract.Requires<ArgumentNullException>(contextKey != null);
-            Contract.Requires<ArgumentNullException>(ratings != null);
-
-            var ratingsList = ratings.ToList();
-            if (ratingsList.Distinct(Rating.UserComparer).Count() != ratingsList.Count())
-                throw new ArgumentException();
-
-            ContextKey = contextKey;
-            Reference = reference;
-            OpeningDate = openingDate;
-            ClosingDate = closingDate;
-            _ratings = new HashSet<Rating>(ratingsList);
-        }
-
-        /// <summary>
-        /// Adds a rating to the candidate.
-        /// </summary>
-        /// <remarks>
-        /// Only one rating per user is allowed.
-        /// Rating is only allowed between opening and close date.
-        /// </remarks>
-        /// <param name="rating">The rating.</param>
-        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
-        public IEnumerable<IEvent> AddRating(Rating rating)
+        public override IEnumerable<IEvent> AddItem(Rating rating)
         {
             Contract.Requires<ArgumentNullException>(rating != null);
             Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
 
-            if (AllowRatingOnDate(rating.CreatedOn) == false)
+            if (IsActiveOn(rating.CreatedOn) == false)
                 return Enumerable.Empty<IEvent>();
 
-            if (_ratings.Add(rating) == false)
+            if (_items.Add(rating) == false)
                 return Enumerable.Empty<IEvent>();
 
             return new IEvent[]
@@ -88,42 +58,16 @@ namespace Burgerama.Services.Ratings.Domain
             };
         }
 
-        /// <summary>
-        /// Set the candidate to open on a specific date.
-        /// </summary>
-        /// <param name="date">The opening date.</param>
-        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
-        public IEnumerable<IEvent> OpenOn(DateTime date)
+        protected override IEnumerable<IEvent> OnOpeningSuccess(DateTime date)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
-
-            // don't overwrite the date
-            if (OpeningDate.HasValue)
-                return Enumerable.Empty<IEvent>();
-
-            OpeningDate = date;
-
             return new IEvent[]
             {
                 new CandidateOpened { ContextKey = ContextKey, Reference = Reference, OpeningDate = date }
             };
         }
 
-        /// <summary>
-        /// Set the candidate to close on a specific date.
-        /// </summary>
-        /// <param name="date">The close date.</param>
-        /// <returns>Returns an <see cref="IEnumerable{T}"/> of domain events that result from this command.</returns>
-        public IEnumerable<IEvent> CloseOn(DateTime date)
+        protected override IEnumerable<IEvent> OnClosingSuccess(DateTime date)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
-
-            // don't overwrite the date
-            if (ClosingDate.HasValue)
-                return Enumerable.Empty<IEvent>();
-
-            ClosingDate = date;
-
             return new IEvent[]
             {
                 new CandidateClosed { ContextKey = ContextKey, Reference = Reference, ClosingDate = date }
@@ -135,27 +79,10 @@ namespace Burgerama.Services.Ratings.Domain
             if (userId == null)
                 return false;
 
-            if (AllowRatingOnDate(DateTime.Now) == false)
+            if (IsActiveOn(DateTime.Now) == false)
                 return false;
 
-            if (Ratings.Any(r => r.UserId == userId))
-                return false;
-
-            return true;
-        }
-
-        private bool AllowRatingOnDate(DateTime date)
-        {
-            // don't allow rating if there is not opening date
-            if (OpeningDate.HasValue == false)
-                return false;
-
-            // don't allow rating if candidate has not yet been opened
-            if (OpeningDate.Value >= date)
-                return false;
-
-            // don't allow rating if candidate has been closed
-            if (ClosingDate.HasValue && ClosingDate.Value <= date)
+            if (Items.Any(r => r.UserId == userId))
                 return false;
 
             return true;
