@@ -112,6 +112,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CandidateClosed.cs" />
+    <Compile Include="CandidateCreated.cs" />
+    <Compile Include="CandidateOpened.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VoteAdded.cs" />
     <Compile Include="TriedToVoteUnknownCandidate.cs" />

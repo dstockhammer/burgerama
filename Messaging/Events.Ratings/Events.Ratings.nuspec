@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Burgerama.Messaging.Events.Ratings</id>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <title>Messaging: Events for Ratings</title>
     <authors>Burgerama Team</authors>
     <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>

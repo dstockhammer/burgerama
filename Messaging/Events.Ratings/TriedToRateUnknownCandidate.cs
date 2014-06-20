@@ -8,5 +8,7 @@ namespace Burgerama.Messaging.Events.Ratings
         public string ContextKey { get; set; }
 
         public Guid Reference { get; set; }
+
+        public string UserId { get; set; }
     }
 }

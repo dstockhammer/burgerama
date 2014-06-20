@@ -1,18 +1,16 @@
-﻿using Burgerama.Messaging.Commands.Configuration;
-using System;
+﻿using System;
+using Burgerama.Messaging.Commands.Configuration;
 
 namespace Burgerama.Messaging.Commands.Voting
 {
     [Serializable]
     [EndpointQueue("burgerama.services.voting.endpoint")]
-    public sealed class CreateCandidate : ICommand
+    public sealed class CloseCandidate : ICommand
     {
         public string ContextKey { get; set; }
 
         public Guid Reference { get; set; }
 
-        public DateTime? OpeningDate { get; set; }
-
-        public DateTime? ClosingDate { get; set; }
+        public DateTime ClosingDate { get; set; }
     }
 }
