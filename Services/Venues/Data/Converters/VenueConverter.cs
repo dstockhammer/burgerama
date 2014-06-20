@@ -21,6 +21,7 @@ namespace Burgerama.Services.Venues.Data.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
+                TotalVotes = venue.TotalVotes,
                 TotalRating = venue.TotalRating
             };
         }
@@ -36,6 +37,7 @@ namespace Burgerama.Services.Venues.Data.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
+                TotalVotes = venue.TotalVotes,
                 TotalRating = venue.TotalRating
             };
         }

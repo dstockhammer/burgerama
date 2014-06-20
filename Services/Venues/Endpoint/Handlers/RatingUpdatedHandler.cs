@@ -5,7 +5,7 @@ using Serilog;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers
 {
-    public sealed class RatingUpdatedHandler : Consumes<RatingUpdated>.Context
+    public sealed class RatingUpdatedHandler : Consumes<RatingUpdated>.Selected
     {
         private const string VenueContextKey = "venues";
 
@@ -18,26 +18,27 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
             _venueRepository = venueRepository;
         }
 
-        public void Consume(IConsumeContext<RatingUpdated> context)
+        public bool Accept(RatingUpdated message)
         {
-            // ignore events that don't belong to the venue context
-            if (context.Message.ContextKey != VenueContextKey)
-                return;
+            return message.ContextKey == VenueContextKey;
+        }
 
-            var venue = _venueRepository.Get(context.Message.Reference);
+        public void Consume(RatingUpdated message)
+        {
+            var venue = _venueRepository.Get(message.Reference);
             if (venue == null)
             {
                 _logger.Error("Tried to update rating for unknown venue {Reference}.",
-                    context.Message.Reference);
+                    message.Reference);
 
                 return;
             }
 
-            venue.TotalRating = context.Message.NewTotal;
+            venue.TotalRating = message.NewTotal;
             _venueRepository.SaveOrUpdate(venue);
 
-            _logger.Information("Rating for venue {Reference} updated to {NewTotal}.",
-                context.Message.Reference, context.Message.NewTotal);
+            _logger.Information("Rating for venue {Reference} updated to {TotalRating}.",
+                message.Reference, venue.TotalRating);
         }
     }
 }

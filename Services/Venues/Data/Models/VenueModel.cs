@@ -24,6 +24,8 @@ namespace Burgerama.Services.Venues.Data.Models
 
         public string Address { get; set; }
 
+        public int TotalVotes { get; set; }
+
         public double? TotalRating { get; set; }
     }
 }

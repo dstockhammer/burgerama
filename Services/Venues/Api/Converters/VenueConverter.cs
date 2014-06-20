@@ -26,8 +26,8 @@ namespace Burgerama.Services.Venues.Api.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
-                TotalRating = venue.TotalRating,
-                TotalVotes = 0 // todo
+                TotalVotes = venue.TotalVotes,
+                TotalRating = venue.TotalRating
             };
         }
 
@@ -42,7 +42,7 @@ namespace Burgerama.Services.Venues.Api.Converters
                 Description = venue.Description,
                 Url = venue.Url,
                 Address = venue.Address
-                // do NOT set TotalRating or TotalVotes!
+                // do NOT set TotalVotes or TotalRating!
             };
         }
     }

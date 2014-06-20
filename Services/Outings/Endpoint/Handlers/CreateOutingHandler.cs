@@ -8,7 +8,7 @@ using Serilog;
 
 namespace Burgerama.Services.Outings.Endpoint.Handlers
 {
-    public sealed class CreateOutingHandler : Consumes<CreateOuting>.Context
+    public sealed class CreateOutingHandler : Consumes<CreateOuting>.All
     {
         private readonly ILogger _logger;
         private readonly IEventDispatcher _eventDispatcher;
@@ -21,9 +21,9 @@ namespace Burgerama.Services.Outings.Endpoint.Handlers
             _outingRepository = outingRepository;
         }
 
-        public void Consume(IConsumeContext<CreateOuting> context)
+        public void Consume(CreateOuting message)
         {
-            var outing = new Outing(context.Message.Date, context.Message.VenueId);
+            var outing = new Outing(message.Date, message.VenueId);
             _outingRepository.SaveOrUpdate(outing);
 
             _eventDispatcher.Publish(new OutingCreated
@@ -34,7 +34,7 @@ namespace Burgerama.Services.Outings.Endpoint.Handlers
             });
 
             _logger.Information("Created outing {@Outing} with Id {Id}.",
-                new { context.Message.VenueId, context.Message.Date }, outing.Id);
+                new { message.VenueId, message.Date }, outing.Id);
         }
     }
 }

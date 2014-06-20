@@ -22,6 +22,12 @@ namespace Burgerama.Services.Venues.Domain
         public string Address { get; set; }
 
         /// <summary>
+        /// todo: probably the votes shouldn't be added directly to the venue,
+        /// but rather to a seperate model to make the intention clear.
+        /// </summary>
+        public int TotalVotes { get; set; }
+
+        /// <summary>
         /// todo: probably the rating shouldn't be added directly to the venue,
         /// but rather to a seperate model to make the intention clear.
         /// </summary>

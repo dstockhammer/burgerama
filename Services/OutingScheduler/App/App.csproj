@@ -148,9 +148,8 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.4.1\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -179,6 +178,9 @@
     <Reference Include="Burgerama.Messaging.Commands.Ratings">
       <HintPath>..\packages\Burgerama.Messaging.Commands.Ratings.0.2.1\lib\net451\Burgerama.Messaging.Commands.Ratings.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Commands.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Commands.Voting.0.2.4\lib\net451\Burgerama.Messaging.Commands.Voting.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
@@ -186,10 +188,6 @@
     <Reference Include="Burgerama.Messaging.MassTransit.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Commands.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.Commands.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Messaging.MassTransit.Endpoint">
-      <HintPath>..\packages\Burgerama.Messaging.MassTransit.Endpoint.0.1.3\lib\net451\Burgerama.Messaging.MassTransit.Endpoint.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -220,27 +218,23 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
-      <HintPath>..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\RabbitMQ.Client.3.3.2\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.1.3.25\lib\net45\Serilog.dll</HintPath>
+    <Reference Include="Serilog">
+      <HintPath>..\packages\Serilog.1.3.30\lib\net45\Serilog.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Extras.Topshelf, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.Extras.Topshelf.1.3.25\lib\net45\Serilog.Extras.Topshelf.dll</HintPath>
+    <Reference Include="Serilog.Extras.Topshelf">
+      <HintPath>..\packages\Serilog.Extras.Topshelf.1.3.30\lib\net45\Serilog.Extras.Topshelf.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx">
-      <HintPath>..\packages\Serilog.1.3.25\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\packages\Serilog.1.3.30\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Sinks.Logentries, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.Sinks.Logentries.1.3.25\lib\net45\Serilog.Sinks.Logentries.dll</HintPath>
+    <Reference Include="Serilog.Sinks.Logentries">
+      <HintPath>..\packages\Serilog.Sinks.Logentries.1.3.30\lib\net45\Serilog.Sinks.Logentries.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

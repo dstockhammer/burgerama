@@ -8,7 +8,7 @@ using Serilog;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers
 {
-    public sealed class TriedToRateUnknownCandidateHandler : Consumes<TriedToRateUnknownCandidate>.Context
+    public sealed class TriedToRateUnknownCandidateHandler : Consumes<TriedToRateUnknownCandidate>.Selected
     {
         private const string VenueContextKey = "venues";
 
@@ -23,25 +23,26 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
             _venueRepository = venueRepository;
         }
 
-        public void Consume(IConsumeContext<TriedToRateUnknownCandidate> context)
+        public bool Accept(TriedToRateUnknownCandidate message)
         {
-            // ignore events that don't belong to the venue context
-            if (context.Message.ContextKey != VenueContextKey)
+            return message.ContextKey == VenueContextKey;
+        }
+
+        public void Consume(TriedToRateUnknownCandidate message)
+        {
+            var venue = _venueRepository.Get(message.Reference);
+            if (venue == null)
                 return;
 
-            var venue = _venueRepository.Get(context.Message.Reference);
-            if (venue != null)
+            _commandDispatcher.Send(new CreateCandidate
             {
-                _commandDispatcher.Send(new CreateCandidate
-                {
-                    ContextKey = VenueContextKey,
-                    Reference = venue.Id,
-                    OpeningDate = DateTime.Today // todo: figure out a good way to get the REAL opening date
-                 });
+                ContextKey = VenueContextKey,
+                Reference = venue.Id,
+                OpeningDate = DateTime.Today // todo: figure out a good way to get the REAL opening date
+            });
 
-                _logger.Information("Created rating candidate for venue {Reference}.",
-                   context.Message.Reference);
-            }
+            _logger.Information("Created rating candidate for venue {Reference}.",
+                message.Reference);
         }
     }
 }

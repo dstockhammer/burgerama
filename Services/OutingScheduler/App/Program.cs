@@ -3,7 +3,6 @@ using Autofac;
 using Burgerama.Common.Logging;
 using Burgerama.Messaging.Commands;
 using Burgerama.Messaging.Commands.Outings;
-using Burgerama.Messaging.Commands.Ratings;
 using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Commands;
 using Burgerama.Services.OutingScheduler.Data.Rest;
@@ -11,6 +10,8 @@ using Burgerama.Services.OutingScheduler.Domain.Contracts;
 using Burgerama.Services.OutingScheduler.Services;
 using MassTransit;
 using Serilog;
+using OpenCandidate = Burgerama.Messaging.Commands.Ratings.OpenCandidate;
+using CloseCandidate = Burgerama.Messaging.Commands.Voting.CloseCandidate;
 
 namespace Burgerama.Services.OutingScheduler.App
 {
@@ -27,7 +28,7 @@ namespace Burgerama.Services.OutingScheduler.App
 
             // set date to tomorrow 7 pm
             // todo: get the date passed in as parameter or read it from somewhere
-            var date = DateTime.Today.AddDays(-1).AddHours(19);
+            var date = DateTime.Today.AddDays(1).AddHours(19);
 
             var scheduler = container.Resolve<ISchedulingService>();
             var outing = scheduler.ScheduleOuting(date);
@@ -45,21 +46,22 @@ namespace Burgerama.Services.OutingScheduler.App
                     Date = outing.Date
                 });
 
+                // close voting immediately
+                commandDispatcher.Send(new CloseCandidate
+                {
+                    ContextKey = VenueContextKey,
+                    Reference = outing.Venue.Id,
+                    ClosingDate = DateTime.Now
+                });
+
+                // open rating on the date of the outing
                 commandDispatcher.Send(new OpenCandidate
                 {
                     ContextKey = VenueContextKey,
                     Reference = outing.Venue.Id,
                     OpeningDate = outing.Date
                 });
-
-                // todo: close voting
-                //commandDispatcher.Send(new Burgerama.Messaging.Commands.Voting.CloseCandidate
-                //{
-                //    ContextKey = VenueContextKey,
-                //    Reference = outing.Venue.Id,
-                //    ClosingDate = DateTime.Now
-                //});
-
+                
                 logger.Information("OutingScheduler run successful: Scheduled outing {@Outing}.", new { outing.Venue.Id, outing.Date });
             }
 

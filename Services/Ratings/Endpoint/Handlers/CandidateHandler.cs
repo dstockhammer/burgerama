@@ -4,9 +4,9 @@ using MassTransit;
 
 namespace Burgerama.Services.Ratings.Endpoint.Handlers
 {
-    public sealed class CandidateHandler : Consumes<CreateCandidate>.Context,
-                                           Consumes<OpenCandidate>.Context,
-                                           Consumes<CloseCandidate>.Context
+    public sealed class CandidateHandler : Consumes<CreateCandidate>.All,
+                                           Consumes<OpenCandidate>.All,
+                                           Consumes<CloseCandidate>.All
     {
         private readonly ICandidateService _candidateService;
 
@@ -15,19 +15,19 @@ namespace Burgerama.Services.Ratings.Endpoint.Handlers
             _candidateService = candidateService;
         }
 
-        public void Consume(IConsumeContext<CreateCandidate> context)
+        public void Consume(CreateCandidate message)
         {
-            _candidateService.CreateCandidate(context.Message.ContextKey, context.Message.Reference, context.Message.OpeningDate, context.Message.ClosingDate);
+            _candidateService.CreateCandidate(message.ContextKey, message.Reference, message.OpeningDate, message.ClosingDate);
         }
 
-        public void Consume(IConsumeContext<OpenCandidate> context)
+        public void Consume(OpenCandidate message)
         {
-            _candidateService.OpenCandidate(context.Message.ContextKey, context.Message.Reference, context.Message.OpeningDate);
+            _candidateService.OpenCandidate(message.ContextKey, message.Reference, message.OpeningDate);
         }
 
-        public void Consume(IConsumeContext<CloseCandidate> context)
+        public void Consume(CloseCandidate message)
         {
-            _candidateService.CloseCandidate(context.Message.ContextKey, context.Message.Reference, context.Message.ClosingDate);
+            _candidateService.CloseCandidate(message.ContextKey, message.Reference, message.ClosingDate);
         }
     }
 }
