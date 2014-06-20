@@ -48,6 +48,9 @@ namespace Burgerama.Services.Ratings.Domain
             if (IsActiveOn(rating.CreatedOn) == false)
                 return Enumerable.Empty<IEvent>();
 
+            if (CanUserRate(rating.UserId) == false)
+                return Enumerable.Empty<IEvent>();
+
             if (_items.Add(rating) == false)
                 return Enumerable.Empty<IEvent>();
 

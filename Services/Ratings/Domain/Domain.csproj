@@ -149,9 +149,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.Events.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.3\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
+    <Reference Include="Burgerama.Messaging.Events.Ratings">
+      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.4\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Shared.Candidates.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

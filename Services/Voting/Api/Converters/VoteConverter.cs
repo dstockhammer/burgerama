@@ -1,7 +1,5 @@
 ﻿using Burgerama.Services.Voting.Api.Models;
 using Burgerama.Services.Voting.Domain;
-using System;
-using System.Diagnostics.Contracts;
 
 namespace Burgerama.Services.Voting.Api.Converters
 {
@@ -9,7 +7,8 @@ namespace Burgerama.Services.Voting.Api.Converters
     {
         public static VoteModel ToModel(this Vote vote)
         {
-            Contract.Requires<ArgumentNullException>(vote != null);
+            if (vote == null)
+                return null;
 
             return new VoteModel
             {
@@ -20,7 +19,8 @@ namespace Burgerama.Services.Voting.Api.Converters
 
         public static Vote ToDomain(this VoteModel vote)
         {
-            Contract.Requires<ArgumentNullException>(vote != null);
+            if (vote == null)
+                return null;
 
             return new Vote(vote.CreatedOn, vote.UserId);
         }

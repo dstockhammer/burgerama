@@ -1,29 +1,15 @@
-﻿using Burgerama.Services.Ratings.Domain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Linq;
+using Burgerama.Services.Voting.Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Burgerama.Services.Ratings.Tests.Domain
+namespace Burgerama.Services.Voting.Tests.Domain
 {
     [TestClass]
     public class CandidateTests
     {
         [TestMethod]
-        public void TotalRating_ShouldDefaultToNull()
-        {
-            // Arrange
-            var candidate = new Candidate("test", Guid.NewGuid());
-
-            // Act
-            // no ratings added
-
-            // Assert
-            Assert.AreEqual(0, candidate.Items.Count());
-            Assert.AreEqual(null, candidate.TotalRating);
-        }
-
-        [TestMethod]
-        public void CloseDateInTheFuture_RatingShouldBeAdded()
+        public void CloseDateInTheFuture_VoteShouldBeAdded()
         {
             // Arrange
             var candidate = new Candidate("test", Guid.NewGuid());
@@ -33,7 +19,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Act
             for (var i = 0; i < 3; i++)
             {
-                candidate.AddItem(new Rating(DateTime.Now, i.ToString(), i / 10, string.Empty));
+                candidate.AddItem(new Vote(DateTime.Now, i.ToString()));
             }
 
             // Assert
@@ -41,7 +27,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         }
 
         [TestMethod]
-        public void CloseDateInThePast_RatingShouldNotBeAdded()
+        public void CloseDateInThePast_VoteShouldNotBeAdded()
         {
             // Arrange
             var candidate = new Candidate("test", Guid.NewGuid());
@@ -50,15 +36,15 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Act
             for (var i = 0; i < 3; i++)
             {
-                candidate.AddItem(new Rating(DateTime.Now, i.ToString(), i / 10, string.Empty));
+                candidate.AddItem(new Vote(DateTime.Now, i.ToString()));
             }
 
             // Assert
             Assert.AreEqual(0, candidate.Items.Count());
         }
-        
+
         [TestMethod]
-        public void NoOpeningDate_RatingShouldNotBeAdded()
+        public void NoOpeningDate_VoteShouldNotBeAdded()
         {
             // Arrange
             var candidate = new Candidate("test", Guid.NewGuid());
@@ -66,7 +52,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Act
             for (var i = 0; i < 3; i++)
             {
-                candidate.AddItem(new Rating(DateTime.Now, i.ToString(), i / 10, string.Empty));
+                candidate.AddItem(new Vote(DateTime.Now, i.ToString()));
             }
 
             // Assert
@@ -74,7 +60,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         }
 
         [TestMethod]
-        public void OpeningDateInTheFuture_RatingShouldNotBeAdded()
+        public void OpeningDateInTheFuture_VoteShouldNotBeAdded()
         {
             // Arrange
             var candidate = new Candidate("test", Guid.NewGuid());
@@ -83,7 +69,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Act
             for (var i = 0; i < 3; i++)
             {
-                candidate.AddItem(new Rating(DateTime.Now, i.ToString(), i / 10, string.Empty));
+                candidate.AddItem(new Vote(DateTime.Now, i.ToString()));
             }
 
             // Assert
@@ -91,7 +77,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         }
 
         [TestMethod]
-        public void OpeningDateInThePast_RatingShouldBeAdded()
+        public void OpeningDateInThePast_VoteShouldBeAdded()
         {
             // Arrange
             var candidate = new Candidate("test", Guid.NewGuid());
@@ -100,7 +86,7 @@ namespace Burgerama.Services.Ratings.Tests.Domain
             // Act
             for (var i = 0; i < 3; i++)
             {
-                candidate.AddItem(new Rating(DateTime.Now, i.ToString(), i / 10, string.Empty));
+                candidate.AddItem(new Vote(DateTime.Now, i.ToString()));
             }
 
             // Assert

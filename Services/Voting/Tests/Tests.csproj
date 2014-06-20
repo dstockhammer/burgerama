@@ -149,40 +149,14 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Burgerama.Common.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.Configuration.0.2.1\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Common.DataAccess.MongoDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.2.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Common.DataAccess.Rest, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Common.DataAccess.Rest.0.2.0\lib\net451\Burgerama.Common.DataAccess.Rest.dll</HintPath>
-    </Reference>
-    <Reference Include="Burgerama.Messaging.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Burgerama.Messaging.Events">
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.Events.Voting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.3\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+    <Reference Include="Burgerama.Shared.Candidates.Domain">
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-    <Reference Include="MongoDB.Bson, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver, Version=1.9.1.221, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -197,29 +171,19 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\MongoDbTestUtils.cs" />
-    <Compile Include="Data\CandidateRepositoryTests.cs" />
+    <Compile Include="Domain\CandidateTests.cs" />
+    <Compile Include="Domain\VoteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data.MongoDB\Data.MongoDB.csproj">
-      <Project>{913A2DCE-6A4B-4782-BF8E-C9A2DF9C92E1}</Project>
-      <Name>Data.MongoDB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{CBECADE6-369B-47E0-AE30-0C7D8C7D95CC}</Project>
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Api\" />
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Config\MongoDb.confidential.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -4,12 +4,16 @@ using Burgerama.Common.Logging;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Events;
-using Burgerama.Services.Voting.Data.MongoDB;
-using Burgerama.Services.Voting.Domain.Contracts;
+using Burgerama.Services.Voting.Domain;
 using System;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Web.Http;
+using Burgerama.Services.Voting.Domain.Services;
+using Burgerama.Shared.Candidates.Data.MongoDB;
+using Burgerama.Shared.Candidates.Domain.Contracts;
+using Burgerama.Shared.Candidates.Services;
+using Burgerama.Shared.Candidates.Services.Contracts;
 
 namespace Burgerama.Services.Voting.Api
 {
@@ -30,9 +34,11 @@ namespace Burgerama.Services.Voting.Api
             // Web API controllers
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            // Repositories
-            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
+            // Candidates
             builder.RegisterType<ContextRepository>().As<IContextRepository>();
+            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
+            builder.RegisterType<CandidateFactory>().As<ICandidateFactory>();
+            builder.RegisterType<CandidateService<Vote>>().As<ICandidateService>();
 
             // Logging
             builder.RegisterModule<LoggingModule>();

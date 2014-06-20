@@ -33,48 +33,20 @@ namespace Burgerama.Services.Ratings.Api.Controllers
 
         [HttpGet]
         [Route("{contextKey}/{reference}")]
-        [ResponseType(typeof(IEnumerable<RatingModel>))]
+        [ResponseType(typeof(CandidateModel))]
         public IHttpActionResult GetRatingSummaryForCandidate(string contextKey, Guid reference)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
-            var model = new CandidateModel
-            {
-                ContextKey = contextKey,
-                Reference = reference
-            };
-
             // first, check all real (= well known) candidates
             var candidate = _candidateRepository.Get<Candidate, Rating>(contextKey, reference);
             if (candidate != null)
-            {
-                var userId = ClaimsPrincipal.Current.GetUserId();
+                return Ok(candidate.ToModel(ClaimsPrincipal.Current.GetUserId()));
 
-                model.IsValidated = true;
-                model.OpeningDate = candidate.OpeningDate;
-                model.ClosingDate = candidate.ClosingDate;
-                model.RatingsCount = candidate.Items.Count();
-                model.TotalRating = candidate.TotalRating;
-                model.UserRating = candidate.Items.SingleOrDefault(r => r.UserId == userId).ToModel();
-                model.CanUserRate = candidate.CanUserRate(userId);
-
-                return Ok(model);
-            }
-            
             // if there is no real candidate, check the potential ones
             var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate, Rating>(contextKey, reference);
             if (potentialCandidate != null)
-            {
-                var userId = ClaimsPrincipal.Current.GetUserId();
-
-                model.IsValidated = false;
-                model.RatingsCount = potentialCandidate.Items.Count();
-                model.TotalRating = potentialCandidate.TotalRating;
-                model.UserRating = potentialCandidate.Items.SingleOrDefault(r => r.UserId == userId).ToModel();
-                model.CanUserRate = model.UserRating == null;
-
-                return Ok(model);
-            }
+                return Ok(potentialCandidate.ToModel(ClaimsPrincipal.Current.GetUserId()));
 
             // if no candidate is found at all, check if the context is valid
             var context = _contextRepository.Get(contextKey);
@@ -82,10 +54,13 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                 return BadRequest("Invalid context.");
 
             // if the context is valid, still return an empty, not validated model in order to allow users to rate
-            model.IsValidated = false;
-            model.CanUserRate = true;
-
-            return Ok(model);
+            return Ok(new CandidateModel
+            {
+                ContextKey = contextKey,
+                Reference = reference,
+                IsValidated = false,
+                CanUserRate = true
+            });
         }
 
         [HttpGet]
@@ -137,8 +112,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                 if (candidate.Items.Any(r => r.UserId == userId))
                     return Conflict();
 
-                var events = candidate.AddItem(new Rating(DateTime.Now, userId, model.Value, model.Text ?? string.Empty));
-
+                var events = candidate.AddItem(rating);
                 _candidateRepository.SaveOrUpdate(candidate);
                 _eventDispatcher.Publish(events);
 
@@ -146,7 +120,7 @@ namespace Burgerama.Services.Ratings.Api.Controllers
                     model.Value, reference);
 
                 var candidateUri = new Uri(Url.Content(string.Format("~/{0}/{1}", contextKey, reference)));
-                return Created(candidateUri, rating.ToModel());
+                return Created(candidateUri, candidate.ToModel(userId));
             }
 
             var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate, Rating>(contextKey, reference);
@@ -173,14 +147,15 @@ namespace Burgerama.Services.Ratings.Api.Controllers
             _eventDispatcher.Publish(new TriedToRateUnknownCandidate
             {
                 ContextKey = contextKey,
-                Reference = reference
+                Reference = reference,
+                UserId = userId
             });
 
             _logger.Information("Added rating of {Rating} to unknown candidate {Reference}.",
                 model.Value, reference);
 
             var uri = new Uri(Url.Content(string.Format("~/{0}/{1}", contextKey, reference)));
-            return Created(uri, rating.ToModel());
+            return Created(uri, potentialCandidate.ToModel(userId));
         }
     }
 }

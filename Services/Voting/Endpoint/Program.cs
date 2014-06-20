@@ -4,8 +4,12 @@ using Burgerama.Messaging.Endpoint.Host;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.MassTransit;
 using Burgerama.Messaging.MassTransit.Events;
-using Burgerama.Services.Voting.Data.MongoDB;
-using Burgerama.Services.Voting.Domain.Contracts;
+using Burgerama.Services.Voting.Domain;
+using Burgerama.Services.Voting.Domain.Services;
+using Burgerama.Shared.Candidates.Data.MongoDB;
+using Burgerama.Shared.Candidates.Domain.Contracts;
+using Burgerama.Shared.Candidates.Services;
+using Burgerama.Shared.Candidates.Services.Contracts;
 
 namespace Burgerama.Services.Voting.Endpoint
 {
@@ -23,9 +27,11 @@ namespace Burgerama.Services.Voting.Endpoint
         {
             var builder = new ContainerBuilder();
 
-            // Repositories
-            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
+            // Candidates
             builder.RegisterType<ContextRepository>().As<IContextRepository>();
+            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
+            builder.RegisterType<CandidateFactory>().As<ICandidateFactory>();
+            builder.RegisterType<CandidateService<Vote>>().As<ICandidateService>();
 
             // Logging
             builder.RegisterModule<LoggingModule>();

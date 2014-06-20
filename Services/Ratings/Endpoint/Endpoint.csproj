@@ -176,8 +176,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.Events.Ratings">
-      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.3\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
+    <Reference Include="Burgerama.Messaging.Events.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.4\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -232,19 +233,19 @@
     </Reference>
     <Reference Include="Serilog, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.1.3.25\lib\net45\Serilog.dll</HintPath>
+      <HintPath>..\packages\Serilog.1.3.30\lib\net45\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Extras.Topshelf, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.Extras.Topshelf.1.3.25\lib\net45\Serilog.Extras.Topshelf.dll</HintPath>
+      <HintPath>..\packages\Serilog.Extras.Topshelf.1.3.30\lib\net45\Serilog.Extras.Topshelf.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.1.3.25\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\packages\Serilog.1.3.30\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Sinks.Logentries, Version=1.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Serilog.Sinks.Logentries.1.3.25\lib\net45\Serilog.Sinks.Logentries.dll</HintPath>
+      <HintPath>..\packages\Serilog.Sinks.Logentries.1.3.30\lib\net45\Serilog.Sinks.Logentries.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -263,9 +264,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\CloseCandidateHandler.cs" />
-    <Compile Include="Handlers\OpenCandidateHandler.cs" />
-    <Compile Include="Handlers\CreateCandidateHandler.cs" />
+    <Compile Include="Handlers\CandidateHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

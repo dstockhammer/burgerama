@@ -11,12 +11,13 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         public void Rating_ShouldBeCreatedCorrectly()
         {
             // Arrange
-            var userId = string.Empty;
-            const double value = 0.5d;
             var dateCreated = DateTime.Now;
+            var userId = string.Empty;
+            var value = 0.5d;
+            var text = string.Empty;
 
             // Act
-            var rating = new Rating(dateCreated, userId, value, string.Empty);
+            var rating = new Rating(dateCreated, userId, value, text);
 
             // Assert
             Assert.IsNotNull(rating);
@@ -30,12 +31,13 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         public void Rating_ShouldNotBeCreatedWithNegativeValue()
         {
             // Arrange
-            var userId = string.Empty;
-            const double value = -0.1d;
             var dateCreated = DateTime.Now;
+            var userId = string.Empty;
+            var value = -0.1d;
+            var text = string.Empty;
 
             // Act
-            var rating = new Rating(dateCreated, userId, value, string.Empty);
+            var rating = new Rating(dateCreated, userId, value, text);
         }
 
         [TestMethod]
@@ -43,26 +45,27 @@ namespace Burgerama.Services.Ratings.Tests.Domain
         public void Rating_ShouldNotBeCreatedWithValueBiggerThanOne()
         {
             // Arrange
-            var userId = string.Empty;
-            const double value = 1.1d;
             var dateCreated = DateTime.Now;
+            var userId = string.Empty;
+            var value = 1.1d;
+            var text = string.Empty;
 
             // Act
-            var rating = new Rating(dateCreated, userId, value, string.Empty);
+            var rating = new Rating(dateCreated, userId, value, text);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Rating_ShouldNotBeCreatedWithoutUser()
         {
-            var rating = new Rating(DateTime.Now, null, 0, string.Empty);
-        }
+            // Arrange
+            var dateCreated = DateTime.Now;
+            string userId = null;
+            var value = 0;
+            var text = string.Empty;
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Rating_ShouldNotBeCreatedWithoutText()
-        {
-            var rating = new Rating(DateTime.Now, null, 0, null);
+            // Act
+            var rating = new Rating(dateCreated, userId, value, text);
         }
     }
 }
