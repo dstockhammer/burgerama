@@ -10,13 +10,15 @@ module Burgerama.Outings {
     }
 
     export class OutingController {
+        private venueContextKey = 'venues';
+
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: IOutingScope,
             private $modal,
             private toaster,
             private outingResource,
-            private candidateResource)
+            private ratingCandidateResource)
         {
             this.$scope.outings = null;
             this.$scope.candidates = [];
@@ -28,12 +30,14 @@ module Burgerama.Outings {
 
         private load() {
             this.outingResource.all((outings: Array<Outing>) => {
+                console.log(outings);
+
                 this.$scope.outings = outings;
                 this.$rootScope.$emit('OutingsLoaded', this.$scope.outings);
 
                 outings.forEach((outing: Outing) => {
                     if (typeof(this.$scope.candidates[outing.venue.id]) === 'undefined') {
-                        this.candidateResource.get({ context: 'venues', reference: outing.venue.id }, (candidate: Ratings.Candidate) => {
+                        this.ratingCandidateResource.get({ context: this.venueContextKey, reference: outing.venue.id }, (candidate: Ratings.Candidate) => {
                             this.$scope.candidates[outing.venue.id] = candidate;
                         });
                     }
@@ -65,6 +69,6 @@ module Burgerama.Outings {
     }
 }
 
-Burgerama.app.controller('OutingController', ['$rootScope', '$scope', '$modal', 'toaster', 'OutingResource', 'CandidateResource', ($rootScope, $scope, $modal, toaster, outingResource, candidateResource) =>
-    new Burgerama.Outings.OutingController($rootScope, $scope, $modal, toaster, outingResource, candidateResource)
+Burgerama.app.controller('OutingController', ['$rootScope', '$scope', '$modal', 'toaster', 'OutingResource', 'RatingCandidateResource', ($rootScope, $scope, $modal, toaster, outingResource, ratingCandidateResource) =>
+    new Burgerama.Outings.OutingController($rootScope, $scope, $modal, toaster, outingResource, ratingCandidateResource)
 ]);

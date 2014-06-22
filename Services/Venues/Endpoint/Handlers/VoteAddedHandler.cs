@@ -28,8 +28,7 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
             var venue = _venueRepository.Get(message.Reference);
             if (venue == null)
             {
-                _logger.Error("Tried to update votes for unknown venue {Reference}.",
-                    message.Reference);
+                _logger.Error("Tried to update votes for unknown venue {Reference}.", message.Reference);
 
                 return;
             }

@@ -8,7 +8,7 @@ using Serilog;
 
 namespace Burgerama.Services.Venues.Endpoint.Handlers
 {
-    public sealed class TriedToVoteUnknownCandidateHandler : Consumes<TriedToVoteForUnknownCandidate>.Selected
+    public sealed class TriedToVoteForUnknownCandidateHandler : Consumes<TriedToVoteForUnknownCandidate>.Selected
     {
         private const string VenueContextKey = "venues";
 
@@ -16,7 +16,7 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
         private readonly IVenueRepository _venueRepository;
         private readonly ICommandDispatcher _commandDispatcher;
 
-        public TriedToVoteUnknownCandidateHandler(ILogger logger, IVenueRepository venueRepository, ICommandDispatcher commandDispatcher)
+        public TriedToVoteForUnknownCandidateHandler(ILogger logger, IVenueRepository venueRepository, ICommandDispatcher commandDispatcher)
         {
             _logger = logger;
             _venueRepository = venueRepository;
@@ -41,8 +41,7 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
                 OpeningDate = DateTime.Today // todo: figure out a good way to get the REAL opening date
             });
 
-            _logger.Information("Created rating candidate for venue {Reference}.",
-                message.Reference);
+            _logger.Information("Created voting candidate for venue {VenueId}.", venue.Id);
         }
     }
 }

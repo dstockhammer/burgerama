@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace Burgerama.Services.Venues.Domain
 {
     public sealed class Venue
     {
+        private readonly HashSet<Guid> _outings;
+
         public Guid Id { get; private set; }
 
         public string Name { get; private set; }
@@ -21,6 +25,11 @@ namespace Burgerama.Services.Venues.Domain
 
         public string Address { get; set; }
 
+        public IEnumerable<Guid> Outings
+        {
+            get { return _outings; }
+        }
+
         /// <summary>
         /// todo: probably the votes shouldn't be added directly to the venue,
         /// but rather to a seperate model to make the intention clear.
@@ -33,7 +42,15 @@ namespace Burgerama.Services.Venues.Domain
         /// </summary>
         public double? TotalRating { get; set; }
 
-        public Venue(Guid id, string name, Location location, string createdByUser, DateTime createdOn)
+        public Venue(string name, Location location, string createdByUser, DateTime createdOn)
+            : this(Guid.NewGuid(), name, location, createdByUser, createdOn, Enumerable.Empty<Guid>())
+        {
+            Contract.Requires<ArgumentNullException>(name != null);
+            Contract.Requires<ArgumentNullException>(location != null);
+            Contract.Requires<ArgumentNullException>(createdByUser != null);
+        }
+
+        public Venue(Guid id, string name, Location location, string createdByUser, DateTime createdOn, IEnumerable<Guid> outings)
         {
             Contract.Requires<ArgumentNullException>(name != null);
             Contract.Requires<ArgumentNullException>(location != null);
@@ -44,19 +61,12 @@ namespace Burgerama.Services.Venues.Domain
             Location = location;
             CreatedByUser = createdByUser;
             CreatedOn = createdOn;
+            _outings = new HashSet<Guid>(outings);
         }
 
-        public Venue(string name, Location location, string createdByUser)
+        public bool AddOuting(Guid outingId)
         {
-            Contract.Requires<ArgumentNullException>(name != null);
-            Contract.Requires<ArgumentNullException>(location != null);
-            Contract.Requires<ArgumentNullException>(createdByUser != null);
-
-            Id = Guid.NewGuid();
-            Name = name;
-            Location = location;
-            CreatedByUser = createdByUser;
-            CreatedOn = DateTime.Now;
+            return _outings.Add(outingId);
         }
     }
 }

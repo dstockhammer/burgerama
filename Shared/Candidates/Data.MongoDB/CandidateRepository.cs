@@ -64,7 +64,7 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB
             where TCandidate : PotentialCandidate<TItem>
             where TItem : class
         {
-            return GetCandidates<TItem>().AsQueryable()
+            return GetPotentialCandidates<TItem>().AsQueryable()
                 .Where(c => c.ContextKey == contextKey)
                 .Select(v => v.ToPotential<TCandidate, TItem>(_candidateFactory));
         }
@@ -78,14 +78,14 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB
         public void SaveOrUpdate<T>(PotentialCandidate<T> candidate)
             where T : class
         {
-            GetCandidates<T>().Save(candidate.ToModel());
+            GetPotentialCandidates<T>().Save(candidate.ToModel());
         }
 
         public void Delete<T>(PotentialCandidate<T> candidate)
             where T : class
         {
             var query = Query<CandidateModel<T>>.EQ(c => c.Reference, candidate.Reference.ToString());
-            GetCandidates<T>().Remove(query);
+            GetPotentialCandidates<T>().Remove(query);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using Burgerama.Services.Venues.Api.Models;
 using Burgerama.Services.Venues.Domain;
 
@@ -26,6 +27,7 @@ namespace Burgerama.Services.Venues.Api.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
+                Outings = venue.Outings.Select(outingId => outingId.ToString()),
                 TotalVotes = venue.TotalVotes,
                 TotalRating = venue.TotalRating
             };
@@ -37,7 +39,7 @@ namespace Burgerama.Services.Venues.Api.Converters
             Contract.Requires<ArgumentNullException>(userId != null);
 
             var location = new Location(venue.Location.Reference, venue.Location.Latitude, venue.Location.Longitude);
-            return new Venue(venue.Name, location, userId)
+            return new Venue(venue.Name, location, userId, venue.CreatedOn)
             {
                 Description = venue.Description,
                 Url = venue.Url,

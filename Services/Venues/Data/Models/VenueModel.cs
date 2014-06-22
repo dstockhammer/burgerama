@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Burgerama.Services.Venues.Domain;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -27,5 +28,7 @@ namespace Burgerama.Services.Venues.Data.Models
         public int TotalVotes { get; set; }
 
         public double? TotalRating { get; set; }
+
+        public IEnumerable<string> Outings { get; set; }
     }
 }

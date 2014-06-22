@@ -3,20 +3,26 @@
 module Burgerama.Venues {
     export interface IVenueScope extends ng.IScope {
         venues: Array<Venue>;
+        candidates: Array<Voting.Candidate>;
 
         panTo: (venue: Venue) => void;
         addVote: (venue: Venue) => void;
     }
 
     export class VenueController {
+        private venueContextKey = 'venues';
+
         constructor(
             private $rootScope: IBurgeramaScope,
             private $scope: IVenueScope,
             private $modal,
+            private toaster,
             private venueResource,
-            private toaster)
+            private voteResource,
+            private votingCandidateResource)
         {
             this.$scope.venues = null;
+            this.$scope.candidates = [];
             this.$scope.panTo = venue => this.panTo(venue);
             this.$scope.addVote = venue => this.addVote(venue);
 
@@ -32,6 +38,14 @@ module Burgerama.Venues {
             this.venueResource.all((venues: Array<Venue>) => {
                 this.$scope.venues = venues;
                 this.$rootScope.$emit('VenuesLoaded', this.$scope.venues);
+
+                venues.forEach((venue: Venue) => {
+                    if (typeof (this.$scope.venues[venue.id]) === 'undefined') {
+                        this.votingCandidateResource.get({ context: this.venueContextKey, reference: venue.id }, (candidate: Voting.Candidate) => {
+                            this.$scope.candidates[venue.id] = candidate;
+                        });
+                    }
+                });
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
@@ -42,11 +56,35 @@ module Burgerama.Venues {
         }
 
         private addVote(venue: Venue) {
-            console.log('add vote clicked');
+            var resource = new this.voteResource({
+                context: this.venueContextKey,
+                reference: venue.id
+            });
+
+            resource.$create((candidate: Voting.Candidate) => {
+                this.toaster.pop('success', 'Success', 'Thanks for your contribution!');
+                this.$rootScope.$emit('VoteAdded', candidate.userVote);
+
+                this.$scope.candidates[venue.id] = candidate;
+                this.$scope.venues.forEach((v: Venue) => {
+                    if (v.id == venue.id) {
+                        v.totalVotes++;
+                    }
+                });
+            }, err => {
+                if (err.status == 401) {
+                    this.toaster.pop('error', 'Unauthorized', 'You are not authorized to vote. Please log in or create an account.');
+                } else if (err.status == 409) {
+                    this.toaster.pop('error', 'Conflict', 'You have already voted for this item.');
+                } else {
+                    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                }
+            });
         }
     }
 }
 
-Burgerama.app.controller('VenueController', ['$rootScope', '$scope', '$modal', 'VenueResource', 'toaster', ($rootScope, $scope, $modal, venueResource, toaster) =>
-    new Burgerama.Venues.VenueController($rootScope, $scope, $modal, venueResource, toaster)
+Burgerama.app.controller('VenueController', ['$rootScope', '$scope', '$modal', 'toaster', 'VenueResource', 'VoteResource', 'VotingCandidateResource',
+    ($rootScope, $scope, $modal, toaster, venueResource, voteResource, votingCandidateResource) =>
+        new Burgerama.Venues.VenueController($rootScope, $scope, $modal, toaster, venueResource, voteResource, votingCandidateResource)
 ]);

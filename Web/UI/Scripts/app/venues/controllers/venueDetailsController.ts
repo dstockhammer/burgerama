@@ -64,27 +64,30 @@ module Burgerama.Venues {
             });
 
             this.voteResource.all({ id: this.venueId }, data => {
-                this.$scope.venue.votes = data.length;
+                this.$scope.venue.totalVotes = data.length;
             }, err => {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });   
         }
         
         private addVote(venue: Venue) {
-            var resource = new this.voteResource(this.$scope.venue);
-            resource.$create((data) => {
-                this.toaster.pop('success', 'Success', 'Added vote for venue: ' + this.$scope.venue.name);
-                this.$rootScope.$emit('VenueVoted', this.$scope.venue);
-                this.$scope.venue.votes = data["0"];
-            }, err => {
-                if (err.status == 401) {
-                    this.toaster.pop('error', 'Unauthorized', 'You are not authorized to vote on venues. Please log in or create an account.');
-                } else if (err.status == 409) {
-                    this.toaster.pop('error', 'Conflict', 'You have already voted on this venue.');
-                } else {
-                    this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
-                }
-            });
+            //var resource = new this.voteResource(this.$scope.venue);
+            //resource.$create((data) => {
+
+            //    // todo !!
+
+            //    this.toaster.pop('success', 'Success', 'Added vote for venue: ' + this.$scope.venue.name);
+            //    this.$rootScope.$emit('VenueVoted', this.$scope.venue);
+            //    this.$scope.venue.totalVotes = data["0"];
+            //}, err => {
+            //    if (err.status == 401) {
+            //        this.toaster.pop('error', 'Unauthorized', 'You are not authorized to vote on venues. Please log in or create an account.');
+            //    } else if (err.status == 409) {
+            //        this.toaster.pop('error', 'Conflict', 'You have already voted on this venue.');
+            //    } else {
+            //        this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+            //    }
+            //});
         }
 
         private addRating(venue: Venue) {
@@ -98,8 +101,8 @@ module Burgerama.Venues {
                             reference: venue.id,
                             title: venue.name
                         };
-    }
-}
+                    }
+                }
             });
         }
     }

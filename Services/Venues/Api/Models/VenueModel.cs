@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -27,6 +28,9 @@ namespace Burgerama.Services.Venues.Api.Models
 
         [DataMember, XmlElement]
         public string Address { get; set; }
+
+        [DataMember, XmlElement]
+        public IEnumerable<string> Outings { get; set; }
 
         [DataMember, XmlElement]
         public string CreatedByUser { get; set; }

@@ -23,7 +23,8 @@ namespace Burgerama.Services.Venues.Tests.Data
             var venueRepository = new VenueRepository();
             var location = new Location("test", 13.0, 37.0);
             var userId = "test|" + Guid.NewGuid();
-            var venue = new Venue("This is a test.", location, userId);
+            var createdOn = DateTime.Now;
+            var venue = new Venue("This is a test.", location, userId, createdOn);
 
             // Act
             venueRepository.SaveOrUpdate(venue);
@@ -43,7 +44,8 @@ namespace Burgerama.Services.Venues.Tests.Data
             var venueRepository = new VenueRepository();
             var location = new Location("test", 13.0, 37.0);
             var userId = "test|" + Guid.NewGuid();
-            var venue = new Venue("This is a test.", location, userId);
+            var createdOn = DateTime.Now;
+            var venue = new Venue("This is a test.", location, userId, createdOn);
             venueRepository.SaveOrUpdate(venue);
 
             // Act
@@ -67,13 +69,14 @@ namespace Burgerama.Services.Venues.Tests.Data
             // Arrange
             var venueRepository = new VenueRepository();
             var location = new Location("test", 13.0, 37.0);
+            var createdOn = DateTime.Now;
 
             // Act
-            venueRepository.SaveOrUpdate(new Venue("This is a test 1.", location, "test|" + Guid.NewGuid()));
-            venueRepository.SaveOrUpdate(new Venue("This is a test 2.", location, "test|" + Guid.NewGuid()));
-            venueRepository.SaveOrUpdate(new Venue("This is a test 3.", location, "test|" + Guid.NewGuid()));
-            venueRepository.SaveOrUpdate(new Venue("This is a test 4.", location, "test|" + Guid.NewGuid()));
-            venueRepository.SaveOrUpdate(new Venue("This is a test 5.", location, "test|" + Guid.NewGuid()));
+            venueRepository.SaveOrUpdate(new Venue("This is a test 1.", location, "test|" + Guid.NewGuid(), createdOn));
+            venueRepository.SaveOrUpdate(new Venue("This is a test 2.", location, "test|" + Guid.NewGuid(), createdOn));
+            venueRepository.SaveOrUpdate(new Venue("This is a test 3.", location, "test|" + Guid.NewGuid(), createdOn));
+            venueRepository.SaveOrUpdate(new Venue("This is a test 4.", location, "test|" + Guid.NewGuid(), createdOn));
+            venueRepository.SaveOrUpdate(new Venue("This is a test 5.", location, "test|" + Guid.NewGuid(), createdOn));
 
             // Assert
             var venues = venueRepository.GetAll();

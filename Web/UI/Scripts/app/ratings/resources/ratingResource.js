@@ -15,8 +15,8 @@ var Burgerama;
 Burgerama.app.factory('RatingResource', [
     '$resource', function ($resource) {
         return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference/ratings', {
-            reference: '@reference',
-            context: '@context'
+            context: '@context',
+            reference: '@reference'
         }, {
             all: { method: 'GET', isArray: true },
             create: { method: 'POST' }

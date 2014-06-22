@@ -11,10 +11,8 @@ namespace Burgerama.Services.Outings.Domain
         public Guid VenueId { get; private set; }
 
         public Outing(DateTime date, Guid venueId)
+            : this(Guid.NewGuid(), date, venueId)
         {
-            Id = Guid.NewGuid();
-            Date = date;
-            VenueId = venueId;
         }
 
         public Outing(Guid id, DateTime date, Guid venueId)

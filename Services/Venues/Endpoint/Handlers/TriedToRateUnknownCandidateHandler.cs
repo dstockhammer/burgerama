@@ -41,8 +41,7 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
                 OpeningDate = DateTime.Today // todo: figure out a good way to get the REAL opening date
             });
 
-            _logger.Information("Created rating candidate for venue {Reference}.",
-                message.Reference);
+            _logger.Information("Created rating candidate for venue {VenueId}.", venue.Id);
         }
     }
 }

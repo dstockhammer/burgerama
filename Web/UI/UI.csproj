@@ -567,7 +567,8 @@
     <TypeScriptCompile Include="Scripts\app\account\controllers\accountController.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authHttpInterceptor.ts" />
     <TypeScriptCompile Include="Scripts\app\account\services\authService.ts" />
-    <TypeScriptCompile Include="Scripts\app\venues\resources\voteResource.ts" />
+    <TypeScriptCompile Include="Scripts\app\voting\resources\voteResource.ts" />
+    <TypeScriptCompile Include="Scripts\app\voting\resources\candidateResource.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap-tests.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router-tests.ts" />

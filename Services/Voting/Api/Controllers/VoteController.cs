@@ -34,19 +34,21 @@ namespace Burgerama.Services.Voting.Api.Controllers
         [HttpGet]
         [Route("{contextKey}/{reference}")]
         [ResponseType(typeof(CandidateModel))]
-        public IHttpActionResult GetRatingSummaryForCandidate(string contextKey, Guid reference)
+        public IHttpActionResult GetCandidate(string contextKey, Guid reference)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
+
+            var userId = ClaimsPrincipal.Current.GetUserId();
 
             // first, check all real (= well known) candidates
             var candidate = _candidateRepository.Get<Candidate, Vote>(contextKey, reference);
             if (candidate != null)
-                return Ok(candidate.ToModel(ClaimsPrincipal.Current.GetUserId()));
+                return Ok(candidate.ToModel(userId));
 
             // if there is no real candidate, check the potential ones
             var potentialCandidate = _candidateRepository.GetPotential<PotentialCandidate, Vote>(contextKey, reference);
             if (potentialCandidate != null)
-                return Ok(potentialCandidate.ToModel(ClaimsPrincipal.Current.GetUserId()));
+                return Ok(potentialCandidate.ToModel(userId));
 
             // if no candidate is found at all, check if the context is valid
             var context = _contextRepository.Get(contextKey);
@@ -59,14 +61,14 @@ namespace Burgerama.Services.Voting.Api.Controllers
                 ContextKey = contextKey,
                 Reference = reference,
                 IsValidated = false,
-                CanUserVote = true
+                CanUserVote = userId != null
             });
         }
 
         [HttpGet]
         [Route("{contextKey}/{reference}/votes")]
         [ResponseType(typeof(IEnumerable<VoteModel>))]
-        public IHttpActionResult GetAllRatingsForCandidate(string contextKey, Guid reference)
+        public IHttpActionResult GetAllVotesForCandidate(string contextKey, Guid reference)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
 
@@ -93,7 +95,7 @@ namespace Burgerama.Services.Voting.Api.Controllers
         [HttpPost]
         [Route("{contextKey}/{reference}/votes")]
         [ResponseType(typeof(IEnumerable<VoteModel>))]
-        public IHttpActionResult AddRatingToCandidate(string contextKey, Guid reference)
+        public IHttpActionResult AddVoteToCandidate(string contextKey, Guid reference)
         {
             Contract.Requires<ArgumentNullException>(contextKey != null);
             

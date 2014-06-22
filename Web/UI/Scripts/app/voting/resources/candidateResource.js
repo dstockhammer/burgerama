@@ -1,20 +1,20 @@
 ﻿/// <reference path="../../app.ts" />
 var Burgerama;
 (function (Burgerama) {
-    (function (Ratings) {
+    (function (Voting) {
         var Candidate = (function () {
             function Candidate() {
             }
             return Candidate;
         })();
-        Ratings.Candidate = Candidate;
-    })(Burgerama.Ratings || (Burgerama.Ratings = {}));
-    var Ratings = Burgerama.Ratings;
+        Voting.Candidate = Candidate;
+    })(Burgerama.Voting || (Burgerama.Voting = {}));
+    var Voting = Burgerama.Voting;
 })(Burgerama || (Burgerama = {}));
 
-Burgerama.app.factory('RatingCandidateResource', [
+Burgerama.app.factory('VotingCandidateResource', [
     '$resource', function ($resource) {
-        return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference', {
+        return $resource(Burgerama.Util.getApiUrl('voting') + '/:context/:reference', {
             reference: '@reference',
             context: '@context'
         }, {

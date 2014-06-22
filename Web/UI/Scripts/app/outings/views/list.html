@@ -1,4 +1,4 @@
-﻿<div class="loading-spinner spin-s" ng-hide="outings != null"></div>
+﻿<div class="loading-spinner spin-s" ng-hide="outings != null && outings.length == 0"></div>
 <div class="no-items-available" ng-show="outings != null && outings.length == 0">
     <div class="col-xs-2 icon"><p>:(</p></div>
     <div class="col-xs-10 text"><p>No outings available.</p></div>

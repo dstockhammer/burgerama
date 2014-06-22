@@ -58,9 +58,9 @@ module Burgerama.Ratings {
             this.$modalInstance.close();
 
             var resource = new this.ratingResource(this.$scope.rating);
-            resource.$create(() => {
+            resource.$create((candidate: Ratings.Candidate) => {
                 this.toaster.pop('success', 'Success', 'Thanks for your contribution!');
-                this.$rootScope.$emit('RatingAdded', this.$scope.rating);
+                this.$rootScope.$emit('RatingAdded', candidate.userRating);
             }, err => {
                 if (err.status == 401) {
                     this.toaster.pop('error', 'Unauthorized', 'You are not authorized to rate. Please log in or create an account.');

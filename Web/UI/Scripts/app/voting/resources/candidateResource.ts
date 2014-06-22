@@ -1,24 +1,23 @@
 ﻿/// <reference path="../../app.ts" />
 
-module Burgerama.Ratings {
+module Burgerama.Voting {
     export class Candidate {
         context: string;
         reference: string;
         isValidated: boolean;
         openingDate: Date;
         closingDate: Date;
-        ratingsCount: number;
-        totalRating: number;
-        canUserRate: boolean;
-        userRating: Rating;
+        votesCount: number;
+        canUserVote: boolean;
+        userVote: Vote;
     }
 }
 
-Burgerama.app.factory('RatingCandidateResource', ['$resource', $resource => {
-    return $resource(Burgerama.Util.getApiUrl('ratings') + '/:context/:reference', {
+Burgerama.app.factory('VotingCandidateResource', ['$resource', $resource => {
+    return $resource(Burgerama.Util.getApiUrl('voting') + '/:context/:reference', {
         reference: '@reference',
         context: '@context'
     }, {
         get: { method: 'GET' }
     });
-}]);
+}]); 

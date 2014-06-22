@@ -191,14 +191,16 @@
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.2.1\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Burgerama.Shared.Candidates.Data.MongoDB">
-      <HintPath>..\packages\Burgerama.Shared.Candidates.MongoDB.0.2.0\lib\net451\Burgerama.Shared.Candidates.Data.MongoDB.dll</HintPath>
+    <Reference Include="Burgerama.Shared.Candidates.Data.MongoDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.MongoDB.0.2.1\lib\net451\Burgerama.Shared.Candidates.Data.MongoDB.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Shared.Candidates.Domain">
       <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Shared.Candidates.Services">
-      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.0\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
+    <Reference Include="Burgerama.Shared.Candidates.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.1\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -279,6 +281,7 @@
     </None>
     <None Include="Config\Logging.confidential.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Config\MongoDb.confidential.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

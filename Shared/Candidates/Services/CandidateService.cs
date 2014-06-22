@@ -116,7 +116,7 @@ namespace Burgerama.Shared.Candidates.Services
                 return null;
             }
 
-            var candidate = _candidateFactory.Create<T>(contextKey, reference);
+            var candidate = _candidateFactory.Create(contextKey, reference, Enumerable.Empty<T>(), openingDate, closingDate);
             var events = candidate.OnCreateSuccess().ToList();
 
             if (openingDate.HasValue)

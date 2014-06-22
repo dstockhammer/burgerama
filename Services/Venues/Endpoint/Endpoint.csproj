@@ -180,6 +180,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Events.Outings">
+      <HintPath>..\packages\Burgerama.Messaging.Events.Outings.0.2.0\lib\net451\Burgerama.Messaging.Events.Outings.dll</HintPath>
+    </Reference>
     <Reference Include="Burgerama.Messaging.Events.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.4\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
@@ -258,7 +261,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\TriedToVoteUnknownCandidateHandler.cs" />
+    <Compile Include="Handlers\OutingCreatedHandler.cs" />
+    <Compile Include="Handlers\TriedToVoteForUnknownCandidateHandler.cs" />
     <Compile Include="Handlers\TriedToRateUnknownCandidateHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Handlers\VoteAddedHandler.cs" />
