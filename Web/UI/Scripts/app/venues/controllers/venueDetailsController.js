@@ -3,7 +3,7 @@ var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
-            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, candidateResource, venueId) {
+            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
@@ -13,11 +13,13 @@ var Burgerama;
                 this.venueResource = venueResource;
                 this.voteResource = voteResource;
                 this.ratingResource = ratingResource;
-                this.candidateResource = candidateResource;
+                this.votingCandidateResource = votingCandidateResource;
+                this.ratingCandidateResource = ratingCandidateResource;
                 this.venueId = venueId;
                 this.venuesContextKey = 'venues';
                 this.$scope.venue = null;
-                this.$scope.candidate = null;
+                this.$scope.votingCandidate = null;
+                this.$scope.ratingCandidate = null;
                 this.$scope.ratings = null;
                 this.$scope.ratingStats = null;
                 this.$scope.ratingOrder = true;
@@ -40,27 +42,39 @@ var Burgerama;
                         return;
                     }
 
+                    _this.loadVotes(venue);
+
+                    if (venue.outings.length > 0) {
+                        _this.loadRatings(venue);
+                    }
+
                     _this.$scope.venue = venue;
                     _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
-
-                    if (venue.totalRating != null) {
-                        _this.candidateResource.get({ context: _this.venuesContextKey, reference: venue.id }, function (candidate) {
-                            _this.$scope.candidate = candidate;
-                        });
-
-                        _this.ratingResource.all({ context: _this.venuesContextKey, reference: venue.id }, function (ratings) {
-                            _this.$scope.ratings = ratings;
-                            _this.$scope.ratingStats = _this.starRatingService.calculateRatingStats(ratings);
-                        });
-                    }
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
                 });
+            };
 
-                this.voteResource.all({ id: this.venueId }, function (data) {
-                    _this.$scope.venue.totalVotes = data.length;
-                }, function (err) {
-                    _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+            VenueDetailsController.prototype.loadRatings = function (venue) {
+                var _this = this;
+                this.ratingCandidateResource.get({ context: this.venuesContextKey, reference: venue.id }, function (candidate) {
+                    _this.$scope.ratingCandidate = candidate;
+                });
+
+                this.ratingResource.all({ context: this.venuesContextKey, reference: venue.id }, function (ratings) {
+                    _this.$scope.ratings = ratings;
+                    _this.$scope.ratingStats = _this.starRatingService.calculateRatingStats(ratings);
+                });
+            };
+
+            VenueDetailsController.prototype.loadVotes = function (venue) {
+                var _this = this;
+                this.votingCandidateResource.get({ context: this.venuesContextKey, reference: venue.id }, function (candidate) {
+                    _this.$scope.votingCandidate = candidate;
+                });
+
+                this.voteResource.all({ context: this.venuesContextKey, reference: venue.id }, function (votes) {
+                    _this.$scope.votes = votes;
                 });
             };
 
@@ -106,9 +120,9 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'CandidateResource', 'venueId',
-    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, candidateResource, venueId) {
-        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, candidateResource, venueId);
+    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'VotingCandidateResource', 'RatingCandidateResource', 'venueId',
+    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) {
+        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId);
     }
 ]);
 //# sourceMappingURL=venueDetailsController.js.map

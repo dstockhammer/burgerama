@@ -241,14 +241,15 @@ module Burgerama.Map {
                 : {
                     id: '',
                     description: '',
-                    name:  markerInfo.place.name,
-                    address:  markerInfo.place.formatted_address,
+                    name: markerInfo.place.name,
+                    address: markerInfo.place.formatted_address,
                     url: markerInfo.place.url,
                     location: {
                         latitude: markerInfo.place.geometry.location.lat(),
                         longitude: markerInfo.place.geometry.location.lng(),
                         reference: markerInfo.place.reference,
                     },
+                    outings: [],
                     totalVotes: 0,
                     totalRating: null
                 };

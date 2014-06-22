@@ -236,6 +236,7 @@ var Burgerama;
                         longitude: markerInfo.place.geometry.location.lng(),
                         reference: markerInfo.place.reference
                     },
+                    outings: [],
                     totalVotes: 0,
                     totalRating: null
                 };

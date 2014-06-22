@@ -8,6 +8,7 @@ module Burgerama.Venues {
         url: string;
         description: string;
         address: string;
+        outings: Array<string>
         totalRating: number;
         totalVotes: number;
     }

@@ -8,18 +8,18 @@
         </div>
     </li>
 
-    <li class="row list-group-item">
+    <li class="row list-group-item" ng-show="venue.outings.length > 0">
         <h3 class="list-group-item-heading">
             Ratings summary
-            <button type="button" class="btn btn-primary pull-right" ng-click="addRating(venue);" ng-show="candidate.canUserRate">
+            <button type="button" class="btn btn-primary pull-right" ng-click="addRating(venue);" ng-show="ratingCandidate.canUserRate">
                 <span class="glyphicon glyphicon-star"></span> Add rating
             </button>
-            <button type="button" class="btn btn-success pull-right" ng-show="candidate.userRating" disabled="disabled">
+            <button type="button" class="btn btn-success pull-right" ng-show="ratingCandidate.userRating" disabled="disabled">
                 <span class="glyphicon glyphicon-ok"></span> Already rated
             </button>
         </h3>
         <div class="info pull-left">
-            <rating-stats ng-model="venue.totalRating" ratings-count="{{ candidate.ratingsCount }}"></rating-stats>
+            <rating-stats ng-model="venue.totalRating" ratings-count="{{ ratingCandidate.ratingsCount }}"></rating-stats>
         </div>
         <div class="content">
             <ul class="star-rating-details">
@@ -36,11 +36,25 @@
             </ul>
         </div>
     </li>
-    
+
     <li class="row list-group-item">
         <div class="content">
-            <h3 class="list-group-item-heading">Outing</h3>
-            <p>todo: Info about the outing OR possibility to vote.</p>
+            <h3 class="list-group-item-heading">
+                Outing
+                <button type="button" class="btn btn-primary pull-right" ng-click="addVote(venue);" ng-show="venue.outings.length == 0 && votingCandidate.canUserVote">
+                    Add vote
+                </button>
+            </h3>
+            <div ng-show="venue.outings.length == 0">
+                <p>There has not yet been an outing in this venue.</p>
+                <p ng-show="votingCandidate.votesCount == 0">Nobody has voted for this venue yet.</p>
+                <p ng-show="votingCandidate.votesCount > 0">
+                    <ng-pluralize count="votingCandidate.votesCount" when="{'0': 'Nobody has', 'one': 'One person has', 'other': '{} people have'}"></ng-pluralize> voted for this venue:
+                </p>
+                <ul>
+                    <li ng-repeat="vote in votes">{{ vote.userId }} on {{ vote.createdOn | date:'medium' }}</li>
+                </ul>
+            </div>
         </div>
     </li>
 
@@ -57,7 +71,7 @@
                 <span class="glyphicon glyphicon-ok"></span> Already rated
             </button>
         </h3>
-        
+
         <ul class="star-rating-details-list">
             <li class="clearfix" ng-repeat="rating in ratings | orderBy: 'createdOn': ratingOrder">
                 <div class="info pull-left">
