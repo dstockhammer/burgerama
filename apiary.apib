@@ -1,0 +1,56 @@
+FORMAT: 1A
+HOST: http://api.burgerama.co.uk
+
+# Burgerama
+Burgerama REST API documentation.
+        
+## Outings [/outings]
+The collection of all Outings.
+
+### List all Outings [GET]
++ Response 200 (application/json)
+
+        [{ 
+          "id": "158dd267b-ffe0-4c0d-9135-c4005b7cf5a6",
+          "date": "2014-04-12T20:44:55",
+          "venue": "88a1cea4-88de-4786-b4fe-e13f53d75d59"
+        },
+        { 
+          "id": "859611b3-d4f7-46e6-829e-9ec8ffe35a0c",
+          "date": "2014-04-19T19:12:33",
+          "venue": "750c9e7a-59f2-4434-b364-7f90ae796155"
+        }]
+
+## Outings [/outings/{id}]
+A single Outing with all its details.
+
++ Parameters
+    + id (required, string, `158dd267b-ffe0-4c0d-9135-c4005b7cf5a6`) ... Global identifier of the outing.
+    
+
+### Retrieve an Outing [GET]
+
++ Response 200 (application/json)
+
+        { 
+          "id": "158dd267b-ffe0-4c0d-9135-c4005b7cf5a6",
+          "date": "2014-04-12T20:44:55",
+          "venue": "88a1cea4-88de-4786-b4fe-e13f53d75d59"
+        }
+
+## Ratings [/ratings]
+The collection of all venue ratings
+
+### List all Ratings [GET]
++ Response 200 (application/json)
+
+        [{ 
+          "id": "158dd267b-ffe0-4c0d-9135-c4005b7cf5a6",
+          "rating": "0.15",
+          "canUserRate": "false"
+        },
+        { 
+          "id": "859611b3-d4f7-46e6-829e-9ec8ffe35a0c",
+          "rating": "0.80",
+          "canUserRate": "true"
+        }]
