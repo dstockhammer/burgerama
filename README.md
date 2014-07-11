@@ -2,6 +2,8 @@ Burgerama
 =========
 Bust the best burger in London!
 
+https://burgerama.azurewebsites.net
+
 Contributing
 ------------
 You want to get involved? Awesome!
@@ -36,18 +38,17 @@ Each API service expects a file `Config\MongoDb.confidential.config` in the foll
 ```
 
 ### Service Bus
-This area is work in progress. For now, go read up on [NServiceBus].
-To install the required infrastructure, run the following commands in the NuGet Package Manager Console:
-```
-PM> Install-NServiceBusDtc 
-PM> Install-NServiceBusMsmq
-PM> Install-NServiceBusRavenDB
-PM> Install-NServiceBusPerformanceCounters
-```
+Burgerama is using [MassTransit] with [RabbitMQ] transport. Again, you can either contact @dstockhammer to get you personal vhost and credentials for the remote RabbitMQ server, or point to you own instance.
+
+Microservices
+-------------
+Burgerama is an [AgularJS] web frontend written in [TypeScript], that connects to many services via their RESTful APIs. The API documentation is powered by Apiary: http://docs.burgerama.apiary.io
+
 
 [Azure]:http://azure.microsoft.com/
 [OWIN]:http://owin.org/
 [Mono]:http://www.mono-project.com/
 [auth0]:https://auth0.com/
 [MongoDb]:https://www.mongodb.org/
-[NServiceBus]:http://docs.particular.net/
+[MassTransit]:http://masstransit-project.com/
+[RabbitMQ]:http://www.rabbitmq.com/
