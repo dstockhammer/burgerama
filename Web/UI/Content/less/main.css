@@ -5974,9 +5974,11 @@ body {
   font-size: 24px;
   color: #999999;
 }
+#sidebar .navbar-primary .user-info {
+  margin-top: -10px;
+}
 #sidebar .navbar-primary .user-info img {
   margin-right: 10px;
-  margin-top: -10px;
 }
 #sidebar .navbar-primary .user-info a {
   max-height: 60px;
@@ -6157,3 +6159,4 @@ body {
 .form-control {
   font-family: "Roboto Light";
 }
+/*# sourceMappingURL=main.css.map */
