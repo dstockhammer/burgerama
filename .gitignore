@@ -167,3 +167,7 @@ $RECYCLE.BIN/
 *.confidential.config
 
 Common/packages-outputs/
+
+# Ignore Web Essentials Map Files
+*.css.map
+*.js.map

@@ -132,6 +132,12 @@
     <Content Include="Content\img\map\pin-yellow-full.png" />
     <Content Include="Content\img\map\pin-yellow-hole.png" />
     <Content Include="Content\img\map\pin-yellow-notch.png" />
+    <Content Include="Content\less\bootstrap-variables.css">
+      <DependentUpon>bootstrap-variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\bootstrap\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
@@ -521,6 +527,39 @@
     <Content Include="Content\less\bootstrap-variables.less" />
     <Content Include="Scripts\typings\jquery\jquery-tests.ts.tscparams" />
     <Content Include="Content\less\loading.less" />
+    <Content Include="Content\less\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\less\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\less\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\less\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\less\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\less\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\less\bootstrap\mixins\forms.less" />
+    <Content Include="Content\less\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\less\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\less\bootstrap\mixins\grid.less" />
+    <Content Include="Content\less\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\less\bootstrap\mixins\image.less" />
+    <Content Include="Content\less\bootstrap\mixins\labels.less" />
+    <Content Include="Content\less\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\less\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\less\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\less\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\less\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\less\bootstrap\mixins\panels.less" />
+    <Content Include="Content\less\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\less\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\less\bootstrap\mixins\resize.less" />
+    <Content Include="Content\less\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\less\bootstrap\mixins\size.less" />
+    <Content Include="Content\less\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\less\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\less\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\less\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\less\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\less\bootstrap\responsive-embed.less" />
+    <Content Include="Content\less\main.css.map">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\burgerama.pubxml" />
     <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
