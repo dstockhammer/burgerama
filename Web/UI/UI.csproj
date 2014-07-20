@@ -135,9 +135,6 @@
     <Content Include="Content\less\bootstrap-variables.css">
       <DependentUpon>bootstrap-variables.less</DependentUpon>
     </Content>
-    <Content Include="Content\less\bootstrap\variables.css">
-      <DependentUpon>variables.less</DependentUpon>
-    </Content>
     <Content Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
