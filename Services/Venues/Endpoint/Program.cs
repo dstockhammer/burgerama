@@ -32,7 +32,6 @@ namespace Burgerama.Services.Venues.Endpoint
             builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
             builder.RegisterModule<ServiceBusModule>();
             builder.RegisterModule<EndpointHostModule>();
-            builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
 
             return builder.Build();
         }
