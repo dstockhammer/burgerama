@@ -551,9 +551,6 @@
     <Content Include="Content\less\bootstrap\mixins\text-overflow.less" />
     <Content Include="Content\less\bootstrap\mixins\vendor-prefixes.less" />
     <Content Include="Content\less\bootstrap\responsive-embed.less" />
-    <Content Include="Content\less\main.css.map">
-      <DependentUpon>main.css</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\burgerama.pubxml" />
     <Content Include="Scripts\vendor\angularjs\angular-animate.min.js.map" />
     <Content Include="Scripts\vendor\angularjs\angular-cookies.min.js.map" />
