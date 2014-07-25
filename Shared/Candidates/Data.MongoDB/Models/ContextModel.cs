@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Burgerama.Shared.Candidates.Data.MongoDB.Models
@@ -11,6 +10,6 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB.Models
 
         public bool GracefullyHandleUnknownCandidates { get; set; }
 
-        public IEnumerable<Guid> Candidates { get; set; }
+        public IEnumerable<string> Candidates { get; set; }
     }
 }

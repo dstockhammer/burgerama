@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Burgerama.Shared.Candidates.MongoDB</id>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <title>Candidates: MongoDB</title>
     <authors>Burgerama Team</authors>
     <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>

@@ -1,4 +1,6 @@
-﻿using Burgerama.Shared.Candidates.Data.MongoDB.Models;
+﻿using System;
+using System.Linq;
+using Burgerama.Shared.Candidates.Data.MongoDB.Models;
 using Burgerama.Shared.Candidates.Domain;
 
 namespace Burgerama.Shared.Candidates.Data.MongoDB.Converters
@@ -14,7 +16,7 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB.Converters
             {
                 ContextKey = context.ContextKey,
                 GracefullyHandleUnknownCandidates = context.GracefullyHandleUnknownCandidates,
-                Candidates = context.Candidates
+                Candidates = context.Candidates.Select(c => c.ToString())
             };
         }
 
@@ -23,7 +25,8 @@ namespace Burgerama.Shared.Candidates.Data.MongoDB.Converters
             if (context == null)
                 return null;
 
-            return new Context(context.ContextKey, context.GracefullyHandleUnknownCandidates, context.Candidates);
+            var candidates = context.Candidates.Select(Guid.Parse);
+            return new Context(context.ContextKey, context.GracefullyHandleUnknownCandidates, candidates);
         }
     }
 }

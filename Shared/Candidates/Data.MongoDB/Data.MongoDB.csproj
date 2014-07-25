@@ -111,6 +111,14 @@
       <HintPath>..\packages\Burgerama.Common.DataAccess.MongoDB.0.2.0\lib\net451\Burgerama.Common.DataAccess.MongoDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Burgerama.Messaging.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.9.1\lib\net35\MongoDB.Bson.dll</HintPath>
       <Private>True</Private>
@@ -140,12 +148,6 @@
   <ItemGroup>
     <None Include="Data.MongoDB.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{AFB2E96A-F55E-4A67-B15E-C5586751C7EE}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
