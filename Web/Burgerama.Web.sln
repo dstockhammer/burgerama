@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{21E98781-43A3-4351-96FF-D63457D84B0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maintenance", "Maintenance\Maintenance.csproj", "{5FA0C399-00D2-4681-82E1-429AF5A9A682}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure|Any CPU = Azure|Any CPU
@@ -18,6 +20,12 @@ Global
 		{21E98781-43A3-4351-96FF-D63457D84B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E98781-43A3-4351-96FF-D63457D84B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E98781-43A3-4351-96FF-D63457D84B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA0C399-00D2-4681-82E1-429AF5A9A682}.Azure|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA0C399-00D2-4681-82E1-429AF5A9A682}.Azure|Any CPU.Build.0 = Release|Any CPU
+		{5FA0C399-00D2-4681-82E1-429AF5A9A682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA0C399-00D2-4681-82E1-429AF5A9A682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA0C399-00D2-4681-82E1-429AF5A9A682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA0C399-00D2-4681-82E1-429AF5A9A682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

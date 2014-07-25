@@ -1,0 +1,41 @@
+﻿<div class="page-header">
+    <h1>Burgerama <small>Maintenance Panel</small></h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Outings</h4>
+            </div>
+            <div class="panel-body">
+                <p><a class="btn btn-default" href="@Url.Action("Index", "Outings")">Overview &raquo;</a></p>
+                <p><a class="btn btn-default" href="@Url.Action("Create", "Outings")">Create outing &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Rating</h4>
+            </div>
+            <div class="panel-body">
+                <p><a class="btn btn-default" href="@Url.Action("Index", "Rating")">Overview &raquo;</a></p>
+                <p><a class="btn btn-default" href="@Url.Action("CreateContext", "Rating")">Create context &raquo;</a></p>
+                <p><a class="btn btn-default" href="@Url.Action("Synchronize", "Rating")">Synchronize candidates &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Voting</h4>
+            </div>
+            <div class="panel-body">
+                <p><a class="btn btn-default" href="@Url.Action("Index", "Voting")">Overview &raquo;</a></p>
+                <p><a class="btn btn-default" href="@Url.Action("CreateContext", "Voting")">Create context &raquo;</a></p>
+                <p><a class="btn btn-default" href="@Url.Action("Synchronize", "Voting")">Synchronize candidates &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+</div>
