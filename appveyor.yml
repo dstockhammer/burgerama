@@ -1,0 +1,92 @@
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+version: 1.0.{build}
+branches:
+  only:
+    - master
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+os: Windows Server 2012 R2
+clone_folder: C:\Projects\burgerama
+
+# environment variables
+environment:
+  AUTH0_ISSUER: https://burgerama.auth0.com/
+  AUTH0_AUDIENCE:
+    secure: jFEjt1cAxCboLVGNC0WyK+0ZzyFrnp9jsYCII2RYdyxUvaH5q0L3fPsYZd5g6A56
+  AUTH0_SECRET:
+    secure: 7LDsbRsymFC/DuvjByTRsDnH2g05gdWpATX3KIQq4kYdueLSq5IyXmx9V5y7tRFS5JSnC7avv7l7J5qwf8lfCSUlozIf2r7LLZ8d9NSFcFU=
+  LOGGING_USE_CONSOLE: false
+  LOGGING_USE_LOGENTRIES: true
+  LOGGING_LOGENTRIES_KEY:
+    secure: 2TmvYhJVLTc2lQrq0Bx7v8z0i0Zab4oPmRnI1fkDcS4aEQnddKiVvHHf0OAV/pLZ
+  MONGODB_DATABASE: burgerama_azure
+  MONGODB_CONN_STR:
+    secure: uyaFW1V3igQZnlCfNyeKlisA/q5k/O9wDhJ48E9Yeobc5JCkpZbdrSp0tL2ecCzHOgYYfA/zlkCnwQ0erws5at0wBjDglML4FEAyGhRnJQ0=
+  RABBITMQ_SERVER: rabbitmq.burgerama.co.uk
+  RABBITMQ_VHOST: azure
+  RABBITMQ_USERNAME: azure
+  RABBITMQ_PASSWORD:
+    secure: d30yH72Zp3GWsX293+q1SlZYx4h7T45neWcUGjE3DdA=
+
+# scripts that run after cloning repository
+install:
+  - ps: AppVeyor/install_codecontracts.ps1
+  - ps: AppVeyor/copy_configs.ps1
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+# disable automatic builds
+build: off
+
+# run custom scripts instead of automatic MSBuild
+build_script:
+  - ps: AppVeyor/build.ps1  
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+test:
+  assemblies:
+    - *.Tests.dll
+  
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+deploy:
+  - provider: Environment
+    name: Azure.Venues
+    on:
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Venues
+      
+  - provider: Environment
+    name: Azure.Outings
+    on:
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Outings
+
+  - provider: Environment
+    name: Azure.Ratings
+    on:
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Ratings
+
+  - provider: Environment
+    name: Azure.Voting
+    on:
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Voting
+
+# scripts to run before deployment
+before_deploy:
+  - ps: AppVeyor/pack_endpoint.ps1
+
+# scripts to run after deployment
+#after_deploy:
+
+# run custom scripts instead of provider deployments
+#deploy_script:
+
+# disable deployment
+#deploy: off
