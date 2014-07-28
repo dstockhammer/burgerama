@@ -14,6 +14,6 @@ $project = $projectNameParts[2];
 $projectDir = "$env:APPVEYOR_BUILD_FOLDER\Services\$project\Endpoint"
 $projectName = "Burgerama.Services.$project.Enpoint"
 
-msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:Transform /property:Configuration=$configuration;Path=$projectDir;Name=$projectName
-7z a -tzip "$projectName.zip" "$projectDir\bin\$configuration"
+msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:"Transform" /property:"Configuration=$configuration;Path=$projectDir;Name=$projectName"
+7z a -tzip "$projectName.zip" "$projectDir\bin\$configuration\*"
 Push-AppveyorArtifact "$projectName.zip"

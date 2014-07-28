@@ -40,9 +40,6 @@ install:
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
-# disable automatic builds
-build: off
-
 # run custom scripts instead of automatic MSBuild
 build_script:
   - ps: AppVeyor\build.ps1
