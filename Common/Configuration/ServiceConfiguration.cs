@@ -4,9 +4,14 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class ServiceConfiguration : ConfigurationSection
     {
-        public static ServiceConfiguration Load()
+        public static ServiceConfiguration Load(bool isRequired = true)
         {
-            return ConfigurationManager.GetSection("burgerama/service") as ServiceConfiguration;
+            var config = ConfigurationManager.GetSection("burgerama/service") as ServiceConfiguration;
+
+            if (isRequired && config == null)
+                throw new ConfigurationErrorsException("Configuration section not found: burgerama/service");
+
+            return config;
         }
 
         [ConfigurationProperty("key", IsRequired = true)]

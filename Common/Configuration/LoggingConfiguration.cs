@@ -4,9 +4,14 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class LoggingConfiguration : ConfigurationSection
     {
-        public static LoggingConfiguration Load()
+        public static LoggingConfiguration Load(bool isRequired = true)
         {
-            return ConfigurationManager.GetSection("burgerama/logging") as LoggingConfiguration;
+            var config = ConfigurationManager.GetSection("burgerama/logging") as LoggingConfiguration;
+
+            if (isRequired && config == null)
+                throw new ConfigurationErrorsException("Configuration section not found: burgerama/logging");
+
+            return config;
         }
 
         [ConfigurationProperty("useConsole", IsRequired = false, DefaultValue = false)]

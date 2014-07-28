@@ -15,8 +15,6 @@ namespace Burgerama.Common.Authentication.Owin
             Contract.Requires<ArgumentNullException>(app != null);
 
             var config = Auth0Configuration.Load();
-            if (config == null)
-                return;
 
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
             {

@@ -35,7 +35,7 @@ namespace Burgerama.Messaging.MassTransit
         {
             return ServiceBusFactory.New(sbc =>
             {
-                var config = (RabbitMqConfiguration)ConfigurationManager.GetSection("burgerama/rabbitMq");
+                var config = RabbitMqConfiguration.Load();
                 var uri = string.Format("{0}/{1}/", config.Server, config.VHost);
                 var credentials = string.Format("{0}:{1}", config.UserName, config.Password);
                 var queue = GetEntryAssembly().GetName().Name.ToLowerInvariant();

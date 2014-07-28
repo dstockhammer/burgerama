@@ -4,9 +4,14 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class MongoDbConfiguration : ConfigurationSection
     {
-        public static MongoDbConfiguration Load()
+        public static MongoDbConfiguration Load(bool isRequired = true)
         {
-            return ConfigurationManager.GetSection("burgerama/mongoDb") as MongoDbConfiguration;
+            var config = ConfigurationManager.GetSection("burgerama/mongoDb") as MongoDbConfiguration;
+
+            if (isRequired && config == null)
+                throw new ConfigurationErrorsException("Configuration section not found: burgerama/mongoDb");
+
+            return config;
         }
 
         [ConfigurationProperty("database", IsRequired = true)]

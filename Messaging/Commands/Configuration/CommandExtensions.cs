@@ -28,12 +28,12 @@ namespace Burgerama.Messaging.Commands.Configuration
         {
             Contract.Requires<ArgumentNullException>(command != null);
 
-            var config = (RabbitMqConfiguration)ConfigurationManager.GetSection("burgerama/rabbitMq");
+            var config = RabbitMqConfiguration.Load();
             var uri = string.Format("{0}/{1}/", config.Server, config.VHost);
             var credentials = string.Format("{0}:{1}", config.UserName, config.Password);
             var queue = command.GetEndpointName();
 
-            return new Uri("rabbitmq://" + uri + queue);
+            return new Uri("rabbitmq://" + credentials + "@" + uri + queue);
         }
     }
 }

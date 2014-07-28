@@ -4,9 +4,14 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class RabbitMqConfiguration : ConfigurationSection
     {
-        public static RabbitMqConfiguration Load()
+        public static RabbitMqConfiguration Load(bool isRequired = true)
         {
-            return ConfigurationManager.GetSection("burgerama/rabbitMq") as RabbitMqConfiguration;
+            var config = ConfigurationManager.GetSection("burgerama/rabbitMq") as RabbitMqConfiguration;
+
+            if (isRequired && config == null)
+                throw new ConfigurationErrorsException("Configuration section not found: burgerama/rabbitMq");
+
+            return config;
         }
 
         [ConfigurationProperty("server", IsRequired = true)]

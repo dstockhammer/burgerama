@@ -4,9 +4,14 @@ namespace Burgerama.Common.Configuration
 {
     public sealed class Auth0Configuration : ConfigurationSection
     {
-        public static Auth0Configuration Load()
+        public static Auth0Configuration Load(bool isRequired = true)
         {
-            return ConfigurationManager.GetSection("burgerama/auth0") as Auth0Configuration;
+            var config = ConfigurationManager.GetSection("burgerama/auth0") as Auth0Configuration;
+
+            if (isRequired && config == null)
+                throw new ConfigurationErrorsException("Configuration section not found: burgerama/auth0");
+
+            return config;
         }
 
         [ConfigurationProperty("issuer", IsRequired = true)]

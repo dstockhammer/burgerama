@@ -22,8 +22,6 @@ namespace Burgerama.Common.Logging
             Contract.Ensures(Contract.Result<ILogger>() != null);
 
             var config = LoggingConfiguration.Load();
-            if (config == null)
-                throw new ConfigurationErrorsException("Logging must be configured.");
 
             var loggerConfig = new LoggerConfiguration();
             loggerConfig.Enrich.WithProperty("Machine", Environment.MachineName);
