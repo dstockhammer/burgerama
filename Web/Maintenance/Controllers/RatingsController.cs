@@ -2,31 +2,31 @@
 using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using Burgerama.Messaging.Commands;
-using Burgerama.Messaging.Commands.Voting;
-using Burgerama.Web.Maintenance.Models.Voting;
+using Burgerama.Messaging.Commands.Ratings;
+using Burgerama.Web.Maintenance.Models.Ratings;
 
 namespace Burgerama.Web.Maintenance.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class VotingController : Controller
+    public class RatingsController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher;
 
-        public VotingController(ICommandDispatcher commandDispatcher)
+        public RatingsController(ICommandDispatcher commandDispatcher)
         {
             _commandDispatcher = commandDispatcher;
         }
 
         public ActionResult Index()
         {
-            ViewBag.Title = "Voting";
+            ViewBag.Title = "Ratings";
 
             return View();
         }
 
         public ActionResult CreateContext()
         {
-            ViewBag.Title = "Create Voting Context";
+            ViewBag.Title = "Create Rating Context";
 
             return View();
         }
@@ -48,7 +48,7 @@ namespace Burgerama.Web.Maintenance.Controllers
 
             return RedirectToAction("Index");
         }
-
+        
         public ActionResult Synchronize()
         {
             ViewBag.Title = "Syncronize Candidates";
