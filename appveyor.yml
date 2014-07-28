@@ -14,6 +14,7 @@ clone_folder: C:\Projects\burgerama
 
 # environment variables
 environment:
+  CONFIGURATION: Azure
   AUTH0_ISSUER: https://burgerama.auth0.com/
   AUTH0_AUDIENCE:
     secure: jFEjt1cAxCboLVGNC0WyK+0ZzyFrnp9jsYCII2RYdyxUvaH5q0L3fPsYZd5g6A56
@@ -63,23 +64,26 @@ deploy:
     name: Azure.Venues
     on:
       APPVEYOR: true
+      CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Venues
       
   - provider: Environment
     name: Azure.Outings
     on:
       APPVEYOR: true
+      CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Outings
 
   - provider: Environment
     name: Azure.Ratings
     on:
       APPVEYOR: true
+      CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Ratings
 
   - provider: Environment
     name: Azure.Voting
     on:
       APPVEYOR: true
+      CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Voting
-

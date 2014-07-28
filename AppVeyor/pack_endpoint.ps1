@@ -12,8 +12,9 @@ if ($projectNameParts[1] -ne "Services") {
 
 $project = $projectNameParts[2];
 $projectDir = "$env:APPVEYOR_BUILD_FOLDER\Services\$project\Endpoint"
-$projectName = "Burgerama.Services.$project.Enpoint"
+$projectName = "Burgerama.Services.$project.Endpoint"
 
-msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:"Transform" /property:"Configuration=$configuration;Path=$projectDir;Name=$projectName"
-7z a -tzip "$projectName.zip" "$projectDir\bin\$configuration\*"
+Write-Host "Transforming and packaging $projectName..."
+msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:"Transform" /property:"Configuration=$env:CONFIGURATION;Path=$projectDir;Name=$projectName"
+7z a -tzip "$projectName.zip" "$projectDir\bin\$env:CONFIGURATION\*"
 Push-AppveyorArtifact "$projectName.zip"
