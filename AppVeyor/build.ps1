@@ -11,7 +11,7 @@ if ($projectNameParts[0] -ne "Burgerama") {
 # Burgerama.Web.{Name?}
 if ($projectNameParts[1] -eq "Web") {
     $solutionDir = "Web"
-    $solutionName = "Burgerama.Web"
+    $solutionName = "Burgerama.Web.sln"
 }
 # Burgerama.Services.{Name}
 ElseIf ($projectNameParts[1] -eq "Services") {
