@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.Events.Voting;
@@ -30,9 +29,6 @@ namespace Burgerama.Services.Voting.Domain
 
         public override IEnumerable<IEvent> AddItem(Vote vote)
         {
-            Contract.Requires<ArgumentNullException>(vote != null);
-            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
-
             if (IsActiveOn(vote.CreatedOn) == false)
                 return Enumerable.Empty<IEvent>();
 

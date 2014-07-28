@@ -31,6 +31,7 @@ namespace Burgerama.Services.Ratings.Endpoint
             builder.RegisterType<ContextRepository>().As<IContextRepository>();
             builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
             builder.RegisterType<CandidateFactory>().As<ICandidateFactory>();
+            builder.RegisterType<ContextService>().As<IContextService>();
             builder.RegisterType<CandidateService<Rating>>().As<ICandidateService>();
 
             // Logging

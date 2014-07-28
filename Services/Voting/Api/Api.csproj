@@ -140,9 +140,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Messaging.Events.0.2.0\lib\net451\Burgerama.Messaging.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.Events.Voting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.4\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+    <Reference Include="Burgerama.Messaging.Events.Voting">
+      <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.5\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit">
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
@@ -158,9 +158,9 @@
     <Reference Include="Burgerama.Shared.Candidates.Domain">
       <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Shared.Candidates.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.1\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
+    <Reference Include="Burgerama.Shared.Candidates.Services">
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.2\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>

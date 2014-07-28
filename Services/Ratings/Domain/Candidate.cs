@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.Events.Ratings;
@@ -42,9 +41,6 @@ namespace Burgerama.Services.Ratings.Domain
 
         public override IEnumerable<IEvent> AddItem(Rating rating)
         {
-            Contract.Requires<ArgumentNullException>(rating != null);
-            Contract.Ensures(Contract.Result<IEnumerable<IEvent>>() != null);
-
             if (IsActiveOn(rating.CreatedOn) == false)
                 return Enumerable.Empty<IEvent>();
 

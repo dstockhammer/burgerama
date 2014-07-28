@@ -118,6 +118,9 @@
     <Reference Include="Burgerama.Messaging.MassTransit.Events">
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.2.1\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
     </Reference>
+    <Reference Include="Burgerama.Shared.Candidates.Domain">
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
     </Reference>
@@ -151,19 +154,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CandidateService.cs" />
+    <Compile Include="ContextService.cs" />
+    <Compile Include="Contracts\ContextServiceContract.cs" />
     <Compile Include="Contracts\CandidateServiceContract.cs" />
     <Compile Include="Contracts\ICandidateService.cs" />
+    <Compile Include="Contracts\IContextService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{AFB2E96A-F55E-4A67-B15E-C5586751C7EE}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Services.nuspec" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

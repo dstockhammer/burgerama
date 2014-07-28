@@ -165,8 +165,9 @@
     <Reference Include="Burgerama.Messaging.Commands">
       <HintPath>..\packages\Burgerama.Messaging.Commands.0.2.0\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Messaging.Commands.Ratings">
-      <HintPath>..\packages\Burgerama.Messaging.Commands.Ratings.0.2.1\lib\net451\Burgerama.Messaging.Commands.Ratings.dll</HintPath>
+    <Reference Include="Burgerama.Messaging.Commands.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Messaging.Commands.Ratings.0.2.2\lib\net451\Burgerama.Messaging.Commands.Ratings.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.Endpoint.Host, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -178,7 +179,7 @@
     </Reference>
     <Reference Include="Burgerama.Messaging.Events.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.4\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Events.Ratings.0.2.5\lib\net451\Burgerama.Messaging.Events.Ratings.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -198,7 +199,7 @@
     </Reference>
     <Reference Include="Burgerama.Shared.Candidates.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.1\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Services.0.2.2\lib\net451\Burgerama.Shared.Candidates.Services.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
@@ -265,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Handlers\CandidateHandler.cs" />
+    <Compile Include="Handlers\ContextHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

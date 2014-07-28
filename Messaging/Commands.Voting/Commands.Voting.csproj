@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="CloseCandidate.cs" />
     <Compile Include="CreateCandidate.cs" />
+    <Compile Include="CreateContext.cs" />
     <Compile Include="OpenCandidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
