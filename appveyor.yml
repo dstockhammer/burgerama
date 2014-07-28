@@ -50,9 +50,9 @@ build_script:
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
-tests:
-  assemblies:
-    - *\*.Tests.dll
+#tests:
+#  assemblies:
+#    - *\*.Tests.dll
   
 #---------------------------------#
 #     deployment configuration    #
