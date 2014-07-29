@@ -54,9 +54,8 @@ build_script:
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
+# auto mode scans the entire build folder
 test:
-  assemblies:
-    - *.Tests.dll
   
 #---------------------------------#
 #     deployment configuration    #
