@@ -5,6 +5,7 @@ version: 1.0.{build}
 branches:
   only:
     - feature/appveyor
+shallow_clone: true
 
 #---------------------------------#
 #    environment configuration    #
@@ -39,6 +40,8 @@ environment:
 
 # scripts that run after cloning repository
 install:
+  - echo %APPVEYOR_BUILD_ID%
+  - echo %APPVEYOR_JOB_ID%
   - ps: AppVeyor\install_codecontracts.ps1
   - ps: AppVeyor\copy_configs.ps1
 
