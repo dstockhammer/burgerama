@@ -40,8 +40,6 @@ environment:
 
 # scripts that run after cloning repository
 install:
-  - echo %APPVEYOR_BUILD_ID%
-  - echo %APPVEYOR_JOB_ID%
   - ps: AppVeyor\install_codecontracts.ps1
   - ps: AppVeyor\copy_configs.ps1
 
@@ -156,20 +154,6 @@ deploy:
       APPVEYOR: true
       CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Voting
-  
-  # Endpoints
-  - provider: FTP
-    server: 134.0.28.206
-    username: burgerama
-    password:
-      secure: wNKsafGahN8lIvOaTzcESyenHS1T+06RIB8oLpNqfxA=
-    folder: /home/burgerama
-    enable_ssl: true
-    active_mode: false
-    artifact: $(APPVEYOR_PROJECT_NAME).Endpoint.zip
-    on:
-      APPVEYOR: true
-      CONFIGURATION: Azure
 
 after_deploy:
   - ps: AppVeyor\ssh_start_endpoint.ps1

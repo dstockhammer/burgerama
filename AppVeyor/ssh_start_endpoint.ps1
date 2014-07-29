@@ -17,11 +17,14 @@ if (Test-Path -path $endpointArtifact) {
     Remove-Module SSH-Sessions -ErrorAction SilentlyContinue
     Import-Module "$moduleDir\SSH-Sessions"
     New-SshSession -ComputerName $env:SSH_IP -Username $env:SSH_USERNAME -Password $env:SSH_PASSWORD
+    
+    $artifactUrl = "https://ci.appveyor.com/api/buildjobs/$env:APPVEYOR_JOB_ID/artifacts/$endpointName.zip"
 
     Execute-Command("cd ~")
+    Execute-Command("wget $artifactUrl -P /home/burgerama/deployments")
     Execute-Command("forever stop -c mono environments/$endpointName/$endpointName.exe")
     Execute-Command("rm -R environments/$endpointName")
-    Execute-Command("unzip deployments/endpointName.zip -d environments/$endpointName")
+    Execute-Command("unzip deployments/$endpointName.zip -d environments/$endpointName")
     Execute-Command("sed -i 's/Config\\/Config\//g' environments/$endpointName/$endpointName.exe.config")
     Execute-Command("forever start -c mono environments/$endpointName/$endpointName.exe")
     Execute-Command("exit")
