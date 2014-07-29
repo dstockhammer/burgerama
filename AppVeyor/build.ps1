@@ -13,16 +13,18 @@ if ($projectNameParts[0] -ne "Burgerama") {
 
 # Burgerama.Web.{Name}
 if ($projectNameParts[1] -eq "Web") {
+    $name = $projectNameParts[2]
     $solutionDir = "$env:APPVEYOR_BUILD_FOLDER\Web"
     $solutionName = "Burgerama.Web.sln"
-	$webProjDir = "$env:APPVEYOR_BUILD_FOLDER\Web\$projectNameParts[2]"
-	$webProjName = "$projectNameParts[2].csproj"
+	$webProjDir = "$env:APPVEYOR_BUILD_FOLDER\Web\$name"
+	$webProjName = "$name.csproj"
 	$artifactName = "$env:APPVEYOR_PROJECT_NAME.Api.zip"
 }
 # Burgerama.Services.{Name}
 ElseIf ($projectNameParts[1] -eq "Services") {
-    $solutionDir = "$env:APPVEYOR_BUILD_FOLDER\Services\$projectNameParts[2]"
-    $solutionName = "Burgerama.Services.$projectNameParts[2].sln"
+    $name = $projectNameParts[2]
+    $solutionDir = "$env:APPVEYOR_BUILD_FOLDER\Services\$name"
+    $solutionName = "Burgerama.Services.$name.sln"
 	$webProjDir = "$solutionDir\Api"
 	$webProjName = "Api.csproj"
 	$artifactName = "$env:APPVEYOR_PROJECT_NAME.zip"

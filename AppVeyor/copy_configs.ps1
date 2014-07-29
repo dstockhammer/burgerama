@@ -1,5 +1,5 @@
 $configSrcDir = "Configuration"
-$configDstDir = "Services"
+$configDstDirs = @("Services", "Web")
 
 $configFiles = @("Auth0", "Logging", "MongoDb", "RabbitMq")
 $solutions =  @("Venues", "Outings", "OutingScheduler", "Ratings", "Voting", "Web")
@@ -44,16 +44,18 @@ foreach ($configFile in $configFiles) {
 
 Write-Host "Copying config files into appropriate directories..."
 foreach ($solution in $solutions) {
-    $currentSolutionDir = "$env:APPVEYOR_BUILD_FOLDER\$configDstDir\$solution"
+    foreach ($configDstDir in $configDstDirs) {
+        $currentSolutionDir = "$env:APPVEYOR_BUILD_FOLDER\$configDstDir\$solution"
 
-    if (Test-Path -path $currentSolutionDir) {
-        foreach ($project in $projects) {
-            $currentProjectDir = "$currentSolutionDir\$project"
-            $currentConfigDir = "$currentProjectDir\Config"
+        if (Test-Path -path $currentSolutionDir) {
+            foreach ($project in $projects) {
+                $currentProjectDir = "$currentSolutionDir\$project"
+                $currentConfigDir = "$currentProjectDir\Config"
 
-            if ((Test-Path -path $currentProjectDir) -and (Test-Path -path $currentConfigDir)) {
-                Write-Host "Copying config files to $currentProjectDir"
-                Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$currentConfigDir"
+                if ((Test-Path -path $currentProjectDir) -and (Test-Path -path $currentConfigDir)) {
+                    Write-Host "Copying config files to $currentProjectDir"
+                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$currentConfigDir"
+                }
             }
         }
     }
