@@ -1,0 +1,155 @@
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+version: 1.0.{build}
+branches:
+  only:
+    - feature/appveyor
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+os: Windows Server 2012 R2
+clone_folder: C:\Projects\burgerama
+shallow_clone: true
+
+# environment variables
+environment:
+  CONFIGURATION: Azure
+  AUTH0_ISSUER: https://burgerama.auth0.com/
+  AUTH0_AUDIENCE:
+    secure: jFEjt1cAxCboLVGNC0WyK+0ZzyFrnp9jsYCII2RYdyxUvaH5q0L3fPsYZd5g6A56
+  AUTH0_SECRET:
+    secure: 7LDsbRsymFC/DuvjByTRsDnH2g05gdWpATX3KIQq4kYdueLSq5IyXmx9V5y7tRFS5JSnC7avv7l7J5qwf8lfCSUlozIf2r7LLZ8d9NSFcFU=
+  LOGGING_USE_CONSOLE: false
+  LOGGING_USE_LOGENTRIES: true
+  LOGGING_LOGENTRIES_KEY:
+    secure: 2TmvYhJVLTc2lQrq0Bx7v8z0i0Zab4oPmRnI1fkDcS4aEQnddKiVvHHf0OAV/pLZ
+  MONGODB_DATABASE: burgerama_azure
+  MONGODB_CONN_STR:
+    secure: uyaFW1V3igQZnlCfNyeKlisA/q5k/O9wDhJ48E9Yeobc5JCkpZbdrSp0tL2ecCzHOgYYfA/zlkCnwQ0erws5at0wBjDglML4FEAyGhRnJQ0=
+  RABBITMQ_SERVER: rabbitmq.burgerama.co.uk
+  RABBITMQ_VHOST: azure
+  RABBITMQ_USERNAME: azure
+  RABBITMQ_PASSWORD:
+    secure: d30yH72Zp3GWsX293+q1SlZYx4h7T45neWcUGjE3DdA=
+  SSH_IP: 134.0.28.206
+  SSH_USERNAME: burgerama
+  SSH_PASSWORD:
+    secure: wNKsafGahN8lIvOaTzcESyenHS1T+06RIB8oLpNqfxA=
+
+# scripts that run after cloning repository
+install:
+  - ps: AppVeyor\install_codecontracts.ps1
+  - ps: AppVeyor\copy_configs.ps1
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+# run custom scripts instead of automatic MSBuild
+build_script:
+  - ps: AppVeyor\build.ps1
+  - ps: AppVeyor\pack_endpoint.ps1
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+# auto mode scans the entire build folder
+test:
+  
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+deploy:
+  # Burgerama.Web.UI
+  - provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=burgerama
+    website: burgerama
+    username: $burgerama
+    password:
+      secure: 3rfPLnCodRlZvsnswgnz0NAFqM81p1tr3eBL4meNZZ6W2byDswTl+eP6i14qywR/l1oLO4bRrNcN00aEDAvuSQ==
+    ntlm: false
+    remove_files: false
+    artifact: $(APPVEYOR_PROJECT_NAME).zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Web.UI
+      
+  # Burgerama.Web.Maintenance
+  - provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=maintenace-burgerama
+    website: maintenace-burgerama
+    username: $maintenace-burgerama
+    password:
+      secure: cn7fVIxO04ocyCrWwiFpq5yslSNkG5E1ySWUva0i3FihJuLy8xvFHo6KCXu+orQ2lrj0x7d4LtTqJ1jXTtZ3ow==
+    ntlm: false
+    remove_files: false
+    artifact: $(APPVEYOR_PROJECT_NAME).zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Web.Maintenance
+
+  # Burgerama.Services.Venues.Api
+  - provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=venues-api-burgerama
+    website: venues-api-burgerama
+    username: $venues-api-burgerama
+    password:
+      secure: D6v8kXDBp+SGICM1Wx9U0ZQ0Uf2M2LTyHKQ+Ho5WhN990OVbvopgTelfvEBzlhwVame0RNPcJY7XFq6tY7g/1g==
+    ntlm: false
+    remove_files: false
+    artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Venues
+   
+  # Burgerama.Services.Outings.Api
+  - provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=outings-api-burgerama
+    website: outings-api-burgerama
+    username: $outings-api-burgerama
+    password:
+      secure: pY361DutgIy30FABPrWjUZ/UULrPQ0bO7HGW8zPmuuxYUyWsJ7f/XAXtDIGURstRGJxY9SKygIIBrOr2JdbeZg==
+    ntlm: false
+    remove_files: false
+    artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Outings
+
+  # Burgerama.Services.Ratings.Api
+  - provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=ratings-api-burgerama
+    website: ratings-api-burgerama
+    username: $ratings-api-burgerama
+    password:
+      secure: gDtpBvIb7Z4wN74CUBq0lNleQAoEUueitKy9dPN5msPUwiPHHtIKWW+xjcUGrPNQDFgS5bzNmS4JpAVChYJOgg==
+    ntlm: false
+    remove_files: false
+    artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Ratings
+
+  # Burgerama.Services.Voting.Api
+  - provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=voting-api-burgerama
+    website: voting-api-burgerama
+    username: $voting-api-burgerama
+    password:
+      secure: YyKlUqj+9+DI5GZA0xpvyKdtpIUXR17W0RzOfNw8OxNXDqLPYRujWl5RI3L0uLzVvSM+x5pjY1SJbTp90ImDbQ==
+    ntlm: false
+    remove_files: false
+    artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Services.Voting
+
+after_deploy:
+  - ps: AppVeyor\ssh_start_endpoint.ps1
