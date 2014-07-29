@@ -7,14 +7,14 @@ if ($projectNameParts[0] -ne "Burgerama") {
 
 if ($projectNameParts[1] -ne "Services") {
     Write-Host "Skipping endpoint for non-service project"
-    Break
 }
+Else {
+    $project = $projectNameParts[2];
+    $projectDir = "$env:APPVEYOR_BUILD_FOLDER\Services\$project\Endpoint"
+    $projectName = "Burgerama.Services.$project.Endpoint.zip"
 
-$project = $projectNameParts[2];
-$projectDir = "$env:APPVEYOR_BUILD_FOLDER\Services\$project\Endpoint"
-$projectName = "Burgerama.Services.$project.Endpoint.zip"
-
-Write-Host "Transforming and packaging $projectName..."
-msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:"Transform" /property:"Configuration=$env:CONFIGURATION;Path=$projectDir;Name=$projectName"
-7z a -tzip "$projectName" "$projectDir\bin\$env:CONFIGURATION\*"
-Push-AppveyorArtifact "$projectName"
+    Write-Host "Transforming and packaging $projectName..."
+    msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:"Transform" /property:"Configuration=$env:CONFIGURATION;Path=$projectDir;Name=$projectName"
+    7z a -tzip "$projectName" "$projectDir\bin\$env:CONFIGURATION\*"
+    Push-AppveyorArtifact "$projectName"
+}

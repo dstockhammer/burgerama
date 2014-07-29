@@ -53,7 +53,7 @@ foreach ($solution in $solutions) {
 
             if ((Test-Path -path $currentProjectDir) -and (Test-Path -path $currentConfigDir)) {
                 Write-Host "Copying config files to $currentProjectDir"
-                #Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$currentConfigDir"
+                Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$currentConfigDir"
             }
         }
     }
@@ -61,4 +61,5 @@ foreach ($solution in $solutions) {
 
 # special treatment for Burgerama.Web.Maintenance
 $webConfigDir = "$env:APPVEYOR_BUILD_FOLDER\Web\Maintenance\Config"
+Write-Host "Copying config files to $currentProjectDir"
 Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$webConfigDir"
