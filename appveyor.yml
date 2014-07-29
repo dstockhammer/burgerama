@@ -76,21 +76,21 @@ deploy:
       CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Web.UI
       
-  # Burgerama.Web.Management    
+  # Burgerama.Web.Maintenance    
   - deploy:
     provider: WebDeploy
-    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=management-burgerama
-    website: management-burgerama
-    username: $management-burgerama
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=maintenace-burgerama
+    website: maintenace-burgerama
+    username: $maintenace-burgerama
     password:
-      secure: obSFUpJ48Ka+ZjsFp2Hdy1Bc95wVLJ8A3iBLYz6EaIcaK+J61UpsTeCjT5EcppiWbUfb9wxcfdNzYZ5AVNqxDw==
+      secure: cn7fVIxO04ocyCrWwiFpq5yslSNkG5E1ySWUva0i3FihJuLy8xvFHo6KCXu+orQ2lrj0x7d4LtTqJ1jXTtZ3ow==
     ntlm: false
     remove_files: false
-    artifact: Burgerama.Web.Management.zip
+    artifact: Burgerama.Web.Maintenance.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
-      APPVEYOR_PROJECT_NAME: Burgerama.Web.Management
+      APPVEYOR_PROJECT_NAME: Burgerama.Web.Maintenance
 
   # Burgerama.Services.Venues
   - deploy:
@@ -102,7 +102,7 @@ deploy:
       secure: D6v8kXDBp+SGICM1Wx9U0ZQ0Uf2M2LTyHKQ+Ho5WhN990OVbvopgTelfvEBzlhwVame0RNPcJY7XFq6tY7g/1g==
     ntlm: false
     remove_files: false
-    artifact: Burgerama.Services.Venues.zip
+    artifact: Burgerama.Services.Venues.Api.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
@@ -118,7 +118,7 @@ deploy:
       secure: pY361DutgIy30FABPrWjUZ/UULrPQ0bO7HGW8zPmuuxYUyWsJ7f/XAXtDIGURstRGJxY9SKygIIBrOr2JdbeZg==
     ntlm: false
     remove_files: false
-    artifact: Burgerama.Services.Outings.zip
+    artifact: Burgerama.Services.Outings.Api.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
@@ -134,7 +134,7 @@ deploy:
       secure: gDtpBvIb7Z4wN74CUBq0lNleQAoEUueitKy9dPN5msPUwiPHHtIKWW+xjcUGrPNQDFgS5bzNmS4JpAVChYJOgg==
     ntlm: false
     remove_files: false
-    artifact: Burgerama.Services.Ratings.zip
+    artifact: Burgerama.Services.Ratings.Api.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
@@ -150,7 +150,7 @@ deploy:
       secure: YyKlUqj+9+DI5GZA0xpvyKdtpIUXR17W0RzOfNw8OxNXDqLPYRujWl5RI3L0uLzVvSM+x5pjY1SJbTp90ImDbQ==
     ntlm: false
     remove_files: false
-    artifact: Burgerama.Services.Voting.zip
+    artifact: Burgerama.Services.Voting.Api.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
