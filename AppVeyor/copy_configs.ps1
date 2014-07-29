@@ -2,8 +2,8 @@ $configSrcDir = "Configuration"
 $configDstDirs = @("Services", "Web")
 
 $configFiles = @("Auth0", "Logging", "MongoDb", "RabbitMq")
-$solutions =  @("Venues", "Outings", "OutingScheduler", "Ratings", "Voting", "Web")
-$projects = @("Api", "App", "Endpoint", "Tests", "Maintenance")
+$solutions =  @("Venues", "Outings", "OutingScheduler", "Ratings", "Voting")
+$projects = @("Api", "App", "Endpoint", "Tests")
 
 Write-Host "Updating variables in config files..."
 foreach ($configFile in $configFiles) {
@@ -44,19 +44,21 @@ foreach ($configFile in $configFiles) {
 
 Write-Host "Copying config files into appropriate directories..."
 foreach ($solution in $solutions) {
-    foreach ($configDstDir in $configDstDirs) {
-        $currentSolutionDir = "$env:APPVEYOR_BUILD_FOLDER\$configDstDir\$solution"
+    $currentSolutionDir = "$env:APPVEYOR_BUILD_FOLDER\$configDstDir\$solution"
 
-        if (Test-Path -path $currentSolutionDir) {
-            foreach ($project in $projects) {
-                $currentProjectDir = "$currentSolutionDir\$project"
-                $currentConfigDir = "$currentProjectDir\Config"
+    if (Test-Path -path $currentSolutionDir) {
+        foreach ($project in $projects) {
+            $currentProjectDir = "$currentSolutionDir\$project"
+            $currentConfigDir = "$currentProjectDir\Config"
 
-                if ((Test-Path -path $currentProjectDir) -and (Test-Path -path $currentConfigDir)) {
-                    Write-Host "Copying config files to $currentProjectDir"
-                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$currentConfigDir"
-                }
+            if ((Test-Path -path $currentProjectDir) -and (Test-Path -path $currentConfigDir)) {
+                Write-Host "Copying config files to $currentProjectDir"
+                #Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$currentConfigDir"
             }
         }
     }
 }
+
+# special treatment for Burgerama.Web.Maintenance
+$webConfigDir = "$env:APPVEYOR_BUILD_FOLDER\Web\Maintenance\Config"
+Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$webConfigDir"
