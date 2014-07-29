@@ -18,7 +18,7 @@ if ($projectNameParts[1] -eq "Web") {
     $solutionName = "Burgerama.Web.sln"
 	$webProjDir = "$env:APPVEYOR_BUILD_FOLDER\Web\$name"
 	$webProjName = "$name.csproj"
-	$artifactName = "$env:APPVEYOR_PROJECT_NAME.Api.zip"
+	$artifactName = "$env:APPVEYOR_PROJECT_NAME.zip"
 }
 # Burgerama.Services.{Name}
 ElseIf ($projectNameParts[1] -eq "Services") {
@@ -27,7 +27,7 @@ ElseIf ($projectNameParts[1] -eq "Services") {
     $solutionName = "Burgerama.Services.$name.sln"
 	$webProjDir = "$solutionDir\Api"
 	$webProjName = "Api.csproj"
-	$artifactName = "$env:APPVEYOR_PROJECT_NAME.zip"
+	$artifactName = "$env:APPVEYOR_PROJECT_NAME.Api.zip"
 }
 Else {
     Add-AppveyorMessage "Invalid project name" -Category Error
@@ -37,8 +37,8 @@ Else {
 nuget restore "$solutionDir\$solutionName"
 
 Write-Host "Building $solutionName..."
-msbuild "$solutionDir\$solutionName" /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="$env:CONFIGURATION" /p:DeployOnBuild=True /p:PublishProfile=appveyor
+msbuild "$solutionDir\$solutionName" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="$env:CONFIGURATION"
 
 Write-Host "Packaging $webProjName..."
-msbuild "$webProjDir\$webProjName" /t:Package /p:PackageLocation="$artifactName" /p:PackageAsSingleFile=True
-Push-AppveyorArtifact "$artifactName"
+msbuild "$webProjDir\$webProjName" /verbosity:minimal /t:Package /p:PackageLocation="$env:APPVEYOR_BUILD_FOLDER\$artifactName" /p:PackageAsSingleFile=True /p:Configuration="$env:CONFIGURATION"
+Push-AppveyorArtifact "$env:APPVEYOR_BUILD_FOLDER\$artifactName"
