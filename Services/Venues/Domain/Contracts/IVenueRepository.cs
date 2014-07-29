@@ -13,6 +13,9 @@ namespace Burgerama.Services.Venues.Domain.Contracts
 
         IEnumerable<Venue> GetAll();
 
+        IEnumerable<Venue> Find(VenueQuery query);
+
         void SaveOrUpdate(Venue venue);
+
     }
 }

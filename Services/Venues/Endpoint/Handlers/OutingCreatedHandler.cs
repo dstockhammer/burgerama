@@ -1,4 +1,5 @@
 ﻿using Burgerama.Messaging.Events.Outings;
+using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
 using MassTransit;
 using Serilog;
@@ -27,7 +28,8 @@ namespace Burgerama.Services.Venues.Endpoint.Handlers
                 return;
             }
 
-            if (venue.AddOuting(message.OutingId) == false)
+            var outing = new Outing(message.OutingId, message.DateTime);
+            if (venue.AddOuting(outing) == false)
             {
                 _logger.Error("Tried to add outing {OutingId} to venue {VenueId}, but the outing already existed.",
                     message.OutingId, message.VenueId);

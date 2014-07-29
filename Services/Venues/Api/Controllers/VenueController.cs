@@ -7,11 +7,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Burgerama.Common.Authentication.Identity;
 using Burgerama.Messaging.Commands;
-using Burgerama.Messaging.Commands.Ratings;
 using Burgerama.Messaging.Events;
 using Burgerama.Messaging.Events.Venues;
 using Burgerama.Services.Venues.Api.Converters;
 using Burgerama.Services.Venues.Api.Models;
+using Burgerama.Services.Venues.Data.Models;
 using Burgerama.Services.Venues.Domain.Contracts;
 using Serilog;
 
@@ -44,10 +44,10 @@ namespace Burgerama.Services.Venues.Api.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<VenueModel>))]
-        public IHttpActionResult GetAllVenues()
+        public IHttpActionResult QueryVenues([FromUri]VenueQuery query)
         {
-            var venues = _venueRepository.GetAll()
-                .Select(v => v.ToModel());
+            var venues = _venueRepository.Find(query)
+                    .Select(v => v.ToModel());
 
             return Ok(venues);
         }
@@ -106,19 +106,18 @@ namespace Burgerama.Services.Venues.Api.Controllers
                 Title = venue.Name
             });
 
-            _commandDispatcher.Send(new CreateCandidate
+            _commandDispatcher.Send(new Messaging.Commands.Ratings.CreateCandidate
             {
                 ContextKey = VenueContextKey,
                 Reference = venue.Id
             });
 
-            // todo: enable voting
-            //_commandDispatcher.Send(new Burgerama.Messaging.Commands.Voting.CreateCandidate
-            //{
-            //    ContextKey = VenueContextKey,
-            //    Reference = venue.Id,
-            //    OpeningDate = venue.CreatedOn
-            //});
+            _commandDispatcher.Send(new Messaging.Commands.Voting.CreateCandidate
+            {
+                ContextKey = VenueContextKey,
+                Reference = venue.Id,
+                OpeningDate = venue.CreatedOn
+            });
 
             _logger.Information("Created venue {@Venue}.",
                 new { venue.Id, Title = venue.Name, venue.CreatedByUser });

@@ -29,6 +29,6 @@ namespace Burgerama.Services.Venues.Data.Models
 
         public double? TotalRating { get; set; }
 
-        public IEnumerable<string> Outings { get; set; }
+        public IEnumerable<OutingModel> Outings { get; set; }
     }
 }

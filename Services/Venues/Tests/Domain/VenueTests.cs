@@ -25,6 +25,27 @@ namespace Burgerama.Services.Venues.Tests.Domain
         }
 
         [TestMethod]
+        public void DuplicateOutings_ShouldNotBeAccepted()
+        {
+            // Arrange
+            var outing1 = new Outing(Guid.NewGuid(), DateTime.Now);
+            var outing2 = new Outing(Guid.NewGuid(), DateTime.Now);
+            var location = new Location("test", 13.0, 37.0);
+            var venue = new Venue("This is a test.", location, "testUserId", DateTime.Now);
+
+            // Act
+            var add1 = venue.AddOuting(outing1);
+            var add2 = venue.AddOuting(outing2);
+            var add3 = venue.AddOuting(outing1);
+
+            // Assert
+            Assert.AreEqual(2, venue.Outings.Count());
+            Assert.IsTrue(add1);
+            Assert.IsTrue(add2);
+            Assert.IsFalse(add3);
+        }
+
+        [TestMethod]
         public void ExistingVenue_ShouldBeCreatedCorrectly()
         {
             // Arrange
@@ -33,7 +54,7 @@ namespace Burgerama.Services.Venues.Tests.Domain
             var location = new Location("test", 13.0, 37.0);
             var userId = "testUserId";
             var createdOn = DateTime.Now;
-            var outings = Enumerable.Empty<Guid>();
+            var outings = Enumerable.Empty<Outing>();
 
             // Act
             var venue = new Venue(id, name, location, userId, createdOn, outings);

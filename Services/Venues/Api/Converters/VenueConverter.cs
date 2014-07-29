@@ -27,7 +27,7 @@ namespace Burgerama.Services.Venues.Api.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
-                Outings = venue.Outings.Select(outingId => outingId.ToString()),
+                Outings = venue.Outings.Select(o => o.Id.ToString()),
                 TotalVotes = venue.TotalVotes,
                 TotalRating = venue.TotalRating
             };
@@ -43,7 +43,7 @@ namespace Burgerama.Services.Venues.Api.Converters
             {
                 Description = venue.Description,
                 Url = venue.Url,
-                Address = venue.Address
+                Address = venue.Address,
                 // do NOT set TotalVotes or TotalRating!
             };
         }

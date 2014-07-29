@@ -22,7 +22,7 @@ namespace Burgerama.Services.Venues.Data.Converters
                 Url = venue.Url,
                 Description = venue.Description,
                 Address = venue.Address,
-                Outings = venue.Outings.Select(outingId => outingId.ToString()),
+                Outings = venue.Outings.Select(o => o.ToModel()),
                 TotalVotes = venue.TotalVotes,
                 TotalRating = venue.TotalRating
             };
@@ -34,7 +34,7 @@ namespace Burgerama.Services.Venues.Data.Converters
                 return null;
 
             var id = Guid.Parse(venue.Id);
-            var outings = venue.Outings.Select(Guid.Parse);
+            var outings = venue.Outings.Select(o => o.ToDomain());
             return new Venue(id, venue.Name, venue.Location, venue.CreatedByUser, venue.CreatedOn, outings)
             {
                 Url = venue.Url,

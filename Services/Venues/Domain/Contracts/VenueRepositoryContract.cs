@@ -26,6 +26,13 @@ namespace Burgerama.Services.Venues.Domain.Contracts
             return default(IEnumerable<Venue>);
         }
 
+        public IEnumerable<Venue> Find(VenueQuery query)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<Venue>>() != null);
+
+            return default(IEnumerable<Venue>);
+        }
+
         public void SaveOrUpdate(Venue venue)
         {
             Contract.Requires<ArgumentNullException>(venue != null);

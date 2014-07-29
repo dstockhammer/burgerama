@@ -7,7 +7,7 @@ namespace Burgerama.Services.Venues.Domain
 {
     public sealed class Venue
     {
-        private readonly HashSet<Guid> _outings;
+        private readonly HashSet<Outing> _outings;
 
         public Guid Id { get; private set; }
 
@@ -25,7 +25,7 @@ namespace Burgerama.Services.Venues.Domain
 
         public string Address { get; set; }
 
-        public IEnumerable<Guid> Outings
+        public IEnumerable<Outing> Outings
         {
             get { return _outings; }
         }
@@ -43,14 +43,14 @@ namespace Burgerama.Services.Venues.Domain
         public double? TotalRating { get; set; }
 
         public Venue(string name, Location location, string createdByUser, DateTime createdOn)
-            : this(Guid.NewGuid(), name, location, createdByUser, createdOn, Enumerable.Empty<Guid>())
+            : this(Guid.NewGuid(), name, location, createdByUser, createdOn, Enumerable.Empty<Outing>())
         {
             Contract.Requires<ArgumentNullException>(name != null);
             Contract.Requires<ArgumentNullException>(location != null);
             Contract.Requires<ArgumentNullException>(createdByUser != null);
         }
 
-        public Venue(Guid id, string name, Location location, string createdByUser, DateTime createdOn, IEnumerable<Guid> outings)
+        public Venue(Guid id, string name, Location location, string createdByUser, DateTime createdOn, IEnumerable<Outing> outings)
         {
             Contract.Requires<ArgumentNullException>(name != null);
             Contract.Requires<ArgumentNullException>(location != null);
@@ -61,12 +61,12 @@ namespace Burgerama.Services.Venues.Domain
             Location = location;
             CreatedByUser = createdByUser;
             CreatedOn = createdOn;
-            _outings = new HashSet<Guid>(outings);
+            _outings = new HashSet<Outing>(outings);
         }
 
-        public bool AddOuting(Guid outingId)
+        public bool AddOuting(Outing outing)
         {
-            return _outings.Add(outingId);
+            return _outings.Add(outing);
         }
     }
 }

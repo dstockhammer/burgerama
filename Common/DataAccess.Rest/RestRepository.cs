@@ -6,7 +6,7 @@ namespace Burgerama.Common.DataAccess.Rest
 {
     public abstract class RestRepository
     {
-        private static readonly Lazy<ApiConfiguration> ApiConfig = new Lazy<ApiConfiguration>(ApiConfiguration.Load);
+        private static readonly Lazy<ApiConfiguration> ApiConfig = new Lazy<ApiConfiguration>(() => ApiConfiguration.Load());
         private readonly Lazy<RestClient> _client;
 
         protected RestClient Client

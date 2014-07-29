@@ -78,9 +78,9 @@ deploy:
       
   # Burgerama.Web.Maintenance
   - provider: WebDeploy
-    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=maintenace-burgerama
-    website: maintenace-burgerama
-    username: $maintenace-burgerama
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=maintenance-burgerama
+    website: maintenance-burgerama
+    username: $maintenance-burgerama
     password:
       secure: cn7fVIxO04ocyCrWwiFpq5yslSNkG5E1ySWUva0i3FihJuLy8xvFHo6KCXu+orQ2lrj0x7d4LtTqJ1jXTtZ3ow==
     ntlm: false
