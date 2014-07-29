@@ -1,5 +1,5 @@
 $configSrcDir = "Configuration"
-$configDstDirs = @("Services", "Web")
+$configDstDirs = "Services"
 
 $configFiles = @("Auth0", "Logging", "MongoDb", "RabbitMq")
 $solutions =  @("Venues", "Outings", "OutingScheduler", "Ratings", "Voting")
@@ -61,5 +61,5 @@ foreach ($solution in $solutions) {
 
 # special treatment for Burgerama.Web.Maintenance
 $webConfigDir = "$env:APPVEYOR_BUILD_FOLDER\Web\Maintenance\Config"
-Write-Host "Copying config files to $currentProjectDir"
+Write-Host "Copying config files to $webConfigDir"
 Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$configSrcDir\*.confidential.config" "$webConfigDir"

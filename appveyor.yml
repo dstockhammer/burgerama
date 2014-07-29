@@ -60,30 +60,99 @@ test: off
 #     deployment configuration    #
 #---------------------------------#
 deploy:
-  - provider: Environment
-    name: Azure.Venues
+  # Burgerama.Web.UI    
+  - deploy:
+    provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=burgerama
+    website: burgerama
+    username: $burgerama
+    password:
+      secure: 3rfPLnCodRlZvsnswgnz0NAFqM81p1tr3eBL4meNZZ6W2byDswTl+eP6i14qywR/l1oLO4bRrNcN00aEDAvuSQ==
+    ntlm: false
+    remove_files: false
+    artifact: Burgerama.Web.UI.zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Web.UI
+      
+  # Burgerama.Web.Management    
+  - deploy:
+    provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=management-burgerama
+    website: management-burgerama
+    username: $management-burgerama
+    password:
+      secure: obSFUpJ48Ka+ZjsFp2Hdy1Bc95wVLJ8A3iBLYz6EaIcaK+J61UpsTeCjT5EcppiWbUfb9wxcfdNzYZ5AVNqxDw==
+    ntlm: false
+    remove_files: false
+    artifact: Burgerama.Web.Management.zip
+    on:
+      APPVEYOR: true
+      CONFIGURATION: Azure
+      APPVEYOR_PROJECT_NAME: Burgerama.Web.Management
+
+  # Burgerama.Services.Venues
+  - deploy:
+    provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=venues-api-burgerama
+    website: venues-api-burgerama
+    username: $venues-api-burgerama
+    password:
+      secure: D6v8kXDBp+SGICM1Wx9U0ZQ0Uf2M2LTyHKQ+Ho5WhN990OVbvopgTelfvEBzlhwVame0RNPcJY7XFq6tY7g/1g==
+    ntlm: false
+    remove_files: false
+    artifact: Burgerama.Services.Venues.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Venues
-      
-  - provider: Environment
-    name: Azure.Outings
+   
+  # Burgerama.Services.Outings   
+  - deploy:
+    provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=outings-api-burgerama
+    website: outings-api-burgerama
+    username: $outings-api-burgerama
+    password:
+      secure: pY361DutgIy30FABPrWjUZ/UULrPQ0bO7HGW8zPmuuxYUyWsJ7f/XAXtDIGURstRGJxY9SKygIIBrOr2JdbeZg==
+    ntlm: false
+    remove_files: false
+    artifact: Burgerama.Services.Outings.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Outings
 
-  - provider: Environment
-    name: Azure.Ratings
+  # Burgerama.Services.Ratings   
+  - deploy:
+    provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=ratings-api-burgerama
+    website: ratings-api-burgerama
+    username: $ratings-api-burgerama
+    password:
+      secure: gDtpBvIb7Z4wN74CUBq0lNleQAoEUueitKy9dPN5msPUwiPHHtIKWW+xjcUGrPNQDFgS5bzNmS4JpAVChYJOgg==
+    ntlm: false
+    remove_files: false
+    artifact: Burgerama.Services.Ratings.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Ratings
 
-  - provider: Environment
-    name: Azure.Voting
+  # Burgerama.Services.Voting   
+  - deploy:
+    provider: WebDeploy
+    server: https://waws-prod-am2-013.publish.azurewebsites.windows.net:443/msdeploy.axd?site=voting-api-burgerama
+    website: voting-api-burgerama
+    username: $voting-api-burgerama
+    password:
+      secure: YyKlUqj+9+DI5GZA0xpvyKdtpIUXR17W0RzOfNw8OxNXDqLPYRujWl5RI3L0uLzVvSM+x5pjY1SJbTp90ImDbQ==
+    ntlm: false
+    remove_files: false
+    artifact: Burgerama.Services.Voting.zip
     on:
       APPVEYOR: true
       CONFIGURATION: Azure
       APPVEYOR_PROJECT_NAME: Burgerama.Services.Voting
+    
