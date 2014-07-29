@@ -16,5 +16,5 @@ Else {
     Write-Host "Transforming and packaging $projectName..."
     msbuild "$env:APPVEYOR_BUILD_FOLDER\Configuration\Transform.proj" /target:"Transform" /property:"Configuration=$env:CONFIGURATION;Path=$projectDir;Name=$projectName"
     7z a -tzip "$env:APPVEYOR_BUILD_FOLDER\$projectName.zip" "$projectDir\bin\$env:CONFIGURATION\*"
-    Push-AppveyorArtifact "$env:APPVEYOR_BUILD_FOLDER\$projectName.zip"
+    Push-AppveyorArtifact "$env:APPVEYOR_BUILD_FOLDER\$projectName.zip" -DeploymentName "Endpoint"
 }

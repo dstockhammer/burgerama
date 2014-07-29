@@ -69,7 +69,7 @@ deploy:
     password:
       secure: 3rfPLnCodRlZvsnswgnz0NAFqM81p1tr3eBL4meNZZ6W2byDswTl+eP6i14qywR/l1oLO4bRrNcN00aEDAvuSQ==
     ntlm: false
-    remove_files: false
+    remove_files: true
     artifact: $(APPVEYOR_PROJECT_NAME).zip
     on:
       APPVEYOR: true
@@ -84,7 +84,7 @@ deploy:
     password:
       secure: cn7fVIxO04ocyCrWwiFpq5yslSNkG5E1ySWUva0i3FihJuLy8xvFHo6KCXu+orQ2lrj0x7d4LtTqJ1jXTtZ3ow==
     ntlm: false
-    remove_files: false
+    remove_files: true
     artifact: $(APPVEYOR_PROJECT_NAME).zip
     on:
       APPVEYOR: true
@@ -99,7 +99,7 @@ deploy:
     password:
       secure: D6v8kXDBp+SGICM1Wx9U0ZQ0Uf2M2LTyHKQ+Ho5WhN990OVbvopgTelfvEBzlhwVame0RNPcJY7XFq6tY7g/1g==
     ntlm: false
-    remove_files: false
+    remove_files: true
     artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
     on:
       APPVEYOR: true
@@ -114,7 +114,7 @@ deploy:
     password:
       secure: pY361DutgIy30FABPrWjUZ/UULrPQ0bO7HGW8zPmuuxYUyWsJ7f/XAXtDIGURstRGJxY9SKygIIBrOr2JdbeZg==
     ntlm: false
-    remove_files: false
+    remove_files: true
     artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
     on:
       APPVEYOR: true
@@ -129,7 +129,7 @@ deploy:
     password:
       secure: gDtpBvIb7Z4wN74CUBq0lNleQAoEUueitKy9dPN5msPUwiPHHtIKWW+xjcUGrPNQDFgS5bzNmS4JpAVChYJOgg==
     ntlm: false
-    remove_files: false
+    remove_files: true
     artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
     on:
       APPVEYOR: true
@@ -144,7 +144,7 @@ deploy:
     password:
       secure: YyKlUqj+9+DI5GZA0xpvyKdtpIUXR17W0RzOfNw8OxNXDqLPYRujWl5RI3L0uLzVvSM+x5pjY1SJbTp90ImDbQ==
     ntlm: false
-    remove_files: false
+    remove_files: true
     artifact: $(APPVEYOR_PROJECT_NAME).Api.zip
     on:
       APPVEYOR: true

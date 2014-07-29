@@ -41,4 +41,4 @@ msbuild "$solutionDir\$solutionName" /verbosity:minimal /logger:"C:\Program File
 
 Write-Host "Packaging $webProjName..."
 msbuild "$webProjDir\$webProjName" /verbosity:minimal /t:Package /p:PackageLocation="$env:APPVEYOR_BUILD_FOLDER\$artifactName" /p:PackageAsSingleFile=True /p:Configuration="$env:CONFIGURATION"
-Push-AppveyorArtifact "$env:APPVEYOR_BUILD_FOLDER\$artifactName"
+Push-AppveyorArtifact "$env:APPVEYOR_BUILD_FOLDER\$artifactName" -DeploymentName "Api" -Type WebDeployPackage
