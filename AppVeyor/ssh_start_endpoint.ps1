@@ -1,3 +1,10 @@
+function Execute-Command($command) {
+    Write-Host $command
+    $output = Invoke-SshCommand -ComputerName $env:SSH_IP -Quiet -Command $command
+    
+    return $output
+}
+
 $endpointName = "$env:APPVEYOR_PROJECT_NAME.Endpoint"
 $endpointArtifact = "$env:APPVEYOR_BUILD_FOLDER\$endpointName.zip"
 
@@ -28,11 +35,4 @@ if (Test-Path -path $endpointArtifact) {
     Execute-Command("sed -i 's/Config\\/Config\//g' environments/$endpointName/$endpointName.exe.config")
     Execute-Command("forever start -c mono environments/$endpointName/$endpointName.exe")
     Execute-Command("exit")
-}
-
-function Execute-Command($command) {
-    Write-Host $command
-    $output = Invoke-SshCommand -ComputerName $env:SSH_IP -Quiet -Command $command
-    
-    return $output
 }
