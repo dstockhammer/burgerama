@@ -5,13 +5,13 @@ version: 1.0.{build}
 branches:
   only:
     - feature/appveyor
-shallow_clone: true
 
 #---------------------------------#
 #    environment configuration    #
 #---------------------------------#
 os: Windows Server 2012 R2
 clone_folder: C:\Projects\burgerama
+shallow_clone: true
 
 # environment variables
 environment:
@@ -54,12 +54,9 @@ build_script:
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
-test: off
-
-# todo: there is something wrong here....
-#test:
-#  assemblies:
-#    - *\*.tests.dll
+test:
+  assemblies:
+    - *\*.Tests.dll
   
 #---------------------------------#
 #     deployment configuration    #
