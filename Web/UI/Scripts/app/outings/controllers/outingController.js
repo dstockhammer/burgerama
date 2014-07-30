@@ -26,8 +26,6 @@ var Burgerama;
             OutingController.prototype.load = function () {
                 var _this = this;
                 this.outingResource.all(function (outings) {
-                    console.log(outings);
-
                     _this.$scope.outings = outings;
                     _this.$rootScope.$emit('OutingsLoaded', _this.$scope.outings);
 

@@ -6,7 +6,7 @@
 <ul id="venue-list" class="list-group">
     <li class="row list-group-item" ng-mouseenter="panTo(venue);" ng-repeat="venue in venues | orderBy: 'totalVotes': true">
         <div class="info pull-right" ng-show="venue.outings.length > 0">
-            <rating-stats ng-model=" venue.totalrating"></rating-stats>
+            <rating-stats ng-model=" venue.totalRating"></rating-stats>
         </div>
 
         <div class="content">
@@ -15,8 +15,8 @@
                 <button type="button" class="btn pull-right"
                         ng-click="addVote(venue);"
                         ng-show="venue.outings.length == 0"
-                        ng-class="{ 'btn-success': candidates[venue.id].userVote, 'btn-primary': candidates[venue.id].canUserVote }"
-                        ng-disabled="!candidates[venue.id].canUserVote">
+                        ng-class="{ 'btn-success': votingCandidates[venue.id].userVote, 'btn-primary': votingCandidates[venue.id].canUserVote }"
+                        ng-disabled="!votingCandidates[venue.id].canUserVote">
                     + {{ venue.totalVotes }}
                 </button>
             </h3>

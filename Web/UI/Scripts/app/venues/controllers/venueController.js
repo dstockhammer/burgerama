@@ -14,7 +14,7 @@ var Burgerama;
                 this.votingCandidateResource = votingCandidateResource;
                 this.venueContextKey = 'venues';
                 this.$scope.venues = null;
-                this.$scope.candidates = [];
+                this.$scope.votingCandidates = [];
                 this.$scope.panTo = function (venue) {
                     return _this.panTo(venue);
                 };
@@ -38,9 +38,9 @@ var Burgerama;
                     _this.$rootScope.$emit('VenuesLoaded', _this.$scope.venues);
 
                     venues.forEach(function (venue) {
-                        if (typeof (_this.$scope.venues[venue.id]) === 'undefined') {
+                        if (typeof (_this.$scope.votingCandidates[venue.id]) === 'undefined') {
                             _this.votingCandidateResource.get({ context: _this.venueContextKey, reference: venue.id }, function (candidate) {
-                                _this.$scope.candidates[venue.id] = candidate;
+                                _this.$scope.votingCandidates[venue.id] = candidate;
                             });
                         }
                     });
@@ -64,7 +64,7 @@ var Burgerama;
                     _this.toaster.pop('success', 'Success', 'Thanks for your contribution!');
                     _this.$rootScope.$emit('VoteAdded', candidate.userVote);
 
-                    _this.$scope.candidates[venue.id] = candidate;
+                    _this.$scope.votingCandidates[venue.id] = candidate;
                     _this.$scope.venues.forEach(function (v) {
                         if (v.id == venue.id) {
                             v.totalVotes++;

@@ -3,7 +3,7 @@
 module Burgerama.Venues {
     export interface IVenueScope extends ng.IScope {
         venues: Array<Venue>;
-        candidates: Array<Voting.Candidate>;
+        votingCandidates: Array<Voting.Candidate>;
 
         panTo: (venue: Venue) => void;
         addVote: (venue: Venue) => void;
@@ -22,7 +22,7 @@ module Burgerama.Venues {
             private votingCandidateResource)
         {
             this.$scope.venues = null;
-            this.$scope.candidates = [];
+            this.$scope.votingCandidates = [];
             this.$scope.panTo = venue => this.panTo(venue);
             this.$scope.addVote = venue => this.addVote(venue);
 
@@ -40,9 +40,9 @@ module Burgerama.Venues {
                 this.$rootScope.$emit('VenuesLoaded', this.$scope.venues);
 
                 venues.forEach((venue: Venue) => {
-                    if (typeof (this.$scope.venues[venue.id]) === 'undefined') {
+                    if (typeof (this.$scope.votingCandidates[venue.id]) === 'undefined') {
                         this.votingCandidateResource.get({ context: this.venueContextKey, reference: venue.id }, (candidate: Voting.Candidate) => {
-                            this.$scope.candidates[venue.id] = candidate;
+                            this.$scope.votingCandidates[venue.id] = candidate;
                         });
                     }
                 });
@@ -65,7 +65,7 @@ module Burgerama.Venues {
                 this.toaster.pop('success', 'Success', 'Thanks for your contribution!');
                 this.$rootScope.$emit('VoteAdded', candidate.userVote);
 
-                this.$scope.candidates[venue.id] = candidate;
+                this.$scope.votingCandidates[venue.id] = candidate;
                 this.$scope.venues.forEach((v: Venue) => {
                     if (v.id == venue.id) {
                         v.totalVotes++;

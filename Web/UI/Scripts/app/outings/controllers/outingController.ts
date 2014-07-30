@@ -30,8 +30,6 @@ module Burgerama.Outings {
 
         private load() {
             this.outingResource.all((outings: Array<Outing>) => {
-                console.log(outings);
-
                 this.$scope.outings = outings;
                 this.$rootScope.$emit('OutingsLoaded', this.$scope.outings);
 
