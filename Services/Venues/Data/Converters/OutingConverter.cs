@@ -14,7 +14,7 @@ namespace Burgerama.Services.Venues.Data.Converters
             return new OutingModel
             {
                 Id = outing.Id.ToString(),
-                DateTime = outing.DateTime
+                Date = outing.Date
             };
         }
 
@@ -24,7 +24,7 @@ namespace Burgerama.Services.Venues.Data.Converters
                 return null;
 
             var id = Guid.Parse(outing.Id);
-            return new Outing(id, outing.DateTime);
+            return new Outing(id, outing.Date);
 
         }
     }

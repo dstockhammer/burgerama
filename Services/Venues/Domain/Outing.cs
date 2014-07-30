@@ -6,11 +6,11 @@ namespace Burgerama.Services.Venues.Domain
     {
         public Guid Id { get; private set; }
 
-        public DateTime DateTime { get; private set; }
+        public DateTime Date { get; private set; }
 
-        public Outing(Guid id, DateTime dateTime)
+        public Outing(Guid id, DateTime date)
         {
-            DateTime = dateTime;
+            Date = date;
             Id = id;
         }
 

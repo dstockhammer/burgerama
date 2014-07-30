@@ -44,7 +44,7 @@ namespace Burgerama.Services.Venues.Api.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<VenueModel>))]
-        public IHttpActionResult QueryVenues([FromUri]VenueQuery query)
+        public IHttpActionResult GetVenues([FromUri]VenueQuery query)
         {
             var venues = _venueRepository.Find(query)
                     .Select(v => v.ToModel());

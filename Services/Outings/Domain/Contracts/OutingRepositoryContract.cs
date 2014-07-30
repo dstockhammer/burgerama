@@ -19,6 +19,11 @@ namespace Burgerama.Services.Outings.Domain.Contracts
             return default(IEnumerable<Outing>);
         }
 
+        public IEnumerable<Outing> Find(OutingQuery query)
+        {
+            return default(IEnumerable<Outing>);
+        }
+
         public void SaveOrUpdate(Outing outing)
         {
             Contract.Requires<ArgumentNullException>(outing != null);

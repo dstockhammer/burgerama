@@ -11,6 +11,8 @@ namespace Burgerama.Services.Outings.Domain.Contracts
 
         IEnumerable<Outing> GetAll();
 
+        IEnumerable<Outing> Find(OutingQuery query);
+
         void SaveOrUpdate(Outing outing);
     }
 }

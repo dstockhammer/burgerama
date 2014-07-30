@@ -1,11 +1,9 @@
-﻿using System.Runtime.Remoting.Messaging;
-using Burgerama.Common.DataAccess.MongoDB;
+﻿using Burgerama.Common.DataAccess.MongoDB;
 using Burgerama.Services.Venues.Data.Converters;
 using Burgerama.Services.Venues.Data.Models;
 using Burgerama.Services.Venues.Domain;
 using Burgerama.Services.Venues.Domain.Contracts;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
@@ -48,7 +46,7 @@ namespace Burgerama.Services.Venues.Data
             var q = Venues.AsQueryable();
             
             if (query.HasOuting.HasValue)
-                q = q.Where(v => v.Outings.Any());
+                q = q.Where(v => v.Outings.Any() == query.HasOuting.Value);
 
             if (query.OutingId != null)
                 q = q.Where(v => v.Outings.Any(o => o.Id == query.OutingId));

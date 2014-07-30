@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="Contracts\IOutingRepository.cs" />
     <Compile Include="Contracts\IVenueRepository.cs" />
+    <Compile Include="Contracts\OutingQuery.cs" />
     <Compile Include="Contracts\OutingRepositoryContract.cs" />
     <Compile Include="Contracts\VenueRepositoryContract.cs" />
     <Compile Include="Location.cs" />

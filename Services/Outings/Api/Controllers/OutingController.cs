@@ -30,9 +30,9 @@ namespace Burgerama.Services.Outings.Api.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<OutingModel>))]
-        public IHttpActionResult GetAllOutings()
+        public IHttpActionResult GetOutings([FromUri]OutingQuery query)
         {
-            var outings = _outingRepository.GetAll()
+            var outings = _outingRepository.Find(query)
                 .Select(o => o.ToModel(venueId => _venueRepository.Get(venueId)));
 
             return Ok(outings);
