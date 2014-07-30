@@ -32,6 +32,7 @@ if (Test-Path -path $endpointArtifact) {
     Execute-Command("forever stop -c mono environments/$endpointName/$endpointName.exe")
     Execute-Command("rm -R environments/$endpointName")
     Execute-Command("unzip deployments/$endpointName.zip -d environments/$endpointName")
+    Execute-Command("rm deployments/$endpointName.zip")
     Execute-Command("sed -i 's/Config\\/Config\//g' environments/$endpointName/$endpointName.exe.config")
     Execute-Command("forever start -c mono environments/$endpointName/$endpointName.exe")
     Execute-Command("exit")
