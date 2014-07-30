@@ -108,14 +108,6 @@ namespace Burgerama.Shared.Candidates.Services
                 return null;
             }
 
-            if (context.AddCandidate(reference) == false)
-            {
-                _logger.Fatal("DATA INCONSISTENCY: The candidate {Reference} already exists in context {ContextKey}, but there is no actual data for the candidate.",
-                    reference, contextKey);
-
-                return null;
-            }
-
             var candidate = _candidateFactory.Create(contextKey, reference, Enumerable.Empty<T>(), openingDate, closingDate);
             var events = candidate.OnCreateSuccess().ToList();
 

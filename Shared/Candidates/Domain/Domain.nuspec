@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Burgerama.Shared.Candidates.Domain</id>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <title>Candidates: Domain</title>
     <authors>Burgerama Team</authors>
     <projectUrl>https://github.com/dstockhammer/burgerama</projectUrl>

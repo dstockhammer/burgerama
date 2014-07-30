@@ -120,8 +120,9 @@
     <Reference Include="Burgerama.Messaging.MassTransit.Events">
       <HintPath>..\packages\Burgerama.Messaging.MassTransit.Events.0.2.1\lib\net451\Burgerama.Messaging.MassTransit.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Shared.Candidates.Domain">
-      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    <Reference Include="Burgerama.Shared.Candidates.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.1\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
