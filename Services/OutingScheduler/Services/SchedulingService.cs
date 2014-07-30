@@ -40,7 +40,7 @@ namespace Burgerama.Services.OutingScheduler.Services
             if (potentialVenues.Any() == false)
                 return null;
 
-            return potentialVenues.OrderByDescending(v => v.Votes).First();
+            return potentialVenues.OrderByDescending(v => v.TotalVotes).First();
         }
     }
 }

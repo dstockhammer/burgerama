@@ -15,7 +15,7 @@ namespace Burgerama.Services.OutingScheduler.Data.Rest.Converters
             {
                 Id = venue.Id.ToString(),
                 Name = venue.Name,
-                Votes = venue.Votes
+                TotalVotes = venue.TotalVotes
             };
         }
 
@@ -24,7 +24,7 @@ namespace Burgerama.Services.OutingScheduler.Data.Rest.Converters
             Contract.Requires<ArgumentNullException>(venue != null);
 
             var id = Guid.Parse(venue.Id);
-            return new Venue(id, venue.Name, venue.Votes);
+            return new Venue(id, venue.Name, venue.TotalVotes);
         }
     }
 }
