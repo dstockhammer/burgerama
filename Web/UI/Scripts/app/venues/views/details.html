@@ -45,14 +45,24 @@
                     Add vote
                 </button>
             </h3>
-            <div ng-show="venue.outings.length == 0">
-                <p>There has not yet been an outing in this venue.</p>
-                <p ng-show="votingCandidate.votesCount == 0">Nobody has voted for this venue yet.</p>
+            <div>
+                <p ng-show="votingCandidate.votesCount == 0">Nobody has voted for this venue.</p>
                 <p ng-show="votingCandidate.votesCount > 0">
-                    <ng-pluralize count="votingCandidate.votesCount" when="{'0': 'Nobody has', 'one': 'One person has', 'other': '{} people have'}"></ng-pluralize> voted for this venue:
+                    <ng-pluralize count="votingCandidate.votesCount" when="{'one': 'One person has', 'other': '{} people have'}"></ng-pluralize> voted for this venue:
                 </p>
                 <ul>
                     <li ng-repeat="vote in votes">{{ vote.userId }} on {{ vote.createdOn | date:'medium' }}</li>
+                </ul>
+            </div>
+            <div ng-show="venue.outings.length == 0">
+                <p>There has not been an outing in this venue.</p>
+            </div>
+            <div ng-show="venue.outings.length != 0">
+                <p>There <ng-pluralize count="venue.outings.length" when="{'one': 'has been one outing', 'other': 'have been {} outings'}"></ng-pluralize> in this venue:</p>
+                <ul>
+                    <li ng-repeat="outing in outings">
+                        {{ outing.date | date:'longDate' }}
+                    </li>
                 </ul>
             </div>
         </div>

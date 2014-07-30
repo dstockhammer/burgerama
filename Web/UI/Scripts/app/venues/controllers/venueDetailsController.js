@@ -3,7 +3,7 @@ var Burgerama;
 (function (Burgerama) {
     (function (Venues) {
         var VenueDetailsController = (function () {
-            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) {
+            function VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, outingResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) {
                 var _this = this;
                 this.$rootScope = $rootScope;
                 this.$scope = $scope;
@@ -11,6 +11,7 @@ var Burgerama;
                 this.toaster = toaster;
                 this.starRatingService = starRatingService;
                 this.venueResource = venueResource;
+                this.outingResource = outingResource;
                 this.voteResource = voteResource;
                 this.ratingResource = ratingResource;
                 this.votingCandidateResource = votingCandidateResource;
@@ -18,6 +19,7 @@ var Burgerama;
                 this.venueId = venueId;
                 this.venuesContextKey = 'venues';
                 this.$scope.venue = null;
+                this.$scope.outings = [];
                 this.$scope.votingCandidate = null;
                 this.$scope.ratingCandidate = null;
                 this.$scope.ratings = null;
@@ -42,16 +44,26 @@ var Burgerama;
                         return;
                     }
 
-                    _this.loadVotes(venue);
-
                     if (venue.outings.length > 0) {
+                        _this.loadOutings(venue);
                         _this.loadRatings(venue);
                     }
+
+                    _this.loadVotes(venue);
 
                     _this.$scope.venue = venue;
                     _this.$rootScope.$emit('VenuesLoaded', [_this.$scope.venue]);
                 }, function (err) {
                     _this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
+                });
+            };
+
+            VenueDetailsController.prototype.loadOutings = function (venue) {
+                var _this = this;
+                venue.outings.forEach(function (outingId) {
+                    _this.outingResource.get({ id: outingId }, function (outing) {
+                        _this.$scope.outings.push(outing);
+                    });
                 });
             };
 
@@ -120,9 +132,9 @@ var Burgerama;
 })(Burgerama || (Burgerama = {}));
 
 Burgerama.app.controller('VenueDetailsController', [
-    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'VotingCandidateResource', 'RatingCandidateResource', 'venueId',
-    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) {
-        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId);
+    '$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'OutingResource', 'VoteResource', 'RatingResource', 'VotingCandidateResource', 'RatingCandidateResource', 'venueId',
+    function ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, outingResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) {
+        return new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, outingResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId);
     }
 ]);
 //# sourceMappingURL=venueDetailsController.js.map

@@ -3,6 +3,7 @@
 module Burgerama.Venues {
     export interface IVenueDetailsScope extends ng.IScope {
         venue: Venue;
+        outings: Array<Outings.Outing>;
 
         votes: Array<Voting.Vote>;
         votingCandidate: Voting.Candidate;
@@ -26,6 +27,7 @@ module Burgerama.Venues {
             private toaster,
             private starRatingService: Ratings.IStarRatingService,
             private venueResource,
+            private outingResource,
             private voteResource,
             private ratingResource,
             private votingCandidateResource,
@@ -33,6 +35,7 @@ module Burgerama.Venues {
             private venueId)
         {
             this.$scope.venue = null;
+            this.$scope.outings = [];
             this.$scope.votingCandidate = null;
             this.$scope.ratingCandidate = null;
             this.$scope.ratings = null;
@@ -52,11 +55,12 @@ module Burgerama.Venues {
                     return;
                 }
 
-                this.loadVotes(venue);
-
                 if (venue.outings.length > 0) {
+                    this.loadOutings(venue);
                     this.loadRatings(venue);
                 }
+
+                this.loadVotes(venue);
 
                 this.$scope.venue = venue;
                 this.$rootScope.$emit('VenuesLoaded', [this.$scope.venue]);
@@ -64,6 +68,14 @@ module Burgerama.Venues {
                 this.toaster.pop('error', 'Error', 'An error has occurred: ' + err.statusText);
             });
 
+        }
+
+        private loadOutings(venue: Venue) {
+            venue.outings.forEach(outingId => {
+                this.outingResource.get({ id: outingId }, (outing: Outings.Outing) => {
+                    this.$scope.outings.push(outing);
+                });
+            });
         }
 
         private loadRatings(venue: Venue) {
@@ -125,7 +137,7 @@ module Burgerama.Venues {
     }
 }
 
-Burgerama.app.controller('VenueDetailsController', ['$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'VoteResource', 'RatingResource', 'VotingCandidateResource', 'RatingCandidateResource', 'venueId',
-    ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) =>
-        new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId)
+Burgerama.app.controller('VenueDetailsController', ['$rootScope', '$scope', '$modal', 'toaster', 'StarRatingService', 'VenueResource', 'OutingResource', 'VoteResource', 'RatingResource', 'VotingCandidateResource', 'RatingCandidateResource', 'venueId',
+    ($rootScope, $scope, $modal, toaster, starRatingService, venueResource, outingResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId) =>
+        new Burgerama.Venues.VenueDetailsController($rootScope, $scope, $modal, toaster, starRatingService, venueResource, outingResource, voteResource, ratingResource, votingCandidateResource, ratingCandidateResource, venueId)
 ]);
