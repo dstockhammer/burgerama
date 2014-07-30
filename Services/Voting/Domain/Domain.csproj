@@ -154,8 +154,9 @@
       <HintPath>..\packages\Burgerama.Messaging.Events.Voting.0.2.5\lib\net451\Burgerama.Messaging.Events.Voting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Burgerama.Shared.Candidates.Domain">
-      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.0\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
+    <Reference Include="Burgerama.Shared.Candidates.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Shared.Candidates.Domain.0.2.1\lib\net451\Burgerama.Shared.Candidates.Domain.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

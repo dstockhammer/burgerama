@@ -33,13 +33,13 @@ namespace Burgerama.Services.Venues.Api.Converters
             };
         }
 
-        public static Venue ToDomain(this VenueModel venue, string userId)
+        public static Venue ToDomain(this VenueModel venue, string userId, DateTime createdOn)
         {
             Contract.Requires<ArgumentNullException>(venue != null);
             Contract.Requires<ArgumentNullException>(userId != null);
 
             var location = new Location(venue.Location.Reference, venue.Location.Latitude, venue.Location.Longitude);
-            return new Venue(venue.Name, location, userId, venue.CreatedOn)
+            return new Venue(venue.Name, location, userId, createdOn)
             {
                 Description = venue.Description,
                 Url = venue.Url,

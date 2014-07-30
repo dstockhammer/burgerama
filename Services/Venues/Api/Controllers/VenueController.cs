@@ -90,8 +90,8 @@ namespace Burgerama.Services.Venues.Api.Controllers
         public IHttpActionResult AddVenue(VenueModel model)
         {
             Contract.Requires<ArgumentNullException>(model != null);
-
-            var venue = model.ToDomain(ClaimsPrincipal.Current.GetUserId());
+            
+            var venue = model.ToDomain(ClaimsPrincipal.Current.GetUserId(), DateTime.Now);
 
             // check for duplicates by location.
             // todo: this is quite naive and can be improved significantly.
