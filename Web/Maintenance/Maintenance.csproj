@@ -133,12 +133,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Burgerama.Common.Configuration.0.2.2\lib\net451\Burgerama.Common.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Burgerama.Common.Logging">
-      <HintPath>..\packages\Burgerama.Common.Logging.0.2.0\lib\net451\Burgerama.Common.Logging.dll</HintPath>
+    <Reference Include="Burgerama.Common.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Burgerama.Common.Logging.0.2.1\lib\net451\Burgerama.Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.Commands.0.2.0\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.Commands.0.2.1\lib\net451\Burgerama.Messaging.Commands.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.Commands.Ratings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -150,7 +151,7 @@
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.2.0\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
+      <HintPath>..\packages\Burgerama.Messaging.MassTransit.0.2.1\lib\net451\Burgerama.Messaging.MassTransit.dll</HintPath>
     </Reference>
     <Reference Include="Burgerama.Messaging.MassTransit.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -458,7 +459,7 @@
     <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
-    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
     <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
