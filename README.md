@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/dstockhammer/burgerama.png?label=ready&title=Ready)](https://waffle.io/dstockhammer/burgerama)
 Burgerama
 =========
 Bust the best burger in London!
